@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 import * as Babel from '@babel/standalone';
-import type {View2D} from '@motion-canvas/2d';
+import type { View2D } from '@motion-canvas/2d';
 import type {
   FullSceneDescription,
   ThreadGeneratorFactory,
@@ -9,7 +9,7 @@ import type {
 export class TransformError extends Error {
   public constructor(
     message: string,
-    public errors: {from: number; to: number; tooltip?: string}[],
+    public errors: { from: number; to: number; tooltip?: string }[],
   ) {
     super(message);
   }
@@ -18,8 +18,8 @@ export class TransformError extends Error {
 export function transform(code: string, name: string): string {
   const filename = `${name}.tsx`;
   const undeclaredVariables = new Set();
-  const errors: {from: number; to: number; tooltip: string}[] = [];
-  let result: {code: string};
+  const errors: { from: number; to: number; tooltip: string }[] = [];
+  let result: { code: string };
   let errorMessage: string = null;
   try {
     result = Babel.transform(code, {
@@ -35,7 +35,7 @@ export function transform(code: string, name: string): string {
         ],
       ],
       plugins: [
-        ({types}) => ({
+        ({ types }) => ({
           visitor: {
             ImportDeclaration(path) {
               if (path.node.source.value.startsWith('@motion-canvas/core')) {
@@ -46,7 +46,7 @@ export function transform(code: string, name: string): string {
               }
             },
             ReferencedIdentifier(path) {
-              const {node, scope} = path;
+              const { node, scope } = path;
 
               if (types.isIdentifier(node) && !scope.hasBinding(node.name)) {
                 undeclaredVariables.add(node.name);
@@ -78,9 +78,11 @@ export function transform(code: string, name: string): string {
   if (errors.length > 0) {
     throw new TransformError(
       errorMessage ??
-        `Cannot find names: ${Array.from(undeclaredVariables).join(
-          ', ',
-        )}\nDid you forget to import them?`,
+        `Cannot find names: ${
+          Array.from(undeclaredVariables).join(
+            ', ',
+          )
+        }\nDid you forget to import them?`,
       errors,
     );
   }
@@ -95,7 +97,7 @@ export async function compileScene(
   const transformedCode = transform(code, name);
   const scene = await import(
     /* webpackIgnore: true */ URL.createObjectURL(
-      new Blob([transformedCode], {type: 'text/javascript'}),
+      new Blob([transformedCode], { type: 'text/javascript' }),
     )
   );
   return scene.default;

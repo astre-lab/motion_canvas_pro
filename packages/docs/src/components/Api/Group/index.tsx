@@ -1,12 +1,12 @@
-import {useLocation} from '@docusaurus/router';
+import { useLocation } from '@docusaurus/router';
 import Category from '@site/src/components/Api/Group/Category';
-import {ApiLookup, useApiLookup} from '@site/src/contexts/api';
-import {Filters, matchFilters, useFilters} from '@site/src/contexts/filters';
+import { ApiLookup, useApiLookup } from '@site/src/contexts/api';
+import { Filters, matchFilters, useFilters } from '@site/src/contexts/filters';
 import Heading from '@theme/Heading';
 import TabItem from '@theme/TabItem';
 import Tabs from '@theme/Tabs';
-import React, {useEffect, useMemo} from 'react';
-import type {JSONOutput} from 'typedoc';
+import React, { useEffect, useMemo } from 'react';
+import type { JSONOutput } from 'typedoc';
 
 export interface FilteredGroup {
   title: string;
@@ -60,8 +60,8 @@ export default function Group({
   const categories = useMemo(
     () =>
       (group.categories ?? [group])
-        .map(group => filterGroup(group, lookup, filters))
-        .filter(group => !!group),
+        .map((group) => filterGroup(group, lookup, filters))
+        .filter((group) => !!group),
     [group, lookup, filters],
   );
 
@@ -87,24 +87,24 @@ export default function Group({
       <Heading as={'h2'} id={group.title}>
         {group.title}
       </Heading>
-      {categories.length > 1 ? (
-        <Tabs groupId={group.title}>
-          {categories.map(category => {
-            return (
-              <TabItem
-                default={category.anchors.includes(hash)}
-                value={category.title}
-                label={category.title}
-                className="margin-top--lg"
-              >
-                <Category group={category} />
-              </TabItem>
-            );
-          })}
-        </Tabs>
-      ) : (
-        <Category group={categories[0]} />
-      )}
+      {categories.length > 1
+        ? (
+          <Tabs groupId={group.title}>
+            {categories.map((category) => {
+              return (
+                <TabItem
+                  default={category.anchors.includes(hash)}
+                  value={category.title}
+                  label={category.title}
+                  className='margin-top--lg'
+                >
+                  <Category group={category} />
+                </TabItem>
+              );
+            })}
+          </Tabs>
+        )
+        : <Category group={categories[0]} />}
     </>
   );
 }

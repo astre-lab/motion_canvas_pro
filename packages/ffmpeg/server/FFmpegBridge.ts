@@ -1,6 +1,6 @@
-import {PluginConfig} from '@motion-canvas/vite-plugin';
-import {ServerResponse} from 'node:http';
-import {Connect, ViteDevServer} from 'vite';
+import { PluginConfig } from '@motion-canvas/vite-plugin';
+import { ServerResponse } from 'node:http';
+import { Connect, ViteDevServer } from 'vite';
 import {
   FFmpegExporterServer,
   FFmpegExporterSettings,
@@ -40,7 +40,7 @@ export class FFmpegBridge {
     });
   };
 
-  private handleMessage = async ({method, data}: BrowserRequest) => {
+  private handleMessage = async ({ method, data }: BrowserRequest) => {
     if (method === 'start') {
       try {
         this.process = new FFmpegExporterServer(

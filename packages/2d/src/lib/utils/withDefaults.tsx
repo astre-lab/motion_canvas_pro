@@ -1,4 +1,4 @@
-import {FunctionComponent, NodeConstructor, PropsOf} from '../components';
+import { FunctionComponent, NodeConstructor, PropsOf } from '../components';
 
 /**
  * Create a higher order component with default props.

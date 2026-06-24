@@ -1,5 +1,5 @@
-import {Vector2} from '../types';
-import {useLogger} from '../utils';
+import { Vector2 } from '../types';
+import { useLogger } from '../utils';
 
 export interface InterpolationFunction<T, TRest extends any[] = any[]> {
   (from: T, to: T, value: number, ...args: TRest): T;
@@ -23,8 +23,7 @@ export function textLerp(fromString: string, toString: string, value: number) {
     }
 
     return text;
-  }
-  // right to left
+  } // right to left
   else {
     const current = Math.round(from.length * (1 - value));
     const currentLength = Math.floor(map(from.length + 1, to.length, value));

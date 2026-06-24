@@ -4,8 +4,8 @@ import {
   foldState,
   syntaxTree,
 } from '@codemirror/language';
-import {EditorState, Extension} from '@codemirror/state';
-import {EditorView} from '@codemirror/view';
+import { EditorState, Extension } from '@codemirror/state';
+import { EditorView } from '@codemirror/view';
 
 const FoldOffset = 'import '.length;
 
@@ -17,7 +17,7 @@ const FoldOffset = 'import '.length;
  */
 export function findImportRange(
   state: EditorState,
-  range?: {from: number; to: number},
+  range?: { from: number; to: number },
 ) {
   const tree = syntaxTree(state);
   let currentNode = tree.topNode.firstChild;
@@ -62,7 +62,7 @@ export function findImportRange(
  */
 export function folding(): Extension {
   return foldService.of((state, from, to) => {
-    return findImportRange(state, {from, to});
+    return findImportRange(state, { from, to });
   });
 }
 
@@ -72,7 +72,7 @@ export function folding(): Extension {
  * @param view - The editor view.
  */
 export function foldImports(view: EditorView) {
-  const {state} = view;
+  const { state } = view;
 
   const range = findImportRange(state);
   if (range) {

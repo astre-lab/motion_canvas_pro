@@ -1,8 +1,8 @@
-import {ComponentChildren} from 'preact';
+import { ComponentChildren } from 'preact';
 
-import {useStorage} from '../../hooks';
-import {Toggle} from '../controls';
-import {Collapse} from '../layout';
+import { useStorage } from '../../hooks';
+import { Toggle } from '../controls';
+import { Collapse } from '../layout';
 
 import styles from './Expandable.module.scss';
 
@@ -12,7 +12,7 @@ export interface ExpandableProps {
   open?: boolean;
 }
 
-export function Expandable({title, children, open}: ExpandableProps) {
+export function Expandable({ title, children, open }: ExpandableProps) {
   const [isOpen, setOpen] = useStorage(`expandable-${title}`, open);
 
   return (

@@ -1,5 +1,5 @@
-import {Vector2} from '@motion-canvas/core';
-import {CurvePoint} from './CurvePoint';
+import { Vector2 } from '@motion-canvas/core';
+import { CurvePoint } from './CurvePoint';
 
 export abstract class Segment {
   public abstract readonly points: Vector2[];

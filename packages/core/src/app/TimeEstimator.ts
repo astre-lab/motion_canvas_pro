@@ -1,5 +1,5 @@
-import {ValueDispatcher} from '../events';
-import {clamp} from '../tweening';
+import { ValueDispatcher } from '../events';
+import { clamp } from '../tweening';
 
 /**
  * An estimate of the time remaining until the process is finished.
@@ -52,7 +52,7 @@ export class TimeEstimator {
       eta = elapsed / this.nextCompletion - elapsed;
     }
 
-    return {completion, elapsed, eta};
+    return { completion, elapsed, eta };
   }
 
   /**

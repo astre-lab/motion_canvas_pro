@@ -1,8 +1,8 @@
-import {createSignal, SimpleSignal} from '../signals';
-import type {Scene} from './Scene';
+import { createSignal, SimpleSignal } from '../signals';
+import type { Scene } from './Scene';
 
 export class Variables {
-  private signals: {[key: string]: SimpleSignal<any>} = {};
+  private signals: { [key: string]: SimpleSignal<any> } = {};
   private variables: Record<string, unknown> = {};
 
   public constructor(private readonly scene: Scene) {
@@ -26,7 +26,7 @@ export class Variables {
    */
   public updateSignals(variables: Record<string, unknown>) {
     this.variables = variables;
-    Object.keys(variables).map(variableName => {
+    Object.keys(variables).map((variableName) => {
       if (variableName in this.signals) {
         this.signals[variableName](variables[variableName]);
       }

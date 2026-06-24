@@ -1,0 +1,29 @@
+{
+  "fmt": {
+    "singleQuote": true,
+    "lineWidth": 80,
+    "proseWrap": "always",
+    "indentWidth": 2,
+    "semiColons": true,
+    "exclude": [
+      ".git",
+      ".docusaurus",
+      ".github",
+      "node_modules",
+      "package-lock.json",
+      "CHANGELOG.md",
+      "README.md",
+      "CONTRIBUTING.md",
+      "packages/docs/docs/intro.md",
+      "packages/*/dist",
+      "packages/*/editor",
+      "packages/*/lib",
+      "packages/*/static",
+      "packages/*/build",
+      "packages/docs/src/generated",
+      "packages/docs/src/theme/Icon/ExternalLink/index.tsx",
+      "packages/docs/src/theme/Icon/Info/index.tsx",
+      "packages/docs/src/theme/Icon/Home/index.tsx"
+    ]
+  }
+}

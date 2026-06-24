@@ -3,7 +3,7 @@
 import fs from 'fs';
 import kleur from 'kleur';
 import minimist from 'minimist';
-import {fileURLToPath} from 'node:url';
+import { fileURLToPath } from 'node:url';
 import path from 'path';
 import prompts from 'prompts';
 
@@ -23,7 +23,7 @@ const PLUGINS = {
   core: {
     package: '@motion-canvas/vite-plugin',
     variable: 'motionCanvas',
-    options: response =>
+    options: (response) =>
       response.language === 'js' ? `{project: './src/project.js'}` : '',
   },
   ffmpeg: {
@@ -64,7 +64,7 @@ const PLUGINS = {
       name: 'name',
       message: 'Project name',
       initial: 'my-animation',
-      validate: value =>
+      validate: (value) =>
         isValidPackageName(value)
           ? true
           : 'Project name must be a valid npm package name.',
@@ -74,11 +74,11 @@ const PLUGINS = {
       name: 'path',
       message: 'Project path',
 
-      initial: value => {
+      initial: (value) => {
         return path.normalize(value.replace('@', ''));
       },
 
-      validate: value => {
+      validate: (value) => {
         let dir = path.normalize(value.trim());
         if (!fs.existsSync(dir)) {
           return true;
@@ -93,7 +93,7 @@ const PLUGINS = {
         }
         return true;
       },
-      format: value => path.resolve(value),
+      format: (value) => path.resolve(value),
     },
     {
       type: 'select',
@@ -131,7 +131,7 @@ const PLUGINS = {
       onRender() {
         this.value[0].selected = true;
       },
-      validate: value => {
+      validate: (value) => {
         if (!Array.isArray(value)) {
           return '"plugins" option must be an array.';
         }
@@ -204,7 +204,7 @@ function isValidPackageName(projectName) {
 }
 
 function copyDirectory(src, dest) {
-  fs.mkdirSync(dest, {recursive: true});
+  fs.mkdirSync(dest, { recursive: true });
   for (const file of fs.readdirSync(src)) {
     let target = file;
     if (file in FILES_TO_MODIFY) {

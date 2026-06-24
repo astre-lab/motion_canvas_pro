@@ -1,8 +1,8 @@
-import {Signal, useSignal} from '@preact/signals';
-import {ComponentChildren, createContext} from 'preact';
-import {Ref, useContext, useEffect, useRef} from 'preact/hooks';
-import {MouseButton} from '../utils';
-import {useApplication} from './application';
+import { Signal, useSignal } from '@preact/signals';
+import { ComponentChildren, createContext } from 'preact';
+import { Ref, useContext, useEffect, useRef } from 'preact/hooks';
+import { MouseButton } from '../utils';
+import { useApplication } from './application';
 
 export interface Action {
   name: string;
@@ -40,7 +40,7 @@ export function makeShortcuts<T extends string>(
   context: string,
   shortcuts: ShortcutMap<T>,
 ): ShortcutConfig<T> {
-  return {context, shortcuts};
+  return { context, shortcuts };
 }
 
 export const GLOBAL_PRESENTER_SHORTCUTS = makeShortcuts('presenter', {
@@ -66,13 +66,13 @@ export const GLOBAL_PRESENTER_SHORTCUTS = makeShortcuts('presenter', {
     display: 'Shift + ←',
     description: 'First slide',
     key: 'ArrowLeft',
-    modifiers: {shift: true},
+    modifiers: { shift: true },
   },
   lastSlide: {
     display: 'Shift + →',
     description: 'Last slide',
     key: 'ArrowRight',
-    modifiers: {shift: true},
+    modifiers: { shift: true },
   },
   toggleFullscreen: {
     display: 'F',
@@ -83,9 +83,14 @@ export const GLOBAL_PRESENTER_SHORTCUTS = makeShortcuts('presenter', {
 });
 
 export const VIEWPORT_SHORTCUTS = makeShortcuts('viewport', {
-  zoomFit: {display: '0', description: 'Zoom to fit', key: '0', modifiers: {}},
-  zoomIn: {display: '=', description: 'Zoom in', key: '=', modifiers: {}},
-  zoomOut: {display: '-', description: 'Zoom out', key: '-', modifiers: {}},
+  zoomFit: {
+    display: '0',
+    description: 'Zoom to fit',
+    key: '0',
+    modifiers: {},
+  },
+  zoomIn: { display: '=', description: 'Zoom in', key: '=', modifiers: {} },
+  zoomOut: { display: '-', description: 'Zoom out', key: '-', modifiers: {} },
   toggleGrid: {
     display: "'",
     description: 'Toggle grid',
@@ -100,13 +105,13 @@ export const VIEWPORT_SHORTCUTS = makeShortcuts('viewport', {
   },
   ...(typeof EyeDropper !== 'undefined'
     ? {
-        colorPicker: {
-          display: 'I',
-          description: 'Use color picker',
-          key: 'i',
-          modifiers: {},
-        },
-      }
+      colorPicker: {
+        display: 'I',
+        description: 'Use color picker',
+        key: 'i',
+        modifiers: {},
+      },
+    }
     : {}),
 });
 
@@ -154,13 +159,13 @@ export const GLOBAL_EDITOR_SHORTCUTS = makeShortcuts('editor', {
     display: 'Shift + <-',
     description: 'Reset to first frame',
     key: 'ArrowLeft',
-    modifiers: {shift: true},
+    modifiers: { shift: true },
   },
   lastFrame: {
     display: 'Shift + ->',
     description: 'Seek to last frame',
     key: 'ArrowRight',
-    modifiers: {shift: true},
+    modifiers: { shift: true },
   },
   toggleAudio: {
     display: 'M',
@@ -208,8 +213,10 @@ interface ShortcutsContextValue {
 
 const ShortcutsContext = createContext<ShortcutsContextValue>(null);
 
-export function ShortcutsProvider({children}: {children: ComponentChildren}) {
-  const {plugins} = useApplication();
+export function ShortcutsProvider(
+  { children }: { children: ComponentChildren },
+) {
+  const { plugins } = useApplication();
   const global = useSignal<string | null>(null);
   const surface = useSignal<string | null>(null);
   const action = useSignal<Action | null>(null);
@@ -220,13 +227,15 @@ export function ShortcutsProvider({children}: {children: ComponentChildren}) {
   });
   const callbacks = useRef<CallbackMap>(new Map());
   const configMap: ConfigMap = new Map();
-  for (const config of [
-    GLOBAL_EDITOR_SHORTCUTS,
-    GLOBAL_PRESENTER_SHORTCUTS,
-    TIMELINE_SHORTCUTS,
-    VIEWPORT_SHORTCUTS,
-    ...plugins.flatMap(plugin => plugin.shortcuts ?? []),
-  ]) {
+  for (
+    const config of [
+      GLOBAL_EDITOR_SHORTCUTS,
+      GLOBAL_PRESENTER_SHORTCUTS,
+      TIMELINE_SHORTCUTS,
+      VIEWPORT_SHORTCUTS,
+      ...plugins.flatMap((plugin) => plugin.shortcuts ?? []),
+    ]
+  ) {
     const shortcutMap = configMap.get(config.context) ?? {};
     for (const [key, shortcut] of Object.entries(config.shortcuts)) {
       if (key in shortcutMap) {
@@ -373,7 +382,7 @@ export function useModifiers() {
 export function useSurfaceShortcuts<T extends HTMLElement>(
   config: ShortcutConfig<string>,
 ) {
-  const {surface} = useShortcutContext();
+  const { surface } = useShortcutContext();
   const ref = useRef<T>(null);
 
   useEffect(() => {
@@ -406,14 +415,14 @@ export function useShortcut<T extends string>(
   name: T,
   handler: ShortcutCallback,
 ) {
-  return useShortcuts<T>(config, {[name]: handler} as ShortcutCallbacks<T>);
+  return useShortcuts<T>(config, { [name]: handler } as ShortcutCallbacks<T>);
 }
 
 export function useShortcuts<T extends string>(
   config: ShortcutConfig<T>,
   handlers: ShortcutCallbacks<T>,
 ) {
-  const {callbacks} = useShortcutContext();
+  const { callbacks } = useShortcutContext();
   const handlersRef = useRef(handlers);
   handlersRef.current = handlers;
 

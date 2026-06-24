@@ -1,13 +1,15 @@
-import type {JSX} from 'preact';
+import type { JSX } from 'preact';
 import styles from './Controls.module.scss';
-import {NumberInput} from './NumberInput';
-import {Select, SelectProps} from './Select';
+import { NumberInput } from './NumberInput';
+import { Select, SelectProps } from './Select';
 
-export type NumberInputSelectProps = Omit<
-  JSX.HTMLAttributes<HTMLInputElement>,
-  'value' | 'onChange' | 'min' | 'max' | 'step' | 'label'
-> &
-  SelectProps<number> & {
+export type NumberInputSelectProps =
+  & Omit<
+    JSX.HTMLAttributes<HTMLInputElement>,
+    'value' | 'onChange' | 'min' | 'max' | 'step' | 'label'
+  >
+  & SelectProps<number>
+  & {
     value: number;
     min?: number;
     max?: number;

@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import type {JSX} from 'preact';
+import type { JSX } from 'preact';
 import styles from './index.module.scss';
 
 interface PreviewCanvasProps extends JSX.HTMLAttributes<HTMLDivElement> {}
@@ -14,6 +14,6 @@ interface PreviewCanvasProps extends JSX.HTMLAttributes<HTMLDivElement> {}
  * @param rest - Any other props to pass to the div. Can be used to hook up
  *               pointer events.
  */
-export function OverlayWrapper({className, ...rest}: PreviewCanvasProps) {
+export function OverlayWrapper({ className, ...rest }: PreviewCanvasProps) {
   return <div className={clsx(className, styles.overlay)} {...rest}></div>;
 }

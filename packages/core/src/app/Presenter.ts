@@ -1,14 +1,14 @@
-import {ValueDispatcher} from '../events';
-import type {Scene, Slide} from '../scenes';
-import {ReadOnlyTimeEvents} from '../scenes/timeEvents';
-import {Vector2} from '../types';
-import {Semaphore} from '../utils';
-import type {Logger} from './Logger';
-import {PlaybackManager, PlaybackState} from './PlaybackManager';
-import {PlaybackStatus} from './PlaybackStatus';
-import type {Project} from './Project';
-import {SharedWebGLContext} from './SharedWebGLContext';
-import {Stage, StageSettings} from './Stage';
+import { ValueDispatcher } from '../events';
+import type { Scene, Slide } from '../scenes';
+import { ReadOnlyTimeEvents } from '../scenes/timeEvents';
+import { Vector2 } from '../types';
+import { Semaphore } from '../utils';
+import type { Logger } from './Logger';
+import { PlaybackManager, PlaybackState } from './PlaybackManager';
+import { PlaybackStatus } from './PlaybackStatus';
+import type { Project } from './Project';
+import { SharedWebGLContext } from './SharedWebGLContext';
+import { Stage, StageSettings } from './Stage';
 
 export interface PresenterSettings extends StageSettings {
   name: string;
@@ -181,7 +181,7 @@ export class Presenter {
       if (signal.aborted) return;
     }
 
-    await new Promise(resolve => {
+    await new Promise((resolve) => {
       signal.addEventListener('abort', resolve);
       this.request();
     });
@@ -224,9 +224,7 @@ export class Presenter {
         await this.playback.goTo(slide);
       }
       this.logger.profile('slide time');
-    }
-
-    // Move forward one frame
+    } // Move forward one frame
     else if (!this.playback.finished) {
       this.playback.state = PlaybackState.Presenting;
       await this.playback.progress();
@@ -249,7 +247,7 @@ export class Presenter {
       return;
     }
 
-    this.requestId ??= requestAnimationFrame(async time => {
+    this.requestId ??= requestAnimationFrame(async (time) => {
       this.requestId = null;
       if (time - this.renderTime >= 1000 / (this.status.fps + 5)) {
         this.renderTime = time;

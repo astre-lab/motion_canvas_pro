@@ -1,5 +1,5 @@
-import {MetaField} from './MetaField';
-import {MetaOption} from './MetaOption';
+import { MetaField } from './MetaField';
+import { MetaOption } from './MetaOption';
 
 /**
  * Represents an enum value stored in a meta file.
@@ -28,7 +28,7 @@ export class EnumMetaField<T> extends MetaField<T> {
 
   public getOption(value: T): MetaOption<T> {
     return (
-      this.options.find(option => option.value === value) ?? this.options[0]
+      this.options.find((option) => option.value === value) ?? this.options[0]
     );
   }
 }

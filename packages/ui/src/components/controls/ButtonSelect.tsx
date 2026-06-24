@@ -1,9 +1,10 @@
-import {Button, ButtonProps} from './Button';
+import { Button, ButtonProps } from './Button';
 import styles from './Controls.module.scss';
-import {Select, SelectProps} from './Select';
+import { Select, SelectProps } from './Select';
 
-export type ButtonSelectProps<T> = Omit<ButtonProps, 'value' | 'onChange'> &
-  SelectProps<T>;
+export type ButtonSelectProps<T> =
+  & Omit<ButtonProps, 'value' | 'onChange'>
+  & SelectProps<T>;
 
 export function ButtonSelect<T extends string | number>({
   options,
@@ -16,7 +17,7 @@ export function ButtonSelect<T extends string | number>({
   return (
     <div className={styles.inputSelect}>
       <Button main={main} {...props} disabled={disabled}>
-        {options.find(option => option.value === value)?.text}
+        {options.find((option) => option.value === value)?.text}
       </Button>
       <Select
         value={value}

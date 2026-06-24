@@ -1,15 +1,15 @@
-import {VNode} from 'preact';
-import {useMemo, useRef} from 'preact/hooks';
-import {usePlayerState, usePlayerTime} from '../../hooks';
+import { VNode } from 'preact';
+import { useMemo, useRef } from 'preact/hooks';
+import { usePlayerState, usePlayerTime } from '../../hooks';
 
 interface FramerateProps {
   render: (framerate: number, paused: boolean) => VNode<unknown>;
 }
 
-export function Framerate({render}: FramerateProps) {
-  const {paused} = usePlayerState();
+export function Framerate({ render }: FramerateProps) {
+  const { paused } = usePlayerState();
   const time = usePlayerTime();
-  const {current: state} = useRef({
+  const { current: state } = useRef({
     history: [],
     lastUpdate: 0,
     overallTime: -1,

@@ -7,8 +7,8 @@ import {
   TimingFunction,
   useLogger,
 } from '@motion-canvas/core';
-import {makeSignalExtensions} from '../utils/makeSignalExtensions';
-import {addInitializer, initialize} from './initializers';
+import { makeSignalExtensions } from '../utils/makeSignalExtensions';
+import { addInitializer, initialize } from './initializers';
 
 export interface PropertyMetadata<T> {
   default?: T;
@@ -51,8 +51,8 @@ export function getPropertyMetaOrCreate<T>(
   ) {
     object[PROPERTIES] = lookup = Object.fromEntries<PropertyMetadata<T>>(
       Object.entries(
-        <Record<string | symbol, PropertyMetadata<T>>>object[PROPERTIES],
-      ).map(([key, meta]) => [key, {...meta}]),
+        <Record<string | symbol, PropertyMetadata<T>>> object[PROPERTIES],
+      ).map(([key, meta]) => [key, { ...meta }]),
     );
   } else {
     lookup = object[PROPERTIES];
@@ -131,7 +131,7 @@ export function signal<T>(): PropertyDecorator {
         meta.interpolationFunction ?? deepLerp,
         instance,
         meta.parser?.bind(instance),
-        makeSignalExtensions(meta, instance, <string>key),
+        makeSignalExtensions(meta, instance, <string> key),
       );
       instance[key] = signal.toSignal();
     });
@@ -266,7 +266,7 @@ export function parser<T>(value: (value: any) => T): PropertyDecorator {
  * @param value - The wrapper class for the property.
  */
 export function wrapper<T>(
-  value: (new (value: any) => T) & {lerp?: InterpolationFunction<T>},
+  value: (new (value: any) => T) & { lerp?: InterpolationFunction<T> },
 ): PropertyDecorator {
   return (target: any, key) => {
     const meta = getPropertyMeta<T>(target, key);
@@ -274,7 +274,7 @@ export function wrapper<T>(
       useLogger().error(`Missing property decorator for "${key.toString()}"`);
       return;
     }
-    meta.parser = raw => new value(raw);
+    meta.parser = (raw) => new value(raw);
     if ('lerp' in value) {
       meta.interpolationFunction ??= value.lerp;
     }

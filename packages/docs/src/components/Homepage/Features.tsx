@@ -32,7 +32,7 @@ type FeatureItem = {
   content: JSX.Element;
 };
 
-function Feature({content, children}: FeatureItem) {
+function Feature({ content, children }: FeatureItem) {
   return (
     <div className={styles.feature}>
       <div className={styles.preview}>{content}</div>
@@ -57,7 +57,7 @@ export default function HomepageFeatures(): JSX.Element {
         </p>
         <p>
           Powered by{' '}
-          <a href="https://vitejs.dev/" target="_blank">
+          <a href='https://vitejs.dev/' target='_blank'>
             Vite
           </a>
           , a real-time preview of your animation automatically updates upon any
@@ -65,15 +65,15 @@ export default function HomepageFeatures(): JSX.Element {
         </p>
         <p>
           <a
-            className="button button--outline button--lg"
-            href="/editor/quickstart"
-            target="_blank"
+            className='button button--outline button--lg'
+            href='/editor/quickstart'
+            target='_blank'
           >
             Try the Editor
           </a>
         </p>
       </Feature>
-      <Feature content={<CodeBlock language="tsx">{CodeSample}</CodeBlock>}>
+      <Feature content={<CodeBlock language='tsx'>{CodeSample}</CodeBlock>}>
         <h3>
           <b>Procedural</b> for a Change
         </h3>
@@ -87,8 +87,8 @@ export default function HomepageFeatures(): JSX.Element {
         </p>
         <p>
           <Link
-            className="button button--outline button--lg"
-            to="/docs/quickstart"
+            className='button button--outline button--lg'
+            to='/docs/quickstart'
           >
             Learn More
           </Link>
@@ -96,7 +96,7 @@ export default function HomepageFeatures(): JSX.Element {
       </Feature>
       <Feature
         content={
-          <YouTubeVideo src="https://www.youtube.com/embed/R6vQ9VmMz2w" />
+          <YouTubeVideo src='https://www.youtube.com/embed/R6vQ9VmMz2w' />
         }
       >
         <h3>
@@ -108,9 +108,9 @@ export default function HomepageFeatures(): JSX.Element {
         </p>
         <p>
           <a
-            className="button button--outline button--lg"
-            href="https://github.com/motion-canvas/examples"
-            target="_blank"
+            className='button button--outline button--lg'
+            href='https://github.com/motion-canvas/examples'
+            target='_blank'
           >
             Video Source Code
           </a>

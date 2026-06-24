@@ -1,9 +1,9 @@
-import {Rect, Txt, makeScene2D} from '@motion-canvas/2d';
+import { makeScene2D, Rect, Txt } from '@motion-canvas/2d';
 import {
-  Color,
   all,
   beginSlide,
   cancel,
+  Color,
   createRef,
   createSignal,
   easeInOutCubic,

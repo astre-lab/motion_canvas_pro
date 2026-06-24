@@ -1,16 +1,16 @@
-import {EventDispatcher, ValueDispatcher} from '../events';
-import type {Scene, Sound} from '../scenes';
-import {ReadOnlyTimeEvents} from '../scenes/timeEvents';
-import {clampRemap} from '../tweening';
-import {Vector2} from '../types';
-import {Semaphore} from '../utils';
-import type {Exporter} from './Exporter';
-import {PlaybackManager, PlaybackState} from './PlaybackManager';
-import {PlaybackStatus} from './PlaybackStatus';
-import type {Project} from './Project';
-import {SharedWebGLContext} from './SharedWebGLContext';
-import {Stage, StageSettings} from './Stage';
-import {TimeEstimator} from './TimeEstimator';
+import { EventDispatcher, ValueDispatcher } from '../events';
+import type { Scene, Sound } from '../scenes';
+import { ReadOnlyTimeEvents } from '../scenes/timeEvents';
+import { clampRemap } from '../tweening';
+import { Vector2 } from '../types';
+import { Semaphore } from '../utils';
+import type { Exporter } from './Exporter';
+import { PlaybackManager, PlaybackState } from './PlaybackManager';
+import { PlaybackStatus } from './PlaybackStatus';
+import type { Project } from './Project';
+import { SharedWebGLContext } from './SharedWebGLContext';
+import { Stage, StageSettings } from './Stage';
+import { TimeEstimator } from './TimeEstimator';
 
 export interface RendererSettings extends StageSettings {
   name: string;
@@ -182,7 +182,7 @@ export class Renderer {
     signal: AbortSignal,
   ): Promise<RendererResult> {
     const exporterClass = this.project.meta.rendering.exporter.exporters.find(
-      exporter => exporter.id === settings.exporter.name,
+      (exporter) => exporter.id === settings.exporter.name,
     );
     if (!exporterClass) {
       this.project.logger.error(
@@ -239,7 +239,7 @@ export class Renderer {
           );
           if (performance.now() - lastRefresh > 1 / 30) {
             lastRefresh = performance.now();
-            await new Promise(resolve => setTimeout(resolve, 0));
+            await new Promise((resolve) => setTimeout(resolve, 0));
           }
           if (this.playback.finished || this.playback.frame >= to) {
             finished = true;
@@ -289,8 +289,8 @@ export class Renderer {
       this.playback.previousScene,
     );
 
-    const sceneFrame =
-      this.playback.frame - this.playback.currentScene.firstFrame;
+    const sceneFrame = this.playback.frame -
+      this.playback.currentScene.firstFrame;
     await this.exporter!.handleFrame(
       this.stage.finalBuffer,
       this.playback.frame,

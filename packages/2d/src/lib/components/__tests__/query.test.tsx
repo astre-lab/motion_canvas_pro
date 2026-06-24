@@ -1,10 +1,10 @@
-import {createRef, createRefArray} from '@motion-canvas/core';
-import {describe, expect, it} from 'vitest';
-import {useScene2D} from '../../scenes';
-import {is} from '../../utils';
-import {Circle} from '../Circle';
-import {Rect} from '../Rect';
-import {mockScene2D} from './mockScene2D';
+import { createRef, createRefArray } from '@motion-canvas/core';
+import { describe, expect, it } from 'vitest';
+import { useScene2D } from '../../scenes';
+import { is } from '../../utils';
+import { Circle } from '../Circle';
+import { Rect } from '../Rect';
+import { mockScene2D } from './mockScene2D';
 
 describe('query', () => {
   mockScene2D();
@@ -39,7 +39,7 @@ describe('query', () => {
       </>,
     );
 
-    const query = view.findAll(node => node.scale.x() === 2);
+    const query = view.findAll((node) => node.scale.x() === 2);
     expect(query.length).toBe(2);
     expect(query).toEqual([...nodes]);
   });
@@ -110,7 +110,7 @@ describe('query', () => {
       <>
         <Circle>
           <Rect />
-          <Circle ref={match} key="test-key" />
+          <Circle ref={match} key='test-key' />
         </Circle>
         <Rect />
       </>,

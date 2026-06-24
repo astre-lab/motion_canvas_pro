@@ -1,9 +1,9 @@
-import {computed, ReadonlySignal} from '@preact/signals';
-import {ComponentChildren, createContext} from 'preact';
-import {useContext, useMemo} from 'preact/hooks';
-import {PluginInspectorConfig, PluginTabConfig} from '../plugin';
-import {EditorPanel, storedSignal} from '../signals';
-import {useApplication} from './application';
+import { computed, ReadonlySignal } from '@preact/signals';
+import { ComponentChildren, createContext } from 'preact';
+import { useContext, useMemo } from 'preact/hooks';
+import { PluginInspectorConfig, PluginTabConfig } from '../plugin';
+import { EditorPanel, storedSignal } from '../signals';
+import { useApplication } from './application';
 
 interface Panel {
   current: ReadonlySignal<string | null>;
@@ -24,8 +24,8 @@ export function usePanels(): Panels {
   return useContext(PanelsContext);
 }
 
-export function PanelsProvider({children}: {children: ComponentChildren}) {
-  const {plugins} = useApplication();
+export function PanelsProvider({ children }: { children: ComponentChildren }) {
+  const { plugins } = useApplication();
   const tabs = useMemo(() => {
     const tabs: PluginTabConfig[] = [];
     for (const plugin of plugins) {
@@ -52,7 +52,7 @@ export function PanelsProvider({children}: {children: ComponentChildren}) {
   }, [plugins]);
 
   const options = useMemo(() => {
-    const options = tabs.map(tab => tab.name);
+    const options = tabs.map((tab) => tab.name);
     options.push(...Object.values(EditorPanel));
     return options;
   }, [tabs]);
@@ -75,8 +75,10 @@ export function PanelsProvider({children}: {children: ComponentChildren}) {
 }
 
 function panelSignal(initial: string, id: string, options: string[]): Panel {
-  const stored = storedSignal<string>(initial, id, value =>
-    options.includes(value) ? value : initial,
+  const stored = storedSignal<string>(
+    initial,
+    id,
+    (value) => options.includes(value) ? value : initial,
   );
   const isHidden = storedSignal(stored.value === null, `${id}-hidden`);
   const current = computed(() => (isHidden.value ? null : stored.value));

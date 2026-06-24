@@ -6,14 +6,14 @@ import Layout from '@theme/Layout';
 import React from 'react';
 
 export default function Home(): JSX.Element {
-  const {siteConfig} = useDocusaurusContext();
+  const { siteConfig } = useDocusaurusContext();
   return (
     <Layout title={siteConfig.title} description={siteConfig.tagline}>
       <Head>
         <title>
           {siteConfig.title} - {siteConfig.tagline}
         </title>
-        <meta property="og:title" content={siteConfig.title} />
+        <meta property='og:title' content={siteConfig.title} />
       </Head>
       <HomepageHeader />
       <main>

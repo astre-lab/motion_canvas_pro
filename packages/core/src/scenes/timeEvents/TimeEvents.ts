@@ -1,5 +1,5 @@
-import type {SubscribableValueEvent} from '../../events';
-import type {TimeEvent} from './TimeEvent';
+import type { SubscribableValueEvent } from '../../events';
+import type { TimeEvent } from './TimeEvent';
 
 /**
  * An interface for classes managing the time events.

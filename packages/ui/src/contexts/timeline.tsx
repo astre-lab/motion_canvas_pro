@@ -1,5 +1,5 @@
-import {ComponentChildren, createContext} from 'preact';
-import {useContext} from 'preact/hooks';
+import { ComponentChildren, createContext } from 'preact';
+import { useContext } from 'preact/hooks';
 
 export interface TimelineState {
   /**
@@ -77,14 +77,14 @@ const TimelineContext = createContext<TimelineState>({
   lastVisibleTime: 0,
   firstVisibleFrame: 0,
   firstVisibleTime: 0,
-  framesToPercents: value => value,
-  secondsToPercents: value => value,
-  framesToPixels: value => value,
-  secondsToPixels: value => value,
-  pixelsToFrames: value => value,
-  pixelsToSeconds: value => value,
-  pointerToFrames: value => value,
-  pointerToSeconds: value => value,
+  framesToPercents: (value) => value,
+  secondsToPercents: (value) => value,
+  framesToPixels: (value) => value,
+  secondsToPixels: (value) => value,
+  pixelsToFrames: (value) => value,
+  pixelsToSeconds: (value) => value,
+  pointerToFrames: (value) => value,
+  pointerToSeconds: (value) => value,
 });
 
 export function TimelineContextProvider({

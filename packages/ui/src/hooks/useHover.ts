@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 type UseHoverType<T extends HTMLElement> = [React.RefObject<T>, boolean];
 

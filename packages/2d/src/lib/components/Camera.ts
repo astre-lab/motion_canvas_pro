@@ -15,10 +15,10 @@ import {
   unwrap,
   Vector2,
 } from '@motion-canvas/core';
-import {cloneable, signal} from '../decorators';
-import {Curve} from './Curve';
-import {Node, NodeProps} from './Node';
-import {Rect, RectProps} from './Rect';
+import { cloneable, signal } from '../decorators';
+import { Curve } from './Curve';
+import { Node, NodeProps } from './Node';
+import { Rect, RectProps } from './Rect';
 
 export interface CameraProps extends NodeProps {
   /**
@@ -79,9 +79,9 @@ export class Camera extends Node {
    * The scene node that the camera is rendering.
    */
   @signal()
-  public declare readonly scene: SimpleSignal<Node, this>;
+  declare public readonly scene: SimpleSignal<Node, this>;
 
-  public constructor({children, ...props}: CameraProps) {
+  public constructor({ children, ...props }: CameraProps) {
     super(props);
 
     if (!this.scene()) {
@@ -100,14 +100,14 @@ export class Camera extends Node {
    */
   @cloneable(false)
   @signal()
-  public declare readonly zoom: SimpleSignal<number, this>;
+  declare public readonly zoom: SimpleSignal<number, this>;
 
   protected getZoom(): number {
     return 1 / this.scale.x();
   }
 
   protected setZoom(value: SignalValue<number>) {
-    this.scale(modify(value, unwrapped => 1 / unwrapped));
+    this.scale(modify(value, (unwrapped) => 1 / unwrapped));
   }
 
   protected getDefaultZoom() {
@@ -121,7 +121,7 @@ export class Camera extends Node {
     interpolationFunction: InterpolationFunction<number>,
   ): ThreadGenerator {
     const from = this.scale.x();
-    yield* tween(duration, v => {
+    yield* tween(duration, (v) => {
       this.zoom(
         1 / interpolationFunction(from, 1 / unwrap(value), timingFunction(v)),
       );
@@ -185,12 +185,11 @@ export class Camera extends Node {
     timing: TimingFunction = easeInOutCubic,
     interpolationFunction: InterpolationFunction<Vector2> = Vector2.lerp,
   ): ThreadGenerator {
-    const position =
-      positionOrNode instanceof Node
-        ? positionOrNode
-            .absolutePosition()
-            .transformAsPoint(this.scene().worldToLocal())
-        : positionOrNode;
+    const position = positionOrNode instanceof Node
+      ? positionOrNode
+        .absolutePosition()
+        .transformAsPoint(this.scene().worldToLocal())
+      : positionOrNode;
     yield* this.position(position, duration, timing, interpolationFunction);
   }
 
@@ -214,7 +213,7 @@ export class Camera extends Node {
     duration: number,
     timing: TimingFunction = easeInOutCubic,
   ): ThreadGenerator {
-    yield* tween(duration, value => {
+    yield* tween(duration, (value) => {
       const t = timing(value);
       const point = curve
         .getPointAtPercentage(t)
@@ -244,7 +243,7 @@ export class Camera extends Node {
     duration: number,
     timing: TimingFunction = easeInOutCubic,
   ) {
-    yield* tween(duration, value => {
+    yield* tween(duration, (value) => {
       const t = 1 - timing(value);
       const point = curve
         .getPointAtPercentage(t)
@@ -275,9 +274,9 @@ export class Camera extends Node {
     duration: number,
     timing: TimingFunction = easeInOutCubic,
   ) {
-    yield* tween(duration, value => {
+    yield* tween(duration, (value) => {
       const t = timing(value);
-      const {position, normal} = curve.getPointAtPercentage(t);
+      const { position, normal } = curve.getPointAtPercentage(t);
       const point = position.transformAsPoint(curve.localToWorld());
       const angle = normal.flipped.perpendicular.degrees;
 
@@ -307,9 +306,9 @@ export class Camera extends Node {
     duration: number,
     timing: TimingFunction = easeInOutCubic,
   ) {
-    yield* tween(duration, value => {
+    yield* tween(duration, (value) => {
       const t = 1 - timing(value);
-      const {position, normal} = curve.getPointAtPercentage(t);
+      const { position, normal } = curve.getPointAtPercentage(t);
       const point = position.transformAsPoint(curve.localToWorld());
       const angle = normal.flipped.perpendicular.degrees;
 
@@ -345,8 +344,8 @@ export class Camera extends Node {
     cameraRef,
     scene,
     ...props
-  }: RectProps & {cameraRef?: Reference<Camera>; scene?: Node}) {
-    const camera = new Camera({scene: scene, children});
+  }: RectProps & { cameraRef?: Reference<Camera>; scene?: Node }) {
+    const camera = new Camera({ scene: scene, children });
 
     cameraRef?.(camera);
 

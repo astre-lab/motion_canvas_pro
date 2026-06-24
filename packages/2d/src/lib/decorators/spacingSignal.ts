@@ -1,6 +1,6 @@
-import {Spacing} from '@motion-canvas/core';
-import {compound} from './compound';
-import {wrapper} from './signal';
+import { Spacing } from '@motion-canvas/core';
+import { compound } from './compound';
+import { wrapper } from './signal';
 
 export function spacingSignal(prefix?: string): PropertyDecorator {
   return (target, key) => {

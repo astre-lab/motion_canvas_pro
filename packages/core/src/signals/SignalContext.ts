@@ -1,14 +1,14 @@
-import {run, waitFor} from '../flow';
-import {ThreadGenerator} from '../threading';
+import { run, waitFor } from '../flow';
+import { ThreadGenerator } from '../threading';
 import {
+  easeInOutCubic,
   InterpolationFunction,
   TimingFunction,
-  easeInOutCubic,
   tween,
 } from '../tweening';
-import {errorToLog, useLogger} from '../utils';
-import {DependencyContext} from './DependencyContext';
-import {DEFAULT} from './symbols';
+import { errorToLog, useLogger } from '../utils';
+import { DependencyContext } from './DependencyContext';
+import { DEFAULT } from './symbols';
 import {
   SignalExtensions,
   SignalGenerator,
@@ -17,7 +17,7 @@ import {
   SignalTween,
   SignalValue,
 } from './types';
-import {isReactive, unwrap} from './utils';
+import { isReactive, unwrap } from './utils';
 
 export type SimpleSignal<TValue, TReturn = void> = Signal<
   TValue,
@@ -30,9 +30,10 @@ export interface Signal<
   TValue extends TSetterValue,
   TOwner = void,
   TContext = SignalContext<TSetterValue, TValue, TOwner>,
-> extends SignalSetter<TSetterValue, TOwner>,
-    SignalGetter<TValue>,
-    SignalTween<TSetterValue, TValue> {
+> extends
+  SignalSetter<TSetterValue, TOwner>,
+  SignalGetter<TValue>,
+  SignalTween<TSetterValue, TValue> {
   /**
    * {@inheritDoc SignalContext.reset}
    */
@@ -64,8 +65,9 @@ export class SignalContext<
   public constructor(
     private initial: SignalValue<TSetterValue> | undefined,
     private readonly interpolation: InterpolationFunction<TValue>,
-    owner: TOwner = <TOwner>(<unknown>undefined),
-    protected parser: (value: TSetterValue) => TValue = value => <TValue>value,
+    owner: TOwner = <TOwner> (<unknown> undefined),
+    protected parser: (value: TSetterValue) => TValue = (value) =>
+      <TValue> value,
     extensions: Partial<SignalExtensions<TSetterValue, TValue>> = {},
   ) {
     super(owner);
@@ -143,7 +145,7 @@ export class SignalContext<
       } catch (e: any) {
         useLogger().error({
           ...errorToLog(e),
-          inspect: (<any>this.owner)?.key,
+          inspect: (<any> this.owner)?.key,
         });
       }
       this.finishCollecting();
@@ -267,7 +269,7 @@ export class SignalContext<
     interpolationFunction: InterpolationFunction<TValue>,
   ): ThreadGenerator {
     const from = this.get();
-    yield* tween(duration, v => {
+    yield* tween(duration, (v) => {
       this.set(
         interpolationFunction(
           from,

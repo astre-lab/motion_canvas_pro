@@ -1,9 +1,9 @@
-import {BBox, Vector2} from '@motion-canvas/core';
-import {moveTo} from '../utils';
-import {CurvePoint} from './CurvePoint';
-import {Polynomial2D} from './Polynomial2D';
-import {Segment} from './Segment';
-import {UniformPolynomialCurveSampler} from './UniformPolynomialCurveSampler';
+import { BBox, Vector2 } from '@motion-canvas/core';
+import { moveTo } from '../utils';
+import { CurvePoint } from './CurvePoint';
+import { Polynomial2D } from './Polynomial2D';
+import { Segment } from './Segment';
+import { UniformPolynomialCurveSampler } from './UniformPolynomialCurveSampler';
 
 export abstract class PolynomialSegment extends Segment {
   protected readonly pointSampler: UniformPolynomialCurveSampler;
@@ -61,7 +61,7 @@ export abstract class PolynomialSegment extends Segment {
   }
 
   public transformPoints(matrix: DOMMatrix): Vector2[] {
-    return this.points.map(point => point.transformAsPoint(matrix));
+    return this.points.map((point) => point.transformAsPoint(matrix));
   }
 
   /**

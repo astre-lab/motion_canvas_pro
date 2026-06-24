@@ -1,6 +1,6 @@
-import {decorate, threadable} from '../decorators';
-import {ThreadGenerator} from '../threading';
-import {useDuration, usePlayback, useThread} from '../utils';
+import { decorate, threadable } from '../decorators';
+import { ThreadGenerator } from '../threading';
+import { useDuration, usePlayback, useThread } from '../utils';
 
 decorate(waitUntil, threadable());
 /**

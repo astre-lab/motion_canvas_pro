@@ -1,4 +1,4 @@
-import {Logger} from './Logger';
+import { Logger } from './Logger';
 import includeWithoutPreprocessor from './__logs__/include-without-preprocessor.md';
 
 const SOURCE_URL_REGEX = /^\/\/# sourceURL=(.*)$/gm;
@@ -49,7 +49,7 @@ export class SharedWebGLContext {
     this.currentOwner = null;
 
     this.gl.useProgram(null);
-    for (const {program, fragment, vertex} of this.programLookup.values()) {
+    for (const { program, fragment, vertex } of this.programLookup.values()) {
       this.gl.deleteProgram(program);
       this.gl.deleteShader(fragment);
       this.gl.deleteShader(vertex);
@@ -180,7 +180,7 @@ function logGlslError(logger: Logger, log: string | null, source: string) {
       if (match[1] === 'include') {
         const line = source
           .split('\n')
-          .find(line => line.startsWith('#include'));
+          .find((line) => line.startsWith('#include'));
         if (line) {
           logged = true;
           logger.error({

@@ -10,10 +10,10 @@ module.exports = (context, options) => ({
       .replace('{{source}}', './project.js');
 
     const examples = options.examples ?? [];
-    for (const {fileName} of examples) {
+    for (const { fileName } of examples) {
       const dir = `./static/editor/${fileName}`;
       if (!fs.existsSync(dir)) {
-        fs.mkdirSync(dir, {recursive: true});
+        fs.mkdirSync(dir, { recursive: true });
       }
 
       await fs.promises.writeFile(`${dir}/index.html`, html);

@@ -1,9 +1,9 @@
 import * as fs from 'fs';
-import {toMatchImageSnapshot} from 'jest-image-snapshot';
-import {afterAll, beforeAll, describe, expect, test} from 'vitest';
-import {App, start} from './app';
+import { toMatchImageSnapshot } from 'jest-image-snapshot';
+import { afterAll, beforeAll, describe, expect, test } from 'vitest';
+import { App, start } from './app';
 
-expect.extend({toMatchImageSnapshot});
+expect.extend({ toMatchImageSnapshot });
 
 describe('Rendering', () => {
   let app: App;
@@ -21,7 +21,7 @@ describe('Rendering', () => {
     await app.page.waitForSelector('#render:not([data-rendering="true"])');
 
     const images = await readOutputFiles();
-    for (const {name, content} of images) {
+    for (const { name, content } of images) {
       expect(content).toMatchImageSnapshot({
         customSnapshotIdentifier: name,
       });
@@ -32,18 +32,18 @@ describe('Rendering', () => {
 async function readOutputFiles() {
   const files = await fs.promises.readdir('./output/project');
   const images = await Promise.all(
-    files.map(async file => {
+    files.map(async (file) => {
       const stat = await fs.promises.stat(`./output/project/${file}`);
       return stat.isDirectory()
         ? {
-            name: file,
-            content: await fs.promises.readFile(
-              `./output/project/${file}/000000.png`,
-            ),
-          }
+          name: file,
+          content: await fs.promises.readFile(
+            `./output/project/${file}/000000.png`,
+          ),
+        }
         : null;
     }),
   );
 
-  return images.filter(image => image !== null);
+  return images.filter((image) => image !== null);
 }

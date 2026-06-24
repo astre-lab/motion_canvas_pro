@@ -1,5 +1,5 @@
-import {EventDispatcher} from '../events';
-import {Scene, SceneRenderEvent} from './Scene';
+import { EventDispatcher } from '../events';
+import { Scene, SceneRenderEvent } from './Scene';
 
 /**
  * Lifecycle events for {@link Scene} that are cleared on every reset.
@@ -8,26 +8,30 @@ export class LifecycleEvents {
   public get onBeforeRender() {
     return this.beforeRender.subscribable;
   }
-  protected readonly beforeRender =
-    new EventDispatcher<CanvasRenderingContext2D>();
+  protected readonly beforeRender = new EventDispatcher<
+    CanvasRenderingContext2D
+  >();
 
   public get onBeginRender() {
     return this.beginRender.subscribable;
   }
-  protected readonly beginRender =
-    new EventDispatcher<CanvasRenderingContext2D>();
+  protected readonly beginRender = new EventDispatcher<
+    CanvasRenderingContext2D
+  >();
 
   public get onFinishRender() {
     return this.finishRender.subscribable;
   }
-  protected readonly finishRender =
-    new EventDispatcher<CanvasRenderingContext2D>();
+  protected readonly finishRender = new EventDispatcher<
+    CanvasRenderingContext2D
+  >();
 
   public get onAfterRender() {
     return this.afterRender.subscribable;
   }
-  protected readonly afterRender =
-    new EventDispatcher<CanvasRenderingContext2D>();
+  protected readonly afterRender = new EventDispatcher<
+    CanvasRenderingContext2D
+  >();
 
   public constructor(private readonly scene: Scene) {
     this.scene.onRenderLifecycle.subscribe(([event, ctx]) => {

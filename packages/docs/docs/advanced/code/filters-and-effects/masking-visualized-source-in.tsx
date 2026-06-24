@@ -35,7 +35,7 @@ export default makeScene2D(function* (view) {
   yield view.add(
     <Node ref={fakeMaskLayerGroup} opacity={0} cache>
       <Img
-        src="/img/logo_dark.svg"
+        src='/img/logo_dark.svg'
         size={200}
         position={maskPosition}
         rotation={maskLayerRotation}
@@ -52,10 +52,12 @@ export default makeScene2D(function* (view) {
   );
   yield view.add(
     <Node ref={fakeValueLayerGroup} opacity={0} cache>
-      {/*
+      {
+        /*
       We do not specifically need to use the Image here, a simple Rectangle would be enough.
       It is however convenient because we get the correct aspect ratio.
-      */}
+      */
+      }
       <Img
         src={ImageSource}
         width={360}
@@ -116,7 +118,7 @@ export default makeScene2D(function* (view) {
     <Node cache>
       {/** Stencil / Mask Layer. It defines if the Value Layer is visible or not */}
       <Img
-        src="/img/logo_dark.svg"
+        src='/img/logo_dark.svg'
         size={200}
         position={maskPosition}
         rotation={maskLayerRotation}

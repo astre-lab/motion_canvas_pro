@@ -1,9 +1,9 @@
 import {
   BBox,
-  SignalValue,
-  SimpleSignal,
   capitalize,
   lazy,
+  SignalValue,
+  SimpleSignal,
   textLerp,
 } from '@motion-canvas/core';
 import {
@@ -13,9 +13,9 @@ import {
   nodeName,
   signal,
 } from '../decorators';
-import {Shape, ShapeProps} from './Shape';
-import {Txt} from './Txt';
-import {View2D} from './View2D';
+import { Shape, ShapeProps } from './Shape';
+import { Txt } from './Txt';
+import { View2D } from './View2D';
 
 export interface TxtLeafProps extends ShapeProps {
   children?: string;
@@ -45,9 +45,9 @@ export class TxtLeaf extends Shape {
   @initial('')
   @interpolation(textLerp)
   @signal()
-  public declare readonly text: SimpleSignal<string, this>;
+  declare public readonly text: SimpleSignal<string, this>;
 
-  public constructor({children, ...rest}: TxtLeafProps) {
+  public constructor({ children, ...rest }: TxtLeafProps) {
     super(rest);
     if (children) {
       this.text(children);
@@ -72,7 +72,7 @@ export class TxtLeaf extends Shape {
     const fontOffset = context.measureText('').fontBoundingBoxAscent;
 
     const parentRect = this.element.getBoundingClientRect();
-    const {width, height} = this.size();
+    const { width, height } = this.size();
     const range = document.createRange();
     let line = '';
     let lineRect: BBox | null = null;
@@ -159,12 +159,13 @@ export class TxtLeaf extends Shape {
     // Make sure the text is aligned correctly even if the text is smaller than
     // the container.
     if (this.justifyContent.isInitial()) {
-      this.element.style.justifyContent =
-        this.styles.getPropertyValue('text-align');
+      this.element.style.justifyContent = this.styles.getPropertyValue(
+        'text-align',
+      );
     }
 
-    const wrap =
-      this.styles.whiteSpace !== 'nowrap' && this.styles.whiteSpace !== 'pre';
+    const wrap = this.styles.whiteSpace !== 'nowrap' &&
+      this.styles.whiteSpace !== 'pre';
 
     if (wrap) {
       this.element.innerText = '';
@@ -198,13 +199,13 @@ export class TxtLeaf extends Shape {
   'lineJoin',
   'lineDash',
   'lineDashOffset',
-].forEach(prop => {
+].forEach((prop) => {
   (TxtLeaf.prototype as any)[`get${capitalize(prop)}`] = function (
     this: TxtLeaf,
   ) {
     return (
       (this.parentTxt() as any)?.[prop]() ??
-      (this as any)[prop].context.getInitial()
+        (this as any)[prop].context.getInitial()
     );
   };
 });

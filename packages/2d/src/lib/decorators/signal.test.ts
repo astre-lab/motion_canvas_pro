@@ -1,6 +1,6 @@
-import {DEFAULT, SimpleSignal} from '@motion-canvas/core';
-import {beforeEach, describe, expect, test, vi} from 'vitest';
-import {initial, initializeSignals, parser, signal} from './signal';
+import { DEFAULT, SimpleSignal } from '@motion-canvas/core';
+import { beforeEach, describe, expect, test, vi } from 'vitest';
+import { initial, initializeSignals, parser, signal } from './signal';
 
 interface OwnerProps {
   integer?: number;
@@ -11,11 +11,11 @@ class Owner {
   @initial(2.2)
   @parser((value: number) => Math.round(value))
   @signal()
-  public declare readonly integer: SimpleSignal<number>;
+  declare public readonly integer: SimpleSignal<number>;
 
   @initial(0)
   @signal()
-  public declare readonly custom: SimpleSignal<number>;
+  declare public readonly custom: SimpleSignal<number>;
   public getCustom() {
     return 4;
   }
@@ -45,14 +45,14 @@ describe('signal', () => {
   });
 
   test('Overrides the value', () => {
-    const instance = new Owner({integer: 4});
+    const instance = new Owner({ integer: 4 });
 
     expect(instance.integer()).toBe(4);
     expect(instance.integer.isInitial()).toBe(false);
   });
 
   test('Resets the value to default', () => {
-    const instance = new Owner({integer: 4});
+    const instance = new Owner({ integer: 4 });
     instance.integer(DEFAULT);
 
     expect(instance.integer()).toBe(2);
@@ -81,7 +81,7 @@ describe('signal', () => {
   });
 
   test('Uses the setter', () => {
-    const instance = new Owner({custom: 1});
+    const instance = new Owner({ custom: 1 });
     instance.custom(2);
 
     expect(SetterMock).toBeCalledTimes(3);

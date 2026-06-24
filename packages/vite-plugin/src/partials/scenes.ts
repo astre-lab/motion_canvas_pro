@@ -1,6 +1,6 @@
 import path from 'path';
-import {Plugin} from 'vite';
-import {createMeta} from '../utils';
+import { Plugin } from 'vite';
+import { createMeta } from '../utils';
 
 const SCENE_QUERY_REGEX = /[?&]scene\b/;
 
@@ -14,7 +14,7 @@ export function scenesPlugin(): Plugin {
       }
 
       const [base] = id.split('?');
-      const {name, dir} = path.posix.parse(base);
+      const { name, dir } = path.posix.parse(base);
       const metaFile = `${name}.meta`;
       await createMeta(path.join(dir, metaFile));
       const sceneFile = `${name}`;

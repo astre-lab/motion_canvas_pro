@@ -1,6 +1,6 @@
-import {Vector2, clamp, remap} from '@motion-canvas/core';
-import {CurvePoint} from './CurvePoint';
-import {PolynomialSegment} from './PolynomialSegment';
+import { clamp, remap, Vector2 } from '@motion-canvas/core';
+import { CurvePoint } from './CurvePoint';
+import { PolynomialSegment } from './PolynomialSegment';
 
 /**
  * Class to uniformly sample points on a given polynomial curve.

@@ -1,11 +1,11 @@
 import './index.css';
 
-import {makeEditorPlugin} from '@motion-canvas/ui';
-import {NodeInspectorConfig} from './NodeInspectorConfig';
-import {PreviewOverlayConfig} from './PreviewOverlayConfig';
-import {Provider} from './Provider';
-import {SceneGraphTabConfig} from './SceneGraphTabConfig';
-import {SCENE_GRAPH_SHORTCUTS} from './shortcuts';
+import { makeEditorPlugin } from '@motion-canvas/ui';
+import { NodeInspectorConfig } from './NodeInspectorConfig';
+import { PreviewOverlayConfig } from './PreviewOverlayConfig';
+import { Provider } from './Provider';
+import { SceneGraphTabConfig } from './SceneGraphTabConfig';
+import { SCENE_GRAPH_SHORTCUTS } from './shortcuts';
 
 export default makeEditorPlugin(() => {
   return {

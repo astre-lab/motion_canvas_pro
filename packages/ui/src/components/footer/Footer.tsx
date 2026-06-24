@@ -1,11 +1,11 @@
-import {useComputed} from '@preact/signals';
+import { useComputed } from '@preact/signals';
 import clsx from 'clsx';
-import {useShortcutContext} from '../../contexts/shortcuts';
+import { useShortcutContext } from '../../contexts/shortcuts';
 import styles from './Footer.module.scss';
-import {Versions} from './Versions';
+import { Versions } from './Versions';
 
 export function Footer() {
-  const {action, surface, configs} = useShortcutContext();
+  const { action, surface, configs } = useShortcutContext();
   const hints = useComputed(() => {
     const config = configs.current.get(surface.value);
     if (!config) return [];
@@ -20,7 +20,7 @@ export function Footer() {
             {action.value.name}
           </div>
         )}
-        {hints.value.map(({display, description}) => (
+        {hints.value.map(({ display, description }) => (
           <div className={styles.shortcut}>
             <code className={styles.key}>{display}</code>
             <span className={styles.description}>{description}</span>
@@ -31,4 +31,4 @@ export function Footer() {
     </div>
   );
 }
-('');
+'';

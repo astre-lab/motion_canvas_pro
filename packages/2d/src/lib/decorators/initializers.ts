@@ -22,7 +22,7 @@ export function initialize(target: any, context?: any) {
   if (target[INITIALIZERS]) {
     try {
       target[INITIALIZERS].forEach((initializer: Initializer<any>) =>
-        initializer(target, context),
+        initializer(target, context)
       );
     } catch (e: any) {
       e.inspect ??= target.key;

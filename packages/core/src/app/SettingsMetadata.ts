@@ -5,7 +5,7 @@ import {
   ObjectMetaField,
   Vector2MetaField,
 } from '../meta';
-import {Color, Vector2} from '../types';
+import { Color, Vector2 } from '../types';
 
 /**
  * Create a runtime representation of the settings metadata.

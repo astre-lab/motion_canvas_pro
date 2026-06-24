@@ -7,6 +7,6 @@
       "@motion-canvas/2d": ["../lib"]
     }
   },
-  "references": [{"path": "../lib/tsconfig.json"}],
+  "references": [{ "path": "../lib/tsconfig.json" }],
   "include": ["**/*"]
 }

@@ -1,9 +1,9 @@
-import {Random} from '../scenes';
-import {useScene} from './useScene';
+import { Random } from '../scenes';
+import { useScene } from './useScene';
 
 /**
  * Get the random number generator for the current scene.
- **/
+ */
 export function useRandom(): Random;
 /**
  * Get the random number generator for the given seed.

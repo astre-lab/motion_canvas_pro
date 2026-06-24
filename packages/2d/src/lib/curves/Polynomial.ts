@@ -1,4 +1,4 @@
-import {clamp} from '@motion-canvas/core';
+import { clamp } from '@motion-canvas/core';
 
 /**
  * A polynomial in the form ax^3 + bx^2 + cx + d up to a cubic polynomial.
@@ -228,7 +228,7 @@ export class Polynomial {
       }
     };
 
-    this.localExtrema01().forEach(t => encapsulate(this.eval(t)));
+    this.localExtrema01().forEach((t) => encapsulate(this.eval(t)));
 
     return range;
   }
@@ -303,8 +303,7 @@ export class Polynomial {
 
     if (discriminant > 0 && p < 0) {
       // one root
-      const coshInner =
-        (1 / 3) *
+      const coshInner = (1 / 3) *
         Math.acosh(((-3 * Math.abs(q)) / (2 * p)) * Math.sqrt(-3 / p));
       const r = -2 * Math.sign(q) * Math.sqrt(-p / 3) * Math.cosh(coshInner);
       return [r];
@@ -312,8 +311,8 @@ export class Polynomial {
 
     if (p > 0) {
       // one root
-      const sinhInner =
-        (1 / 3) * Math.asinh(((3 * q) / (2 * p)) * Math.sqrt(3 / p));
+      const sinhInner = (1 / 3) *
+        Math.asinh(((3 * q) / (2 * p)) * Math.sqrt(3 / p));
       const r = -2 * Math.sqrt(p / 3) * Math.sinh(sinhInner);
       return [r];
     }

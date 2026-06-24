@@ -1,5 +1,5 @@
-import {Img, makeScene2D} from '@motion-canvas/2d';
-import {createRef, easeOutElastic} from '@motion-canvas/core';
+import { Img, makeScene2D } from '@motion-canvas/2d';
+import { createRef, easeOutElastic } from '@motion-canvas/core';
 
 export default makeScene2D(function* (view) {
   const ref = createRef<Img>();
@@ -7,7 +7,7 @@ export default makeScene2D(function* (view) {
     <Img
       ref={ref}
       skew={[-24, -12]}
-      src="https://images.unsplash.com/photo-1696931073577-5638a6891e1e"
+      src='https://images.unsplash.com/photo-1696931073577-5638a6891e1e'
       width={240}
       radius={20}
     />,

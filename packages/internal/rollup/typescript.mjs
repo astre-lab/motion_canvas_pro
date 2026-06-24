@@ -6,7 +6,7 @@ import markdownLiterals from '../transformers/markdown-literals.js';
  * @returns {Plugin}
  */
 export default function typescript(options = {}) {
-  const {compilerOptions, ...rest} = options;
+  const { compilerOptions, ...rest } = options;
   return typescriptBase({
     compilerOptions: {
       declaration: false,

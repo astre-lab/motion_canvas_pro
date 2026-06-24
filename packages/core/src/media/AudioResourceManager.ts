@@ -1,6 +1,6 @@
-import {Logger} from '../app';
-import {ValueDispatcher} from '../events';
-import {AudioData, EMPTY_AUDIO_DATA} from './AudioData';
+import { Logger } from '../app';
+import { ValueDispatcher } from '../events';
+import { AudioData, EMPTY_AUDIO_DATA } from './AudioData';
 
 export class AudioResourceManager {
   private readonly context = new AudioContext();
@@ -8,7 +8,7 @@ export class AudioResourceManager {
 
   public constructor(private readonly logger: Logger) {
     if (import.meta.hot) {
-      import.meta.hot.on('motion-canvas:assets', ({urls}) => {
+      import.meta.hot.on('motion-canvas:assets', ({ urls }) => {
         for (const url of urls) {
           const manager = this.lookup.get(url);
           manager?.reload();
@@ -60,7 +60,7 @@ export class AudioResource {
   private async loadData(signal: AbortSignal): Promise<AudioData | void> {
     let response: Response;
     try {
-      response = await fetch(this.source, {signal});
+      response = await fetch(this.source, { signal });
     } catch (e: any) {
       if (e.name !== 'AbortError') {
         this.logger.error(e);
@@ -139,7 +139,7 @@ export class AudioResource {
 
   private decodeAudioData(buffer: ArrayBuffer): Promise<AudioBuffer> {
     return new Promise<AudioBuffer>((resolve, reject) =>
-      this.context.decodeAudioData(buffer, resolve, reject).catch(reject),
+      this.context.decodeAudioData(buffer, resolve, reject).catch(reject)
     );
   }
 }

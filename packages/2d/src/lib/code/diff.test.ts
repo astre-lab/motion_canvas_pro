@@ -1,5 +1,5 @@
-import {expect, test} from 'vitest';
-import {patienceDiff} from './diff';
+import { expect, test } from 'vitest';
+import { patienceDiff } from './diff';
 
 test('should find simple strings', () => {
   const result = patienceDiff(
@@ -50,7 +50,7 @@ function other() {
       function test() {
         console.log('hello world');
       }
-    + 
+    +
     + function other() {
     +   return 5;
     + }
@@ -110,11 +110,11 @@ function test() {
     - function test() {
     -   console.log('hello world');
     - }
-    - 
+    -
       function other() {
         return 5;
       }
-    + 
+    +
     + function test() {
     +   console.log('hello world');
     + }
@@ -202,19 +202,19 @@ void Chunk_copy(Chunk *src, size_t src_start, Chunk *dst, size_t dst_start, size
   );
 
   // printDiff(result);
-  /* 
+  /*
     + int Chunk_bounds_check(Chunk *chunk, size_t start, size_t n)
     + {
     +     if (chunk == NULL) return 0;
-    + 
+    +
     +     return start <= chunk->length && n <= chunk->length - start;
     + }
-    + 
+    +
       void Chunk_copy(Chunk *src, size_t src_start, Chunk *dst, size_t dst_start, size_t n)
       {
           if (!Chunk_bounds_check(src, src_start, n)) return;
           if (!Chunk_bounds_check(dst, dst_start, n)) return;
-      
+
           memcpy(dst->data + dst_start, src->data + src_start, n);
       }
     -
@@ -246,7 +246,8 @@ void Chunk_copy(Chunk *src, size_t src_start, Chunk *dst, size_t dst_start, size
         aIndex: -1,
       },
       {
-        line: '    return start <= chunk->length && n <= chunk->length - start;',
+        line:
+          '    return start <= chunk->length && n <= chunk->length - start;',
         aIndex: -1,
       },
       {
@@ -257,7 +258,8 @@ void Chunk_copy(Chunk *src, size_t src_start, Chunk *dst, size_t dst_start, size
         line: '',
       },
       {
-        line: 'void Chunk_copy(Chunk *src, size_t src_start, Chunk *dst, size_t dst_start, size_t n)',
+        line:
+          'void Chunk_copy(Chunk *src, size_t src_start, Chunk *dst, size_t dst_start, size_t n)',
       },
       {
         line: '{',
@@ -299,7 +301,8 @@ void Chunk_copy(Chunk *src, size_t src_start, Chunk *dst, size_t dst_start, size
         bIndex: -1,
       },
       {
-        line: '    return start <= chunk->length && n <= chunk->length - start;',
+        line:
+          '    return start <= chunk->length && n <= chunk->length - start;',
         bIndex: -1,
       },
       {

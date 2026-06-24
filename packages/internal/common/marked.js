@@ -1,4 +1,4 @@
-const {Marked} = require('marked');
+const { Marked } = require('marked');
 const highlightJs = require('highlight.js');
 
 module.exports = new Marked({
@@ -10,13 +10,15 @@ module.exports = new Marked({
       const [lang, ...rest] = (info || '').split(/\s+/);
       code = code
         .split('\n')
-        .filter(line => !line.includes('prettier-ignore'))
+        .filter((line) => !line.includes('prettier-ignore'))
         .join('\n');
       const language = highlightJs.getLanguage(lang) ? lang : 'plaintext';
-      const result = highlightJs.highlight(code, {language});
-      return `<pre class="${rest.join(
-        ' ',
-      )}"><code class="language-${language}">${result.value}</code></pre>`;
+      const result = highlightJs.highlight(code, { language });
+      return `<pre class="${
+        rest.join(
+          ' ',
+        )
+      }"><code class="language-${language}">${result.value}</code></pre>`;
     },
   },
 });

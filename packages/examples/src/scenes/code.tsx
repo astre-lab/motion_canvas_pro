@@ -1,10 +1,10 @@
-import {CODE, Code, lines, makeScene2D, word} from '@motion-canvas/2d';
+import { CODE, Code, lines, makeScene2D, word } from '@motion-canvas/2d';
 import {
-  DEFAULT,
-  SimpleSignal,
   createRef,
   createSignal,
+  DEFAULT,
   easeOutCubic,
+  SimpleSignal,
   waitFor,
 } from '@motion-canvas/core';
 
@@ -30,9 +30,11 @@ const radius = ${displayFloat(radius)};
 area = ${functionName}(radius); // ${displayFloat(area)}
 
 const ${functionName} = () => {
-  const r2 = radius * radius; // ${displayFloat(radius)} * ${displayFloat(
-    radius,
-  )} = ${displayFloat(r2)}
+  const r2 = radius * radius; // ${displayFloat(radius)} * ${
+        displayFloat(
+          radius,
+        )
+      } = ${displayFloat(r2)}
   return Math.PI * r2;
 };
     `}

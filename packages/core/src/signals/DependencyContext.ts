@@ -1,6 +1,6 @@
-import {FlagDispatcher, Subscribable} from '../events';
-import {Promisable} from '../threading';
-import {DetailedError} from '../utils';
+import { FlagDispatcher, Subscribable } from '../events';
+import { Promisable } from '../threading';
+import { DetailedError } from '../utils';
 
 export interface PromiseHandle<T> {
   promise: Promise<T>;
@@ -10,8 +10,7 @@ export interface PromiseHandle<T> {
 }
 
 export class DependencyContext<TOwner = void>
-  implements Promisable<DependencyContext<TOwner>>
-{
+  implements Promisable<DependencyContext<TOwner>> {
   protected static collectionSet = new Set<DependencyContext<any>>();
   protected static collectionStack: DependencyContext<any>[] = [];
   protected static promises: PromiseHandle<any>[] = [];
@@ -35,7 +34,7 @@ export class DependencyContext<TOwner = void>
     if (context) {
       handle.owner = context.owner;
     }
-    promise.then(value => {
+    promise.then((value) => {
       handle.value = value;
       context?.markDirty();
     });
@@ -50,8 +49,8 @@ export class DependencyContext<TOwner = void>
 
   public static async consumePromises() {
     const promises = [...this.promises];
-    await Promise.all(promises.map(handle => handle.promise));
-    this.promises = this.promises.filter(v => !promises.includes(v));
+    await Promise.all(promises.map((handle) => handle.promise));
+    this.promises = this.promises.filter((v) => !promises.includes(v));
     return promises;
   }
 
@@ -98,7 +97,7 @@ export class DependencyContext<TOwner = void>
   }
 
   protected clearDependencies() {
-    this.dependencies.forEach(dep => dep.unsubscribe(this.markDirty));
+    this.dependencies.forEach((dep) => dep.unsubscribe(this.markDirty));
     this.dependencies.clear();
   }
 

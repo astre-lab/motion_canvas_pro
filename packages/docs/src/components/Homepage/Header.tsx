@@ -1,5 +1,5 @@
 import Link from '@docusaurus/Link';
-import {ThemeConfig} from '@docusaurus/preset-classic';
+import { ThemeConfig } from '@docusaurus/preset-classic';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import ThemedImage from '@theme/ThemedImage';
 import clsx from 'clsx';
@@ -7,7 +7,7 @@ import React from 'react';
 import styles from './styles.module.css';
 
 export default function HomepageHeader() {
-  const {siteConfig} = useDocusaurusContext();
+  const { siteConfig } = useDocusaurusContext();
   const logo = (siteConfig.themeConfig as ThemeConfig).navbar.logo;
 
   return (
@@ -28,13 +28,13 @@ export default function HomepageHeader() {
         </h1>
         <p className={styles.description}>{siteConfig.tagline}</p>
         <div className={styles.buttons}>
-          <Link className="button button--primary button--lg" to="/docs">
+          <Link className='button button--primary button--lg' to='/docs'>
             Get Started
           </Link>
           <a
-            className="button button--outline button--lg"
-            href="https://github.com/motion-canvas/motion-canvas/blob/main/CONTRIBUTING.md"
-            target="_blank"
+            className='button button--outline button--lg'
+            href='https://github.com/motion-canvas/motion-canvas/blob/main/CONTRIBUTING.md'
+            target='_blank'
           >
             Contribute
           </a>

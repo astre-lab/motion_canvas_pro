@@ -1,10 +1,10 @@
-import {MetaFile} from '../meta';
-import {Plugin} from '../plugin';
+import { MetaFile } from '../meta';
+import { Plugin } from '../plugin';
 import DefaultPlugin from '../plugin/DefaultPlugin';
-import {Logger} from './Logger';
-import {Project, ProjectSettings, Versions} from './Project';
-import {ProjectMetadata} from './ProjectMetadata';
-import {createSettingsMetadata} from './SettingsMetadata';
+import { Logger } from './Logger';
+import { Project, ProjectSettings, Versions } from './Project';
+import { ProjectMetadata } from './ProjectMetadata';
+import { createSettingsMetadata } from './SettingsMetadata';
 
 /**
  * Bootstrap a project.
@@ -117,7 +117,7 @@ export async function editorBootstrap(
     settingsFile,
   );
 
-  includedPlugins.forEach(plugin => plugin.project?.(project));
+  includedPlugins.forEach((plugin) => plugin.project?.(project));
 
   return project;
 }

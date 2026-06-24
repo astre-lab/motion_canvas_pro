@@ -1,4 +1,4 @@
-import {signal} from '@preact/signals';
+import { signal } from '@preact/signals';
 
 export class SignalSet<T> {
   private readonly set = new Set<T>();

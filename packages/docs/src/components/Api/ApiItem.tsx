@@ -1,16 +1,16 @@
-import {TOCItem} from '@docusaurus/mdx-loader';
-import {DocProvider} from '@docusaurus/theme-common/internal';
+import { TOCItem } from '@docusaurus/mdx-loader';
+import { DocProvider } from '@docusaurus/theme-common/internal';
 import useIsBrowser from '@docusaurus/useIsBrowser';
 import Item from '@site/src/components/Api/Item';
 import Tooltip from '@site/src/components/Tooltip';
-import {useApiLookup} from '@site/src/contexts/api';
-import {ThemeDictProvider} from '@site/src/contexts/codeTheme';
-import {matchFilters, useFilters} from '@site/src/contexts/filters';
+import { useApiLookup } from '@site/src/contexts/api';
+import { ThemeDictProvider } from '@site/src/contexts/codeTheme';
+import { matchFilters, useFilters } from '@site/src/contexts/filters';
 import DocItemLayout from '@theme/DocItem/Layout';
 import DocItemMetadata from '@theme/DocItem/Metadata';
-import React, {useMemo} from 'react';
-import type {JSONOutput} from 'typedoc';
-import {ReflectionKind} from './ReflectionKind';
+import React, { useMemo } from 'react';
+import type { JSONOutput } from 'typedoc';
+import { ReflectionKind } from './ReflectionKind';
 
 const ExperimentalIcon = `
 <svg 
@@ -29,7 +29,7 @@ interface ApiItemProps {
   };
 }
 
-export default function ApiItem({route}: ApiItemProps): JSX.Element {
+export default function ApiItem({ route }: ApiItemProps): JSX.Element {
   const lookup = useApiLookup(route.projectId);
   const reflection: JSONOutput.DeclarationReflection =
     lookup[route.reflectionId];
@@ -59,9 +59,9 @@ export default function ApiItem({route}: ApiItemProps): JSX.Element {
             continue;
           }
           toc.push({
-            value: `${child.experimental ? ExperimentalIcon : ''}<code>${
-              child.name
-            }</code>`,
+            value: `${
+              child.experimental ? ExperimentalIcon : ''
+            }<code>${child.name}</code>`,
             id: child.anchor,
             level: 3,
           });

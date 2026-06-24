@@ -5,7 +5,7 @@ import {
   Vector2,
   Vector2Signal,
 } from '@motion-canvas/core';
-import {KnotInfo} from '../curves';
+import { KnotInfo } from '../curves';
 import {
   cloneable,
   compound,
@@ -15,7 +15,7 @@ import {
   signal,
   wrapper,
 } from '../decorators';
-import {Node, NodeProps} from './Node';
+import { Node, NodeProps } from './Node';
 
 export interface KnotProps extends NodeProps {
   /**
@@ -34,16 +34,18 @@ export interface KnotProps extends NodeProps {
   endHandleAuto?: SignalValue<number>;
 }
 
-export type KnotAuto = {startHandle: number; endHandle: number};
+export type KnotAuto = { startHandle: number; endHandle: number };
 export type PossibleKnotAuto = KnotAuto | number | [number, number];
-export type KnotAutoSignal<TOwner> = Signal<
-  PossibleKnotAuto,
-  KnotAuto,
-  TOwner
-> & {
-  endHandle: Signal<number, number, TOwner>;
-  startHandle: Signal<number, number, TOwner>;
-};
+export type KnotAutoSignal<TOwner> =
+  & Signal<
+    PossibleKnotAuto,
+    KnotAuto,
+    TOwner
+  >
+  & {
+    endHandle: Signal<number, number, TOwner>;
+    startHandle: Signal<number, number, TOwner>;
+  };
 
 /**
  * A node representing a knot of a {@link Spline}.
@@ -69,7 +71,7 @@ export class Knot extends Node {
    */
   @wrapper(Vector2)
   @signal()
-  public declare readonly startHandle: Vector2Signal<this>;
+  declare public readonly startHandle: Vector2Signal<this>;
 
   /**
    * The position of the knot's end handle. The position is provided relative
@@ -91,7 +93,7 @@ export class Knot extends Node {
    */
   @wrapper(Vector2)
   @signal()
-  public declare readonly endHandle: Vector2Signal<this>;
+  declare public readonly endHandle: Vector2Signal<this>;
 
   /**
    * How much to blend between the user-provided handles and the auto-calculated
@@ -104,7 +106,7 @@ export class Knot extends Node {
    * @defaultValue 0
    */
   @cloneable(false)
-  @initial(() => ({startHandle: 0, endHandle: 0}))
+  @initial(() => ({ startHandle: 0, endHandle: 0 }))
   @parser((value: PossibleKnotAuto) => {
     if (typeof value === 'object' && !Array.isArray(value)) {
       return value;
@@ -112,10 +114,10 @@ export class Knot extends Node {
     if (typeof value === 'number') {
       value = [value, value];
     }
-    return {startHandle: value[0], endHandle: value[1]};
+    return { startHandle: value[0], endHandle: value[1] };
   })
-  @compound({startHandle: 'startHandleAuto', endHandle: 'endHandleAuto'})
-  public declare readonly auto: KnotAutoSignal<this>;
+  @compound({ startHandle: 'startHandleAuto', endHandle: 'endHandleAuto' })
+  declare public readonly auto: KnotAutoSignal<this>;
   public get startHandleAuto() {
     return this.auto.startHandle;
   }
@@ -126,15 +128,15 @@ export class Knot extends Node {
   public constructor(props: KnotProps) {
     super(
       props.startHandle === undefined && props.endHandle === undefined
-        ? {auto: 1, ...props}
+        ? { auto: 1, ...props }
         : props,
     );
   }
 
   @computed()
   public points(): KnotInfo {
-    const hasExplicitHandles =
-      !this.startHandle.isInitial() || !this.endHandle.isInitial();
+    const hasExplicitHandles = !this.startHandle.isInitial() ||
+      !this.endHandle.isInitial();
     const startHandle = hasExplicitHandles ? this.startHandle() : Vector2.zero;
     const endHandle = hasExplicitHandles ? this.endHandle() : Vector2.zero;
 
@@ -142,7 +144,7 @@ export class Knot extends Node {
       position: this.position(),
       startHandle: startHandle.transformAsPoint(this.localToParent()),
       endHandle: endHandle.transformAsPoint(this.localToParent()),
-      auto: {start: this.startHandleAuto(), end: this.endHandleAuto()},
+      auto: { start: this.startHandleAuto(), end: this.endHandleAuto() },
     };
   }
 

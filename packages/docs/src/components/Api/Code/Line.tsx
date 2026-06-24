@@ -1,4 +1,4 @@
-import React, {ReactNode, useLayoutEffect, useRef} from 'react';
+import React, { ReactNode, useLayoutEffect, useRef } from 'react';
 
 import clsx from 'clsx';
 import styles from './styles.module.css';
@@ -7,7 +7,9 @@ function compare(a: number, b: number) {
   return a > b ? 1 : a < b ? -1 : 0;
 }
 
-export default function Line({children}: {children?: ReactNode | ReactNode[]}) {
+export default function Line(
+  { children }: { children?: ReactNode | ReactNode[] },
+) {
   const line = useRef<HTMLSpanElement>();
 
   useLayoutEffect(() => {

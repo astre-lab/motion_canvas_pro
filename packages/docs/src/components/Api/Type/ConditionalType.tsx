@@ -2,7 +2,7 @@ import React from 'react';
 
 import Token from '@site/src/components/Api/Code/Token';
 import Type from '@site/src/components/Api/Type';
-import type {JSONOutput} from 'typedoc';
+import type { JSONOutput } from 'typedoc';
 
 export default function ConditionalType({
   type,
@@ -12,7 +12,7 @@ export default function ConditionalType({
   return (
     <>
       <Type type={type.checkType} />
-      <Token type="keyword"> extends </Token>
+      <Token type='keyword'>extends</Token>
       <Type type={type.extendsType} />
       {' ? '}
       <Type type={type.trueType} />

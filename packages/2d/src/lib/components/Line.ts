@@ -12,17 +12,17 @@ import {
   useLogger,
   Vector2,
 } from '@motion-canvas/core';
-import {CurveProfile, getPolylineProfile} from '../curves';
+import { CurveProfile, getPolylineProfile } from '../curves';
 import {
   calculateLerpDistance,
   polygonLength,
   polygonPointsLerp,
 } from '../curves/createCurveProfileLerp';
-import {computed, initial, nodeName, signal} from '../decorators';
-import {arc, drawLine, drawPivot, lineTo, moveTo} from '../utils';
+import { computed, initial, nodeName, signal } from '../decorators';
+import { arc, drawLine, drawPivot, lineTo, moveTo } from '../utils';
 import lineWithoutPoints from './__logs__/line-without-points.md';
-import {Curve, CurveProps} from './Curve';
-import {Layout} from './Layout';
+import { Curve, CurveProps } from './Curve';
+import { Layout } from './Layout';
 
 export interface LineProps extends CurveProps {
   /**
@@ -242,7 +242,7 @@ export class Line extends Curve {
    */
   @initial(0)
   @signal()
-  public declare readonly radius: SimpleSignal<number, this>;
+  declare public readonly radius: SimpleSignal<number, this>;
 
   /**
    * The points of the line.
@@ -253,7 +253,7 @@ export class Line extends Curve {
    */
   @initial(null)
   @signal()
-  public declare readonly points: SimpleSignal<
+  declare public readonly points: SimpleSignal<
     SignalValue<PossibleVector2>[] | null,
     this
   >;
@@ -275,7 +275,7 @@ export class Line extends Curve {
     this.tweenedPoints(fromPoints);
     yield* tween(
       time,
-      value => {
+      (value) => {
         const progress = timingFunction(value);
         this.tweenedPoints(polygonPointsLerp(fromPoints, toPoints, progress));
       },
@@ -306,10 +306,10 @@ export class Line extends Curve {
     if (!points) {
       const custom = this.points();
       points = custom
-        ? custom.map(signal => new Vector2(unwrap(signal)))
+        ? custom.map((signal) => new Vector2(unwrap(signal)))
         : this.children()
-            .filter(child => !(child instanceof Layout) || child.isLayoutRoot())
-            .map(child => child.position());
+          .filter((child) => !(child instanceof Layout) || child.isLayoutRoot())
+          .map((child) => child.position());
     }
 
     return BBox.fromPoints(...points);
@@ -336,7 +336,7 @@ export class Line extends Curve {
     let coefficient = super.lineWidthCoefficient();
 
     if (radius === 0 && join === 'miter') {
-      const {minSin} = this.profile();
+      const { minSin } = this.profile();
       if (minSin > 0) {
         coefficient = Math.max(coefficient, 0.5 / minSin);
       }
@@ -358,8 +358,8 @@ export class Line extends Curve {
     context.lineWidth = 1;
 
     const path = new Path2D();
-    const points = (this.tweenedPoints() ?? this.parsedPoints()).map(point =>
-      point.transformAsPoint(matrix),
+    const points = (this.tweenedPoints() ?? this.parsedPoints()).map((point) =>
+      point.transformAsPoint(matrix)
     );
     if (points.length > 0) {
       moveTo(path, points[0]);
@@ -388,7 +388,7 @@ export class Line extends Curve {
 
   private parsePoints(points: SignalValue<PossibleVector2>[] | null) {
     return points
-      ? points.map(signal => new Vector2(unwrap(signal)))
-      : this.children().map(child => child.position());
+      ? points.map((signal) => new Vector2(unwrap(signal)))
+      : this.children().map((child) => child.position());
   }
 }

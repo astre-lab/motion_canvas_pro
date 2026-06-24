@@ -1,7 +1,7 @@
-import type {ExporterClass, Project} from '../app';
-import {ValueDispatcher} from '../events';
-import {EnumMetaField} from './EnumMetaField';
-import {MetaField} from './MetaField';
+import type { ExporterClass, Project } from '../app';
+import { ValueDispatcher } from '../events';
+import { EnumMetaField } from './EnumMetaField';
+import { MetaField } from './MetaField';
 
 /**
  * Represents the exporter configuration.
@@ -36,12 +36,12 @@ export class ExporterMetaField extends MetaField<{
     private current = 0,
   ) {
     const exporters = project.plugins.flatMap(
-      plugin => plugin.exporters?.(project) ?? [],
+      (plugin) => plugin.exporters?.(project) ?? [],
     );
-    const optionFields = exporters.map(exporter => exporter.meta(project));
+    const optionFields = exporters.map((exporter) => exporter.meta(project));
     const exporterField = new EnumMetaField(
       'exporter',
-      exporters.map(exporter => ({
+      exporters.map((exporter) => ({
         value: exporter.id,
         text: exporter.displayName,
       })),
@@ -66,12 +66,12 @@ export class ExporterMetaField extends MetaField<{
     }
   }
 
-  public set(value: {name: string; options: any}) {
+  public set(value: { name: string; options: any }) {
     this.exporterField.set(value.name);
     this.options?.set(value.options ?? {});
   }
 
-  public serialize(): {name: string; options: any} {
+  public serialize(): { name: string; options: any } {
     return {
       name: this.exporterField.serialize(),
       options: this.options?.serialize() ?? null,
@@ -79,13 +79,17 @@ export class ExporterMetaField extends MetaField<{
   }
 
   public clone(): this {
-    return new (<any>this.constructor)(this.name, this.exporters, this.current);
+    return new (<any> this.constructor)(
+      this.name,
+      this.exporters,
+      this.current,
+    );
   }
 
   private handleChange = () => {
     const value = this.exporterField.get();
     const index = Math.max(
-      this.exporters.findIndex(exporter => exporter.id === value),
+      this.exporters.findIndex((exporter) => exporter.id === value),
       0,
     );
 

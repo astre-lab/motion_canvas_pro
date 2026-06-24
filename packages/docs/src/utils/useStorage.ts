@@ -1,5 +1,5 @@
 import useIsBrowser from '@docusaurus/useIsBrowser';
-import {useCallback, useMemo, useState} from 'react';
+import { useCallback, useMemo, useState } from 'react';
 
 export default function useStorage<T>(key: string, initialState: T) {
   const isBrowser = useIsBrowser();

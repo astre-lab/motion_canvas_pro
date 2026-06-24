@@ -5,16 +5,16 @@ export interface ContributorProps {
   name: string;
 }
 
-export default function Contributor({name}: ContributorProps) {
+export default function Contributor({ name }: ContributorProps) {
   return (
     <a
       className={styles.contributor}
       title={name}
       href={`https://github.com/${name}`}
-      target="_blank"
+      target='_blank'
     >
       <img
-        loading="lazy"
+        loading='lazy'
         src={`https://github.com/${name}.png`}
         width={20}
         height={20}

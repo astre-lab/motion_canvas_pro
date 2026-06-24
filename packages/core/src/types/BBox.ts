@@ -1,9 +1,9 @@
-import {CompoundSignal, CompoundSignalContext, SignalValue} from '../signals';
-import {InterpolationFunction, arcLerp, map} from '../tweening';
-import {PossibleMatrix2D} from './Matrix2D';
-import {PossibleSpacing, Spacing} from './Spacing';
-import {Type, WebGLConvertible} from './Type';
-import {PossibleVector2, Vector2} from './Vector';
+import { CompoundSignal, CompoundSignalContext, SignalValue } from '../signals';
+import { arcLerp, InterpolationFunction, map } from '../tweening';
+import { PossibleMatrix2D } from './Matrix2D';
+import { PossibleSpacing, Spacing } from './Spacing';
+import { Type, WebGLConvertible } from './Type';
+import { PossibleVector2, Vector2 } from './Vector';
 
 export type SerializedBBox = {
   x: number;
@@ -55,7 +55,11 @@ export class BBox implements Type, WebGLConvertible {
     let valueWidth;
     let valueHeight;
     if (typeof value === 'number') {
-      valueX = valueY = valueWidth = valueHeight = value;
+      valueX =
+        valueY =
+        valueWidth =
+        valueHeight =
+          value;
     } else if (value instanceof Vector2) {
       valueX = valueWidth = value.x;
       valueY = valueHeight = value.y;
@@ -241,7 +245,7 @@ export class BBox implements Type, WebGLConvertible {
 
     if (typeof one === 'number') {
       this.x = one;
-      this.y = <number>two;
+      this.y = <number> two;
       this.width = three;
       this.height = four;
       return;
@@ -281,7 +285,7 @@ export class BBox implements Type, WebGLConvertible {
   }
 
   public transformCorners(matrix: PossibleMatrix2D) {
-    return this.corners.map(corner => corner.transformAsPoint(matrix));
+    return this.corners.map((corner) => corner.transformAsPoint(matrix));
   }
 
   /**
@@ -382,6 +386,6 @@ export class BBox implements Type, WebGLConvertible {
   }
 
   public serialize(): SerializedBBox {
-    return {x: this.x, y: this.y, width: this.width, height: this.height};
+    return { x: this.x, y: this.y, width: this.width, height: this.height };
   }
 }

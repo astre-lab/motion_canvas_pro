@@ -1,4 +1,4 @@
-import {deprecate} from '../utils';
+import { deprecate } from '../utils';
 
 /**
  * Create a deprecated decorator that marks methods as deprecated.
@@ -10,8 +10,8 @@ export function deprecated(remarks?: string): MethodDecorator {
     descriptor: PropertyDescriptor,
   ) {
     const name = target.constructor.name
-      ? `${target.constructor.name}.${<string>propertyKey}`
-      : <string>propertyKey;
+      ? `${target.constructor.name}.${<string> propertyKey}`
+      : <string> propertyKey;
     const message = `${name}() has been deprecated.`;
 
     if (descriptor.value) {

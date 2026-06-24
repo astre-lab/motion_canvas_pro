@@ -1,14 +1,14 @@
 import {
   CompoundSignalContext,
-  SignalContext,
   deepLerp,
   map,
   modify,
+  SignalContext,
   useLogger,
 } from '@motion-canvas/core';
-import {makeSignalExtensions} from '../utils/makeSignalExtensions';
-import {addInitializer} from './initializers';
-import {getPropertyMetaOrCreate} from './signal';
+import { makeSignalExtensions } from '../utils/makeSignalExtensions';
+import { addInitializer } from './initializers';
+import { getPropertyMetaOrCreate } from './signal';
 
 /**
  * Create a compound property decorator.
@@ -64,8 +64,8 @@ export function compound<
       const signalContext = new klass(
         meta.compoundEntries.map(([key, property]) => {
           const signal = new SignalContext(
-            modify(initial, value => parser(value)[key]),
-            <any>map,
+            modify(initial, (value) => parser(value)[key]),
+            <any> map,
             instance,
             undefined,
             makeSignalExtensions(undefined, instance, property),
@@ -76,7 +76,7 @@ export function compound<
         initial,
         meta.interpolationFunction ?? deepLerp,
         instance,
-        makeSignalExtensions(meta, instance, <string>key),
+        makeSignalExtensions(meta, instance, <string> key),
       );
 
       instance[key] = signalContext.toSignal();

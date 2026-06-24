@@ -1,14 +1,14 @@
 import fs from 'fs';
 import path from 'path';
-import {Plugin} from 'vite';
-import {ProjectData} from '../plugins';
+import { Plugin } from 'vite';
+import { ProjectData } from '../plugins';
 
 interface EditorPluginConfig {
   editor: string;
   projects: ProjectData[];
 }
 
-export function editorPlugin({editor, projects}: EditorPluginConfig): Plugin {
+export function editorPlugin({ editor, projects }: EditorPluginConfig): Plugin {
   const editorPath = path.dirname(require.resolve(editor));
   const editorFile = fs.readFileSync(path.resolve(editorPath, 'editor.html'));
   const htmlParts = editorFile
@@ -75,9 +75,11 @@ index(${JSON.stringify(projects)});
             res.setHeader('Content-Type', 'text/html');
             res.end(
               createHtml(
-                `/@id/__x00__virtual:editor?project=${encodeURIComponent(
-                  name,
-                )}`,
+                `/@id/__x00__virtual:editor?project=${
+                  encodeURIComponent(
+                    name,
+                  )
+                }`,
               ),
             );
             return;

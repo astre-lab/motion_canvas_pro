@@ -1,4 +1,4 @@
-import {useMemo} from 'preact/hooks';
+import { useMemo } from 'preact/hooks';
 
 export function useFormattedNumber(value: number, precision = 6) {
   return useMemo(() => {

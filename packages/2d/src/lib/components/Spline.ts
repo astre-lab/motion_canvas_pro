@@ -4,19 +4,19 @@ import {
   SerializedVector2,
   SignalValue,
   SimpleSignal,
-  Vector2,
   unwrap,
   useLogger,
+  Vector2,
 } from '@motion-canvas/core';
 import {
   CubicBezierSegment,
   CurveProfile,
-  KnotInfo,
   getBezierSplineProfile,
+  KnotInfo,
 } from '../curves';
-import {PolynomialSegment} from '../curves/PolynomialSegment';
-import {computed, initial, signal} from '../decorators';
-import {DesiredLength} from '../partials';
+import { PolynomialSegment } from '../curves/PolynomialSegment';
+import { computed, initial, signal } from '../decorators';
+import { DesiredLength } from '../partials';
 import {
   arc,
   bezierCurveTo,
@@ -26,9 +26,9 @@ import {
   moveTo,
   quadraticCurveTo,
 } from '../utils';
-import {Curve, CurveProps} from './Curve';
-import {Knot} from './Knot';
-import {Node} from './Node';
+import { Curve, CurveProps } from './Curve';
+import { Knot } from './Knot';
+import { Node } from './Node';
 import splineWithInsufficientKnots from './__logs__/spline-with-insufficient-knots.md';
 
 export interface SplineProps extends CurveProps {
@@ -97,7 +97,7 @@ export class Spline extends Curve {
    */
   @initial(0.4)
   @signal()
-  public declare readonly smoothness: SimpleSignal<number>;
+  declare public readonly smoothness: SimpleSignal<number>;
 
   /**
    * The knots of the spline as an array of knots with auto-calculated handles.
@@ -108,7 +108,7 @@ export class Spline extends Curve {
    */
   @initial(null)
   @signal()
-  public declare readonly points: SimpleSignal<
+  declare public readonly points: SimpleSignal<
     SignalValue<PossibleVector2>[] | null,
     this
   >;
@@ -147,27 +147,27 @@ export class Spline extends Curve {
     const points = this.points();
 
     if (points) {
-      return points.map(signal => {
+      return points.map((signal) => {
         const point = new Vector2(unwrap(signal));
 
         return {
           position: point,
           startHandle: point,
           endHandle: point,
-          auto: {start: 1, end: 1},
+          auto: { start: 1, end: 1 },
         };
       });
     }
 
     return this.children()
       .filter(this.isKnot)
-      .map(knot => knot.points());
+      .map((knot) => knot.points());
   }
 
   @computed()
   protected childrenBBox() {
     const points = (this.profile().segments as PolynomialSegment[]).flatMap(
-      segment => segment.points,
+      (segment) => segment.points,
     );
     return BBox.fromPoints(...points);
   }
@@ -181,7 +181,7 @@ export class Spline extends Curve {
       return coefficient;
     }
 
-    const {minSin} = this.profile();
+    const { minSin } = this.profile();
     if (minSin > 0) {
       coefficient = Math.max(coefficient, 0.5 / minSin);
     }
@@ -201,7 +201,7 @@ export class Spline extends Curve {
   @computed()
   private getTightBBox(): BBox {
     const bounds = (this.profile().segments as PolynomialSegment[]).map(
-      segment => segment.getBBox(),
+      (segment) => segment.getBBox(),
     );
     return BBox.fromBBoxes(...bounds);
   }
@@ -224,8 +224,9 @@ export class Spline extends Curve {
     // Draw the actual spline first so that all control points get drawn on top of it.
     for (let i = 0; i < segments.length; i++) {
       const segment = segments[i];
-      const [from, startHandle, endHandle, to] =
-        segment.transformPoints(matrix);
+      const [from, startHandle, endHandle, to] = segment.transformPoints(
+        matrix,
+      );
 
       moveTo(splinePath, from);
       if (segment instanceof CubicBezierSegment) {
@@ -240,8 +241,9 @@ export class Spline extends Curve {
       const segment = segments[i];
       context.fillStyle = 'white';
 
-      const [from, startHandle, endHandle, to] =
-        segment.transformPoints(matrix);
+      const [from, startHandle, endHandle, to] = segment.transformPoints(
+        matrix,
+      );
 
       const handlePath = new Path2D();
 

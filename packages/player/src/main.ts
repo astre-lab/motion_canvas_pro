@@ -1,7 +1,11 @@
-import type {PlayerSettings, Project, StageSettings} from '@motion-canvas/core';
-import {Player, Stage} from '@motion-canvas/core';
+import type {
+  PlayerSettings,
+  Project,
+  StageSettings,
+} from '@motion-canvas/core';
+import { Player, Stage } from '@motion-canvas/core';
 
-import {Vector2} from '@motion-canvas/core';
+import { Vector2 } from '@motion-canvas/core';
 import styles from './styles.scss?inline';
 import html from './template.html?raw';
 
@@ -72,7 +76,7 @@ class MotionCanvasPlayer extends HTMLElement {
 
   public constructor() {
     super();
-    this.root = this.attachShadow({mode: 'open'});
+    this.root = this.attachShadow({ mode: 'open' });
     this.root.innerHTML = TEMPLATE;
 
     this.overlay = this.root.querySelector('.overlay');
@@ -125,13 +129,13 @@ class MotionCanvasPlayer extends HTMLElement {
     this.setPlaying(!this.playing);
     this.button.animate(
       [
-        {scale: `0.9`},
+        { scale: `0.9` },
         {
           scale: `1`,
           easing: 'ease-out',
         },
       ],
-      {duration: 200},
+      { duration: 200 },
     );
   };
 
@@ -178,7 +182,7 @@ class MotionCanvasPlayer extends HTMLElement {
       const promise = import(
         /* webpackIgnore: true */ /* @vite-ignore */ source
       );
-      const delay = new Promise(resolve => setTimeout(resolve, 200));
+      const delay = new Promise((resolve) => setTimeout(resolve, 200));
       await Promise.any([delay, promise]);
       this.setState(State.Loading);
       project = (await promise).default;

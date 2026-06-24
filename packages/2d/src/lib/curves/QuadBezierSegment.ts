@@ -1,7 +1,7 @@
-import {Vector2, lazy} from '@motion-canvas/core';
-import {quadraticCurveTo} from '../utils';
-import {Polynomial2D} from './Polynomial2D';
-import {PolynomialSegment} from './PolynomialSegment';
+import { lazy, Vector2 } from '@motion-canvas/core';
+import { quadraticCurveTo } from '../utils';
+import { Polynomial2D } from './Polynomial2D';
+import { PolynomialSegment } from './PolynomialSegment';
 
 /**
  * A spline segment representing a quadratic Bézier curve.

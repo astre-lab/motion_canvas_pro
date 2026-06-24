@@ -1,23 +1,23 @@
 import './index.scss';
 
 import {
+  experimentalLog,
   Player,
   Presenter,
-  Renderer,
-  experimentalLog,
   type Project,
+  Renderer,
 } from '@motion-canvas/core';
-import {ComponentChild, render} from 'preact';
-import {Editor} from './Editor';
-import {ProjectData, ProjectSelection} from './ProjectSelection';
+import { ComponentChild, render } from 'preact';
+import { Editor } from './Editor';
+import { ProjectData, ProjectSelection } from './ProjectSelection';
 import {
   ApplicationProvider,
   PanelsProvider,
   ShortcutsProvider,
 } from './contexts';
 import GridPlugin from './plugin/GridPlugin';
-import {projectNameSignal} from './signals';
-import {getItem, setItem} from './utils';
+import { projectNameSignal } from './signals';
+import { getItem, setItem } from './utils';
 
 const ExperimentalHooks = [
   'tabs',
@@ -38,10 +38,10 @@ export function editor(project: Project) {
   Error.stackTraceLimit = Infinity;
   projectNameSignal.value = project.name;
 
-  project.logger.onLogged.subscribe(log => {
-    const {level, message, stack, object, durationMs, ...rest} = log;
+  project.logger.onLogged.subscribe((log) => {
+    const { level, message, stack, object, durationMs, ...rest } = log;
     const fn = console[level as 'error'] ?? console.log;
-    fn(message, ...[object, durationMs, rest].filter(part => !!part));
+    fn(message, ...[object, durationMs, rest].filter((part) => !!part));
     if (stack) {
       fn(stack);
     }
@@ -53,13 +53,13 @@ export function editor(project: Project) {
         continue;
       }
 
-      const experimental = ExperimentalHooks.filter(key => key in plugin);
+      const experimental = ExperimentalHooks.filter((key) => key in plugin);
       if (experimental.length > 0) {
         project.logger.log(
           experimentalLog(
-            `Plugin "${
-              plugin.name
-            }" uses experimental editor hooks: ${experimental.join(', ')}.`,
+            `Plugin "${plugin.name}" uses experimental editor hooks: ${
+              experimental.join(', ')
+            }.`,
           ),
         );
       }
@@ -67,10 +67,10 @@ export function editor(project: Project) {
   }
 
   const renderer = new Renderer(project);
-  project.plugins.forEach(plugin => plugin.renderer?.(renderer));
+  project.plugins.forEach((plugin) => plugin.renderer?.(renderer));
 
   const presenter = new Presenter(project);
-  project.plugins.forEach(plugin => plugin.presenter?.(presenter));
+  project.plugins.forEach((plugin) => plugin.presenter?.(presenter));
 
   const settings = project.settings;
   settings.appearance.color.onChanged.subscribe(() => {
@@ -130,12 +130,12 @@ export function editor(project: Project) {
     getItem(playerKey, {}),
     getItem(frameKey, -1),
   );
-  project.plugins.forEach(plugin => plugin.player?.(player));
+  project.plugins.forEach((plugin) => plugin.player?.(player));
 
-  player.onStateChanged.subscribe(state => {
+  player.onStateChanged.subscribe((state) => {
     setItem(playerKey, state);
   });
-  player.onFrameChanged.subscribe(frame => {
+  player.onFrameChanged.subscribe((frame) => {
     setItem(frameKey, frame);
   });
 

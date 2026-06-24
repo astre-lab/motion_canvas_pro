@@ -9,19 +9,19 @@ import {
   useLogger,
   Vector2,
 } from '@motion-canvas/core';
-import {liteAdaptor} from 'mathjax-full/js/adaptors/liteAdaptor';
-import {RegisterHTMLHandler} from 'mathjax-full/js/handlers/html';
-import {TeX} from 'mathjax-full/js/input/tex';
-import {AllPackages} from 'mathjax-full/js/input/tex/AllPackages';
-import {mathjax} from 'mathjax-full/js/mathjax';
-import {SVG} from 'mathjax-full/js/output/svg';
-import {OptionList} from 'mathjax-full/js/util/Options';
-import {computed, initial, parser, signal} from '../decorators';
-import {Node} from './Node';
+import { liteAdaptor } from 'mathjax-full/js/adaptors/liteAdaptor';
+import { RegisterHTMLHandler } from 'mathjax-full/js/handlers/html';
+import { TeX } from 'mathjax-full/js/input/tex';
+import { AllPackages } from 'mathjax-full/js/input/tex/AllPackages';
+import { mathjax } from 'mathjax-full/js/mathjax';
+import { SVG } from 'mathjax-full/js/output/svg';
+import { OptionList } from 'mathjax-full/js/util/Options';
+import { computed, initial, parser, signal } from '../decorators';
+import { Node } from './Node';
 import {
+  SVG as SVGNode,
   SVGDocument,
   SVGDocumentData,
-  SVG as SVGNode,
   SVGProps,
   SVGShapeData,
 } from './SVG';
@@ -31,9 +31,9 @@ RegisterHTMLHandler(Adaptor);
 
 const JaxDocument = mathjax.document('', {
   // eslint-disable-next-line @typescript-eslint/naming-convention
-  InputJax: new TeX({packages: AllPackages}),
+  InputJax: new TeX({ packages: AllPackages }),
   // eslint-disable-next-line @typescript-eslint/naming-convention
-  OutputJax: new SVG({fontCache: 'local'}),
+  OutputJax: new SVG({ fontCache: 'local' }),
 });
 
 export interface LatexProps extends Omit<SVGProps, 'svg'> {
@@ -78,7 +78,7 @@ export class Latex extends SVGNode {
 
   @initial({})
   @signal()
-  public declare readonly options: SimpleSignal<OptionList, this>;
+  declare public readonly options: SimpleSignal<OptionList, this>;
 
   @initial('')
   @parser(function (this: SVGNode, value: string[] | string): string[] {
@@ -88,10 +88,10 @@ export class Latex extends SVGNode {
         prev.push(...current.split(/{{(.*?)}}/));
         return prev;
       }, [])
-      .filter(sub => sub.trim().length > 0);
+      .filter((sub) => sub.trim().length > 0);
   })
   @signal()
-  public declare readonly tex: Signal<string[] | string, string[], this>;
+  declare public readonly tex: Signal<string[] | string, string[], this>;
 
   public constructor(props: LatexProps) {
     super({
@@ -117,13 +117,13 @@ export class Latex extends SVGNode {
     return this.texToSvg(this.tex());
   }
 
-  private getNodeCharacterId({id}: SVGShapeData) {
+  private getNodeCharacterId({ id }: SVGShapeData) {
     if (!id.includes('-')) return id;
     return id.substring(id.lastIndexOf('-') + 1);
   }
 
   protected override parseSVG(svg: string): SVGDocument {
-    const subTexs = this.svgSubTexMap[svg]!.map(sub => sub.trim());
+    const subTexs = this.svgSubTexMap[svg]!.map((sub) => sub.trim());
     const key = `[${subTexs.join(',')}]::${JSON.stringify(this.options())}`;
     const cached = Latex.texNodesPool[key];
     if (cached && (cached.size.x > 0 || cached.size.y > 0)) {
@@ -143,7 +143,7 @@ export class Latex extends SVGNode {
 
       const firstId = this.getNodeCharacterId(subNodes[0]);
       const spliceIndex = oldNodes.findIndex(
-        node => this.getNodeCharacterId(node) === firstId,
+        (node) => this.getNodeCharacterId(node) === firstId,
       );
       const children = oldNodes.splice(spliceIndex, subNodes.length);
 

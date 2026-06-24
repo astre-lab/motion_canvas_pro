@@ -1,10 +1,10 @@
 import styles from '@docusaurus/theme-classic/lib/theme/CodeBlock/Content/styles.module.css';
-import {useCodeWordWrap} from '@docusaurus/theme-common/internal';
+import { useCodeWordWrap } from '@docusaurus/theme-common/internal';
 import IconExternalLink from '@site/src/Icon/ExternalLink';
 import customStyles from '@site/src/components/Api/Code/styles.module.css';
-import {useTokenStyle} from '@site/src/contexts/codeTheme';
+import { useTokenStyle } from '@site/src/contexts/codeTheme';
 import clsx from 'clsx';
-import React, {ReactNode} from 'react';
+import React, { ReactNode } from 'react';
 
 export default function CodeBlock({
   children,
@@ -31,7 +31,7 @@ export default function CodeBlock({
     >
       <pre
         onClick={onClick}
-        onKeyDown={e => {
+        onKeyDown={(e) => {
           if (e.key === 'Enter') {
             onClick?.();
           }
@@ -47,9 +47,9 @@ export default function CodeBlock({
       {link && (
         <div className={styles.buttonGroup}>
           <button
-            title="Go to source"
-            className="clean-btn"
-            onClick={e => {
+            title='Go to source'
+            className='clean-btn'
+            onClick={(e) => {
               e.preventDefault();
               window.open(link, '_blank');
             }}

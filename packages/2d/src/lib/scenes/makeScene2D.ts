@@ -3,8 +3,8 @@ import {
   DescriptionOf,
   ThreadGeneratorFactory,
 } from '@motion-canvas/core';
-import type {View2D} from '../components';
-import {Scene2D} from './Scene2D';
+import type { View2D } from '../components';
+import { Scene2D } from './Scene2D';
 
 export function makeScene2D(
   runner: ThreadGeneratorFactory<View2D>,

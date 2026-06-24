@@ -1,7 +1,7 @@
-import {decorate, threadable} from '../decorators';
-import {useThread} from '../utils';
-import {Thread} from './Thread';
-import {ThreadGenerator} from './ThreadGenerator';
+import { decorate, threadable } from '../decorators';
+import { useThread } from '../utils';
+import { Thread } from './Thread';
+import { ThreadGenerator } from './ThreadGenerator';
 
 decorate(join, threadable());
 /**
@@ -52,25 +52,25 @@ export function* join(
   }
 
   const parent = useThread();
-  const threads = <Thread[]>(
+  const threads = <Thread[]> (
     tasks
-      .map(task => parent.children.find(thread => thread.runner === task))
-      .filter(thread => thread)
+      .map((task) => parent.children.find((thread) => thread.runner === task))
+      .filter((thread) => thread)
   );
 
   const startTime = parent.time();
   let childTime;
   if (all) {
-    while (threads.find(thread => !thread.canceled)) {
+    while (threads.find((thread) => !thread.canceled)) {
       yield;
     }
-    childTime = Math.max(...threads.map(thread => thread.time()));
+    childTime = Math.max(...threads.map((thread) => thread.time()));
   } else {
-    while (!threads.find(thread => thread.canceled)) {
+    while (!threads.find((thread) => thread.canceled)) {
       yield;
     }
-    const canceled = threads.filter(thread => thread.canceled);
-    childTime = Math.min(...canceled.map(thread => thread.time()));
+    const canceled = threads.filter((thread) => thread.canceled);
+    childTime = Math.min(...canceled.map((thread) => thread.time()));
   }
 
   parent.time(Math.max(startTime, childTime));

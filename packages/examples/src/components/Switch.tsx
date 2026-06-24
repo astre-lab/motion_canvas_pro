@@ -1,22 +1,22 @@
 import {
   Circle,
+  colorSignal,
+  initial,
   Node,
   NodeProps,
   Rect,
-  colorSignal,
-  initial,
   signal,
 } from '@motion-canvas/2d';
 import {
+  all,
   Color,
   ColorSignal,
-  PossibleColor,
-  SignalValue,
-  SimpleSignal,
-  all,
   createRef,
   createSignal,
   easeInOutCubic,
+  PossibleColor,
+  SignalValue,
+  SimpleSignal,
   tween,
 } from '@motion-canvas/core';
 
@@ -28,11 +28,11 @@ export interface SwitchProps extends NodeProps {
 export class Switch extends Node {
   @initial(false)
   @signal()
-  public declare readonly initialState: SimpleSignal<boolean, this>;
+  declare public readonly initialState: SimpleSignal<boolean, this>;
 
   @initial('#68ABDF')
   @colorSignal()
-  public declare readonly accent: ColorSignal<this>;
+  declare public readonly accent: ColorSignal<this>;
 
   private isOn: boolean;
   private readonly indicatorPosition = createSignal(0);
@@ -59,7 +59,7 @@ export class Switch extends Node {
           x={() => this.indicatorPosition()}
           ref={this.indicator}
           size={[80, 80]}
-          fill="#ffffff"
+          fill='#ffffff'
         />
       </Rect>,
     );
@@ -67,7 +67,7 @@ export class Switch extends Node {
 
   public *toggle(duration: number) {
     yield* all(
-      tween(duration, value => {
+      tween(duration, (value) => {
         const oldColor = this.isOn ? this.accent() : this.offColor;
         const newColor = this.isOn ? this.offColor : this.accent();
 
@@ -75,8 +75,7 @@ export class Switch extends Node {
           Color.lerp(oldColor, newColor, easeInOutCubic(value)),
         );
       }),
-
-      tween(duration, value => {
+      tween(duration, (value) => {
         const currentPos = this.indicator().position();
 
         this.indicatorPosition(

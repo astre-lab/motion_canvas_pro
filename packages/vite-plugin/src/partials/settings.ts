@@ -1,7 +1,7 @@
 import fs from 'fs';
 import os from 'os';
 import path from 'path';
-import {Plugin} from 'vite';
+import { Plugin } from 'vite';
 
 export function settingsPlugin(): Plugin {
   const settingsId = 'virtual:settings.meta';
@@ -35,12 +35,12 @@ export function settingsPlugin(): Plugin {
     },
 
     configureServer(server) {
-      server.ws.on('motion-canvas:meta', async ({source, data}, client) => {
+      server.ws.on('motion-canvas:meta', async ({ source, data }, client) => {
         if (source !== resolvedSettingsId) {
           return;
         }
 
-        await fs.promises.mkdir(outputDirectory, {recursive: true});
+        await fs.promises.mkdir(outputDirectory, { recursive: true });
         const newData = JSON.stringify(data, undefined, 2);
         let oldData = '';
         try {
@@ -54,7 +54,7 @@ export function settingsPlugin(): Plugin {
             fs.promises.writeFile(settingsPath, newData, 'utf8'),
             // Invalidate the module so that the settings are up-to-date next
             // time the browser is refreshed.
-            server.moduleGraph.getModuleByUrl(source).then(module => {
+            server.moduleGraph.getModuleByUrl(source).then((module) => {
               if (module) {
                 server.moduleGraph.invalidateModule(module);
               }
@@ -62,7 +62,7 @@ export function settingsPlugin(): Plugin {
           ]);
         }
 
-        client.send('motion-canvas:meta-ack', {source});
+        client.send('motion-canvas:meta-ack', { source });
       });
     },
   };

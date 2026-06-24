@@ -1,22 +1,22 @@
-import {isInspectable, Vector2} from '@motion-canvas/core';
-import {useEffect, useState} from 'react';
+import { isInspectable, Vector2 } from '@motion-canvas/core';
+import { useEffect, useState } from 'react';
 import {
   useShortcut,
   useViewportContext,
   VIEWPORT_SHORTCUTS,
 } from '../../contexts';
-import {useCurrentScene, useViewportMatrix} from '../../hooks';
-import {ReadOnlyInput} from '../controls';
+import { useCurrentScene, useViewportMatrix } from '../../hooks';
+import { ReadOnlyInput } from '../controls';
 import styles from './Viewport.module.scss';
 
 export function Coordinates() {
-  const [mousePos, setMousePos] = useState({x: 0, y: 0});
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const state = useViewportContext();
   const scene = useCurrentScene();
   const matrix = useViewportMatrix();
 
   useEffect(() => {
-    const handleMouseMove = (event: {x: number; y: number}) => {
+    const handleMouseMove = (event: { x: number; y: number }) => {
       if (!isInspectable(scene)) return;
 
       let point = new Vector2(

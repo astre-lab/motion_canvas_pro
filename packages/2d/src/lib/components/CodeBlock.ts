@@ -1,35 +1,35 @@
 import {
-  SerializedVector2,
-  Signal,
-  SignalValue,
-  SimpleSignal,
-  ThreadGenerator,
-  TimingFunction,
-  Vector2,
   clampRemap,
   createComputedAsync,
   createSignal,
   easeInOutSine,
   join,
   map,
+  SerializedVector2,
+  Signal,
+  SignalValue,
+  SimpleSignal,
   threadable,
+  ThreadGenerator,
+  TimingFunction,
   tween,
   useLogger,
+  Vector2,
   waitFor,
 } from '@motion-canvas/core';
 import {
   Code,
   CodeStyle,
   CodeTree,
-  MorphToken,
-  Token,
   diff,
+  MorphToken,
   parse,
   ready,
+  Token,
 } from 'code-fns';
-import {computed, initial, nodeName, parser, signal} from '../decorators';
-import {DesiredLength} from '../partials';
-import {Shape, ShapeProps} from './Shape';
+import { computed, initial, nodeName, parser, signal } from '../decorators';
+import { DesiredLength } from '../partials';
+import { Shape, ShapeProps } from './Shape';
 
 type CodePoint = [number, number];
 type CodeRange = [CodePoint, CodePoint];
@@ -59,28 +59,28 @@ export class CodeBlock extends Shape {
 
   @initial('tsx')
   @signal()
-  public declare readonly language: SimpleSignal<string, this>;
+  declare public readonly language: SimpleSignal<string, this>;
 
   @initial('')
   @parser(function (this: CodeBlock, value: Code): CodeTree {
     return typeof value === 'string'
       ? {
-          language: this.language(),
-          spans: [value],
-          nodes: [],
-        }
+        language: this.language(),
+        spans: [value],
+        nodes: [],
+      }
       : value;
   })
   @signal()
-  public declare readonly code: Signal<Code, CodeTree, this>;
+  declare public readonly code: Signal<Code, CodeTree, this>;
 
   @initial(undefined)
   @signal()
-  public declare readonly theme: Signal<CodeStyle | null, CodeStyle, this>;
+  declare public readonly theme: Signal<CodeStyle | null, CodeStyle, this>;
 
   @initial(lines(0, Infinity))
   @signal()
-  public declare readonly selection: SimpleSignal<CodeRange[], this>;
+  declare public readonly selection: SimpleSignal<CodeRange[], this>;
 
   protected *tweenSelection(
     value: CodeRange[],
@@ -97,7 +97,7 @@ export class CodeBlock extends Shape {
 
   @initial(0.32)
   @signal()
-  public declare readonly unselectedOpacity: SimpleSignal<number, this>;
+  declare public readonly unselectedOpacity: SimpleSignal<number, this>;
 
   private codeProgress = createSignal<number | null>(null);
   private selectionProgress = createSignal<number | null>(null);
@@ -142,10 +142,10 @@ export class CodeBlock extends Shape {
       return [];
     }
 
-    return parse(this.code(), {codeStyle: this.theme()});
+    return parse(this.code(), { codeStyle: this.theme() });
   }
 
-  public constructor({children, ...rest}: CodeProps) {
+  public constructor({ children, ...rest }: CodeProps) {
     super({
       fontFamily: 'monospace',
       ...rest,
@@ -201,7 +201,7 @@ export class CodeBlock extends Shape {
       maxWidth = width;
     }
 
-    return {x: maxWidth, y: height};
+    return { x: maxWidth, y: height };
   }
 
   protected override collectAsyncResources(): void {
@@ -249,15 +249,15 @@ export class CodeBlock extends Shape {
       const from = {
         language: this.language(),
         spans: [...strings],
-        nodes: rest.map(modification =>
-          isCodeModification(modification) ? modification.from : modification,
+        nodes: rest.map((modification) =>
+          isCodeModification(modification) ? modification.from : modification
         ),
       };
       const to = {
         language: this.language(),
         spans: [...strings],
-        nodes: rest.map(modification =>
-          isCodeModification(modification) ? modification.to : modification,
+        nodes: rest.map((modification) =>
+          isCodeModification(modification) ? modification.to : modification
         ),
       };
       this.code(from);
@@ -267,15 +267,14 @@ export class CodeBlock extends Shape {
         yield* waitFor(duration * 0.2);
         yield* this.selection([], duration * 0.3);
 
-        const newSelection: CodeRange[] =
-          changeSelection === true
-            ? diff(from, to)
-                .filter(token => token.morph === 'create')
-                .map(token => [
-                  [token.to![1], token.to![0]],
-                  [token.to![1], token.to![0] + token.code.length],
-                ])
-            : changeSelection;
+        const newSelection: CodeRange[] = changeSelection === true
+          ? diff(from, to)
+            .filter((token) => token.morph === 'create')
+            .map((token) => [
+              [token.to![1], token.to![0]],
+              [token.to![1], token.to![0] + token.code.length],
+            ])
+          : changeSelection;
 
         yield* this.selection(newSelection, duration * 0.3);
         yield* join(task);
@@ -296,8 +295,8 @@ export class CodeBlock extends Shape {
     if (typeof code === 'function') throw new Error();
     if (!CodeBlock.initialized()) return;
 
-    const currentParsedCode = parse(this.code(), {codeStyle: this.theme()});
-    const newParsedCode = parse(code, {codeStyle: this.theme()});
+    const currentParsedCode = parse(this.code(), { codeStyle: this.theme() });
+    const newParsedCode = parse(code, { codeStyle: this.theme() });
     this.currentLineCount = this.getLineCountOfTokenArray(currentParsedCode);
     this.newLineCount = this.getLineCountOfTokenArray(newParsedCode);
 
@@ -310,10 +309,10 @@ export class CodeBlock extends Shape {
     const ending = 0.8;
 
     this.codeProgress(0);
-    this.diffed = diff(this.code(), code, {codeStyle: this.theme()});
+    this.diffed = diff(this.code(), code, { codeStyle: this.theme() });
     yield* tween(
       time,
-      value => {
+      (value) => {
         const progress = timingFunction(value);
         const remapped = clampRemap(beginning, ending, 0, 1, progress);
         this.codeProgress(progress);
@@ -367,8 +366,8 @@ export class CodeBlock extends Shape {
           position.x = 0;
           continue;
         }
-        context.globalAlpha =
-          globalAlpha * alpha * getSelectionAlpha(position.x, position.y);
+        context.globalAlpha = globalAlpha * alpha *
+          getSelectionAlpha(position.x, position.y);
         context.fillText(char, position.x * w, position.y * lh);
         position.x++;
       }
@@ -377,7 +376,7 @@ export class CodeBlock extends Shape {
     context.translate(size.x / -2, size.y / -2);
     if (progress == null) {
       const parsed = this.parsed();
-      const position = {x: 0, y: 0};
+      const position = { x: 0, y: 0 };
       for (const token of parsed) {
         context.save();
         context.fillStyle = token.color ?? '#c9d1d9';
@@ -396,13 +395,13 @@ export class CodeBlock extends Shape {
         if (token.morph === 'delete') {
           drawToken(
             token.code,
-            {x: token.from![0], y: token.from![1]},
+            { x: token.from![0], y: token.from![1] },
             clampRemap(0, beginning + overlap, 1, 0, progress),
           );
         } else if (token.morph === 'create') {
           drawToken(
             token.code,
-            {x: token.to![0], y: token.to![1]},
+            { x: token.to![0], y: token.to![1] },
             clampRemap(ending - overlap, 1, 0, 1, progress),
           );
         } else if (token.morph === 'retain') {
@@ -421,8 +420,7 @@ export class CodeBlock extends Shape {
               continue;
             }
 
-            context.globalAlpha =
-              globalAlpha *
+            context.globalAlpha = globalAlpha *
               getSelectionAlpha(point[0] + offsetX, point[1] + offsetY);
 
             context.fillText(char, (x + offsetX) * w, (y + offsetY) * lh);
@@ -462,12 +460,12 @@ export class CodeBlock extends Shape {
     y: number,
   ): number {
     return selection.length > 0 &&
-      !!selection.find(([[startLine, startColumn], [endLine, endColumn]]) => {
-        return (
-          ((y === startLine && x >= startColumn) || y > startLine) &&
-          ((y === endLine && x < endColumn) || y < endLine)
-        );
-      })
+        !!selection.find(([[startLine, startColumn], [endLine, endColumn]]) => {
+          return (
+            ((y === startLine && x >= startColumn) || y > startLine) &&
+            ((y === endLine && x < endColumn) || y < endLine)
+          );
+        })
       ? 1
       : 0;
   }
@@ -522,7 +520,7 @@ export function remove(content: Code): CodeModification {
  * @param to - The code to change to.
  */
 export function edit(from: Code, to: Code): CodeModification {
-  return {from, to};
+  return { from, to };
 }
 
 /**

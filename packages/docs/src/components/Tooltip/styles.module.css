@@ -32,10 +32,7 @@
   transform: translateY(16px);
   opacity: 0;
 
-  transition:
-    visibility 0.1s step-end,
-    transform 0.1s ease-in,
-    opacity 0.1s;
+  transition: visibility 0.1s step-end, transform 0.1s ease-in, opacity 0.1s;
   transition-delay: 0.1s;
 }
 

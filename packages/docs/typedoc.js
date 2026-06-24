@@ -23,7 +23,7 @@ module.exports = () => ({
       return api.lookups;
     }
 
-    fs.mkdirSync(`${dir}/markdown`, {recursive: true});
+    fs.mkdirSync(`${dir}/markdown`, { recursive: true });
 
     const core = await parseTypes(
       {
@@ -106,9 +106,9 @@ module.exports = () => ({
     await fs.promises.writeFile(
       `${dir}/markdown/index.js`,
       `
-      ${mdContents.map(id => `import ${id} from './${id}.md';`).join('\n')}
+      ${mdContents.map((id) => `import ${id} from './${id}.md';`).join('\n')}
       export {
-        ${mdContents.map(id => `${id},\n`).join('\n')}
+        ${mdContents.map((id) => `${id},\n`).join('\n')}
       }`,
       'utf8',
     );
@@ -121,13 +121,13 @@ module.exports = () => ({
 
     await fs.promises.writeFile(
       `${dir}/api.json`,
-      JSON.stringify({lookups, urlLookups}),
+      JSON.stringify({ lookups, urlLookups }),
       'utf8',
     );
 
     return lookups;
   },
-  async contentLoaded({content, actions}) {
+  async contentLoaded({ content, actions }) {
     if (content === null) {
       return;
     }
@@ -137,8 +137,8 @@ module.exports = () => ({
         path: lookup[id].url,
         component: '@site/src/components/Api/ApiPage.tsx',
         routes: Object.values(lookup)
-          .filter(reflection => reflection.hasOwnPage)
-          .map(reflection => ({
+          .filter((reflection) => reflection.hasOwnPage)
+          .map((reflection) => ({
             path: reflection.url,
             component: '@site/src/components/Api/ApiItem.tsx',
             exact: true,
@@ -157,7 +157,7 @@ async function parseTypes(options, projectName, externalProject) {
   app.options.addReader(new TSConfigReader());
   app.bootstrap(options);
 
-  app.converter.addUnknownSymbolResolver(ref => {
+  app.converter.addUnknownSymbolResolver((ref) => {
     const name = ref.symbolReference.path[0].path;
     if (externalProject) {
       let reference = externalProject.nameLookup[name];
@@ -172,8 +172,8 @@ async function parseTypes(options, projectName, externalProject) {
         if (ref.symbolReference.path.length > 0) {
           for (const value of ref.symbolReference.path.slice(1)) {
             reference = reference.children
-              .map(({id}) => externalProject.lookup[id])
-              .find(child => child.name === value.path);
+              .map(({ id }) => externalProject.lookup[id])
+              .find((child) => child.name === value.path);
           }
         }
 
@@ -197,7 +197,7 @@ async function parseTypes(options, projectName, externalProject) {
     ReflectionKind.Enum,
   ];
 
-  const traverse = reflection => {
+  const traverse = (reflection) => {
     reflection.hasOwnPage = hasOwnPage.includes(reflection.kind);
     reflection.docId = reflection.parent
       ? `${reflection.parent.docId}-${reflection.name}`
@@ -290,10 +290,9 @@ async function parseTypes(options, projectName, externalProject) {
       );
     },
     toObject(item, obj) {
-      obj.importPath =
-        item.name === 'index'
-          ? `${project.name}/lib`
-          : `${project.name}/lib/${item.name}`;
+      obj.importPath = item.name === 'index'
+        ? `${project.name}/lib`
+        : `${project.name}/lib/${item.name}`;
       return obj;
     },
   });
@@ -312,10 +311,10 @@ async function parseTypes(options, projectName, externalProject) {
           obj.setSignature,
           obj.getSignature,
           obj.indexSignature,
-        ].filter(item => !!item);
+        ].filter((item) => !!item);
 
-        obj.experimental = signatures.some(signature =>
-          isExperimental(lookup[signature.id]),
+        obj.experimental = signatures.some((signature) =>
+          isExperimental(lookup[signature.id])
         );
       }
 
@@ -342,7 +341,7 @@ async function parseTypes(options, projectName, externalProject) {
       obj.docId = item.docId;
       obj.next = item.sidebar?.next;
       obj.previous = item.sidebar?.previous;
-      return {id: item.id, project: project.id};
+      return { id: item.id, project: project.id };
     },
   });
 
@@ -402,7 +401,7 @@ function getContentName(project, index) {
 
 function partsToMarkdown(parts) {
   return parts
-    .map(part => {
+    .map((part) => {
       if (part.kind === 'inline-tag' && part.tag === '@link') {
         if (part.target instanceof DeclarationReflection) {
           return `[\`${part.text}\`](${part.target.href})`;
@@ -420,7 +419,7 @@ function partsToMarkdown(parts) {
 
 function partsToText(parts) {
   return parts
-    .map(part => {
+    .map((part) => {
       if (part.kind === 'code') {
         return part.text.startsWith('```') ? '' : part.text.slice(1, -1);
       }
@@ -438,7 +437,7 @@ function isExperimental(reflection) {
   }
 
   if (Array.isArray(tags)) {
-    return tags.some(tag => tag === '@experimental');
+    return tags.some((tag) => tag === '@experimental');
   }
 
   return tags.has('@experimental');

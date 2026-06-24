@@ -1,7 +1,7 @@
-import {Color, ColorSpace, InterpolationMode, mix} from 'chroma-js';
-import {Signal, SignalContext, SignalValue} from '../signals';
-import type {InterpolationFunction} from '../tweening';
-import type {Type, WebGLConvertible} from './Type';
+import { Color, ColorSpace, InterpolationMode, mix } from 'chroma-js';
+import { Signal, SignalContext, SignalValue } from '../signals';
+import type { InterpolationFunction } from '../tweening';
+import type { Type, WebGLConvertible } from './Type';
 
 export type SerializedColor = string;
 
@@ -9,7 +9,7 @@ export type PossibleColor =
   | SerializedColor
   | number
   | Color
-  | {r: number; g: number; b: number; a: number};
+  | { r: number; g: number; b: number; a: number };
 
 export type ColorSignal<T> = Signal<PossibleColor, Color, T>;
 
@@ -87,10 +87,11 @@ const ExtendedColor: typeof Color = (() => {
     return mix(from as Color, to as Color, value, colorSpace);
   };
 
-  Color.createLerp = Color.prototype.createLerp =
-    (colorSpace: InterpolationMode) =>
-    (from: Color | string | null, to: Color | string | null, value: number) =>
-      Color.lerp(from, to, value, colorSpace);
+  Color.createLerp =
+    Color.prototype.createLerp =
+      (colorSpace: InterpolationMode) =>
+      (from: Color | string | null, to: Color | string | null, value: number) =>
+        Color.lerp(from, to, value, colorSpace);
 
   Color.createSignal = (
     initial?: SignalValue<PossibleColor>,
@@ -100,7 +101,7 @@ const ExtendedColor: typeof Color = (() => {
       initial,
       interpolation,
       undefined,
-      value => new Color(value),
+      (value) => new Color(value),
     ).toSignal();
   };
 
@@ -132,4 +133,4 @@ const ExtendedColor: typeof Color = (() => {
   return Color;
 })();
 
-export {ExtendedColor as Color};
+export { ExtendedColor as Color };

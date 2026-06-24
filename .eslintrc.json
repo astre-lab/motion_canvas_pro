@@ -20,7 +20,7 @@
   "rules": {
     "require-yield": "off",
     "grouped-accessor-pairs": ["error", "getBeforeSet"],
-    "eqeqeq": ["error", "always", {"null": "ignore"}],
+    "eqeqeq": ["error", "always", { "null": "ignore" }],
     "curly": ["error", "multi-line"],
     "@typescript-eslint/explicit-member-accessibility": "error",
     "@typescript-eslint/no-explicit-any": "off",

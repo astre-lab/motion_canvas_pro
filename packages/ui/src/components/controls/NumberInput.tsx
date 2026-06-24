@@ -1,21 +1,23 @@
 import clsx from 'clsx';
-import type {JSX} from 'preact';
-import {useRef, useState} from 'preact/hooks';
-import {MouseButton, clamp} from '../../utils';
+import type { JSX } from 'preact';
+import { useRef, useState } from 'preact/hooks';
+import { clamp, MouseButton } from '../../utils';
 import styles from './Controls.module.scss';
 
-type NumberInputProps = Omit<
-  JSX.HTMLAttributes<HTMLInputElement>,
-  'value' | 'onChange' | 'min' | 'max' | 'step' | 'label'
-> & {
-  value: number;
-  onChange: (value: number) => void;
-  min?: number;
-  max?: number;
-  step?: number;
-  decimalPlaces?: number;
-  label?: string;
-};
+type NumberInputProps =
+  & Omit<
+    JSX.HTMLAttributes<HTMLInputElement>,
+    'value' | 'onChange' | 'min' | 'max' | 'step' | 'label'
+  >
+  & {
+    value: number;
+    onChange: (value: number) => void;
+    min?: number;
+    max?: number;
+    step?: number;
+    decimalPlaces?: number;
+    label?: string;
+  };
 
 export function NumberInput({
   value,
@@ -43,7 +45,7 @@ export function NumberInput({
         lang={'en'}
         value={currentValue?.toFixed(decimalPlaces)}
         onChangeCapture={() => onChange?.(parseFloat(inputRef.current.value))}
-        onPointerDown={event => {
+        onPointerDown={(event) => {
           if (
             document.activeElement !== inputRef.current &&
             event.button === MouseButton.Left
@@ -56,7 +58,7 @@ export function NumberInput({
             setEditedValue(value);
           }
         }}
-        onPointerMove={event => {
+        onPointerMove={(event) => {
           if (
             document.activeElement !== inputRef.current &&
             event.currentTarget.hasPointerCapture(event.pointerId)
@@ -78,7 +80,7 @@ export function NumberInput({
             );
           }
         }}
-        onPointerUp={event => {
+        onPointerUp={(event) => {
           if (event.button === MouseButton.Left) {
             event.stopPropagation();
             event.currentTarget.releasePointerCapture(event.pointerId);
@@ -93,7 +95,7 @@ export function NumberInput({
             setEditedValue(null);
           }
         }}
-        onKeyDown={event => {
+        onKeyDown={(event) => {
           if (event.key === 'Enter') {
             inputRef.current.blur();
           }

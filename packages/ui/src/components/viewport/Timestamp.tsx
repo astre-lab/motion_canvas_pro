@@ -1,7 +1,7 @@
-import {JSX} from 'preact';
-import {useApplication} from '../../contexts';
-import {usePlayerState} from '../../hooks';
-import {formatDuration} from '../../utils';
+import { JSX } from 'preact';
+import { useApplication } from '../../contexts';
+import { usePlayerState } from '../../hooks';
+import { formatDuration } from '../../utils';
 import styles from './Viewport.module.scss';
 
 interface TimestampProps extends JSX.HTMLAttributes<HTMLInputElement> {
@@ -18,8 +18,8 @@ export function Timestamp({
   frameTitle,
   ...rest
 }: TimestampProps) {
-  const {player} = useApplication();
-  const {speed} = usePlayerState();
+  const { player } = useApplication();
+  const { speed } = usePlayerState();
 
   let precision = 0;
   let padding = player.status.fps.toString().length;

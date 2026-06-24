@@ -1,8 +1,8 @@
-import {Vector2} from '@motion-canvas/core';
-import {CurveProfile} from './CurveProfile';
-import {LineSegment} from './LineSegment';
-import {getPointAtDistance} from './getPointAtDistance';
-import {getPolylineProfile} from './getPolylineProfile';
+import { Vector2 } from '@motion-canvas/core';
+import { CurveProfile } from './CurveProfile';
+import { LineSegment } from './LineSegment';
+import { getPointAtDistance } from './getPointAtDistance';
+import { getPolylineProfile } from './getPolylineProfile';
 
 // Based on kute.js svgMorph plugin
 
@@ -172,8 +172,7 @@ function subcurveToPolygon(
   curve: SubcurveProfile,
   maxLength: number,
 ): PolygonProfile {
-  const points =
-    exactPolygonPoints(curve, maxLength) ||
+  const points = exactPolygonPoints(curve, maxLength) ||
     approximatePolygonPoints(curve, maxLength);
   return {
     points: [...points],
@@ -194,7 +193,7 @@ export function polygonLength(points: Vector2[]) {
   }, 0);
 }
 
-/**s
+/** s
  * Sample additional points for polygon to better match its pair. This will mutate original points.
  * @param points - polygon points
  * @param numPoints - number of points to be added
@@ -261,7 +260,7 @@ export function calculateLerpDistance(
  */
 
 function rotatePolygon(polygon: PolygonProfile, reference: PolygonProfile) {
-  const {points, closed} = polygon;
+  const { points, closed } = polygon;
   const len = points.length;
 
   if (!closed) {
@@ -315,13 +314,13 @@ function rotatePolygon(polygon: PolygonProfile, reference: PolygonProfile) {
  */
 
 function roundPolygon(
-  {points, ...rest}: PolygonProfile,
+  { points, ...rest }: PolygonProfile,
   round: number,
 ): PolygonProfile {
   const pow = round >= 1 ? 10 ** round : 1;
   return {
-    points: points.map(point => {
-      const [x, y] = [point.x, point.y].map(n => Math.round(n * pow) / pow);
+    points: points.map((point) => {
+      const [x, y] = [point.x, point.y].map((n) => Math.round(n * pow) / pow);
       return new Vector2(x, y);
     }),
     ...rest,
@@ -404,7 +403,7 @@ function getInterpolationPolygon(
   else balanceSubcurves(toSub, fromSub);
 
   return fromSub.map((sub, i) =>
-    getSubcurveInterpolationPolygon(sub, toSub[i], precision, round),
+    getSubcurveInterpolationPolygon(sub, toSub[i], precision, round)
   );
 }
 
@@ -415,7 +414,7 @@ function getInterpolationPolygon(
  */
 
 function addCurveToCurve(target: CurveProfile, source: CurveProfile) {
-  const {segments, arcLength, minSin} = source;
+  const { segments, arcLength, minSin } = source;
   target.segments.push(...segments);
   target.arcLength += arcLength;
   target.minSin = Math.min(target.minSin, minSin);
@@ -462,7 +461,7 @@ export function createCurveProfileLerp(a: CurveProfile, b: CurveProfile) {
       arcLength: 0,
       minSin: 1,
     };
-    for (const {from, to} of interpolations) {
+    for (const { from, to } of interpolations) {
       const points = polygonPointsLerp(from.points, to.points, progress);
       addCurveToCurve(curve, getPolylineProfile(points, 0, false));
     }

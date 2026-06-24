@@ -1,20 +1,20 @@
 import {
+  all,
+  capitalize,
   DEFAULT,
   InterpolationFunction,
   SignalValue,
   SimpleSignal,
+  threadable,
   ThreadGenerator,
   TimingFunction,
-  all,
-  capitalize,
-  threadable,
 } from '@motion-canvas/core';
-import {computed, initial, nodeName, signal} from '../decorators';
-import {is} from '../utils';
-import {Node} from './Node';
-import {Shape, ShapeProps} from './Shape';
-import {TxtLeaf} from './TxtLeaf';
-import {ComponentChildren} from './types';
+import { computed, initial, nodeName, signal } from '../decorators';
+import { is } from '../utils';
+import { Node } from './Node';
+import { Shape, ShapeProps } from './Shape';
+import { TxtLeaf } from './TxtLeaf';
+import { ComponentChildren } from './types';
 
 type TxtChildren = string | Node | (string | Node)[];
 type AnyTxt = Txt | TxtLeaf;
@@ -38,7 +38,7 @@ export class Txt extends Shape {
    * @param props - Additional text properties.
    */
   public static b(props: TxtProps) {
-    return new Txt({...props, fontWeight: 700});
+    return new Txt({ ...props, fontWeight: 700 });
   }
 
   /**
@@ -53,12 +53,12 @@ export class Txt extends Shape {
    * @param props - Additional text properties.
    */
   public static i(props: TxtProps) {
-    return new Txt({...props, fontStyle: 'italic'});
+    return new Txt({ ...props, fontStyle: 'italic' });
   }
 
   @initial('')
   @signal()
-  public declare readonly text: SimpleSignal<string, this>;
+  declare public readonly text: SimpleSignal<string, this>;
 
   protected getText(): string {
     return this.innerText();
@@ -77,7 +77,7 @@ export class Txt extends Shape {
     }
 
     if (leaf === null) {
-      leaf = new TxtLeaf({text: value});
+      leaf = new TxtLeaf({ text: value });
       leaf.parent(this);
     } else {
       leaf.text(value);
@@ -137,7 +137,7 @@ export class Txt extends Shape {
     return true;
   }
 
-  public constructor({children, text, ...props}: TxtProps) {
+  public constructor({ children, text, ...props }: TxtProps) {
     super(props);
     this.children(text ?? children);
   }
@@ -166,7 +166,7 @@ export class Txt extends Shape {
       if (child instanceof Txt || child instanceof TxtLeaf) {
         result.push(child);
       } else if (typeof child === 'string') {
-        result.push(new TxtLeaf({text: child}));
+        result.push(new TxtLeaf({ text: child }));
       }
     }
 
@@ -194,7 +194,7 @@ export class Txt extends Shape {
   'lineJoin',
   'lineDash',
   'lineDashOffset',
-].forEach(prop => {
+].forEach((prop) => {
   (Txt.prototype as any)[`getDefault${capitalize(prop)}`] = function (
     this: Txt,
     initial: unknown,

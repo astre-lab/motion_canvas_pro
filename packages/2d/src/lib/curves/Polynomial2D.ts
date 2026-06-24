@@ -1,6 +1,6 @@
-import {BBox, Vector2} from '@motion-canvas/core';
+import { BBox, Vector2 } from '@motion-canvas/core';
 
-import {Polynomial} from './Polynomial';
+import { Polynomial } from './Polynomial';
 
 export class Polynomial2D {
   public readonly x: Polynomial;

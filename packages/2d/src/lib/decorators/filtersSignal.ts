@@ -1,27 +1,29 @@
 import {
+  all,
+  deepLerp,
+  easeInOutCubic,
   Signal,
   SignalContext,
   SignalValue,
   SimpleSignal,
   ThreadGenerator,
   TimingFunction,
-  all,
-  deepLerp,
-  easeInOutCubic,
   unwrap,
 } from '@motion-canvas/core';
-import {FILTERS, Filter, FilterName} from '../partials';
-import {addInitializer} from './initializers';
-import {getPropertyMetaOrCreate} from './signal';
+import { Filter, FilterName, FILTERS } from '../partials';
+import { addInitializer } from './initializers';
+import { getPropertyMetaOrCreate } from './signal';
 
-export type FiltersSignal<TOwner> = Signal<
-  Filter[],
-  Filter[],
-  TOwner,
-  FiltersSignalContext<TOwner>
-> & {
-  [K in FilterName]: SimpleSignal<number, TOwner>;
-};
+export type FiltersSignal<TOwner> =
+  & Signal<
+    Filter[],
+    Filter[],
+    TOwner,
+    FiltersSignalContext<TOwner>
+  >
+  & {
+    [K in FilterName]: SimpleSignal<number, TOwner>;
+  };
 
 export class FiltersSignalContext<TOwner> extends SignalContext<
   Filter[],
@@ -42,14 +44,16 @@ export class FiltersSignalContext<TOwner> extends SignalContext<
           if (newValue === undefined) {
             return (
               this.get()
-                ?.find(filter => filter.name === props.name)
+                ?.find((filter) => filter.name === props.name)
                 ?.value() ??
-              props.default ??
-              0
+                props.default ??
+                0
             );
           }
 
-          let instance = this.get()?.find(filter => filter.name === props.name);
+          let instance = this.get()?.find((filter) =>
+            filter.name === props.name
+          );
           if (!instance) {
             instance = new Filter(props);
             this.set([...this.get(), instance]);
@@ -77,7 +81,7 @@ export class FiltersSignalContext<TOwner> extends SignalContext<
     if (areFiltersCompatible(from, to)) {
       yield* all(
         ...from.map((filter, i) =>
-          filter.value(to[i].value(), duration, timingFunction),
+          filter.value(to[i].value(), duration, timingFunction)
         ),
       );
       this.set(to);
@@ -88,13 +92,14 @@ export class FiltersSignalContext<TOwner> extends SignalContext<
       filter.value(filter.default);
     }
 
-    const toValues = to.map(filter => filter.value.context.raw());
-    const partialDuration =
-      from.length > 0 && to.length > 0 ? duration / 2 : duration;
+    const toValues = to.map((filter) => filter.value.context.raw());
+    const partialDuration = from.length > 0 && to.length > 0
+      ? duration / 2
+      : duration;
     if (from.length > 0) {
       yield* all(
-        ...from.map(filter =>
-          filter.value(filter.default, partialDuration, timingFunction),
+        ...from.map((filter) =>
+          filter.value(filter.default, partialDuration, timingFunction)
         ),
       );
     }
@@ -102,7 +107,7 @@ export class FiltersSignalContext<TOwner> extends SignalContext<
     if (to.length > 0) {
       yield* all(
         ...to.map((filter, index) =>
-          filter.value(toValues[index]!, partialDuration, timingFunction),
+          filter.value(toValues[index]!, partialDuration, timingFunction)
         ),
       );
     }

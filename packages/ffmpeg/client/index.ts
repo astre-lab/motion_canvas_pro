@@ -1,6 +1,6 @@
-import type {ExporterClass} from '@motion-canvas/core';
-import {makePlugin} from '@motion-canvas/core';
-import {FFmpegExporterClient} from './FFmpegExporterClient';
+import type { ExporterClass } from '@motion-canvas/core';
+import { makePlugin } from '@motion-canvas/core';
+import { FFmpegExporterClient } from './FFmpegExporterClient';
 
 export default makePlugin({
   name: 'ffmpeg-plugin',

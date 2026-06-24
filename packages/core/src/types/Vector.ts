@@ -4,16 +4,16 @@ import {
   Vector2Signal,
   Vector2SignalContext,
 } from '../signals';
-import {arcLerp} from '../tweening';
+import { arcLerp } from '../tweening';
 import {
-  InterpolationFunction,
   clamp,
+  InterpolationFunction,
   map,
 } from '../tweening/interpolationFunctions';
-import {DEG2RAD, RAD2DEG} from '../utils';
-import {Matrix2D, PossibleMatrix2D} from './Matrix2D';
-import {Direction, Origin} from './Origin';
-import {EPSILON, Type, WebGLConvertible} from './Type';
+import { DEG2RAD, RAD2DEG } from '../utils';
+import { Matrix2D, PossibleMatrix2D } from './Matrix2D';
+import { Direction, Origin } from './Origin';
+import { EPSILON, Type, WebGLConvertible } from './Type';
 
 export type SerializedVector2<T = number> = {
   x: T;
@@ -22,7 +22,7 @@ export type SerializedVector2<T = number> = {
 
 export type PossibleVector2<T = number> =
   | SerializedVector2<T>
-  | {width: T; height: T}
+  | { width: T; height: T }
   | T
   | [T, T]
   | undefined;
@@ -515,7 +515,7 @@ export class Vector2 implements Type, WebGLConvertible {
   }
 
   public serialize(): SerializedVector2 {
-    return {x: this.x, y: this.y};
+    return { x: this.x, y: this.y };
   }
 
   /**

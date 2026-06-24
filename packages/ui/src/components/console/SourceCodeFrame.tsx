@@ -1,19 +1,19 @@
 import styles from './Console.module.scss';
 
-import {useMemo} from 'preact/hooks';
+import { useMemo } from 'preact/hooks';
 import {
   getSourceCodeFrame,
   openFileInEditor,
   StackTraceEntry,
 } from '../../utils';
 
-import {IconButton} from '../controls';
-import {OpenInNew} from '../icons';
+import { IconButton } from '../controls';
+import { OpenInNew } from '../icons';
 export interface SourceFrameProps {
   entry: StackTraceEntry;
 }
 
-export function SourceCodeFrame({entry}: SourceFrameProps) {
+export function SourceCodeFrame({ entry }: SourceFrameProps) {
   const frame = useMemo(
     () => (entry ? getSourceCodeFrame(entry) : null),
     [entry],
@@ -30,7 +30,7 @@ export function SourceCodeFrame({entry}: SourceFrameProps) {
         />
       </pre>
       <IconButton
-        title="Go to source"
+        title='Go to source'
         className={styles.viewSource}
         onClick={async () => {
           if (entry) {

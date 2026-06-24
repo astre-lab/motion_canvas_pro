@@ -1,11 +1,11 @@
-import {Vector2, clamp} from '@motion-canvas/core';
-import parse, {PathCommand} from 'parse-svg-path';
-import {ArcSegment} from './ArcSegment';
-import {CubicBezierSegment} from './CubicBezierSegment';
-import {CurveProfile} from './CurveProfile';
-import {LineSegment} from './LineSegment';
-import {QuadBezierSegment} from './QuadBezierSegment';
-import {Segment} from './Segment';
+import { clamp, Vector2 } from '@motion-canvas/core';
+import parse, { PathCommand } from 'parse-svg-path';
+import { ArcSegment } from './ArcSegment';
+import { CubicBezierSegment } from './CubicBezierSegment';
+import { CurveProfile } from './CurveProfile';
+import { LineSegment } from './LineSegment';
+import { QuadBezierSegment } from './QuadBezierSegment';
+import { Segment } from './Segment';
 
 function addSegmentToProfile(profile: CurveProfile, segment: Segment) {
   profile.segments.push(segment);
@@ -101,10 +101,9 @@ export function getPathProfile(data: string): CurveProfile {
       currentPoint = nextPoint;
     } else if (command === 't') {
       const lastSegment = profile.segments.at(-1);
-      const controlPoint =
-        lastSegment instanceof QuadBezierSegment
-          ? reflectControlPoint(lastSegment.p1, currentPoint)
-          : currentPoint;
+      const controlPoint = lastSegment instanceof QuadBezierSegment
+        ? reflectControlPoint(lastSegment.p1, currentPoint)
+        : currentPoint;
 
       const nextPoint = getPoint(segment, 0, isRelative, currentPoint);
       addSegmentToProfile(
@@ -128,10 +127,9 @@ export function getPathProfile(data: string): CurveProfile {
       currentPoint = nextPoint;
     } else if (command === 's') {
       const lastSegment = profile.segments.at(-1);
-      const startControlPoint =
-        lastSegment instanceof CubicBezierSegment
-          ? reflectControlPoint(lastSegment.p2, currentPoint)
-          : currentPoint;
+      const startControlPoint = lastSegment instanceof CubicBezierSegment
+        ? reflectControlPoint(lastSegment.p2, currentPoint)
+        : currentPoint;
 
       const endControlPoint = getPoint(segment, 0, isRelative, currentPoint);
       const nextPoint = getPoint(segment, 2, isRelative, currentPoint);

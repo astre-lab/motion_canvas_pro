@@ -36,7 +36,7 @@ export function parseFiddle(code: string): CodeSnippet[] {
     }
 
     if (snippet.lines.length > 0) {
-      snippet = {name: snippetName, lines: []};
+      snippet = { name: snippetName, lines: [] };
       snippets.push(snippet);
     } else {
       snippet.name = snippetName;

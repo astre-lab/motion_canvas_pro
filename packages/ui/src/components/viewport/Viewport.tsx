@@ -1,31 +1,29 @@
-import {RendererState} from '@motion-canvas/core';
+import { RendererState } from '@motion-canvas/core';
 import clsx from 'clsx';
-import {useEffect, useState} from 'preact/hooks';
-import {useApplication} from '../../contexts';
+import { useEffect, useState } from 'preact/hooks';
+import { useApplication } from '../../contexts';
 import {
-  VIEWPORT_SHORTCUTS,
   useSurfaceShortcuts,
+  VIEWPORT_SHORTCUTS,
 } from '../../contexts/shortcuts';
-import {useDuration, useRendererState} from '../../hooks';
-import {formatDuration} from '../../utils';
+import { useDuration, useRendererState } from '../../hooks';
+import { formatDuration } from '../../utils';
 import {
   PlaybackControls,
   PlaybackProgress,
   RenderingProgress,
 } from '../playback';
-import {CurrentTime} from '../playback/CurrentTime';
-import {EditorPreview} from './EditorPreview';
-import {StageView} from './StageView';
-import {Timestamp} from './Timestamp';
+import { CurrentTime } from '../playback/CurrentTime';
+import { EditorPreview } from './EditorPreview';
+import { StageView } from './StageView';
+import { Timestamp } from './Timestamp';
 import styles from './Viewport.module.scss';
 
 export function Viewport() {
   const state = useRendererState();
-  return state === RendererState.Working ? (
-    <RenderingViewport />
-  ) : (
-    <EditorViewport />
-  );
+  return state === RendererState.Working
+    ? <RenderingViewport />
+    : <EditorViewport />;
 }
 
 function EditorViewport() {
@@ -38,11 +36,11 @@ function EditorViewport() {
       <PlaybackProgress />
       <div className={styles.playback}>
         <CurrentTime
-          render={time => (
+          render={(time) => (
             <Timestamp
               className={styles.time}
-              title="Current time"
-              frameTitle="Current frame"
+              title='Current time'
+              frameTitle='Current frame'
               frame={time}
             />
           )}
@@ -51,8 +49,8 @@ function EditorViewport() {
         <Timestamp
           reverse
           className={styles.duration}
-          title="Duration"
-          frameTitle="Duration in frames"
+          title='Duration'
+          frameTitle='Duration in frames'
           frame={duration}
         />
       </div>
@@ -61,7 +59,7 @@ function EditorViewport() {
 }
 
 function RenderingViewport() {
-  const {renderer} = useApplication();
+  const { renderer } = useApplication();
   const [estimate, setEstimate] = useState(renderer.estimator.estimate());
 
   useEffect(() => {
@@ -81,7 +79,7 @@ function RenderingViewport() {
       <div className={styles.playback}>
         <code
           className={styles.time}
-          title="Time elapsed since the rendering started"
+          title='Time elapsed since the rendering started'
         >
           {formatDuration(estimate.elapsed / 1000)}
           <span className={styles.frames}>Elapsed</span>
@@ -89,7 +87,7 @@ function RenderingViewport() {
         <div />
         <code
           className={styles.duration}
-          title="Estimated time remaining until the rendering is complete"
+          title='Estimated time remaining until the rendering is complete'
         >
           <span className={styles.frames}>ETA:</span>
           {formatDuration(estimate.eta / 1000)}

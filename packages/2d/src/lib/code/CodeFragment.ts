@@ -1,4 +1,4 @@
-import {CodeMetrics, isCodeMetrics, measureString} from './CodeMetrics';
+import { CodeMetrics, isCodeMetrics, measureString } from './CodeMetrics';
 
 export interface CodeFragment {
   before: CodeMetrics;
@@ -34,14 +34,12 @@ export function parseCodeFragment(
     fragment = metricsToFragment(value);
   } else {
     fragment = {
-      before:
-        typeof value.before === 'string'
-          ? measureString(context, monoWidth, value.before)
-          : value.before,
-      after:
-        typeof value.after === 'string'
-          ? measureString(context, monoWidth, value.after)
-          : value.after,
+      before: typeof value.before === 'string'
+        ? measureString(context, monoWidth, value.before)
+        : value.before,
+      after: typeof value.after === 'string'
+        ? measureString(context, monoWidth, value.after)
+        : value.after,
     };
   }
 

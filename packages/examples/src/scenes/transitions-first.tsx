@@ -1,5 +1,5 @@
-import {Rect, Txt, makeScene2D} from '@motion-canvas/2d';
-import {waitFor} from '@motion-canvas/core';
+import { makeScene2D, Rect, Txt } from '@motion-canvas/2d';
+import { waitFor } from '@motion-canvas/core';
 
 export default makeScene2D(function* (view) {
   view.add(

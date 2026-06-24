@@ -1,5 +1,5 @@
-import {Circle, makeScene2D} from '@motion-canvas/2d';
-import {all, createRef} from '@motion-canvas/core';
+import { Circle, makeScene2D } from '@motion-canvas/2d';
+import { all, createRef } from '@motion-canvas/core';
 
 export default makeScene2D(function* (view) {
   const myCircle = createRef<Circle>();
@@ -11,7 +11,7 @@ export default makeScene2D(function* (view) {
       x={-300}
       width={140}
       height={140}
-      fill="#e13238"
+      fill='#e13238'
     />,
   );
 

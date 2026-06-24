@@ -1,5 +1,5 @@
-import {decorate, threadable} from '../decorators';
-import {ThreadGenerator, isThreadGenerator} from '../threading';
+import { decorate, threadable } from '../decorators';
+import { isThreadGenerator, ThreadGenerator } from '../threading';
 
 decorate(chain, threadable());
 /**

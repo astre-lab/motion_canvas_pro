@@ -1,35 +1,35 @@
 import {
-  BBox,
-  Matrix2D,
-  PossibleSpacing,
-  SerializedVector2,
-  SignalValue,
-  SimpleSignal,
-  ThreadGenerator,
-  TimingFunction,
-  Vector2,
   all,
+  BBox,
   clampRemap,
   delay,
   easeInOutSine,
   isReactive,
   lazy,
+  Matrix2D,
+  PossibleSpacing,
+  SerializedVector2,
+  SignalValue,
+  SimpleSignal,
   threadable,
+  ThreadGenerator,
+  TimingFunction,
   tween,
   useLogger,
+  Vector2,
 } from '@motion-canvas/core';
-import {computed, signal} from '../decorators';
-import {DesiredLength, PossibleCanvasStyle} from '../partials';
-import {applyTransformDiff, getTransformDiff} from '../utils/diff';
-import {Circle, CircleProps} from './Circle';
-import {Img, ImgProps} from './Img';
-import {Layout} from './Layout';
-import {Line, LineProps} from './Line';
-import {Node, NodeProps} from './Node';
-import {Path, PathProps} from './Path';
-import {Rect, RectProps} from './Rect';
-import {Shape, ShapeProps} from './Shape';
-import {View2D} from './View2D';
+import { computed, signal } from '../decorators';
+import { DesiredLength, PossibleCanvasStyle } from '../partials';
+import { applyTransformDiff, getTransformDiff } from '../utils/diff';
+import { Circle, CircleProps } from './Circle';
+import { Img, ImgProps } from './Img';
+import { Layout } from './Layout';
+import { Line, LineProps } from './Line';
+import { Node, NodeProps } from './Node';
+import { Path, PathProps } from './Path';
+import { Rect, RectProps } from './Rect';
+import { Shape, ShapeProps } from './Shape';
+import { View2D } from './View2D';
 
 /**
  * Represent SVG shape.
@@ -94,7 +94,7 @@ export class SVG extends Shape {
    * SVG string to be rendered
    */
   @signal()
-  public declare readonly svg: SimpleSignal<string, this>;
+  declare public readonly svg: SimpleSignal<string, this>;
 
   /**
    * Child to wrap all SVG node
@@ -118,8 +118,8 @@ export class SVG extends Shape {
    */
   public getChildrenById(id: string) {
     return this.document()
-      .nodes.filter(node => node.id === id)
-      .map(({shape}) => shape);
+      .nodes.filter((node) => node.id === id)
+      .map(({ shape }) => shape);
   }
 
   protected override desiredSize(): SerializedVector2<DesiredLength> {
@@ -163,7 +163,7 @@ export class SVG extends Shape {
   protected buildDocument(data: SVGDocumentData): SVGDocument {
     return {
       size: data.size,
-      nodes: data.nodes.map(ch => this.buildShape(ch)),
+      nodes: data.nodes.map((ch) => this.buildShape(ch)),
     };
   }
 
@@ -171,11 +171,11 @@ export class SVG extends Shape {
    * Convert `SVGShapeData` to `SVGShape`.
    * @param data - `SVGShapeData` to convert.
    */
-  protected buildShape({id, type, props, children}: SVGShapeData): SVGShape {
+  protected buildShape({ id, type, props, children }: SVGShapeData): SVGShape {
     return {
       id,
       shape: new type({
-        children: children?.map(ch => this.buildShape(ch).shape),
+        children: children?.map((ch) => this.buildShape(ch).shape),
         ...this.processElementStyle(props),
       }),
     };
@@ -247,11 +247,11 @@ export class SVG extends Shape {
     this.lastTweenTargetSrc = newValue;
     this.lastTweenTargetDocument = newSVG;
 
-    applyTransformDiff(currentSVG.nodes, diff, ({shape, ...rest}) => ({
+    applyTransformDiff(currentSVG.nodes, diff, ({ shape, ...rest }) => ({
       ...rest,
       shape: shape.clone(),
     }));
-    this.wrapper.children(currentSVG.nodes.map(shape => shape.shape));
+    this.wrapper.children(currentSVG.nodes.map((shape) => shape.shape));
     for (const item of currentSVG.nodes) {
       item.shape.parent(this.wrapper);
     }
@@ -283,7 +283,7 @@ export class SVG extends Shape {
 
     const baseTween = tween(
       time,
-      value => {
+      (value) => {
         const progress = timingFunction(value);
         const remapped = clampRemap(beginning, ending, 0, 1, progress);
 
@@ -307,12 +307,12 @@ export class SVG extends Shape {
           0,
           progress,
         );
-        for (const {current} of diff.deleted) {
+        for (const { current } of diff.deleted) {
           current.shape.opacity(deletedOpacity);
         }
 
         const insertedOpacity = clampRemap(ending - overlap, 1, 0, 1, progress);
-        for (const {current} of diff.inserted) {
+        for (const { current } of diff.inserted) {
           current.shape.opacity(insertedOpacity);
         }
       },
@@ -321,8 +321,8 @@ export class SVG extends Shape {
         if (autoWidth) this.width.reset();
         if (autoHeight) this.height.reset();
 
-        for (const {current} of diff.deleted) current.shape.dispose();
-        for (const {from} of diff.transformed) {
+        for (const { current } of diff.deleted) current.shape.dispose();
+        for (const { from } of diff.transformed) {
           from.current.shape.dispose();
         }
         this.wrapper.scale(this.wrapperScale);
@@ -369,7 +369,7 @@ export class SVG extends Shape {
    */
   @computed()
   private documentNodes() {
-    return this.document().nodes.map(node => node.shape);
+    return this.document().nodes.map((node) => node.shape);
   }
 
   /**
@@ -377,11 +377,14 @@ export class SVG extends Shape {
    * @param param - Shape properties.
    * @returns Converted Shape properties.
    */
-  private processElementStyle({fill, stroke, ...rest}: ShapeProps): ShapeProps {
+  private processElementStyle(
+    { fill, stroke, ...rest }: ShapeProps,
+  ): ShapeProps {
     return {
       fill: fill === 'currentColor' ? this.fill : SVG.processSVGColor(fill),
-      stroke:
-        stroke === 'currentColor' ? this.stroke : SVG.processSVGColor(stroke),
+      stroke: stroke === 'currentColor'
+        ? this.stroke
+        : SVG.processSVGColor(stroke),
       ...rest,
     };
   }
@@ -414,11 +417,11 @@ export class SVG extends Shape {
     let size = new Vector2();
 
     const hasViewBox = svgRoot.hasAttribute('viewBox');
-    const hasSize =
-      svgRoot.hasAttribute('width') || svgRoot.hasAttribute('height');
+    const hasSize = svgRoot.hasAttribute('width') ||
+      svgRoot.hasAttribute('height');
 
     if (hasViewBox) {
-      const {x, y, width, height} = svgRoot.viewBox.baseVal;
+      const { x, y, width, height } = svgRoot.viewBox.baseVal;
       viewBox = new BBox(x, y, width, height);
 
       if (!hasSize) size = viewBox.size;
@@ -540,11 +543,11 @@ export class SVG extends Shape {
     if (!value) return null;
 
     const list = value.split(/,|\s+/);
-    if (list.findIndex(str => str.endsWith('%')) > 0) {
+    if (list.findIndex((str) => str.endsWith('%')) > 0) {
       useLogger().warn(`SVG: percentage line dash are ignored`);
       return null;
     }
-    return list.map(str => parseFloat(str));
+    return list.map((str) => parseFloat(str));
   }
 
   private static parseDashOffset(value: string | null): number | null {
@@ -577,20 +580,16 @@ export class SVG extends Shape {
       lineWidth: element.hasAttribute('stroke-width')
         ? parseFloat(element.getAttribute('stroke-width')!)
         : inheritedStyle.lineWidth,
-      lineCap:
-        this.parseLineCap(element.getAttribute('stroke-linecap')) ??
+      lineCap: this.parseLineCap(element.getAttribute('stroke-linecap')) ??
         inheritedStyle.lineCap,
-      lineJoin:
-        this.parseLineJoin(element.getAttribute('stroke-linejoin')) ??
+      lineJoin: this.parseLineJoin(element.getAttribute('stroke-linejoin')) ??
         inheritedStyle.lineJoin,
-      lineDash:
-        this.parseLineDash(element.getAttribute('stroke-dasharray')) ??
+      lineDash: this.parseLineDash(element.getAttribute('stroke-dasharray')) ??
         inheritedStyle.lineDash,
       lineDashOffset:
         this.parseDashOffset(element.getAttribute('stroke-dashoffset')) ??
-        inheritedStyle.lineDashOffset,
-      opacity:
-        this.parseOpacity(element.getAttribute('opacity')) ??
+          inheritedStyle.lineDashOffset,
+      opacity: this.parseOpacity(element.getAttribute('opacity')) ??
         inheritedStyle.opacity,
       layout: false,
     };
@@ -713,13 +712,12 @@ export class SVG extends Shape {
     } else if (['circle', 'ellipse'].includes(child.tagName)) {
       const cx = SVG.parseNumberAttribute(child, 'cx');
       const cy = SVG.parseNumberAttribute(child, 'cy');
-      const size: PossibleSpacing =
-        child.tagName === 'circle'
-          ? SVG.parseNumberAttribute(child, 'r') * 2
-          : [
-              SVG.parseNumberAttribute(child, 'rx') * 2,
-              SVG.parseNumberAttribute(child, 'ry') * 2,
-            ];
+      const size: PossibleSpacing = child.tagName === 'circle'
+        ? SVG.parseNumberAttribute(child, 'r') * 2
+        : [
+          SVG.parseNumberAttribute(child, 'rx') * 2,
+          SVG.parseNumberAttribute(child, 'ry') * 2,
+        ];
 
       const transformation = transformMatrix.translate(cx, cy);
 
@@ -733,15 +731,14 @@ export class SVG extends Shape {
         } as CircleProps,
       };
     } else if (['line', 'polyline', 'polygon'].includes(child.tagName)) {
-      const numbers =
-        child.tagName === 'line'
-          ? ['x1', 'y1', 'x2', 'y2'].map(attr =>
-              SVG.parseNumberAttribute(child, attr),
-            )
-          : child
-              .getAttribute('points')!
-              .match(/-?[\d.e+-]+/g)!
-              .map(value => parseFloat(value));
+      const numbers = child.tagName === 'line'
+        ? ['x1', 'y1', 'x2', 'y2'].map((attr) =>
+          SVG.parseNumberAttribute(child, attr)
+        )
+        : child
+          .getAttribute('points')!
+          .match(/-?[\d.e+-]+/g)!
+          .map((value) => parseFloat(value));
       const points = numbers.reduce<number[][]>((accum, current) => {
         let last = accum.at(-1);
         if (!last || last.length === 2) {

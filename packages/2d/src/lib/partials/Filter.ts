@@ -118,7 +118,7 @@ export class Filter {
  * @param value - The value of the filter.
  */
 export function invert(value?: SignalValue<number>) {
-  return new Filter({...FILTERS.invert, value});
+  return new Filter({ ...FILTERS.invert, value });
 }
 
 /**
@@ -127,7 +127,7 @@ export function invert(value?: SignalValue<number>) {
  * @param value - The value of the filter.
  */
 export function sepia(value?: SignalValue<number>) {
-  return new Filter({...FILTERS.sepia, value});
+  return new Filter({ ...FILTERS.sepia, value });
 }
 
 /**
@@ -136,7 +136,7 @@ export function sepia(value?: SignalValue<number>) {
  * @param value - The value of the filter.
  */
 export function grayscale(value?: SignalValue<number>) {
-  return new Filter({...FILTERS.grayscale, value});
+  return new Filter({ ...FILTERS.grayscale, value });
 }
 
 /**
@@ -145,7 +145,7 @@ export function grayscale(value?: SignalValue<number>) {
  * @param value - The value of the filter.
  */
 export function brightness(value?: SignalValue<number>) {
-  return new Filter({...FILTERS.brightness, value});
+  return new Filter({ ...FILTERS.brightness, value });
 }
 
 /**
@@ -154,7 +154,7 @@ export function brightness(value?: SignalValue<number>) {
  * @param value - The value of the filter.
  */
 export function contrast(value?: SignalValue<number>) {
-  return new Filter({...FILTERS.contrast, value});
+  return new Filter({ ...FILTERS.contrast, value });
 }
 
 /**
@@ -163,7 +163,7 @@ export function contrast(value?: SignalValue<number>) {
  * @param value - The value of the filter.
  */
 export function saturate(value?: SignalValue<number>) {
-  return new Filter({...FILTERS.saturate, value});
+  return new Filter({ ...FILTERS.saturate, value });
 }
 
 /**
@@ -172,7 +172,7 @@ export function saturate(value?: SignalValue<number>) {
  * @param value - The value of the filter in degrees.
  */
 export function hue(value?: SignalValue<number>) {
-  return new Filter({...FILTERS.hue, value});
+  return new Filter({ ...FILTERS.hue, value });
 }
 
 /**
@@ -181,5 +181,5 @@ export function hue(value?: SignalValue<number>) {
  * @param value - The value of the filter in pixels.
  */
 export function blur(value?: SignalValue<number>) {
-  return new Filter({...FILTERS.blur, value});
+  return new Filter({ ...FILTERS.blur, value });
 }

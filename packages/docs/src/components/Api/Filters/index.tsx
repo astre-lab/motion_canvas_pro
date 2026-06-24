@@ -1,6 +1,6 @@
-import {ReflectionKind} from '@site/src/components/Api/ReflectionKind';
+import { ReflectionKind } from '@site/src/components/Api/ReflectionKind';
 import clsx from 'clsx';
-import React, {ReactNode} from 'react';
+import React, { ReactNode } from 'react';
 import Controls from './Controls';
 import styles from './index.module.css';
 
@@ -17,7 +17,7 @@ export default function Filters({
         <div className={clsx('col', styles.filters)}>
           <Controls />
         </div>
-        <div className="col">{children}</div>
+        <div className='col'>{children}</div>
       </div>
     );
   }

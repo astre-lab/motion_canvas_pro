@@ -1,4 +1,4 @@
-import {syntaxTree} from '@codemirror/language';
+import { syntaxTree } from '@codemirror/language';
 import {
   EditorState,
   RangeSet,
@@ -10,8 +10,8 @@ import {
   Decoration,
   DecorationSet,
   EditorView,
-  Tooltip,
   hoverTooltip,
+  Tooltip,
 } from '@codemirror/view';
 
 const ClearErrors = StateEffect.define();
@@ -20,14 +20,14 @@ const AddError = StateEffect.define<{
   to: number;
   tooltip: string;
 }>({
-  map: ({from, to, tooltip}, change) => ({
+  map: ({ from, to, tooltip }, change) => ({
     from: change.mapPos(from),
     to: change.mapPos(to),
     tooltip,
   }),
 });
 
-const UnderlineMark = Decoration.mark({class: 'cm-underline'});
+const UnderlineMark = Decoration.mark({ class: 'cm-underline' });
 const UnderlineTheme = EditorView.baseTheme({
   // eslint-disable-next-line @typescript-eslint/naming-convention
   '.cm-underline': {
@@ -54,7 +54,7 @@ const UnderlineField = StateField.define<DecorationSet>({
     }
     return underlines;
   },
-  provide: field => EditorView.decorations.from(field),
+  provide: (field) => EditorView.decorations.from(field),
 });
 
 class TooltipRange extends RangeValue {
@@ -87,7 +87,7 @@ const TooltipField = StateField.define<RangeSet<TooltipRange>>({
     }
     return tooltips;
   },
-  provide: field =>
+  provide: (field) =>
     hoverTooltip((view, pos) => {
       let tooltip: Tooltip;
       view.state.field(field, false).between(pos, pos, (from, to, value) => {
@@ -97,7 +97,7 @@ const TooltipField = StateField.define<RangeSet<TooltipRange>>({
           create: () => {
             const dom = document.createElement('div');
             dom.textContent = value.tooltip;
-            return {dom};
+            return { dom };
           },
         };
         return false;
@@ -109,7 +109,7 @@ const TooltipField = StateField.define<RangeSet<TooltipRange>>({
 function getRange(state: EditorState, position: number) {
   const tree = syntaxTree(state);
   const node = tree.resolveInner(position, 1);
-  return {from: node.from, to: node.to};
+  return { from: node.from, to: node.to };
 }
 
 export function errorExtension() {
@@ -118,21 +118,21 @@ export function errorExtension() {
 
 export function underlineErrors(
   view: EditorView,
-  ranges: {from: number; to: number}[],
+  ranges: { from: number; to: number }[],
   error: string,
 ) {
-  const effects: StateEffect<unknown>[] = ranges.map(range => {
+  const effects: StateEffect<unknown>[] = ranges.map((range) => {
     if (range.from === range.to) {
       range = getRange(view.state, range.from);
     }
 
-    return AddError.of({tooltip: error, ...range});
+    return AddError.of({ tooltip: error, ...range });
   });
 
-  view.dispatch({effects});
+  view.dispatch({ effects });
   return true;
 }
 
 export function clearErrors(view: EditorView) {
-  view.dispatch({effects: [ClearErrors.of(null)]});
+  view.dispatch({ effects: [ClearErrors.of(null)] });
 }

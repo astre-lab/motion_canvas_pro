@@ -1,6 +1,6 @@
 import followRedirects from 'follow-redirects';
-import {IncomingMessage, ServerResponse} from 'http';
-import {Connect, Plugin} from 'vite';
+import { IncomingMessage, ServerResponse } from 'http';
+import { Connect, Plugin } from 'vite';
 
 /**
  * Configuration used by the Proxy plugin
@@ -94,7 +94,7 @@ function motionCanvasCorsProxy(
   // Check the Mime Types to have a correct structure (left/right)
   // not having them in the correct format would crash the Middleware
   // further down below
-  if ((config.allowedMimeTypes ?? []).some(e => e.split('/').length !== 2)) {
+  if ((config.allowedMimeTypes ?? []).some((e) => e.split('/').length !== 2)) {
     throw new Error(
       "Invalid config for Proxy:\nAll Entries must have the following format:\n 'left/right' where left may be '*'",
     );
@@ -130,7 +130,7 @@ function motionCanvasCorsProxy(
 
     // Get the resource, do some checks. Throws an Error
     // if the checks fail. The catch then writes an Error
-    return tryGetResource(res, sourceUrl, config).catch(error => {
+    return tryGetResource(res, sourceUrl, config).catch((error) => {
       writeError(error, res);
     });
   });
@@ -183,7 +183,7 @@ function isReceivedUrlInAllowedHosts(
   }
   // Check if the hostname is any of the values set in allowListHosts
   return allowListHosts.some(
-    e => e.toLowerCase().trim() === hostname.toLowerCase().trim(),
+    (e) => e.toLowerCase().trim() === hostname.toLowerCase().trim(),
   );
 }
 
@@ -208,12 +208,12 @@ function isResultOfAllowedResourceType(
 
   const [leftSegment, rightSegment] = foundMimeType
     .split('/')
-    .map(e => e.trim().toLowerCase());
+    .map((e) => e.trim().toLowerCase());
 
   // Get all Segments where the left Part is identical between foundMimeType and
   // allowedMimeType.
   const leftSegmentMatches = allowedMimeTypes.filter(
-    e => e.trim().toLowerCase().split('/')[0] === leftSegment,
+    (e) => e.trim().toLowerCase().split('/')[0] === leftSegment,
   );
   if (leftSegmentMatches.length === 0) {
     // No matches at all, not even catchall - resource is rejected.
@@ -223,13 +223,13 @@ function isResultOfAllowedResourceType(
   // This just gets the right part of the MIME Types from the
   // configured allowList, e.g. "image/png" -> png
   const rightSegmentOfLeftSegmentMatches = leftSegmentMatches.map(
-    e => e.split('/')[1],
+    (e) => e.split('/')[1],
   );
 
   // if an exact match or a catchall is found, the resource is allowed to be
   // proxied.
   return rightSegmentOfLeftSegmentMatches.some(
-    e => e === '*' || e === rightSegment,
+    (e) => e === '*' || e === rightSegment,
   );
 }
 
@@ -250,14 +250,14 @@ async function tryGetResource(
         sourceUrl.protocol.startsWith('https')
           ? followRedirects.https
           : followRedirects.http
-      ).get(sourceUrl, data => {
+      ).get(sourceUrl, (data) => {
         res(data);
       });
       request.on('error', (err: any) => {
         if (err.code && err.code === 'ENOTFOUND') {
           // This is a bit hacky, but this basically returns as a
           // 404 instead of crashing the Node Server with ENOTFOUND
-          res({statusCode: 404} as any);
+          res({ statusCode: 404 } as any);
         } else {
           rej(err);
         }

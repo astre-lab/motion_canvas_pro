@@ -1,6 +1,6 @@
-import {SignalValue, unwrap} from '@motion-canvas/core';
-import {PossibleCodeFragment} from './CodeFragment';
-import {isCodeMetrics} from './CodeMetrics';
+import { SignalValue, unwrap } from '@motion-canvas/core';
+import { PossibleCodeFragment } from './CodeFragment';
+import { isCodeMetrics } from './CodeMetrics';
 
 export interface CodeScope {
   progress: SignalValue<number>;
@@ -94,7 +94,7 @@ export function resolveCodeTag(
         ? fragment.after
         : fragment.after.content
       : typeof fragment.before === 'string'
-        ? fragment.before
-        : fragment.before.content;
+      ? fragment.before
+      : fragment.before.content;
   }
 }

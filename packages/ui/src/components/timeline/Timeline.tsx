@@ -1,8 +1,8 @@
 import styles from './Timeline.module.scss';
 
-import {useSignal, useSignalEffect} from '@preact/signals';
+import { useSignal, useSignalEffect } from '@preact/signals';
 import clsx from 'clsx';
-import {useLayoutEffect, useMemo, useRef} from 'preact/hooks';
+import { useLayoutEffect, useMemo, useRef } from 'preact/hooks';
 import {
   TIMELINE_SHORTCUTS,
   TimelineContextProvider,
@@ -21,15 +21,15 @@ import {
   useStateChange,
   useStorage,
 } from '../../hooks';
-import {labelClipDraggingLeftSignal} from '../../signals';
-import {MouseButton, MouseMask, clamp} from '../../utils';
-import {borderHighlight} from '../animations';
-import {AudioTrack} from './AudioTrack';
-import {LabelTrack} from './LabelTrack';
-import {Playhead} from './Playhead';
-import {RangeSelector} from './RangeSelector';
-import {SceneTrack} from './SceneTrack';
-import {Timestamps} from './Timestamps';
+import { labelClipDraggingLeftSignal } from '../../signals';
+import { clamp, MouseButton, MouseMask } from '../../utils';
+import { borderHighlight } from '../animations';
+import { AudioTrack } from './AudioTrack';
+import { LabelTrack } from './LabelTrack';
+import { Playhead } from './Playhead';
+import { RangeSelector } from './RangeSelector';
+import { SceneTrack } from './SceneTrack';
+import { Timestamps } from './Timestamps';
 
 const ZOOM_SPEED = 0.1;
 const ZOOM_MIN = 0.5;
@@ -39,13 +39,13 @@ const MAX_FRAME_SIZE = 128;
 
 export function Timeline() {
   const shortcutRef = useSurfaceShortcuts<HTMLDivElement>(TIMELINE_SHORTCUTS);
-  const {player, meta} = useApplication();
-  const {range} = useSharedSettings();
+  const { player, meta } = useApplication();
+  const { range } = useSharedSettings();
   const containerRef = useRef<HTMLDivElement>();
   const playheadRef = useRef<HTMLDivElement>();
   const rangeRef = useRef<HTMLDivElement>();
   const duration = useDuration();
-  const {fps} = usePreviewSettings();
+  const { fps } = usePreviewSettings();
   const rect = useSize(containerRef);
   const [offset, setOffset] = useStorage('timeline-offset', 0);
   const [scale, setScale] = useStorage('timeline-scale', 1);
@@ -54,7 +54,7 @@ export function Timeline() {
   const warnedAboutRange = useRef(false);
   const isReady = duration > 0;
 
-  const {durationTime} = usePlayerTime();
+  const { durationTime } = usePlayerTime();
 
   useLayoutEffect(() => {
     containerRef.current.scrollLeft = offset;
@@ -99,17 +99,15 @@ export function Timeline() {
       Math.floor(VIRTUAL_SCROLL_SPACING * density),
     );
     const relativeOffset = offset - sizes.paddingLeft;
-    const firstVisibleFrame =
-      Math.floor(
-        conversion.pixelsToFrames(relativeOffset) / virtualScrollDensity,
-      ) * virtualScrollDensity;
+    const firstVisibleFrame = Math.floor(
+      conversion.pixelsToFrames(relativeOffset) / virtualScrollDensity,
+    ) * virtualScrollDensity;
     const firstVisibleTime = player.status.framesToSeconds(firstVisibleFrame);
-    const lastVisibleFrame =
-      Math.ceil(
-        conversion.pixelsToFrames(
-          relativeOffset + sizes.viewLength + TIMESTAMP_SPACING,
-        ) / virtualScrollDensity,
-      ) * virtualScrollDensity;
+    const lastVisibleFrame = Math.ceil(
+      conversion.pixelsToFrames(
+        relativeOffset + sizes.viewLength + TIMESTAMP_SPACING,
+      ) / virtualScrollDensity,
+    ) * virtualScrollDensity;
     const lastVisibleTime = player.status.framesToSeconds(lastVisibleFrame);
     const startPosition = sizes.paddingLeft + rect.x - offset;
 
@@ -211,10 +209,9 @@ export function Timeline() {
         <div
           className={styles.timelineWrapper}
           ref={containerRef}
-          onScroll={event =>
-            setOffset((event.target as HTMLElement).scrollLeft)
-          }
-          onWheel={event => {
+          onScroll={(event) =>
+            setOffset((event.target as HTMLElement).scrollLeft)}
+          onWheel={(event) => {
             const isVertical = Math.abs(event.deltaX) > Math.abs(event.deltaY);
             if (event.shiftKey || isVertical) return;
             event.preventDefault();
@@ -253,7 +250,7 @@ export function Timeline() {
               event.x - rect.x + newOffset
             }px`;
           }}
-          onPointerDown={event => {
+          onPointerDown={(event) => {
             if (event.button === MouseButton.Left) {
               event.preventDefault();
               event.currentTarget.setPointerCapture(event.pointerId);
@@ -265,7 +262,7 @@ export function Timeline() {
               containerRef.current.style.cursor = 'grabbing';
             }
           }}
-          onPointerMove={event => {
+          onPointerMove={(event) => {
             if (event.currentTarget.hasPointerCapture(event.pointerId)) {
               if (event.buttons & MouseMask.Primary) {
                 scrub(event.x);
@@ -282,7 +279,7 @@ export function Timeline() {
               playheadRef.current.style.left = `${event.x - rect.x + offset}px`;
             }
           }}
-          onPointerUp={event => {
+          onPointerUp={(event) => {
             if (labelClipDraggingLeftSignal.value === null) {
               playheadRef.current.style.left = `${event.x - rect.x + offset}px`;
             }
@@ -300,7 +297,7 @@ export function Timeline() {
         >
           <div
             className={styles.timeline}
-            style={{width: `${sizes.fullLength}px`}}
+            style={{ width: `${sizes.fullLength}px` }}
           >
             <div
               className={styles.timelineContent}

@@ -3,9 +3,9 @@ const path = require('path');
 const fs = require('fs');
 const marked = require('../common/marked');
 
-const transformerProgram = program => context => sourceFile => {
+const transformerProgram = (program) => (context) => (sourceFile) => {
   const sourceMap = new Map();
-  const visitor = node => {
+  const visitor = (node) => {
     if (
       (node.kind === ts.SyntaxKind.NoSubstitutionTemplateLiteral ||
         ts.isStringLiteral(node)) &&

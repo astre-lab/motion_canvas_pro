@@ -1,6 +1,6 @@
-import {useMemo} from 'preact/hooks';
-import {useViewportContext} from '../contexts';
-import {useSharedSettings} from './useSettings';
+import { useMemo } from 'preact/hooks';
+import { useViewportContext } from '../contexts';
+import { useSharedSettings } from './useSettings';
 
 /**
  * Get a matrix that transforms the overlay canvas space to the scene space.
@@ -15,7 +15,7 @@ import {useSharedSettings} from './useSettings';
  * they should be in the scene.
  */
 export function useViewportMatrix() {
-  const {size} = useSharedSettings();
+  const { size } = useSharedSettings();
   const state = useViewportContext();
 
   return useMemo(() => {

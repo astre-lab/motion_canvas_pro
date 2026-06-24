@@ -1,6 +1,6 @@
-import {useCallback, useMemo} from 'preact/hooks';
-import {useViewportContext} from '../../contexts';
-import {makeEditorPlugin} from '../makeEditorPlugin';
+import { useCallback, useMemo } from 'preact/hooks';
+import { useViewportContext } from '../../contexts';
+import { makeEditorPlugin } from '../makeEditorPlugin';
 
 const GRID_SIZE = 40;
 
@@ -12,10 +12,10 @@ export default makeEditorPlugin({
 
       const path = useMemo(() => {
         const path = new Path2D();
-        const width =
-          Math.ceil(state.rect.width / 2 / GRID_SIZE + 2) * GRID_SIZE;
-        const height =
-          Math.ceil(state.rect.height / 2 / GRID_SIZE + 2) * GRID_SIZE;
+        const width = Math.ceil(state.rect.width / 2 / GRID_SIZE + 2) *
+          GRID_SIZE;
+        const height = Math.ceil(state.rect.height / 2 / GRID_SIZE + 2) *
+          GRID_SIZE;
 
         for (let i = -width; i < width; i += GRID_SIZE) {
           path.moveTo(i, -height);

@@ -1,7 +1,7 @@
-import {ValueDispatcher} from '../../events';
-import type {Scene} from '../Scene';
-import type {TimeEvent} from './TimeEvent';
-import type {TimeEvents} from './TimeEvents';
+import { ValueDispatcher } from '../../events';
+import type { Scene } from '../Scene';
+import type { TimeEvent } from './TimeEvent';
+import type { TimeEvents } from './TimeEvents';
 
 /**
  * Manages time events during rendering and presentation.
@@ -26,7 +26,7 @@ export class ReadOnlyTimeEvents implements TimeEvents {
     if (duration === undefined) {
       const event = this.scene.meta.timeEvents
         .get()
-        .find(event => event.name === name);
+        .find((event) => event.name === name);
       duration = event ? event.targetTime - initialTime : 0;
       this.lookup.set(name, duration);
     }

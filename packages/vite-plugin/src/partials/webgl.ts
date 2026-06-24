@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
-import {SourceNode} from 'source-map';
-import {normalizePath, Plugin, ResolvedConfig} from 'vite';
+import { SourceNode } from 'source-map';
+import { normalizePath, Plugin, ResolvedConfig } from 'vite';
 
 declare module 'source-map' {
   interface SourceNode {
@@ -31,7 +31,7 @@ export function webglPlugin(): Plugin {
       }
 
       const [base, query] = id.split('?');
-      const {dir} = path.posix.parse(base);
+      const { dir } = path.posix.parse(base);
       const params = new URLSearchParams(query);
       if (params.has('raw')) {
         return;
@@ -41,7 +41,7 @@ export function webglPlugin(): Plugin {
         rootDir: dir,
         fileStack: [],
         includeMap: new Map(),
-        watchFile: file => this.addWatchFile(file),
+        watchFile: (file) => this.addWatchFile(file),
         resolve: async (source, importer) => {
           const resolved = await this.resolve(source, importer);
           return resolved?.id;

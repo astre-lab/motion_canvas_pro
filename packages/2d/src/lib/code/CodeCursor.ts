@@ -6,13 +6,13 @@ import {
   unwrap,
   Vector2,
 } from '@motion-canvas/core';
-import {Code} from '../components';
-import {CodeFragment, parseCodeFragment} from './CodeFragment';
-import {CodeHighlighter} from './CodeHighlighter';
-import {CodeMetrics} from './CodeMetrics';
-import {CodePoint, CodeRange} from './CodeRange';
-import {CodeScope, isCodeScope} from './CodeScope';
-import {isPointInCodeSelection} from './CodeSelection';
+import { Code } from '../components';
+import { CodeFragment, parseCodeFragment } from './CodeFragment';
+import { CodeHighlighter } from './CodeHighlighter';
+import { CodeMetrics } from './CodeMetrics';
+import { CodePoint, CodeRange } from './CodeRange';
+import { CodeScope, isCodeScope } from './CodeScope';
+import { isPointInCodeSelection } from './CodeSelection';
 
 export interface CodeFragmentDrawingInfo {
   text: string;
@@ -41,7 +41,7 @@ export class CodeCursor {
   private maxWidth = 0;
   private lineHeight = 0;
   private fallbackFill = new Color('white');
-  private caches: {before: unknown; after: unknown} | null = null;
+  private caches: { before: unknown; after: unknown } | null = null;
   private highlighter: CodeHighlighter | null = null;
   private selection: CodeRange[] = [];
   private selectionProgress: number | null = null;
@@ -60,8 +60,8 @@ export class CodeCursor {
   public setupMeasure(context: CanvasRenderingContext2D) {
     const metrics = context.measureText('X');
     this.monoWidth = metrics.width;
-    this.fontHeight =
-      metrics.fontBoundingBoxDescent + metrics.fontBoundingBoxAscent;
+    this.fontHeight = metrics.fontBoundingBoxDescent +
+      metrics.fontBoundingBoxAscent;
     this.verticalOffset = metrics.fontBoundingBoxAscent;
     this.context = context;
     this.lineHeight = parseFloat(this.node.styles.lineHeight);
@@ -77,8 +77,9 @@ export class CodeCursor {
   public setupDraw(context: CanvasRenderingContext2D) {
     this.setupMeasure(context);
     const fill = this.node.fill();
-    this.fallbackFill =
-      fill instanceof Color ? (fill as Color) : new Color('white');
+    this.fallbackFill = fill instanceof Color
+      ? (fill as Color)
+      : new Color('white');
     this.caches = this.node.highlighterCache();
     this.highlighter = this.node.highlighter();
     this.selection = this.node.selection();
@@ -195,8 +196,9 @@ export class CodeCursor {
         const mirrored = Math.abs(progress - 0.5) * 2;
         alpha = clampRemap(1, 1 - timingOffset, 1, 0, mirrored);
 
-        const isBigger =
-          fragment.after.newRows > fragment.before.newRows ? 1 : -1;
+        const isBigger = fragment.after.newRows > fragment.before.newRows
+          ? 1
+          : -1;
         const isBefore = progress < 0.5 ? 1 : -1;
         const scale = isBigger * isBefore * 4;
         offsetY = map(
@@ -238,8 +240,9 @@ export class CodeCursor {
       const afterEnd = this.calculateWidth(fragment.after);
       this.cursor.x = map(beforeEnd, afterEnd, progress);
 
-      this.tweenCursor.y +=
-        progress > 0.5 ? fragment.after.newRows : fragment.before.newRows;
+      this.tweenCursor.y += progress > 0.5
+        ? fragment.after.newRows
+        : fragment.before.newRows;
       this.tweenCursor.x = progress > 0.5 ? afterEnd : beforeEnd;
     }
   }
@@ -266,7 +269,7 @@ export class CodeCursor {
     for (let i = 0; i < code.content.length; i++) {
       let color = this.fallbackFill.serialize();
       let char = code.content.charAt(i);
-      const selection: {before: number | null; after: number | null} = {
+      const selection: { before: number | null; after: number | null } = {
         before: null,
         after: null,
       };
@@ -281,11 +284,9 @@ export class CodeCursor {
         continue;
       }
 
-      const beforeHighlight =
-        this.caches &&
+      const beforeHighlight = this.caches &&
         this.highlighter?.highlight(this.beforeIndex + i, this.caches.before);
-      const afterHighlight =
-        this.caches &&
+      const afterHighlight = this.caches &&
         this.highlighter?.highlight(this.afterIndex + i, this.caches.after);
 
       const highlight = progress < 0.5 ? beforeHighlight : afterHighlight;
@@ -419,7 +420,7 @@ export class CodeCursor {
   }
 
   private processSelection(
-    selection: {before: number | null; after: number | null},
+    selection: { before: number | null; after: number | null },
     skipAhead: number,
     hasOffset: boolean,
     stringLength: number,

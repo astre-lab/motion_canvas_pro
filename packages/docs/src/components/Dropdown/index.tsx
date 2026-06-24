@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import React, {useEffect, useRef, useState} from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 export interface DropdownProps {
   options: {
@@ -49,31 +49,31 @@ export default function Dropdown({
     >
       <a
         ref={linkRef}
-        className="navbar__link"
-        href="#"
-        onClick={event => {
+        className='navbar__link'
+        href='#'
+        onClick={(event) => {
           event.preventDefault();
           setOpen(!open);
         }}
       >
-        {options.find(option => option.value === value)?.name ?? value}
+        {options.find((option) => option.value === value)?.name ?? value}
       </a>
-      <ul className="dropdown__menu">
+      <ul className='dropdown__menu'>
         {options.map((option, index) => (
           <li key={option.value}>
             <a
-              href="#"
+              href='#'
               className={clsx(
                 'dropdown__link',
                 value === option.value && 'dropdown__link--active',
               )}
-              onClick={event => {
+              onClick={(event) => {
                 event.preventDefault();
                 onChange(option.value);
                 setOpen(false);
                 linkRef.current.focus();
               }}
-              onKeyDown={event => {
+              onKeyDown={(event) => {
                 if (
                   index === options.length - 1 &&
                   event.key === 'Tab' &&

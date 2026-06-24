@@ -1,6 +1,6 @@
-import {ThreadGeneratorFactory, threads} from '@motion-canvas/core';
-import {useScene2D} from '../../scenes';
-import {View2D} from '../View2D';
+import { ThreadGeneratorFactory, threads } from '@motion-canvas/core';
+import { useScene2D } from '../../scenes';
+import { View2D } from '../View2D';
 
 /**
  * Turn a generator factory into a test function.

@@ -3,7 +3,7 @@ export function shake(distancePixels = 2) {
     '--timing-ease-in-out',
   );
   return [
-    {translate: '0px'},
+    { translate: '0px' },
     {
       translate: `-${distancePixels}px`,
       easing,
@@ -20,6 +20,6 @@ export function shake(distancePixels = 2) {
       translate: `${distancePixels}px`,
       easing,
     },
-    {translate: '0px'},
+    { translate: '0px' },
   ];
 }

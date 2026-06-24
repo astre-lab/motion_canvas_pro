@@ -1,9 +1,9 @@
 import path from 'path';
-import type {Plugin} from 'vite';
+import type { Plugin } from 'vite';
 import {
-  CorsProxyPluginConfig,
   assetsPlugin,
   corsProxyPlugin,
+  CorsProxyPluginConfig,
   editorPlugin,
   exporterPlugin,
   metaPlugin,
@@ -12,8 +12,13 @@ import {
   settingsPlugin,
   webglPlugin,
 } from './partials';
-import {PLUGIN_OPTIONS, PluginConfig, PluginOptions, isPlugin} from './plugins';
-import {getProjects} from './utils';
+import {
+  isPlugin,
+  PLUGIN_OPTIONS,
+  PluginConfig,
+  PluginOptions,
+} from './plugins';
+import { getProjects } from './utils';
 
 export interface MotionCanvasPluginConfig {
   /**
@@ -86,7 +91,7 @@ export interface MotionCanvasPluginConfig {
    * Note that the proxy is disabled by default.
    * You can either pass `true` and a config object
    * to enable it.
-   **/
+   */
   proxy?: boolean | CorsProxyPluginConfig;
 
   /**
@@ -116,13 +121,13 @@ export default ({
         plugins.push(
           ...resolvedConfig.plugins
             .filter(isPlugin)
-            .map(plugin => plugin[PLUGIN_OPTIONS]),
+            .map((plugin) => plugin[PLUGIN_OPTIONS]),
         );
 
         for (const plugin of plugins) {
           const newConfig = await plugin.config?.(config);
           if (newConfig) {
-            config = {...config, ...newConfig};
+            config = { ...config, ...newConfig };
           }
         }
       },
@@ -130,10 +135,10 @@ export default ({
     metaPlugin(),
     settingsPlugin(),
     scenesPlugin(),
-    exporterPlugin({outputPath: config.output}),
-    editorPlugin({editor, projects: config.projects}),
-    projectsPlugin({projects: config.projects, plugins, buildForEditor}),
-    assetsPlugin({bufferedAssets}),
+    exporterPlugin({ outputPath: config.output }),
+    editorPlugin({ editor, projects: config.projects }),
+    projectsPlugin({ projects: config.projects, plugins, buildForEditor }),
+    assetsPlugin({ bufferedAssets }),
     webglPlugin(),
     corsProxyPlugin(proxy),
   ];

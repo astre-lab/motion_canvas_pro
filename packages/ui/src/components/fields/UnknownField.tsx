@@ -1,10 +1,10 @@
-import {Field, FieldSurface, FieldValue} from './Layout';
+import { Field, FieldSurface, FieldValue } from './Layout';
 
 export interface UnknownFieldProps {
   value: any;
 }
 
-export function UnknownField({value}: UnknownFieldProps) {
+export function UnknownField({ value }: UnknownFieldProps) {
   const isUnset = value === null || value === '';
   return (
     <FieldSurface disabled={isUnset}>

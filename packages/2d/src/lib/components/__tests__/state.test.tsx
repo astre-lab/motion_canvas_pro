@@ -1,8 +1,8 @@
-import {createSignal, join, waitFor} from '@motion-canvas/core';
-import {describe, expect, it} from 'vitest';
-import {Circle} from '../Circle';
-import {generatorTest} from './generatorTest';
-import {mockScene2D} from './mockScene2D';
+import { createSignal, join, waitFor } from '@motion-canvas/core';
+import { describe, expect, it } from 'vitest';
+import { Circle } from '../Circle';
+import { generatorTest } from './generatorTest';
+import { mockScene2D } from './mockScene2D';
 
 describe('state', () => {
   mockScene2D();
@@ -10,7 +10,11 @@ describe('state', () => {
   it('Restoring state', () => {
     const signal = createSignal(45);
     const circle = (
-      <Circle lineWidth={8} startAngle={signal} end={0.5} />
+      <Circle
+        lineWidth={8}
+        startAngle={signal}
+        end={0.5}
+      />
     ) as Circle;
     circle.save();
 

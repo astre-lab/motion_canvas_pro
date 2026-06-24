@@ -1,7 +1,7 @@
 import styles from './Controls.module.scss';
 
 import clsx from 'clsx';
-import {ComponentChildren} from 'preact';
+import { ComponentChildren } from 'preact';
 
 interface IconButtonProps {
   title?: string;
@@ -26,7 +26,7 @@ export function IconButton({
         className,
         disabled && styles.disabled,
       )}
-      type="button"
+      type='button'
       onClick={disabled ? null : onClick}
     >
       {children}

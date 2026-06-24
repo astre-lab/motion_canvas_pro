@@ -1,14 +1,14 @@
 import fs from 'fs';
 import mime from 'mime-types';
 import path from 'path';
-import {Plugin} from 'vite';
-import {openInExplorer} from '../openInExplorer';
+import { Plugin } from 'vite';
+import { openInExplorer } from '../openInExplorer';
 
 interface ExporterPluginConfig {
   outputPath: string;
 }
 
-export function exporterPlugin({outputPath}: ExporterPluginConfig): Plugin {
+export function exporterPlugin({ outputPath }: ExporterPluginConfig): Plugin {
   return {
     name: 'motion-canvas:exporter',
 
@@ -16,7 +16,7 @@ export function exporterPlugin({outputPath}: ExporterPluginConfig): Plugin {
       server.middlewares.use((req, res, next) => {
         if (req.url === '/__open-output-path') {
           if (!fs.existsSync(outputPath)) {
-            fs.mkdirSync(outputPath, {recursive: true});
+            fs.mkdirSync(outputPath, { recursive: true });
           }
           openInExplorer(outputPath);
           res.end();
@@ -28,7 +28,7 @@ export function exporterPlugin({outputPath}: ExporterPluginConfig): Plugin {
 
       server.ws.on(
         'motion-canvas:export',
-        async ({data, frame, name, subDirectories, mimeType}, client) => {
+        async ({ data, frame, name, subDirectories, mimeType }, client) => {
           const extension = mime.extension(mimeType);
           const outputFilePath = path.join(
             outputPath,
@@ -38,12 +38,12 @@ export function exporterPlugin({outputPath}: ExporterPluginConfig): Plugin {
           const outputDirectory = path.dirname(outputFilePath);
 
           if (!fs.existsSync(outputDirectory)) {
-            fs.mkdirSync(outputDirectory, {recursive: true});
+            fs.mkdirSync(outputDirectory, { recursive: true });
           }
 
           const base64Data = data.slice(data.indexOf(',') + 1);
           await writeBase64(outputFilePath, base64Data);
-          client.send('motion-canvas:export-ack', {frame});
+          client.send('motion-canvas:export-ack', { frame });
         },
       );
     },

@@ -1,12 +1,12 @@
-import {Color} from '@motion-canvas/core';
-import {ColorPreview} from '../controls/ColorPreview';
-import {Field, FieldSet, FieldValue, NumericField} from './Layout';
+import { Color } from '@motion-canvas/core';
+import { ColorPreview } from '../controls/ColorPreview';
+import { Field, FieldSet, FieldValue, NumericField } from './Layout';
 
 export interface ColorFieldProps {
   value: Color;
 }
 
-export function ColorField({value}: ColorFieldProps) {
+export function ColorField({ value }: ColorFieldProps) {
   const color = value.serialize();
   return (
     <FieldSet
@@ -19,16 +19,16 @@ export function ColorField({value}: ColorFieldProps) {
         </Field>
       }
     >
-      <NumericField label="red" precision={0}>
+      <NumericField label='red' precision={0}>
         {value.get('rgb.r')}
       </NumericField>
-      <NumericField label="green" precision={0}>
+      <NumericField label='green' precision={0}>
         {value.get('rgb.g')}
       </NumericField>
-      <NumericField label="blue" precision={0}>
+      <NumericField label='blue' precision={0}>
         {value.get('rgb.b')}
       </NumericField>
-      <NumericField label="alpha">{value.alpha()}</NumericField>
+      <NumericField label='alpha'>{value.alpha()}</NumericField>
     </FieldSet>
   );
 }

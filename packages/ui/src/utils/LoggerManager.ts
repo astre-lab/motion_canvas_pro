@@ -1,8 +1,8 @@
 import {
   EventDispatcher,
+  Logger,
   LogLevel,
   LogPayload,
-  Logger,
   ValueDispatcher,
 } from '@motion-canvas/core';
 
@@ -25,7 +25,7 @@ export class LoggerManager {
   public constructor(private readonly logger: Logger) {
     this.logs.current = logger.history;
     this.errorCount.current = logger.history.filter(
-      log => log.level === LogLevel.Error,
+      (log) => log.level === LogLevel.Error,
     ).length;
     this.logger.onLogged.subscribe(this.handleLog);
   }

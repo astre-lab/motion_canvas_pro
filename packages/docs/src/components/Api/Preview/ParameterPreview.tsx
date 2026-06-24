@@ -2,15 +2,16 @@ import Token from '@site/src/components/Api/Code/Token';
 import FlagsPreview from '@site/src/components/Api/Preview/FlagsPreview';
 import Type from '@site/src/components/Api/Type';
 import React from 'react';
-import type {JSONOutput} from 'typedoc';
+import type { JSONOutput } from 'typedoc';
 
 export default function ParameterPreview({
   reflection,
 }: {
   reflection: JSONOutput.ParameterReflection;
 }) {
-  const name =
-    reflection.name === '__namedParameters' ? '{...}' : reflection.name;
+  const name = reflection.name === '__namedParameters'
+    ? '{...}'
+    : reflection.name;
 
   return (
     <>
@@ -19,7 +20,7 @@ export default function ParameterPreview({
       <Token
         id={reflection.anchor}
         to={reflection.anchor ? `#${reflection.anchor}` : undefined}
-        type="plain"
+        type='plain'
       >
         {name}
       </Token>
@@ -29,7 +30,7 @@ export default function ParameterPreview({
       {reflection.defaultValue && (
         <>
           {' = '}
-          <Token type="plain">{reflection.defaultValue}</Token>
+          <Token type='plain'>{reflection.defaultValue}</Token>
         </>
       )}
     </>

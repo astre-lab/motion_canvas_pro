@@ -106,8 +106,7 @@
   white-space: pre-wrap;
 }
 
-.editor {
-}
+.editor {}
 
 .root .editor .source {
   display: none;

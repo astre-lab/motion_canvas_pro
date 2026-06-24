@@ -1,4 +1,4 @@
-import {MutableRef, useEffect, useMemo, useState} from 'preact/hooks';
+import { MutableRef, useEffect, useMemo, useState } from 'preact/hooks';
 
 export function useSize<T extends Element>(
   ref: MutableRef<T>,
@@ -10,7 +10,7 @@ export function useSize<T extends Element>(
     [],
   );
   useEffect(() => {
-    const {current} = ref;
+    const { current } = ref;
     observer.observe(current);
     return () => observer.unobserve(current);
   }, [ref.current]);

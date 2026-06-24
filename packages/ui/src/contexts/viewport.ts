@@ -1,5 +1,5 @@
-import {createContext} from 'preact';
-import {useContext} from 'preact/hooks';
+import { createContext } from 'preact';
+import { useContext } from 'preact/hooks';
 
 export interface ViewportState {
   x: number;

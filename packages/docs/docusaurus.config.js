@@ -29,7 +29,10 @@ const config = {
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
-      metadata: [{name: 'keywords', content: 'typescript, animation, library'}],
+      metadata: [{
+        name: 'keywords',
+        content: 'typescript, animation, library',
+      }],
       image: 'img/banner.png',
       colorMode: {
         defaultMode: 'dark',
@@ -48,8 +51,8 @@ const config = {
             position: 'left',
             label: 'Docs',
           },
-          {to: '/api/core', label: 'API', position: 'left'},
-          {to: '/blog', label: 'Blog', position: 'left'},
+          { to: '/api/core', label: 'API', position: 'left' },
+          { to: '/blog', label: 'Blog', position: 'left' },
         ],
       },
       footer: {
@@ -98,7 +101,9 @@ const config = {
             ],
           },
         ],
-        copyright: `Copyright © ${new Date().getFullYear()} Motion Canvas. Built with Docusaurus.`,
+        copyright: `Copyright © ${
+          new Date().getFullYear()
+        } Motion Canvas. Built with Docusaurus.`,
       },
       algolia: {
         appId: 'Q6Z7BJ83RF',
@@ -113,7 +118,7 @@ const config = {
           {
             className: 'theme-code-block-highlighted-line',
             line: 'highlight-next-line',
-            block: {start: 'highlight-start', end: 'highlight-end'},
+            block: { start: 'highlight-start', end: 'highlight-end' },
           },
           {
             className: 'prettier-ignore',
@@ -154,7 +159,7 @@ const config = {
             'experimental',
           ],
         },
-        editUrl: ({versionDocsDirPath, docPath}) =>
+        editUrl: ({ versionDocsDirPath, docPath }) =>
           `https://github.com/motion-canvas/motion-canvas/blob/main/packages/docs/${versionDocsDirPath}/${docPath}`,
       },
     ],
@@ -162,7 +167,7 @@ const config = {
       '@docusaurus/plugin-content-blog',
       {
         showReadingTime: true,
-        editUrl: ({blogDirPath, blogPath}) =>
+        editUrl: ({ blogDirPath, blogPath }) =>
           `https://github.com/motion-canvas/motion-canvas/blob/main/packages/docs/${blogDirPath}/${blogPath}`,
       },
     ],

@@ -1,6 +1,6 @@
 import ExecutionEnvironment from '@docusaurus/ExecutionEnvironment';
-import {parser as javascript} from '@lezer/javascript';
-import type {View2D} from '@motion-canvas/2d';
+import { parser as javascript } from '@lezer/javascript';
+import type { View2D } from '@motion-canvas/2d';
 import type {
   FullSceneDescription,
   Player as PlayerType,
@@ -24,42 +24,42 @@ const ConfigMap = new Map<Setter, Config>();
 
 const Observer = ExecutionEnvironment.canUseDOM
   ? new IntersectionObserver(
-      entries => {
-        for (const entry of entries) {
-          const target = entry.target as HTMLDivElement;
-          if (entry.isIntersecting) {
-            VisiblePlayers.set(target, entry.intersectionRatio);
-          } else {
-            VisiblePlayers.delete(target);
-          }
+    (entries) => {
+      for (const entry of entries) {
+        const target = entry.target as HTMLDivElement;
+        if (entry.isIntersecting) {
+          VisiblePlayers.set(target, entry.intersectionRatio);
+        } else {
+          VisiblePlayers.delete(target);
         }
+      }
 
-        const current = VisiblePlayers.get(CurrentParent);
-        if (current !== undefined && current > 0.75) return;
+      const current = VisiblePlayers.get(CurrentParent);
+      if (current !== undefined && current > 0.75) return;
 
-        let bestRatio = 0;
-        let bestConfig: Config = null;
-        for (const config of ConfigMap.values()) {
-          const visible = VisiblePlayers.get(config.parent);
-          if (visible !== undefined && visible > bestRatio) {
-            bestRatio = visible;
-            bestConfig = config;
-          }
+      let bestRatio = 0;
+      let bestConfig: Config = null;
+      for (const config of ConfigMap.values()) {
+        const visible = VisiblePlayers.get(config.parent);
+        if (visible !== undefined && visible > bestRatio) {
+          bestRatio = visible;
+          bestConfig = config;
         }
+      }
 
-        if (bestConfig && (current === undefined || bestRatio > current)) {
-          borrowPlayer(
-            bestConfig.setter,
-            bestConfig.parent,
-            bestConfig.ratio,
-            bestConfig.onError,
-          ).then(bestConfig.onBorrow);
-        }
-      },
-      {
-        threshold: [0, 0.25, 0.5, 0.75, 1],
-      },
-    )
+      if (bestConfig && (current === undefined || bestRatio > current)) {
+        borrowPlayer(
+          bestConfig.setter,
+          bestConfig.parent,
+          bestConfig.ratio,
+          bestConfig.onError,
+        ).then(bestConfig.onBorrow);
+      }
+    },
+    {
+      threshold: [0, 0.25, 0.5, 0.75, 1],
+    },
+  )
   : null;
 
 let ProjectInstance: Project = null;
@@ -119,7 +119,7 @@ export async function borrowPlayer(
       ValueDispatcher,
       DefaultPlugin,
     } = await import(/* webpackIgnore: true */ '@motion-canvas/core');
-    const {makeScene2D, Code, LezerHighlighter} = await import(
+    const { makeScene2D, Code, LezerHighlighter } = await import(
       /* webpackIgnore: true */ '@motion-canvas/2d'
     );
     Code.defaultHighlighter = new LezerHighlighter(
@@ -157,13 +157,13 @@ export async function borrowPlayer(
       );
     });
 
-    ProjectInstance.logger.onLogged.subscribe(payload => {
+    ProjectInstance.logger.onLogged.subscribe((payload) => {
       if (payload.level === 'error') {
         ErrorHandler?.(`Runtime error: ${payload.message}`);
       }
     });
 
-    await new Promise<void>(resolve => {
+    await new Promise<void>((resolve) => {
       PlayerInstance.onRecalculated.subscribe(() => {
         if (StageInstance.finalBuffer.parentElement !== CurrentParent) {
           CurrentParent?.append(StageInstance.finalBuffer);

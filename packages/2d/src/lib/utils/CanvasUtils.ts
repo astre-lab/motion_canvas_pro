@@ -1,5 +1,10 @@
-import {BBox, Color, Spacing, Vector2} from '@motion-canvas/core';
-import {CanvasStyle, Gradient, Pattern, PossibleCanvasStyle} from '../partials';
+import { BBox, Color, Spacing, Vector2 } from '@motion-canvas/core';
+import {
+  CanvasStyle,
+  Gradient,
+  Pattern,
+  PossibleCanvasStyle,
+} from '../partials';
 
 export function canvasStyleParser(style: PossibleCanvasStyle) {
   if (style === null) {
@@ -23,7 +28,7 @@ export function resolveCanvasStyle(
     return '';
   }
   if (style instanceof Color) {
-    return (<Color>style).serialize();
+    return (<Color> style).serialize();
   }
   if (style instanceof Gradient) {
     return style.canvasGradient(context);
@@ -135,14 +140,12 @@ export function adjustRectRadius(
   vertical: number,
   rect: BBox,
 ): number {
-  const width =
-    radius + horizontal > rect.width
-      ? rect.width * (radius / (radius + horizontal))
-      : radius;
-  const height =
-    radius + vertical > rect.height
-      ? rect.height * (radius / (radius + vertical))
-      : radius;
+  const width = radius + horizontal > rect.width
+    ? rect.width * (radius / (radius + horizontal))
+    : radius;
+  const height = radius + vertical > rect.height
+    ? rect.height * (radius / (radius + vertical))
+    : radius;
 
   return Math.min(width, height);
 }

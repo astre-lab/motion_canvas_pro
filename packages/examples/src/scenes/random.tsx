@@ -1,4 +1,4 @@
-import {Layout, Rect, makeScene2D} from '@motion-canvas/2d';
+import { Layout, makeScene2D, Rect } from '@motion-canvas/2d';
 import {
   all,
   loop,
@@ -14,8 +14,8 @@ export default makeScene2D(function* (view) {
   const rects: Rect[] = [];
 
   view.add(
-    <Layout layout gap={10} alignItems="center">
-      {range(40).map(i => (
+    <Layout layout gap={10} alignItems='center'>
+      {range(40).map((i) => (
         <Rect
           ref={makeRef(rects, i)}
           radius={5}
@@ -30,13 +30,12 @@ export default makeScene2D(function* (view) {
   yield* loop(3, () =>
     sequence(
       0.04,
-      ...rects.map(rect =>
+      ...rects.map((rect) =>
         all(
           // highlight-next-line
           rect.size.y(random.nextInt(100, 200), 0.5).to(10, 0.5),
           rect.fill('#e6a700', 0.5).to('#e13238', 0.5),
-        ),
+        )
       ),
-    ),
-  );
+    ));
 });

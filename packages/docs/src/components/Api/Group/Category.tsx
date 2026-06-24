@@ -1,9 +1,9 @@
-import {FilteredGroup} from '@site/src/components/Api/Group/index';
+import { FilteredGroup } from '@site/src/components/Api/Group/index';
 import Item from '@site/src/components/Api/Item';
 import ReferenceType from '@site/src/components/Api/Type/ReferenceType';
 import React from 'react';
 
-export default function Category({group}: {group: FilteredGroup}) {
+export default function Category({ group }: { group: FilteredGroup }) {
   if (
     group.title === 'Constructors' &&
     group.external.length === 0 &&
@@ -16,7 +16,7 @@ export default function Category({group}: {group: FilteredGroup}) {
     <>
       {group.external.length > 0 && (
         <ul>
-          {group.external.map(child => (
+          {group.external.map((child) => (
             <li key={child.id}>
               <code>
                 <ReferenceType type={child} />

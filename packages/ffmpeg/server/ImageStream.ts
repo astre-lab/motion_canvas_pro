@@ -1,19 +1,19 @@
-import {Readable} from 'stream';
+import { Readable } from 'stream';
 
 type QueueItem =
   | {
-      type: 'frame';
-      array: Uint8Array;
-      finished: boolean;
-    }
+    type: 'frame';
+    array: Uint8Array;
+    finished: boolean;
+  }
   | {
-      type: 'end';
-    };
+    type: 'end';
+  };
 
 export class ImageStream extends Readable {
   private queue: QueueItem[] = [];
 
-  public constructor(private size: {x: number; y: number}) {
+  public constructor(private size: { x: number; y: number }) {
     super();
   }
 
@@ -39,7 +39,7 @@ export class ImageStream extends Readable {
 
       item.finished = true;
     } else {
-      this.queue.push({type: 'end'});
+      this.queue.push({ type: 'end' });
     }
 
     this._read();

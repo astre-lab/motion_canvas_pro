@@ -1,5 +1,5 @@
-import {CodeRange} from './CodeRange';
-import {CodeTag, resolveCodeTag} from './CodeScope';
+import { CodeRange } from './CodeRange';
+import { CodeTag, resolveCodeTag } from './CodeScope';
 
 /**
  * Transform the fragments to isolate the given range into its own fragment.
@@ -111,8 +111,9 @@ export function extractRange(
   if (index === -1) {
     index = newFragments.length + 1;
     const missingRows = fromRow - currentRow;
-    const missingColumns =
-      missingRows > 0 ? fromColumn : fromColumn - currentColumn;
+    const missingColumns = missingRows > 0
+      ? fromColumn
+      : fromColumn - currentColumn;
     newFragments.push(
       '\n'.repeat(missingRows) + ' '.repeat(missingColumns),
       '',

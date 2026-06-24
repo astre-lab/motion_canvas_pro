@@ -1,6 +1,6 @@
-import {decorate, threadable} from '../decorators';
-import {ThreadGenerator} from '../threading';
-import {useLogger, useThread} from '../utils';
+import { decorate, threadable } from '../decorators';
+import { ThreadGenerator } from '../threading';
+import { useLogger, useThread } from '../utils';
 
 type ProgressFunction = (value: number, time: number) => void;
 
@@ -30,13 +30,13 @@ export function* spring(
   onProgressOrOnEnd?: ProgressFunction,
   onEnd?: ProgressFunction,
 ): ThreadGenerator {
-  const settleTolerance =
-    typeof settleToleranceOrOnProgress === 'number'
-      ? settleToleranceOrOnProgress
-      : 0.001;
+  const settleTolerance = typeof settleToleranceOrOnProgress === 'number'
+    ? settleToleranceOrOnProgress
+    : 0.001;
 
-  onEnd =
-    typeof settleToleranceOrOnProgress === 'number' ? onEnd : onProgressOrOnEnd;
+  onEnd = typeof settleToleranceOrOnProgress === 'number'
+    ? onEnd
+    : onProgressOrOnEnd;
 
   const onProgress: ProgressFunction = (value: number, time: number) => {
     if (typeof settleToleranceOrOnProgress === 'function') {

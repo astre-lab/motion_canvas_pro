@@ -3,10 +3,10 @@ import {
   Grid,
   Layout,
   Line,
+  makeScene2D,
   Node,
   Rect,
   Txt,
-  makeScene2D,
 } from '@motion-canvas/2d';
 import {
   all,
@@ -52,7 +52,8 @@ export default makeScene2D(function* (view) {
           lineCap={'round'}
           endArrow
           arrowSize={15}
-        ></Line>
+        >
+        </Line>
 
         {/* Tracker */}
         <Layout y={() => value() * -500 + 650}>
@@ -63,7 +64,8 @@ export default makeScene2D(function* (view) {
             fontSize={30}
             x={-55}
             y={3}
-          ></Txt>
+          >
+          </Txt>
           <Circle size={30} fill={'#DDD'}></Circle>
         </Layout>
 
@@ -77,7 +79,8 @@ export default makeScene2D(function* (view) {
           fontFamily={'Candara'}
           fill={'#DDD'}
           text={'VALUE'}
-        ></Txt>
+        >
+        </Txt>
       </Node>
 
       {/* Horizontal */}
@@ -93,7 +96,8 @@ export default makeScene2D(function* (view) {
           lineCap={'round'}
           endArrow
           arrowSize={15}
-        ></Line>
+        >
+        </Line>
 
         {/* Tracker */}
         <Layout y={800} x={() => time() * 500 + 150}>
@@ -104,7 +108,8 @@ export default makeScene2D(function* (view) {
             fontWeight={300}
             fontSize={30}
             y={50}
-          ></Txt>
+          >
+          </Txt>
         </Layout>
 
         {/* Label */}
@@ -117,7 +122,8 @@ export default makeScene2D(function* (view) {
           fontFamily={'Candara'}
           fill={'#DDD'}
           text={'TIME'}
-        ></Txt>
+        >
+        </Txt>
       </Node>
     </Node>,
   );

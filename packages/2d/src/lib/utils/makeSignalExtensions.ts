@@ -1,5 +1,5 @@
-import {SignalExtensions, capitalize} from '@motion-canvas/core';
-import {PropertyMetadata} from '../decorators';
+import { capitalize, SignalExtensions } from '@motion-canvas/core';
+import { PropertyMetadata } from '../decorators';
 
 export function makeSignalExtensions<TSetterValue, TValue extends TSetterValue>(
   meta: Partial<PropertyMetadata<TValue>> = {},

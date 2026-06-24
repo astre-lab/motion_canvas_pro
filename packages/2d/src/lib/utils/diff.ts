@@ -106,19 +106,19 @@ export function applyTransformDiff<T extends Idable>(
   function insert(item: TransformDiffItem<T>) {
     let idIndex = -1;
     const index = item.before
-      ? current.findIndex(({id}) => {
-          if (id === item.before?.id) {
-            idIndex++;
-            if (idIndex === item.beforeIdIndex) return true;
-          }
-          return false;
-        })
+      ? current.findIndex(({ id }) => {
+        if (id === item.before?.id) {
+          idIndex++;
+          if (idIndex === item.beforeIdIndex) return true;
+        }
+        return false;
+      })
       : 0;
     current.splice(index + 1, 0, item.current);
   }
 
   const result: ApplyTransformResult<T> = {
-    inserted: diff.inserted.map(item => ({
+    inserted: diff.inserted.map((item) => ({
       item,
       order: item.currentIndex,
     })),

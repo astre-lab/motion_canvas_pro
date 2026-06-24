@@ -8,9 +8,9 @@ import Item from '@site/src/components/Api/Item';
 import Preview from '@site/src/components/Api/Preview';
 import Signatures from '@site/src/components/Api/Signatures';
 import TypeParameters from '@site/src/components/Api/TypeParameters';
-import {useApiLookup} from '@site/src/contexts/api';
+import { useApiLookup } from '@site/src/contexts/api';
 import Heading from '@theme/Heading';
-import type {JSONOutput} from 'typedoc';
+import type { JSONOutput } from 'typedoc';
 
 export default function TypeAliasItem({
   reflection,
@@ -21,7 +21,7 @@ export default function TypeAliasItem({
 
   return (
     <>
-      <Heading as="h3" id={reflection.anchor}>
+      <Heading as='h3' id={reflection.anchor}>
         <code>{reflection.name}</code>
       </Heading>
       <Container>
@@ -39,20 +39,18 @@ export default function TypeAliasItem({
           <Signatures signatures={reflection.signatures} />
         </>
       )}
-      {reflection.groups?.map(group => (
+      {reflection.groups?.map((group) => (
         <React.Fragment key={group.title}>
           <h2>{group.title}</h2>
           {group.children
-            .map(child => lookup[child])
+            .map((child) => lookup[child])
             .filter(
-              child =>
+              (child) =>
                 child &&
                 (child.flags.isPublic ||
                   (!child.flags.isProtected && !child.flags.isPrivate)),
             )
-            .map(child => (
-              <Item key={child.id} reflection={child} />
-            ))}
+            .map((child) => <Item key={child.id} reflection={child} />)}
         </React.Fragment>
       ))}
     </>

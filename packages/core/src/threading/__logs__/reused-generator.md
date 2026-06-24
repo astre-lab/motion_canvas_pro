@@ -18,7 +18,7 @@ Passing it to other flow functions will also cause the error:
 
 ```ts
 // prettier-ignore
-yield* all(task);
+yield * all(task);
 ```
 
 Try to investigate your code looking for `yield` statements whose return value
@@ -34,8 +34,8 @@ yield* all(
 
 ```ts correct
 // prettier-ignore
-yield* all(
-  rect().opacity(1, 1), 
+yield * all(
+  rect().opacity(1, 1),
   rect().x(200, 1),
 );
 ```

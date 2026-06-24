@@ -1,7 +1,7 @@
 import * as path from 'path';
-import {Page, firefox} from 'playwright';
-import {fileURLToPath} from 'url';
-import {createServer} from 'vite';
+import { firefox, Page } from 'playwright';
+import { fileURLToPath } from 'url';
+import { createServer } from 'vite';
 
 const Root = fileURLToPath(new URL('.', import.meta.url));
 
@@ -18,7 +18,7 @@ export async function start(): Promise<App> {
     createServer({
       root: Root,
       configFile: path.resolve(Root, '../vite.config.ts'),
-    }).then(server => server.listen()),
+    }).then((server) => server.listen()),
   ]);
 
   const page = await browser.newPage();

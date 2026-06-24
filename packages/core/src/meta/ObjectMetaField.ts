@@ -1,5 +1,5 @@
-import {ValueDispatcher} from '../events';
-import {MetaField} from './MetaField';
+import { ValueDispatcher } from '../events';
+import { MetaField } from './MetaField';
 
 export type ValueOf<T extends Record<string, any>> = {
   [K in keyof T]: T[K] extends MetaField<any, infer P> ? P : never;
@@ -49,7 +49,7 @@ class ObjectMetaFieldInternal<
     this.event = new ValueDispatcher([...map.values()]);
     this.fields = map;
     for (const [key, field] of this.fields) {
-      Object.defineProperty(this, key, {value: field});
+      Object.defineProperty(this, key, { value: field });
       field.onChanged.subscribe(this.handleChange);
     }
   }
@@ -76,7 +76,7 @@ class ObjectMetaFieldInternal<
   }
 
   public override clone(): this {
-    const cloned = new (<any>this.constructor)(
+    const cloned = new (<any> this.constructor)(
       this.name,
       this.transform('clone'),
     );
@@ -108,7 +108,8 @@ class ObjectMetaFieldInternal<
  * Represents an object with nested meta-fields.
  */
 export type ObjectMetaField<T extends Record<string, MetaField<any>>> =
-  ObjectMetaFieldInternal<T> & T;
+  & ObjectMetaFieldInternal<T>
+  & T;
 
 /**
  * Represents an object with nested meta-fields.

@@ -1,11 +1,11 @@
 import styles from './Layout.module.scss';
 
 import clsx from 'clsx';
-import {ComponentChildren, JSX} from 'preact';
-import {useRef, useState} from 'preact/hooks';
-import {useFormattedNumber} from '../../hooks';
-import {Toggle} from '../controls';
-import {Collapse} from '../layout';
+import { ComponentChildren, JSX } from 'preact';
+import { useRef, useState } from 'preact/hooks';
+import { useFormattedNumber } from '../../hooks';
+import { Toggle } from '../controls';
+import { Collapse } from '../layout';
 
 export interface FieldSetProps {
   children: ComponentChildren;
@@ -13,7 +13,7 @@ export interface FieldSetProps {
   nested?: boolean;
 }
 
-export function FieldSet({children, header, nested}: FieldSetProps) {
+export function FieldSet({ children, header, nested }: FieldSetProps) {
   const [open, setOpen] = useState(false);
 
   return (
@@ -60,7 +60,7 @@ export interface FieldProps {
   children: ComponentChildren;
   copy?: string;
 }
-export function Field({label, copy, children}: FieldProps) {
+export function Field({ label, copy, children }: FieldProps) {
   const timeout = useRef<number | null>(null);
   const [copied, setCopied] = useState(false);
 

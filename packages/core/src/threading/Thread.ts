@@ -1,10 +1,10 @@
-import {EventDispatcher} from '../events';
-import {noop} from '../flow';
-import {createSignal} from '../signals';
-import {endThread, startThread, useLogger} from '../utils';
-import {ThreadGenerator, isThreadGenerator} from './ThreadGenerator';
+import { EventDispatcher } from '../events';
+import { noop } from '../flow';
+import { createSignal } from '../signals';
+import { endThread, startThread, useLogger } from '../utils';
+import { isThreadGenerator, ThreadGenerator } from './ThreadGenerator';
 import reusedGenerator from './__logs__/reused-generator.md';
-import {getTaskName, setTaskName} from './names';
+import { getTaskName, setTaskName } from './names';
 
 /**
  * A class representing an individual thread.
@@ -73,13 +73,15 @@ export class Thread {
     /**
      * The generator wrapped by this thread.
      */
-    public readonly runner: ThreadGenerator & {task?: Thread},
+    public readonly runner: ThreadGenerator & { task?: Thread },
   ) {
     if (this.runner.task) {
       useLogger().error({
-        message: `The generator "${getTaskName(
-          this.runner,
-        )}" is already being executed by another thread.`,
+        message: `The generator "${
+          getTaskName(
+            this.runner,
+          )
+        }" is already being executed by another thread.`,
         remarks: reusedGenerator,
       });
       this.runner = noop();
@@ -115,7 +117,7 @@ export class Thread {
       this.time(this.time() + dt);
       this.fixedTime += dt;
     }
-    this.children = this.children.filter(child => !child.canceled);
+    this.children = this.children.filter((child) => !child.canceled);
   }
 
   public spawn(
@@ -148,7 +150,7 @@ export class Thread {
     this.runner.return();
     this.isCanceled = true;
     this.parent = null;
-    this.drain(task => task.return());
+    this.drain((task) => task.return());
   }
 
   public pause(value: boolean) {

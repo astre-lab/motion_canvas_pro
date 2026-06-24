@@ -1,16 +1,16 @@
-import {indentWithTab} from '@codemirror/commands';
-import {javascript} from '@codemirror/lang-javascript';
-import {syntaxHighlighting} from '@codemirror/language';
-import {EditorState, Text} from '@codemirror/state';
-import {EditorView, keymap} from '@codemirror/view';
+import { indentWithTab } from '@codemirror/commands';
+import { javascript } from '@codemirror/lang-javascript';
+import { syntaxHighlighting } from '@codemirror/language';
+import { EditorState, Text } from '@codemirror/state';
+import { EditorView, keymap } from '@codemirror/view';
 import ExecutionEnvironment from '@docusaurus/ExecutionEnvironment';
-import {useLocation} from '@docusaurus/router';
-import type {Player} from '@motion-canvas/core';
+import { useLocation } from '@docusaurus/router';
+import type { Player } from '@motion-canvas/core';
 import IconImage from '@site/src/Icon/Image';
-import {Pause} from '@site/src/Icon/Pause';
-import {PlayArrow} from '@site/src/Icon/PlayArrow';
-import {SkipNext} from '@site/src/Icon/SkipNext';
-import {SkipPrevious} from '@site/src/Icon/SkipPrevious';
+import { Pause } from '@site/src/Icon/Pause';
+import { PlayArrow } from '@site/src/Icon/PlayArrow';
+import { SkipNext } from '@site/src/Icon/SkipNext';
+import { SkipPrevious } from '@site/src/Icon/SkipPrevious';
 import IconSplit from '@site/src/Icon/Split';
 import IconText from '@site/src/Icon/Text';
 import Dropdown from '@site/src/components/Dropdown';
@@ -20,7 +20,7 @@ import {
   tryBorrowPlayer,
   updatePlayer,
 } from '@site/src/components/Fiddle/SharedPlayer';
-import {autocomplete} from '@site/src/components/Fiddle/autocomplete';
+import { autocomplete } from '@site/src/components/Fiddle/autocomplete';
 import {
   clearErrors,
   errorExtension,
@@ -32,21 +32,21 @@ import {
   foldImports,
   folding,
 } from '@site/src/components/Fiddle/folding';
-import {parseFiddle} from '@site/src/components/Fiddle/parseFiddle';
+import { parseFiddle } from '@site/src/components/Fiddle/parseFiddle';
 import {
   EditorTheme,
   SyntaxHighlightStyle,
 } from '@site/src/components/Fiddle/themes';
 import {
-  TransformError,
   compileScene,
   transform,
+  TransformError,
 } from '@site/src/components/Fiddle/transformer';
-import {useSubscribableValue} from '@site/src/utils/useSubscribable';
+import { useSubscribableValue } from '@site/src/utils/useSubscribable';
 import CodeBlock from '@theme/CodeBlock';
 import clsx from 'clsx';
-import {basicSetup} from 'codemirror';
-import React, {useEffect, useMemo, useRef, useState} from 'react';
+import { basicSetup } from 'codemirror';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import styles from './styles.module.css';
 
 export interface FiddleProps {
@@ -66,7 +66,7 @@ function highlight(sizePixels = 4) {
       boxShadow: `0 0 0px ${sizePixels}px #ccc inset`,
       easing: 'cubic-bezier(0.32, 0, 0.67, 0)',
     },
-    {boxShadow: '0 0 0px 0 #ccc inset'},
+    { boxShadow: '0 0 0px 0 #ccc inset' },
   ];
 }
 
@@ -81,7 +81,7 @@ export default function Fiddle({
   const editorRef = useRef<HTMLDivElement>();
   const previewRef = useRef<HTMLDivElement>();
   const [mode, setMode] = useState(initialMode);
-  const {pathname} = useLocation();
+  const { pathname } = useLocation();
 
   const [error, setError] = useState<string>(null);
   const duration = useSubscribableValue(player?.onDurationChanged);
@@ -110,7 +110,7 @@ export default function Fiddle({
       updatePlayer(scene);
       setLastDoc(newDoc);
       if (animate && !lastDoc?.eq(newDoc)) {
-        previewRef.current.animate(highlight(), {duration: 300});
+        previewRef.current.animate(highlight(), { duration: 300 });
       }
       return true;
     } catch (e) {
@@ -136,7 +136,7 @@ export default function Fiddle({
   const [snippetId, setSnippetId] = useState(0);
   const snippets = useMemo(
     () =>
-      parseFiddle(children).map(snippet => ({
+      parseFiddle(children).map((snippet) => ({
         name: snippet.name,
         state: EditorState.create({
           doc: Text.of(snippet.lines),
@@ -147,13 +147,13 @@ export default function Fiddle({
               {
                 key: 'Mod-s',
                 preventDefault: true,
-                run: view => {
+                run: (view) => {
                   update(view.state.doc);
                   return true;
                 },
               },
             ]),
-            EditorView.updateListener.of(update => {
+            EditorView.updateListener.of((update) => {
               setDoc(update.state.doc);
               if (update.docChanged) {
                 setError(null);
@@ -177,7 +177,7 @@ export default function Fiddle({
 
   if (!ExecutionEnvironment.canUseDOM) {
     // Validate the snippets during Server-Side Rendering.
-    snippets.forEach(snippet => {
+    snippets.forEach((snippet) => {
       transform(snippet.state.doc.sliceString(0), pathname);
     });
   }
@@ -194,7 +194,7 @@ export default function Fiddle({
       previewRef.current,
       parsedRatio,
       setError,
-      async borrowed => {
+      async (borrowed) => {
         const success = await update(snippets[snippetId].state.doc, false);
         if (success && mode !== 'code') {
           borrowed.togglePlayback(true);
@@ -220,8 +220,7 @@ export default function Fiddle({
   }, [snippets]);
 
   const hasChangedSinceLastUpdate = lastDoc && doc && !doc.eq(lastDoc);
-  const hasChanged =
-    (doc && !doc.eq(snippets[snippetId].state.doc)) ||
+  const hasChanged = (doc && !doc.eq(snippets[snippetId].state.doc)) ||
     hasChangedSinceLastUpdate;
 
   return (
@@ -238,28 +237,28 @@ export default function Fiddle({
             setMode('code');
             player?.togglePlayback(false);
           }}
-          title="Source code"
+          title='Source code'
         >
           <IconText />
         </button>
         <button
           className={clsx(styles.icon, mode === 'editor' && styles.active)}
           onClick={() => setMode('editor')}
-          title="Editor with preview"
+          title='Editor with preview'
         >
           <IconSplit />
         </button>
         <button
           className={clsx(styles.icon, mode === 'preview' && styles.active)}
           onClick={() => setMode('preview')}
-          title="Preview"
+          title='Preview'
         >
           <IconImage />
         </button>
       </div>
       <div
         className={styles.preview}
-        style={{aspectRatio: ratio}}
+        style={{ aspectRatio: ratio }}
         ref={previewRef}
       >
         {!player && <div>Press play to preview the animation</div>}
@@ -267,7 +266,7 @@ export default function Fiddle({
       {duration > 0 && (
         <div
           className={styles.progress}
-          style={{width: player ? `${(frame / duration) * 100}%` : 0}}
+          style={{ width: player ? `${(frame / duration) * 100}%` : 0 }}
         />
       )}
       <div className={styles.controls}>
@@ -331,7 +330,10 @@ export default function Fiddle({
         </div>
         <div className={styles.section}>
           {snippets.length === 1 && hasChanged && (
-            <button className={styles.button} onClick={() => switchState(0)}>
+            <button
+              className={styles.button}
+              onClick={() => switchState(0)}
+            >
               <small>Reset example</small>
             </button>
           )}
@@ -345,14 +347,14 @@ export default function Fiddle({
                   value: index,
                   name: snippet.name,
                 }))
-                .concat(hasChanged ? {value: -1, name: 'Custom'} : [])}
+                .concat(hasChanged ? { value: -1, name: 'Custom' } : [])}
             />
           )}
         </div>
       </div>
       {error && <pre className={styles.error}>{error}</pre>}
       <div className={styles.editor} ref={editorRef}>
-        <CodeBlock className={styles.source} language="tsx">
+        <CodeBlock className={styles.source} language='tsx'>
           {mode === 'code'
             ? snippets[snippetId].state.doc.toString()
             : ghostCode}

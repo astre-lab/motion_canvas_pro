@@ -1,5 +1,5 @@
-import {Img, Node, makeScene2D} from '@motion-canvas/2d';
-import {createRef, linear} from '@motion-canvas/core';
+import { Img, makeScene2D, Node } from '@motion-canvas/2d';
+import { createRef, linear } from '@motion-canvas/core';
 
 // Image by Marek Piwnicki (https://unsplash.com/photos/_4o-1pr2oqU)
 const ImageSource =
@@ -19,12 +19,14 @@ export default makeScene2D(function* (view) {
       <Img
         ref={maskRef}
         size={250}
-        src="/img/logo_dark.svg"
+        src='/img/logo_dark.svg'
         compositeOperation={'destination-in'}
       />
-      {/** !!! Notice how the roles got reversed in comparison to source-in
-       * compositeOperation is now on the Mask, and the Value Layer lies above the Mask Layer.
-       */}
+      {
+        /** !!! Notice how the roles got reversed in comparison to source-in
+         * compositeOperation is now on the Mask, and the Value Layer lies above the Mask Layer.
+         */
+      }
     </Node>,
   );
 

@@ -2,7 +2,7 @@
  * Automatically generate a new blog entry for the current release.
  */
 
-const {exec} = require('child_process');
+const { exec } = require('child_process');
 const fs = require('fs');
 
 const COMMIT_REGEX = /^(\w+)(?:\(.+\))?!?: (.+) \(#(\d+)\)/;
@@ -12,7 +12,7 @@ function runBash(command) {
     exec(command, (error, stdout) => {
       if (error) reject(error);
       resolve(stdout);
-    }),
+    })
   );
 }
 
@@ -29,7 +29,7 @@ async function gitTags() {
     .trim()
     .split('\n')
     .reverse()
-    .filter(tag => !tag.includes('-alpha'));
+    .filter((tag) => !tag.includes('-alpha'));
 }
 
 function getDate() {
@@ -41,7 +41,7 @@ function getDate() {
   return `${year}-${month}-${day}`;
 }
 
-function Issue({user, pr, header}) {
+function Issue({ user, pr, header }) {
   return `  <Issue user={'${user}'} pr={${pr}}>
     ${header}
   </Issue>`;

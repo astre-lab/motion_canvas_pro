@@ -1,6 +1,6 @@
-import {createSignal} from '../signals';
-import {ThreadGenerator} from '../threading';
-import {useTransition} from './useTransition';
+import { createSignal } from '../signals';
+import { ThreadGenerator } from '../threading';
+import { useTransition } from './useTransition';
 
 /**
  * Perform a transition that fades between the scenes.
@@ -9,7 +9,7 @@ import {useTransition} from './useTransition';
  */
 export function* fadeTransition(duration = 0.6): ThreadGenerator {
   const progress = createSignal(0);
-  const endTransition = useTransition(ctx => {
+  const endTransition = useTransition((ctx) => {
     ctx.globalAlpha = progress();
   });
 

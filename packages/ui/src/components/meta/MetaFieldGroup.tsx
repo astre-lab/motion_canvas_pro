@@ -1,14 +1,14 @@
-import type {MetaField} from '@motion-canvas/core';
-import type {ComponentChildren} from 'preact';
-import {useMemo} from 'preact/hooks';
-import {Group, Label} from '../controls';
+import type { MetaField } from '@motion-canvas/core';
+import type { ComponentChildren } from 'preact';
+import { useMemo } from 'preact/hooks';
+import { Group, Label } from '../controls';
 
 export interface MetaFieldGroupProps {
   children: ComponentChildren;
   field: MetaField<unknown>;
 }
 
-export function MetaFieldGroup({field, children}: MetaFieldGroupProps) {
+export function MetaFieldGroup({ field, children }: MetaFieldGroupProps) {
   const description = useMemo(() => {
     let result = '';
     let charCount = 0;

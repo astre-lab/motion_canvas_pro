@@ -1,8 +1,8 @@
-import {Scene} from '../scenes';
-import {unwrap} from '../signals';
-import type {Color} from '../types';
-import {CanvasColorSpace, Vector2} from '../types';
-import {getContext} from '../utils';
+import { Scene } from '../scenes';
+import { unwrap } from '../signals';
+import type { Color } from '../types';
+import { CanvasColorSpace, Vector2 } from '../types';
+import { getContext } from '../utils';
 
 export interface StageSettings {
   size: Vector2;
@@ -41,11 +41,11 @@ export class Stage {
 
     const colorSpace = this.colorSpace;
     this.context = getContext(
-      {colorSpace, willReadFrequently: true},
+      { colorSpace, willReadFrequently: true },
       this.finalBuffer,
     );
-    this.currentContext = getContext({colorSpace}, this.currentBuffer);
-    this.previousContext = getContext({colorSpace}, this.previousBuffer);
+    this.currentContext = getContext({ colorSpace }, this.currentBuffer);
+    this.previousContext = getContext({ colorSpace }, this.previousBuffer);
   }
 
   public configure({
@@ -56,9 +56,9 @@ export class Stage {
   }: Partial<StageSettings>) {
     if (colorSpace !== this.colorSpace) {
       this.colorSpace = colorSpace;
-      this.context = getContext({colorSpace}, this.finalBuffer);
-      this.currentContext = getContext({colorSpace}, this.currentBuffer);
-      this.previousContext = getContext({colorSpace}, this.previousBuffer);
+      this.context = getContext({ colorSpace }, this.finalBuffer);
+      this.currentContext = getContext({ colorSpace }, this.currentBuffer);
+      this.previousContext = getContext({ colorSpace }, this.previousBuffer);
     }
 
     if (
@@ -72,10 +72,9 @@ export class Stage {
       this.resizeCanvas(this.previousContext);
     }
 
-    this.background =
-      typeof background === 'string'
-        ? background
-        : (background?.serialize() ?? null);
+    this.background = typeof background === 'string'
+      ? background
+      : (background?.serialize() ?? null);
   }
 
   public async render(currentScene: Scene, previousScene: Scene | null) {

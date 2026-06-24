@@ -1,4 +1,4 @@
-import {Plugin as VitePlugin} from 'vite';
+import { Plugin as VitePlugin } from 'vite';
 
 /**
  * Represents a Motion Canvas project configured in the Vite plugin.

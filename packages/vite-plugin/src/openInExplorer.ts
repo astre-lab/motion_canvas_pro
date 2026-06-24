@@ -1,5 +1,5 @@
-import {execSync, spawn} from 'child_process';
-import {platform} from 'os';
+import { execSync, spawn } from 'child_process';
+import { platform } from 'os';
 
 export function openInExplorer(file: string) {
   let command: string | null = null;
@@ -24,7 +24,7 @@ export function openInExplorer(file: string) {
   }
 
   if (command) {
-    spawn(command, args, {detached: true}).unref();
+    spawn(command, args, { detached: true }).unref();
   } else {
     console.warn(`Unsupported OS: ${os}`);
   }

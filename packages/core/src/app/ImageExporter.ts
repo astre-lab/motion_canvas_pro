@@ -1,4 +1,4 @@
-import {EventDispatcher} from '../events';
+import { EventDispatcher } from '../events';
 import {
   BoolMetaField,
   EnumMetaField,
@@ -6,13 +6,13 @@ import {
   ObjectMetaField,
   ValueOf,
 } from '../meta';
-import {clamp} from '../tweening';
-import {CanvasOutputMimeType} from '../types';
-import type {Exporter} from './Exporter';
-import type {Logger} from './Logger';
-import type {Project} from './Project';
-import type {RendererSettings} from './Renderer';
-import {FileTypes} from './presets';
+import { clamp } from '../tweening';
+import { CanvasOutputMimeType } from '../types';
+import type { Exporter } from './Exporter';
+import type { Logger } from './Logger';
+import type { Project } from './Project';
+import type { RendererSettings } from './Renderer';
+import { FileTypes } from './presets';
 
 const EXPORT_FRAME_LIMIT = 256;
 const EXPORT_RETRY_DELAY = 1000;
@@ -43,7 +43,7 @@ export class ImageExporter implements Exporter {
       ),
     });
 
-    meta.fileType.onChanged.subscribe(value => {
+    meta.fileType.onChanged.subscribe((value) => {
       meta.quality.disable(value === 'image/png');
     });
 
@@ -61,7 +61,7 @@ export class ImageExporter implements Exporter {
 
   static {
     if (import.meta.hot) {
-      import.meta.hot.on('motion-canvas:export-ack', response => {
+      import.meta.hot.on('motion-canvas:export-ack', (response) => {
         this.response.dispatch(response);
       });
     }
@@ -101,7 +101,7 @@ export class ImageExporter implements Exporter {
     }
     if (import.meta.hot) {
       while (this.frameLookup.size > EXPORT_FRAME_LIMIT) {
-        await new Promise(resolve => setTimeout(resolve, EXPORT_RETRY_DELAY));
+        await new Promise((resolve) => setTimeout(resolve, EXPORT_RETRY_DELAY));
         if (signal.aborted) {
           return;
         }
@@ -124,12 +124,12 @@ export class ImageExporter implements Exporter {
 
   public async stop() {
     while (this.frameLookup.size > 0) {
-      await new Promise(resolve => setTimeout(resolve, EXPORT_RETRY_DELAY));
+      await new Promise((resolve) => setTimeout(resolve, EXPORT_RETRY_DELAY));
     }
     ImageExporter.response.unsubscribe(this.handleResponse);
   }
 
-  private handleResponse = ({frame}: ServerResponse) => {
+  private handleResponse = ({ frame }: ServerResponse) => {
     this.frameLookup.delete(frame);
   };
 }

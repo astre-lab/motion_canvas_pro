@@ -1,24 +1,24 @@
 import {
   AutoField,
   Button,
+  findAndOpenFirstUserFile,
   Group,
   Label,
   Pane,
   PluginInspectorConfig,
   Separator,
   UnknownField,
-  findAndOpenFirstUserFile,
   useApplication,
 } from '@motion-canvas/ui';
-import {useComputed} from '@preact/signals';
-import {NodeInspectorKey, usePluginState} from './Provider';
+import { useComputed } from '@preact/signals';
+import { NodeInspectorKey, usePluginState } from './Provider';
 
 function Component() {
-  const {inspection} = useApplication();
-  const {scene, afterRender} = usePluginState();
+  const { inspection } = useApplication();
+  const { scene, afterRender } = usePluginState();
   const node = useComputed(() => {
     afterRender.value;
-    const {payload} = inspection.value;
+    const { payload } = inspection.value;
     return scene.value?.getNode(payload as string);
   });
 
@@ -28,7 +28,7 @@ function Component() {
     const attributes: [string, unknown][] = [];
 
     if (currentNode) {
-      for (const {key, meta, signal} of currentNode) {
+      for (const { key, meta, signal } of currentNode) {
         if (!meta.inspectable) continue;
         attributes.push([key, signal()]);
       }
@@ -40,7 +40,7 @@ function Component() {
   const stack = node.value?.creationStack;
 
   return (
-    <Pane title="Node Inspector" id="node-inspector-pane">
+    <Pane title='Node Inspector' id='node-inspector-pane'>
       <Separator size={1} />
       {stack && (
         <Group>

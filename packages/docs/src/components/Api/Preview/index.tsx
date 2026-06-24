@@ -5,9 +5,9 @@ import SignaturePreview from '@site/src/components/Api/Preview/SignaturePreview'
 import TypeAliasPreview from '@site/src/components/Api/Preview/TypeAliasPreview';
 import TypeLiteralPreview from '@site/src/components/Api/Preview/TypeLiteralPreview';
 import TypeParameterPreview from '@site/src/components/Api/Preview/TypeParameterPreview';
-import {ReflectionKind} from '@site/src/components/Api/ReflectionKind';
-import React, {useMemo} from 'react';
-import type {JSONOutput} from 'typedoc';
+import { ReflectionKind } from '@site/src/components/Api/ReflectionKind';
+import React, { useMemo } from 'react';
+import type { JSONOutput } from 'typedoc';
 
 export default function CodePreview({
   reflection,

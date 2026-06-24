@@ -1,6 +1,6 @@
-import {describe, expect, test, vi} from 'vitest';
-import {Vector2} from '../types';
-import {deepLerp} from './interpolationFunctions';
+import { describe, expect, test, vi } from 'vitest';
+import { Vector2 } from '../types';
+import { deepLerp } from './interpolationFunctions';
 
 describe('deepLerp', () => {
   test('falls back to primitive tween for numbers', () => {
@@ -54,29 +54,32 @@ describe('deepLerp', () => {
   });
 
   test('interpolates between values in an object', () => {
-    expect(deepLerp({foo: 0}, {foo: 5}, 3 / 5)).toEqual({foo: 3});
+    expect(deepLerp({ foo: 0 }, { foo: 5 }, 3 / 5)).toEqual({ foo: 3 });
   });
 
   test('deletes values in a map after a value of 0', () => {
-    expect(deepLerp({foo: 5}, {}, 3 / 5)).toEqual({});
-    expect(deepLerp({foo: 5}, {}, 1)).toEqual({});
+    expect(deepLerp({ foo: 5 }, {}, 3 / 5)).toEqual({});
+    expect(deepLerp({ foo: 5 }, {}, 1)).toEqual({});
   });
 
   test('retains missing values in a map at a value of 0', () => {
-    expect(deepLerp({foo: 5}, {}, 0)).toEqual({foo: 5});
+    expect(deepLerp({ foo: 5 }, {}, 0)).toEqual({ foo: 5 });
   });
 
   test('retains properties with falsy values', () => {
-    expect(deepLerp({x: 0, y: 10}, {x: 0, y: 20}, 0.5)).toEqual({x: 0, y: 15});
+    expect(deepLerp({ x: 0, y: 10 }, { x: 0, y: 20 }, 0.5)).toEqual({
+      x: 0,
+      y: 15,
+    });
   });
 
   test('waits to add new values to a map until a value of 1', () => {
-    expect(deepLerp({}, {foo: 5}, 3 / 5)).toEqual({});
-    expect(deepLerp({}, {foo: 5}, 0)).toEqual({});
+    expect(deepLerp({}, { foo: 5 }, 3 / 5)).toEqual({});
+    expect(deepLerp({}, { foo: 5 }, 0)).toEqual({});
   });
 
   test('adds new values to a map at a value of 1', () => {
-    expect(deepLerp({}, {foo: 5}, 1)).toEqual({foo: 5});
+    expect(deepLerp({}, { foo: 5 }, 1)).toEqual({ foo: 5 });
   });
 
   test('invokes native interpolation function', () => {

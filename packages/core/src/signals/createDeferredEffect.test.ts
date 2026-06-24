@@ -1,10 +1,10 @@
-import {afterAll, beforeAll, describe, expect, test, vi} from 'vitest';
-import {PlaybackManager, PlaybackStatus} from '../app';
-import {run} from '../flow';
-import {threads} from '../threading';
-import {endPlayback, startPlayback} from '../utils';
-import {createDeferredEffect} from './createDeferredEffect';
-import {createSignal} from './createSignal';
+import { afterAll, beforeAll, describe, expect, test, vi } from 'vitest';
+import { PlaybackManager, PlaybackStatus } from '../app';
+import { run } from '../flow';
+import { threads } from '../threading';
+import { endPlayback, startPlayback } from '../utils';
+import { createDeferredEffect } from './createDeferredEffect';
+import { createSignal } from './createSignal';
 
 describe('createDeferredEffect()', () => {
   const status = new PlaybackStatus(new PlaybackManager());

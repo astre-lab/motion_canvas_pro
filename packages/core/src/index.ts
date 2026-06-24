@@ -7,7 +7,7 @@ export * from './events';
 export * from './flow';
 export * from './media';
 export * from './plugin';
-export {default as DefaultPlugin} from './plugin/DefaultPlugin';
+export { default as DefaultPlugin } from './plugin/DefaultPlugin';
 export * from './scenes';
 export * from './signals';
 export * from './threading';

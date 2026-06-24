@@ -1,8 +1,8 @@
-import {decorate, threadable} from '../decorators';
-import {usePlayback} from '../utils';
-import {Thread} from './Thread';
-import {ThreadGenerator, isThreadGenerator} from './ThreadGenerator';
-import {setTaskName} from './names';
+import { decorate, threadable } from '../decorators';
+import { usePlayback } from '../utils';
+import { Thread } from './Thread';
+import { isThreadGenerator, ThreadGenerator } from './ThreadGenerator';
+import { setTaskName } from './names';
 
 /**
  * Check if the given value is a [Promise][promise].
@@ -92,7 +92,7 @@ export function* threads(
         queue.push(thread);
       } else {
         thread.update(dt);
-        thread.drain(task => {
+        thread.drain((task) => {
           const child = new Thread(task);
           thread.add(child);
           newThreads.unshift(child);

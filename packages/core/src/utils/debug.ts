@@ -1,5 +1,5 @@
-import {LogPayload} from '../app';
-import {useLogger} from './useScene';
+import { LogPayload } from '../app';
+import { useLogger } from './useScene';
 
 function stringify(value: any): string {
   switch (typeof value) {
@@ -41,7 +41,7 @@ function stringify(value: any): string {
  * @param payload - The payload to log
  */
 export function debug(payload: any) {
-  const result: LogPayload = {message: stringify(payload)};
+  const result: LogPayload = { message: stringify(payload) };
 
   if (payload && typeof payload === 'object') {
     result.object = payload;

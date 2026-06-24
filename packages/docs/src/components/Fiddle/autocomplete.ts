@@ -1,23 +1,20 @@
-import {javascriptLanguage} from '@codemirror/lang-javascript';
-import {syntaxTree} from '@codemirror/language';
+import { javascriptLanguage } from '@codemirror/lang-javascript';
+import { syntaxTree } from '@codemirror/language';
 import ExecutionEnvironment from '@docusaurus/ExecutionEnvironment';
 
 function isConstructor(obj) {
   return !!obj.prototype && !!obj.prototype.constructor.name;
 }
 
-const Options: {label: string; type: string}[] = [];
+const Options: { label: string; type: string }[] = [];
 
 function loadModule(module: Record<string, unknown>) {
   Object.entries(module).forEach(([name, value]) => {
     Options.push({
       label: name,
-      type:
-        typeof value === 'function'
-          ? isConstructor(value)
-            ? 'class'
-            : 'function'
-          : 'variable',
+      type: typeof value === 'function'
+        ? isConstructor(value) ? 'class' : 'function'
+        : 'variable',
     });
   });
 }
@@ -33,7 +30,7 @@ if (ExecutionEnvironment.canUseDOM) {
 
 export function autocomplete() {
   return javascriptLanguage.data.of({
-    autocomplete: context => {
+    autocomplete: (context) => {
       const nodeBefore = syntaxTree(context.state).resolveInner(
         context.pos,
         -1,

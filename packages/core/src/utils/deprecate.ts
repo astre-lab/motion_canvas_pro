@@ -1,4 +1,4 @@
-import {useLogger} from './useScene';
+import { useLogger } from './useScene';
 
 /**
  * Mark the given function as deprecated.
@@ -13,7 +13,7 @@ export function deprecate<TArgs extends any[], TReturn>(
   remarks?: string,
 ): (...args: TArgs) => TReturn {
   return function (this: any, ...args) {
-    useLogger().warn({message, remarks, stack: new Error().stack});
+    useLogger().warn({ message, remarks, stack: new Error().stack });
     return fn.apply(this, args);
   };
 }

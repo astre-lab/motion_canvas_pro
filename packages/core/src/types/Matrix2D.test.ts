@@ -1,6 +1,6 @@
-import {beforeEach, describe, expect, test} from 'vitest';
-import {Matrix2D} from './Matrix2D';
-import {PossibleVector2, Vector2} from './Vector';
+import { beforeEach, describe, expect, test } from 'vitest';
+import { Matrix2D } from './Matrix2D';
+import { PossibleVector2, Vector2 } from './Vector';
 
 type Matrix2DValues = [number, number, number, number, number, number];
 
@@ -22,7 +22,7 @@ describe('Matrix2D', () => {
     });
 
     test('can be constructed from an array of three PossibleVector2', () => {
-      const matrix = new Matrix2D([[1, 0], {x: 0, y: 1}, Vector2.zero]);
+      const matrix = new Matrix2D([[1, 0], { x: 0, y: 1 }, Vector2.zero]);
       expect(matrix.values).toEqual(new Float32Array([1, 0, 0, 1, 0, 0]));
     });
 
@@ -58,18 +58,18 @@ describe('Matrix2D', () => {
       [
         'SerializedVector2',
         [
-          {x: 1, y: 1},
-          {x: 0, y: 0},
-          {x: 0, y: 1},
+          { x: 1, y: 1 },
+          { x: 0, y: 0 },
+          { x: 0, y: 1 },
         ],
         [1, 1, 0, 0, 0, 1],
       ],
       [
         '{width: T, height: T}',
         [
-          {width: 0, height: 1},
-          {width: 1, height: 1},
-          {width: 1, height: 1},
+          { width: 0, height: 1 },
+          { width: 1, height: 1 },
+          { width: 1, height: 1 },
         ],
         [0, 1, 1, 1, 1, 1],
       ],
@@ -320,9 +320,12 @@ describe('Matrix2D', () => {
     test('not exactly equal when not all values are exactly equal', () => {
       // prettier-ignore
       const other = new Matrix2D(
-        0.999999, -0.999999,
-        0.999999, 0.999999,
-        0.999999, -0.999999,
+        0.999999,
+        -0.999999,
+        0.999999,
+        0.999999,
+        0.999999,
+        -0.999999,
       );
       expect(Matrix2D.identity.exactlyEquals(other)).toBe(false);
     });

@@ -1,10 +1,10 @@
-import {all} from '../flow';
-import {createSignal} from '../signals';
-import {ThreadGenerator} from '../threading';
-import {clampRemap, easeInOutCubic, linear} from '../tweening';
-import {BBox, Vector2} from '../types';
-import {useScene} from '../utils';
-import {useTransition} from './useTransition';
+import { all } from '../flow';
+import { createSignal } from '../signals';
+import { ThreadGenerator } from '../threading';
+import { clampRemap, easeInOutCubic, linear } from '../tweening';
+import { BBox, Vector2 } from '../types';
+import { useScene } from '../utils';
+import { useTransition } from './useTransition';
 
 /**
  * Perform a transition that zooms in on a given area of the scene.
@@ -22,12 +22,12 @@ export function* zoomInTransition(area: BBox, duration = 0.6): ThreadGenerator {
   const alpha = createSignal(0);
 
   const endTransition = useTransition(
-    ctx => {
+    (ctx) => {
       ctx.globalAlpha = clampRemap(0.1, 0.5, 0, 1, alpha());
       ctx.translate(currentPosition.x(), currentPosition.y());
       ctx.scale(currentScale.x(), currentScale.y());
     },
-    ctx => {
+    (ctx) => {
       ctx.globalAlpha = clampRemap(0.5, 0.9, 1, 0, alpha());
       ctx.translate(previousPosition.x(), previousPosition.y());
       ctx.scale(previousScale.x(), previousScale.y());

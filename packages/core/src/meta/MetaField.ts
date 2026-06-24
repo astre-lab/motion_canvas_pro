@@ -1,4 +1,4 @@
-import {ValueDispatcher} from '../events';
+import { ValueDispatcher } from '../events';
 
 /**
  * Represents an entry in the meta file.
@@ -87,7 +87,7 @@ export class MetaField<
    * Create a clone of this field.
    */
   public clone(): this {
-    return new (<any>this.constructor)(this.name, this.get());
+    return new (<any> this.constructor)(this.name, this.get());
   }
 
   /**

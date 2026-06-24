@@ -3,17 +3,17 @@ import {
   EventDispatcher,
   ValueDispatcher,
 } from '../events';
-import {AudioManager, AudioManagerPool, AudioResourceManager} from '../media';
-import {Scene, Sound} from '../scenes';
-import {EditableTimeEvents} from '../scenes/timeEvents';
-import {clamp} from '../tweening';
-import {Vector2} from '../types';
-import {Semaphore} from '../utils';
-import {Logger} from './Logger';
-import {PlaybackManager, PlaybackState} from './PlaybackManager';
-import {PlaybackStatus} from './PlaybackStatus';
-import {Project} from './Project';
-import {SharedWebGLContext} from './SharedWebGLContext';
+import { AudioManager, AudioManagerPool, AudioResourceManager } from '../media';
+import { Scene, Sound } from '../scenes';
+import { EditableTimeEvents } from '../scenes/timeEvents';
+import { clamp } from '../tweening';
+import { Vector2 } from '../types';
+import { Semaphore } from '../utils';
+import { Logger } from './Logger';
+import { PlaybackManager, PlaybackState } from './PlaybackManager';
+import { PlaybackStatus } from './PlaybackStatus';
+import { Project } from './Project';
+import { SharedWebGLContext } from './SharedWebGLContext';
 
 export interface PlayerState extends Record<string, unknown> {
   paused: boolean;
@@ -170,7 +170,7 @@ export class Player {
         sharedWebGLContext: this.sharedWebGLContext,
         experimentalFeatures: project.experimentalFeatures,
       });
-      description.onReplaced?.subscribe(description => {
+      description.onReplaced?.subscribe((description) => {
         scene.reload(description);
       }, false);
       scene.onReloaded.subscribe(() => this.requestRecalculation());
@@ -367,7 +367,7 @@ export class Player {
   }
 
   private async prepare(): Promise<
-    PlayerState & {seek: number; render: boolean}
+    PlayerState & { seek: number; render: boolean }
   > {
     const state = {
       ...this.playerState.current,
@@ -409,8 +409,9 @@ export class Player {
     ) {
       this.togglePlayback(false);
       state.paused = true;
-      state.seek =
-        this.endFrame === this.startFrame ? state.seek : this.startFrame;
+      state.seek = this.endFrame === this.startFrame
+        ? state.seek
+        : this.startFrame;
     }
 
     // Seek to the beginning if looping is enabled
@@ -429,8 +430,8 @@ export class Player {
     this.audioPool.setVolume(state.volume);
 
     // Pause / play audio.
-    const audioPaused =
-      state.paused || this.finished || !this.audio.isInRange(this.status.time);
+    const audioPaused = state.paused || this.finished ||
+      !this.audio.isInRange(this.status.time);
     if (await this.audio.setPaused(audioPaused)) {
       this.syncAudio(-3);
     }
@@ -455,8 +456,7 @@ export class Player {
       await this.playback.seek(clampedFrame);
       this.logger.profile('seek time');
       this.syncAudio(-3);
-    }
-    // Do nothing if paused or is ahead of the audio.
+    } // Do nothing if paused or is ahead of the audio.
     else if (
       state.paused ||
       (state.speed === 1 &&
@@ -481,8 +481,7 @@ export class Player {
 
       this.request();
       return;
-    }
-    // Seek to synchronize animation with audio.
+    } // Seek to synchronize animation with audio.
     else if (
       this.audio.isReady() &&
       state.speed === 1 &&
@@ -492,8 +491,7 @@ export class Player {
     ) {
       const seekFrame = this.status.secondsToFrames(this.audio.getTime());
       await this.playback.seek(seekFrame);
-    }
-    // Simply move forward one frame
+    } // Simply move forward one frame
     else if (this.status.frame < this.endFrame) {
       await this.playback.progress();
 
@@ -518,7 +516,7 @@ export class Player {
   private request() {
     if (!this.active) return;
 
-    this.requestId ??= requestAnimationFrame(async time => {
+    this.requestId ??= requestAnimationFrame(async (time) => {
       this.requestId = null;
       if (time - this.renderTime >= 1000 / (this.status.fps + 5)) {
         this.renderTime = time;

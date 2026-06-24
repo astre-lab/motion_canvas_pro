@@ -1,8 +1,12 @@
 import clsx from 'clsx';
-import {ComponentChildren} from 'preact';
-import {useMemo, useRef} from 'preact/hooks';
-import {ViewportProvider, ViewportState, useApplication} from '../../contexts';
-import {VIEWPORT_SHORTCUTS, useShortcuts} from '../../contexts/shortcuts';
+import { ComponentChildren } from 'preact';
+import { useMemo, useRef } from 'preact/hooks';
+import {
+  useApplication,
+  ViewportProvider,
+  ViewportState,
+} from '../../contexts';
+import { useShortcuts, VIEWPORT_SHORTCUTS } from '../../contexts/shortcuts';
 import {
   usePreviewSettings,
   useSharedSettings,
@@ -11,22 +15,22 @@ import {
   useSubscribable,
   useSubscribableValue,
 } from '../../hooks';
-import {MouseButton} from '../../utils';
-import {highlight} from '../animations';
-import {Button, Select} from '../controls';
-import {ButtonCheckbox} from '../controls/ButtonCheckbox';
-import {Grid as GridIcon, Recenter} from '../icons';
-import {ColorPicker} from './ColorPicker';
-import {Coordinates} from './Coordinates';
-import {Inspector} from './Inspector';
-import {OverlayCanvas} from './OverlayCanvas';
-import {PreviewStage} from './PreviewStage';
+import { MouseButton } from '../../utils';
+import { highlight } from '../animations';
+import { Button, Select } from '../controls';
+import { ButtonCheckbox } from '../controls/ButtonCheckbox';
+import { Grid as GridIcon, Recenter } from '../icons';
+import { ColorPicker } from './ColorPicker';
+import { Coordinates } from './Coordinates';
+import { Inspector } from './Inspector';
+import { OverlayCanvas } from './OverlayCanvas';
+import { PreviewStage } from './PreviewStage';
 import styles from './Viewport.module.scss';
 
 const ZOOM_SPEED = 0.1;
 
 export function EditorPreview() {
-  const {plugins, player, settings: appSettings} = useApplication();
+  const { plugins, player, settings: appSettings } = useApplication();
   const coordinateSetting = useSubscribableValue(
     appSettings.appearance.coordinates.onChanged,
   );
@@ -50,7 +54,7 @@ export function EditorPreview() {
   const inspector = useMemo(() => <Inspector />, []);
   const drawHooks = useMemo(
     () =>
-      plugins.map(plugin => plugin.previewOverlay?.drawHook).filter(Boolean),
+      plugins.map((plugin) => plugin.previewOverlay?.drawHook).filter(Boolean),
     [plugins],
   );
 
@@ -63,7 +67,7 @@ export function EditorPreview() {
       resolutionScale: settings.resolutionScale,
     };
     if (zoomToFit) {
-      const {width, height} = settings.size;
+      const { width, height } = settings.size;
       let newZoom = size.height / height;
       if (width * newZoom > size.width) {
         newZoom = size.width / width;
@@ -80,7 +84,7 @@ export function EditorPreview() {
 
   useSubscribable(
     player.onRecalculated,
-    () => overlayRef.current.animate(highlight(), {duration: 300}),
+    () => overlayRef.current.animate(highlight(), { duration: 300 }),
     [],
   );
 
@@ -98,18 +102,18 @@ export function EditorPreview() {
   });
 
   const zoomOptions = [
-    {value: 0, text: 'Zoom to fit'},
-    {value: 0.25, text: '25%'},
-    {value: 0.5, text: '50%'},
-    {value: 1, text: '100%'},
-    {value: 2, text: '200%'},
+    { value: 0, text: 'Zoom to fit' },
+    { value: 0.25, text: '25%' },
+    { value: 0.5, text: '50%' },
+    { value: 1, text: '100%' },
+    { value: 2, text: '200%' },
   ];
   let value;
   if (zoomToFit) {
     value = 0;
   } else {
-    value =
-      zoomOptions.find(option => option.value === state.zoom)?.value ?? -1;
+    value = zoomOptions.find((option) => option.value === state.zoom)?.value ??
+      -1;
   }
   if (value === -1) {
     zoomOptions.unshift({
@@ -139,10 +143,10 @@ export function EditorPreview() {
         <div
           ref={overlayRef}
           className={styles.overlay}
-          onContextMenu={event => {
+          onContextMenu={(event) => {
             event.preventDefault();
           }}
-          onPointerDown={event => {
+          onPointerDown={(event) => {
             if (
               event.button === MouseButton.Middle ||
               (event.button === MouseButton.Left && event.shiftKey)
@@ -153,7 +157,7 @@ export function EditorPreview() {
               event.currentTarget.setPointerCapture(event.pointerId);
             }
           }}
-          onPointerMove={event => {
+          onPointerMove={(event) => {
             if (event.currentTarget.hasPointerCapture(event.pointerId)) {
               setZoomToFit(false);
               setZoom(state.zoom);
@@ -163,11 +167,11 @@ export function EditorPreview() {
               });
             }
           }}
-          onPointerUp={event => {
+          onPointerUp={(event) => {
             isDragging.current = false;
             event.currentTarget.releasePointerCapture(event.pointerId);
           }}
-          onWheel={event => {
+          onWheel={(event) => {
             if (isDragging.current) return;
             const rect = containerRef.current.getBoundingClientRect();
             const pointer = {
@@ -191,13 +195,13 @@ export function EditorPreview() {
         </div>
         <div className={clsx(styles.overlay, styles.controls)}>
           <Select
-            title="Change zoom"
-            onChange={value => {
+            title='Change zoom'
+            onChange={(value) => {
               if (value === 0) {
                 setZoomToFit(true);
               } else {
                 setZoomToFit(false);
-                setPosition({x: 0, y: 0});
+                setPosition({ x: 0, y: 0 });
                 setZoom(value);
               }
             }}
@@ -207,7 +211,7 @@ export function EditorPreview() {
           <Button
             disabled={state.x === 0 && state.y === 0}
             title={'Recenter'}
-            onClick={() => setPosition({x: 0, y: 0})}
+            onClick={() => setPosition({ x: 0, y: 0 })}
           >
             <Recenter />
           </Button>

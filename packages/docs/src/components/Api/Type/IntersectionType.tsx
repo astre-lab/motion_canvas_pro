@@ -5,7 +5,7 @@ import TokenList, {
   Separator,
 } from '@site/src/components/Api/Code/TokenList';
 import Type from '@site/src/components/Api/Type';
-import type {JSONOutput} from 'typedoc';
+import type { JSONOutput } from 'typedoc';
 
 export default function IntersectionType({
   type,
@@ -14,9 +14,7 @@ export default function IntersectionType({
 }) {
   return (
     <TokenList type={ListType.Parentheses} separator={Separator.Ampersand}>
-      {type.types.map((item, index) => (
-        <Type key={index} type={item} />
-      ))}
+      {type.types.map((item, index) => <Type key={index} type={item} />)}
     </TokenList>
   );
 }

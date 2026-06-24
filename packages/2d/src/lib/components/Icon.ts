@@ -5,8 +5,8 @@ import {
   SimpleSignal,
   useLogger,
 } from '@motion-canvas/core';
-import {colorSignal, computed, initial, signal} from '../decorators';
-import {Img, ImgProps} from './Img';
+import { colorSignal, computed, initial, signal } from '../decorators';
+import { Img, ImgProps } from './Img';
 
 export interface IconProps extends ImgProps {
   /**
@@ -36,7 +36,7 @@ export class Icon extends Img {
    * * `ph:activity-bold`
    */
   @signal()
-  public declare icon: SimpleSignal<string, this>;
+  declare public icon: SimpleSignal<string, this>;
 
   /**
    * The color of the icon
@@ -52,7 +52,7 @@ export class Icon extends Img {
    */
   @initial('white')
   @colorSignal()
-  public declare color: ColorSignal<this>;
+  declare public color: ColorSignal<this>;
 
   public constructor(props: IconProps) {
     super({

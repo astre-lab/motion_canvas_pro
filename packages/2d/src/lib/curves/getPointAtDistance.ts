@@ -1,6 +1,6 @@
-import {Vector2, clamp} from '@motion-canvas/core';
-import {CurvePoint} from './CurvePoint';
-import {CurveProfile} from './CurveProfile';
+import { clamp, Vector2 } from '@motion-canvas/core';
+import { CurvePoint } from './CurvePoint';
+import { CurveProfile } from './CurveProfile';
 
 export function getPointAtDistance(
   profile: CurveProfile,
@@ -17,5 +17,5 @@ export function getPointAtDistance(
     }
   }
 
-  return {position: Vector2.zero, tangent: Vector2.up, normal: Vector2.up};
+  return { position: Vector2.zero, tangent: Vector2.up, normal: Vector2.up };
 }

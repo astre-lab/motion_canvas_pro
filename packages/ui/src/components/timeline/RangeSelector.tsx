@@ -1,25 +1,29 @@
 import styles from './Timeline.module.scss';
 
 import clsx from 'clsx';
-import {RefObject} from 'preact';
-import {useCallback, useEffect, useState} from 'preact/hooks';
-import {useApplication, useTimelineContext} from '../../contexts';
-import {useModifiers} from '../../contexts/shortcuts';
-import {useDuration, usePreviewSettings, useSharedSettings} from '../../hooks';
-import {labelClipDraggingLeftSignal} from '../../signals';
-import {MouseButton} from '../../utils';
-import {DragIndicator} from '../icons';
+import { RefObject } from 'preact';
+import { useCallback, useEffect, useState } from 'preact/hooks';
+import { useApplication, useTimelineContext } from '../../contexts';
+import { useModifiers } from '../../contexts/shortcuts';
+import {
+  useDuration,
+  usePreviewSettings,
+  useSharedSettings,
+} from '../../hooks';
+import { labelClipDraggingLeftSignal } from '../../signals';
+import { MouseButton } from '../../utils';
+import { DragIndicator } from '../icons';
 
 export interface RangeSelectorProps {
   rangeRef: RefObject<HTMLDivElement>;
 }
 
-export function RangeSelector({rangeRef}: RangeSelectorProps) {
-  const {pixelsToFrames, framesToPercents, pointerToFrames} =
+export function RangeSelector({ rangeRef }: RangeSelectorProps) {
+  const { pixelsToFrames, framesToPercents, pointerToFrames } =
     useTimelineContext();
-  const {player, meta} = useApplication();
-  const {range} = useSharedSettings();
-  const {fps} = usePreviewSettings();
+  const { player, meta } = useApplication();
+  const { range } = useSharedSettings();
+  const { fps } = usePreviewSettings();
   const duration = useDuration();
   const startFrame = player.status.secondsToFrames(range[0]);
   const endFrame = Math.min(player.status.secondsToFrames(range[1]), duration);
@@ -50,7 +54,7 @@ export function RangeSelector({rangeRef}: RangeSelectorProps) {
         styles.rangeTrack,
         modifiers.value.shift && modifiers.value.ctrl && styles.active,
       )}
-      onPointerDown={event => {
+      onPointerDown={(event) => {
         if (event.button === MouseButton.Left) {
           event.preventDefault();
           event.stopPropagation();
@@ -60,12 +64,12 @@ export function RangeSelector({rangeRef}: RangeSelectorProps) {
           setEnd(pointerToFrames(event.clientX));
         }
       }}
-      onPointerMove={event => {
+      onPointerMove={(event) => {
         if (event.currentTarget.hasPointerCapture(event.pointerId)) {
           setEnd(end + pixelsToFrames(event.movementX));
         }
       }}
-      onPointerUp={event => {
+      onPointerUp={(event) => {
         if (event.button === MouseButton.Left) {
           event.currentTarget.releasePointerCapture(event.pointerId);
           onDrop();
@@ -85,20 +89,20 @@ export function RangeSelector({rangeRef}: RangeSelectorProps) {
           styles.range,
           modifiers.value.shift && !modifiers.value.ctrl && styles.active,
         )}
-        onPointerDown={event => {
+        onPointerDown={(event) => {
           if (event.button === MouseButton.Left) {
             event.preventDefault();
             event.stopPropagation();
             event.currentTarget.setPointerCapture(event.pointerId);
           }
         }}
-        onPointerMove={event => {
+        onPointerMove={(event) => {
           if (event.currentTarget.hasPointerCapture(event.pointerId)) {
             setStart(start + pixelsToFrames(event.movementX));
             setEnd(end + pixelsToFrames(event.movementX));
           }
         }}
-        onPointerUp={event => {
+        onPointerUp={(event) => {
           if (event.button === MouseButton.Left) {
             event.currentTarget.releasePointerCapture(event.pointerId);
             onDrop();
@@ -122,32 +126,34 @@ interface RangeHandleProps {
   onDrop: (event: PointerEvent) => void;
 }
 
-function RangeHandle({value, setValue, onDrop}: RangeHandleProps) {
-  const {pixelsToFrames} = useTimelineContext();
-  const {player} = useApplication();
+function RangeHandle({ value, setValue, onDrop }: RangeHandleProps) {
+  const { pixelsToFrames } = useTimelineContext();
+  const { player } = useApplication();
 
   return (
     <DragIndicator
       className={styles.handle}
-      onPointerDown={event => {
+      onPointerDown={(event) => {
         if (event.button === MouseButton.Left) {
           event.preventDefault();
           event.stopPropagation();
           event.currentTarget.setPointerCapture(event.pointerId);
-          labelClipDraggingLeftSignal.value =
-            player.status.framesToSeconds(value);
+          labelClipDraggingLeftSignal.value = player.status.framesToSeconds(
+            value,
+          );
         }
       }}
-      onPointerMove={event => {
+      onPointerMove={(event) => {
         if (event.currentTarget.hasPointerCapture(event.pointerId)) {
           event.stopPropagation();
           const newValue = value + pixelsToFrames(event.movementX);
           setValue(newValue);
-          labelClipDraggingLeftSignal.value =
-            player.status.framesToSeconds(newValue);
+          labelClipDraggingLeftSignal.value = player.status.framesToSeconds(
+            newValue,
+          );
         }
       }}
-      onPointerUp={event => {
+      onPointerUp={(event) => {
         if (event.button === MouseButton.Left) {
           event.stopPropagation();
           event.currentTarget.releasePointerCapture(event.pointerId);

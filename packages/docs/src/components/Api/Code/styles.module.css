@@ -1,7 +1,5 @@
-.list {
-}
-.elements {
-}
+.list {}
+.elements {}
 
 .elements:not(.wrap) > .element:not(:last-child)::after {
   content: attr(data-separator);
@@ -88,7 +86,8 @@
   border-radius: var(--ifm-pre-border-radius);
 }
 .codeBlock:first-child:not(:last-child) {
-  --ifm-pre-border-radius: var(--ifm-global-radius) var(--ifm-global-radius) 0 0;
+  --ifm-pre-border-radius: var(--ifm-global-radius) var(--ifm-global-radius) 0
+    0;
   border-bottom: 1px solid var(--ifm-color-emphasis-300);
 }
 .codeBlock:not(:first-child):not(:last-child) {
@@ -96,7 +95,9 @@
   border-bottom: 1px solid var(--ifm-color-emphasis-300);
 }
 .codeBlock:not(:first-child):last-child {
-  --ifm-pre-border-radius: 0 0 var(--ifm-global-radius) var(--ifm-global-radius);
+  --ifm-pre-border-radius: 0 0 var(--ifm-global-radius) var(
+    --ifm-global-radius
+  );
 }
 
 .codeBlock.pointer {

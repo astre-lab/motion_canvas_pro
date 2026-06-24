@@ -1,13 +1,13 @@
-import {useApplication} from '../../contexts';
-import {Expandable} from '../fields';
-import {MetaFieldView} from '../meta';
-import {Pane} from '../tabs';
+import { useApplication } from '../../contexts';
+import { Expandable } from '../fields';
+import { MetaFieldView } from '../meta';
+import { Pane } from '../tabs';
 
 export function Settings() {
-  const {settings} = useApplication();
+  const { settings } = useApplication();
 
   return (
-    <Pane title="Settings" id="app-settings-pane">
+    <Pane title='Settings' id='app-settings-pane'>
       <Expandable title={settings.appearance.name} open>
         <MetaFieldView field={settings.appearance} />
       </Expandable>

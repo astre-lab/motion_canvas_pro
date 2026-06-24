@@ -1,8 +1,8 @@
-import {ValueDispatcher} from '../../events';
-import type {Scene} from '../Scene';
-import type {SerializedTimeEvent} from './SerializedTimeEvent';
-import type {TimeEvent} from './TimeEvent';
-import type {TimeEvents} from './TimeEvents';
+import { ValueDispatcher } from '../../events';
+import type { Scene } from '../Scene';
+import type { SerializedTimeEvent } from './SerializedTimeEvent';
+import type { TimeEvent } from './TimeEvent';
+import type { TimeEvents } from './TimeEvents';
 
 /**
  * Manages time events during editing.
@@ -71,7 +71,7 @@ export class EditableTimeEvents implements TimeEvents {
       this.lookup.set(name, event);
     } else {
       let changed = false;
-      const newEvent = {...event};
+      const newEvent = { ...event };
 
       const stack = new Error().stack;
       if (newEvent.stack !== stack) {
@@ -129,7 +129,7 @@ export class EditableTimeEvents implements TimeEvents {
     ) {
       this.didEventsChange = false;
       this.previousReference = [...this.registeredEvents.values()].map(
-        event => ({
+        (event) => ({
           name: event.name,
           targetTime: event.targetTime,
         }),

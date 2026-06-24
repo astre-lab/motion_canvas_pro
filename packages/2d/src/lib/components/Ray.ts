@@ -4,10 +4,10 @@ import {
   SignalValue,
   Vector2Signal,
 } from '@motion-canvas/core';
-import {CurveProfile, LineSegment} from '../curves';
-import {nodeName, vector2Signal} from '../decorators';
-import {arc, drawLine, drawPivot} from '../utils';
-import {Curve, CurveProps} from './Curve';
+import { CurveProfile, LineSegment } from '../curves';
+import { nodeName, vector2Signal } from '../decorators';
+import { arc, drawLine, drawPivot } from '../utils';
+import { Curve, CurveProps } from './Curve';
 
 export interface RayProps extends CurveProps {
   /**
@@ -59,13 +59,13 @@ export class Ray extends Curve {
    * The starting point of the ray.
    */
   @vector2Signal('from')
-  public declare readonly from: Vector2Signal<this>;
+  declare public readonly from: Vector2Signal<this>;
 
   /**
    * The ending point of the ray.
    */
   @vector2Signal('to')
-  public declare readonly to: Vector2Signal<this>;
+  declare public readonly to: Vector2Signal<this>;
 
   public constructor(props: RayProps) {
     super(props);

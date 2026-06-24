@@ -1,4 +1,4 @@
-import {Vector2} from '@motion-canvas/core';
+import { Vector2 } from '@motion-canvas/core';
 import {
   MouseButton,
   OverlayWrapper,
@@ -6,17 +6,17 @@ import {
   useViewportContext,
   useViewportMatrix,
 } from '@motion-canvas/ui';
-import {ComponentChildren} from 'preact';
-import {usePluginState} from './Provider';
+import { ComponentChildren } from 'preact';
+import { usePluginState } from './Provider';
 
-function Component({children}: {children?: ComponentChildren}) {
+function Component({ children }: { children?: ComponentChildren }) {
   const state = useViewportContext();
-  const {scene, selectNode} = usePluginState();
+  const { scene, selectNode } = usePluginState();
   const matrix = useViewportMatrix();
 
   return (
     <OverlayWrapper
-      onPointerDown={event => {
+      onPointerDown={(event) => {
         if (event.button !== MouseButton.Left || event.shiftKey) return;
         if (!scene.value) return;
         event.stopPropagation();
@@ -37,7 +37,7 @@ function Component({children}: {children?: ComponentChildren}) {
 }
 
 function drawHook() {
-  const {selectedNode, hoveredKey, afterRender, scene} = usePluginState();
+  const { selectedNode, hoveredKey, afterRender, scene } = usePluginState();
   selectedNode.value;
   hoveredKey.value;
   afterRender.value;

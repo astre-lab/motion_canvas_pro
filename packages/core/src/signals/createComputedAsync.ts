@@ -4,7 +4,7 @@ import {
   createSignal,
   PromiseHandle,
 } from '../signals';
-import {createComputed} from './createComputed';
+import { createComputed } from './createComputed';
 
 export function createComputedAsync<T>(
   factory: () => Promise<T>,

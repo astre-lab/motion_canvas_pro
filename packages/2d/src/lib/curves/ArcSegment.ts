@@ -1,7 +1,7 @@
-import {BBox, DEG2RAD, Matrix2D, Vector2, lazy} from '@motion-canvas/core';
-import {View2D} from '../components/View2D';
-import {CurvePoint} from './CurvePoint';
-import {Segment} from './Segment';
+import { BBox, DEG2RAD, lazy, Matrix2D, Vector2 } from '@motion-canvas/core';
+import { View2D } from '../components/View2D';
+import { CurvePoint } from './CurvePoint';
+import { Segment } from './Segment';
 
 export class ArcSegment extends Segment {
   @lazy(() => {
@@ -39,8 +39,7 @@ export class ArcSegment extends Segment {
       .div(2)
       .transform(Matrix2D.fromRotation(-xAxisRotationDegree).domMatrix);
 
-    const L =
-      (pAccent.x * pAccent.x) / (radius.x * radius.x) +
+    const L = (pAccent.x * pAccent.x) / (radius.x * radius.x) +
       (pAccent.y * pAccent.y) / (radius.y * radius.y);
 
     if (L > 1) {
@@ -55,8 +54,8 @@ export class ArcSegment extends Segment {
     ).scale(
       Math.sqrt(
         1 /
-          ((pAccent.x * pAccent.x) / (radius.x * radius.x) +
-            (pAccent.y * pAccent.y) / (radius.y * radius.y)) -
+            ((pAccent.x * pAccent.x) / (radius.x * radius.x) +
+              (pAccent.y * pAccent.y) / (radius.y * radius.y)) -
           1,
       ) * (largeArcFlag === sweepFlag ? -1 : 1),
     );
@@ -133,12 +132,11 @@ export class ArcSegment extends Segment {
     const angle = this.startAngle + distance * this.deltaAngle;
     const tangent = this.getAngleDerivative(angle).normalized;
     return {
-      position:
-        distance === 0
-          ? this.startPoint
-          : distance === 1
-            ? this.endPoint
-            : this.getAnglePosition(angle),
+      position: distance === 0
+        ? this.startPoint
+        : distance === 1
+        ? this.endPoint
+        : this.getAnglePosition(angle),
       tangent,
       normal: tangent.perpendicular,
     };

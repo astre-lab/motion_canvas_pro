@@ -1,5 +1,5 @@
-import {Circle, Img, Node, makeScene2D} from '@motion-canvas/2d';
-import {createRef, easeInOutSine, linear} from '@motion-canvas/core';
+import { Circle, Img, makeScene2D, Node } from '@motion-canvas/2d';
+import { createRef, easeInOutSine, linear } from '@motion-canvas/core';
 
 /*
  * This example shows you that you can also nest composite operations.
@@ -21,7 +21,7 @@ export default makeScene2D(function* (view) {
   yield view.add(
     <Node cache>
       {/** Stencil / Mask Layer. It defines if the Value Layer is visible or not */}
-      <Img ref={maskRef} size={250} src="/img/logo_dark.svg" />
+      <Img ref={maskRef} size={250} src='/img/logo_dark.svg' />
       {/** Value Layer (which in itself is generated from a composite operation)  */}
       <Node cache compositeOperation={'xor'}>
         <Circle ref={valueRef} size={0} fill={'white'} />

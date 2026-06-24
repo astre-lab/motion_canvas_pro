@@ -1,6 +1,6 @@
-import {ValueDispatcher} from '../events';
-import {useScene} from '../utils';
-import type {Scene} from './Scene';
+import { ValueDispatcher } from '../events';
+import { useScene } from '../utils';
+import type { Scene } from './Scene';
 
 export interface SoundSettings {
   audio: string;
@@ -24,9 +24,9 @@ export class SoundBuilder {
    */
   public constructor(audio: string | SoundBuilder) {
     if (audio instanceof SoundBuilder) {
-      this.settings = {...audio.settings};
+      this.settings = { ...audio.settings };
     } else {
-      this.settings = {audio};
+      this.settings = { audio };
     }
   }
 
@@ -113,8 +113,7 @@ export class Sounds {
 
     this.registeredSounds.push({
       offset: playbackTime,
-      realPlaybackRate:
-        Math.pow(2, (settings.detune ?? 0) / 1200) *
+      realPlaybackRate: Math.pow(2, (settings.detune ?? 0) / 1200) *
         (settings.playbackRate ?? 1),
       ...settings,
     });

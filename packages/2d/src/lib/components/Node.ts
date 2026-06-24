@@ -1,7 +1,13 @@
 import {
+  all,
   BBox,
+  clamp,
   ColorSignal,
+  createSignal,
   DependencyContext,
+  easeInOutCubic,
+  isReactive,
+  modify,
   PossibleColor,
   PossibleSpacing,
   PossibleVector2,
@@ -12,27 +18,20 @@ import {
   SimpleSignal,
   SimpleVector2Signal,
   SpacingSignal,
+  threadable,
   ThreadGenerator,
   TimingFunction,
+  transformAngle,
+  transformScalar,
   UNIFORM_DESTINATION_MATRIX,
   UNIFORM_SOURCE_MATRIX,
   UNIFORM_TIME,
-  Vector2,
-  Vector2Signal,
-  all,
-  clamp,
-  createSignal,
-  easeInOutCubic,
-  isReactive,
-  modify,
-  threadable,
-  transformAngle,
-  transformScalar,
   unwrap,
   useLogger,
+  Vector2,
+  Vector2Signal,
 } from '@motion-canvas/core';
 import {
-  NODE_NAME,
   cloneable,
   colorSignal,
   computed,
@@ -40,24 +39,29 @@ import {
   initial,
   initializeSignals,
   inspectable,
+  NODE_NAME,
   nodeName,
   parser,
   signal,
   vector2Signal,
   wrapper,
 } from '../decorators';
-import {FiltersSignal, filtersSignal} from '../decorators/filtersSignal';
-import {spacingSignal} from '../decorators/spacingSignal';
-import {Filter} from '../partials';
+import { FiltersSignal, filtersSignal } from '../decorators/filtersSignal';
+import { spacingSignal } from '../decorators/spacingSignal';
+import { Filter } from '../partials';
 import {
+  parseShader,
   PossibleShaderConfig,
   ShaderConfig,
-  parseShader,
 } from '../partials/ShaderConfig';
-import {useScene2D} from '../scenes/useScene2D';
-import {drawLine} from '../utils';
-import type {View2D} from './View2D';
-import type {ComponentChild, ComponentChildren, NodeConstructor} from './types';
+import { useScene2D } from '../scenes/useScene2D';
+import { drawLine } from '../utils';
+import type { View2D } from './View2D';
+import type {
+  ComponentChild,
+  ComponentChildren,
+  NodeConstructor,
+} from './types';
 
 export type NodeState = NodeProps & Record<string, any>;
 
@@ -126,8 +130,8 @@ export class Node implements Promisable<Node> {
   /**
    * @internal
    */
-  public declare readonly [NODE_NAME]: string;
-  public declare isClass: boolean;
+  declare public readonly [NODE_NAME]: string;
+  declare public isClass: boolean;
 
   /**
    * Represents the position of this node in local space of its parent.
@@ -160,7 +164,7 @@ export class Node implements Promisable<Node> {
    * ```
    */
   @vector2Signal()
-  public declare readonly position: Vector2Signal<this>;
+  declare public readonly position: Vector2Signal<this>;
 
   public get x() {
     return this.position.x as SimpleSignal<number, this>;
@@ -188,7 +192,7 @@ export class Node implements Promisable<Node> {
   @wrapper(Vector2)
   @cloneable(false)
   @signal()
-  public declare readonly absolutePosition: SimpleVector2Signal<this>;
+  declare public readonly absolutePosition: SimpleVector2Signal<this>;
 
   protected getAbsolutePosition(): Vector2 {
     return new Vector2(this.parentToWorld().transformPoint(this.position()));
@@ -196,8 +200,10 @@ export class Node implements Promisable<Node> {
 
   protected setAbsolutePosition(value: SignalValue<PossibleVector2>) {
     this.position(
-      modify(value, unwrapped =>
-        new Vector2(unwrapped).transformAsPoint(this.worldToParent()),
+      modify(
+        value,
+        (unwrapped) =>
+          new Vector2(unwrapped).transformAsPoint(this.worldToParent()),
       ),
     );
   }
@@ -207,7 +213,7 @@ export class Node implements Promisable<Node> {
    */
   @initial(0)
   @signal()
-  public declare readonly rotation: SimpleSignal<number, this>;
+  declare public readonly rotation: SimpleSignal<number, this>;
 
   /**
    * A helper signal for operating on the rotation in world space.
@@ -222,7 +228,7 @@ export class Node implements Promisable<Node> {
    */
   @cloneable(false)
   @signal()
-  public declare readonly absoluteRotation: SimpleSignal<number, this>;
+  declare public readonly absoluteRotation: SimpleSignal<number, this>;
 
   protected getAbsoluteRotation() {
     const matrix = this.localToWorld();
@@ -231,8 +237,9 @@ export class Node implements Promisable<Node> {
 
   protected setAbsoluteRotation(value: SignalValue<number>) {
     this.rotation(
-      modify(value, unwrapped =>
-        transformAngle(unwrapped, this.worldToParent()),
+      modify(
+        value,
+        (unwrapped) => transformAngle(unwrapped, this.worldToParent()),
       ),
     );
   }
@@ -269,7 +276,7 @@ export class Node implements Promisable<Node> {
    */
   @initial(Vector2.one)
   @vector2Signal('scale')
-  public declare readonly scale: Vector2Signal<this>;
+  declare public readonly scale: Vector2Signal<this>;
 
   /**
    * Represents the skew of this node in local space of its parent.
@@ -303,7 +310,7 @@ export class Node implements Promisable<Node> {
    */
   @initial(Vector2.zero)
   @vector2Signal('skew')
-  public declare readonly skew: Vector2Signal<this>;
+  declare public readonly skew: Vector2Signal<this>;
 
   /**
    * A helper signal for operating on the scale in world space.
@@ -322,7 +329,7 @@ export class Node implements Promisable<Node> {
   @wrapper(Vector2)
   @cloneable(false)
   @signal()
-  public declare readonly absoluteScale: SimpleVector2Signal<this>;
+  declare public readonly absoluteScale: SimpleVector2Signal<this>;
 
   protected getAbsoluteScale(): Vector2 {
     const matrix = this.localToWorld();
@@ -334,7 +341,10 @@ export class Node implements Promisable<Node> {
 
   protected setAbsoluteScale(value: SignalValue<PossibleVector2>) {
     this.scale(
-      modify(value, unwrapped => this.getRelativeScale(new Vector2(unwrapped))),
+      modify(
+        value,
+        (unwrapped) => this.getRelativeScale(new Vector2(unwrapped)),
+      ),
     );
   }
 
@@ -345,11 +355,11 @@ export class Node implements Promisable<Node> {
 
   @initial(0)
   @signal()
-  public declare readonly zIndex: SimpleSignal<number, this>;
+  declare public readonly zIndex: SimpleSignal<number, this>;
 
   @initial(false)
   @signal()
-  public declare readonly cache: SimpleSignal<boolean, this>;
+  declare public readonly cache: SimpleSignal<boolean, this>;
 
   /**
    * Controls the padding of the cached canvas used by this node.
@@ -361,15 +371,15 @@ export class Node implements Promisable<Node> {
    * Usually used to account for custom effects created by {@link shaders}.
    */
   @spacingSignal('cachePadding')
-  public declare readonly cachePadding: SpacingSignal<this>;
+  declare public readonly cachePadding: SpacingSignal<this>;
 
   @initial(false)
   @signal()
-  public declare readonly composite: SimpleSignal<boolean, this>;
+  declare public readonly composite: SimpleSignal<boolean, this>;
 
   @initial('source-over')
   @signal()
-  public declare readonly compositeOperation: SimpleSignal<
+  declare public readonly compositeOperation: SimpleSignal<
     GlobalCompositeOperation,
     this
   >;
@@ -403,7 +413,7 @@ export class Node implements Promisable<Node> {
   @initial(1)
   @parser((value: number) => clamp(0, 1, value))
   @signal()
-  public declare readonly opacity: SimpleSignal<number, this>;
+  declare public readonly opacity: SimpleSignal<number, this>;
 
   @computed()
   public absoluteOpacity(): number {
@@ -411,18 +421,18 @@ export class Node implements Promisable<Node> {
   }
 
   @filtersSignal()
-  public declare readonly filters: FiltersSignal<this>;
+  declare public readonly filters: FiltersSignal<this>;
 
   @initial('#0000')
   @colorSignal()
-  public declare readonly shadowColor: ColorSignal<this>;
+  declare public readonly shadowColor: ColorSignal<this>;
 
   @initial(0)
   @signal()
-  public declare readonly shadowBlur: SimpleSignal<number, this>;
+  declare public readonly shadowBlur: SimpleSignal<number, this>;
 
   @vector2Signal('shadowOffset')
-  public declare readonly shadowOffset: Vector2Signal<this>;
+  declare public readonly shadowOffset: Vector2Signal<this>;
 
   /**
    * @experimental
@@ -430,7 +440,7 @@ export class Node implements Promisable<Node> {
   @initial([])
   @parser(parseShader)
   @signal()
-  public declare readonly shaders: Signal<
+  declare public readonly shaders: Signal<
     PossibleShaderConfig,
     ShaderConfig[],
     this
@@ -438,7 +448,7 @@ export class Node implements Promisable<Node> {
 
   @computed()
   protected hasFilters(): boolean {
-    return !!this.filters().find(filter => filter.isActive());
+    return !!this.filters().find((filter) => filter.isActive());
   }
 
   @computed()
@@ -470,7 +480,7 @@ export class Node implements Promisable<Node> {
   @inspectable(false)
   @cloneable(false)
   @signal()
-  protected declare readonly spawner: SimpleSignal<ComponentChildren, this>;
+  declare protected readonly spawner: SimpleSignal<ComponentChildren, this>;
   protected getSpawner(): ComponentChildren {
     return this.children();
   }
@@ -481,7 +491,7 @@ export class Node implements Promisable<Node> {
   @inspectable(false)
   @cloneable(false)
   @signal()
-  public declare readonly children: Signal<ComponentChildren, Node[], this>;
+  declare public readonly children: Signal<ComponentChildren, Node[], this>;
   protected setChildren(value: SignalValue<ComponentChildren>) {
     if (this.children.context.raw() === value) {
       return;
@@ -513,7 +523,7 @@ export class Node implements Promisable<Node> {
   @computed()
   protected sortedChildren(): Node[] {
     return [...this.children()].sort((a, b) =>
-      Math.sign(a.zIndex() - b.zIndex()),
+      Math.sign(a.zIndex() - b.zIndex())
     );
   }
 
@@ -527,7 +537,7 @@ export class Node implements Promisable<Node> {
   public readonly key: string;
   public readonly creationStack?: string;
 
-  public constructor({children, spawner, key, ...rest}: NodeProps) {
+  public constructor({ children, spawner, key, ...rest }: NodeProps) {
     const scene = useScene2D();
     [this.key, this.unregister] = scene.registerNode(this, key);
     this.view2D = scene.getView();
@@ -1186,7 +1196,7 @@ export class Node implements Promisable<Node> {
     this.stateStack = [];
     this.unregister();
     this.unregister = null!;
-    for (const {signal} of this) {
+    for (const { signal } of this) {
       signal?.context.dispose();
     }
     for (const child of this.realChildren) {
@@ -1200,20 +1210,20 @@ export class Node implements Promisable<Node> {
    * @param customProps - Properties to override.
    */
   public clone(customProps: NodeState = {}): this {
-    const props = {...customProps};
+    const props = { ...customProps };
     if (isReactive(this.children.context.raw())) {
       props.children ??= this.children.context.raw();
     } else if (this.children().length > 0) {
-      props.children ??= this.children().map(child => child.clone());
+      props.children ??= this.children().map((child) => child.clone());
     }
 
-    for (const {key, meta, signal} of this) {
+    for (const { key, meta, signal } of this) {
       if (!meta.cloneable || key in props) continue;
       if (meta.compound) {
         for (const [key, property] of meta.compoundEntries) {
           if (property in props) continue;
-          const component = (<Record<string, SimpleSignal<any>>>(
-            (<unknown>signal)
+          const component = (<Record<string, SimpleSignal<any>>> (
+            <unknown> signal
           ))[key];
           if (!component.context.isInitial()) {
             props[property] = component.context.raw();
@@ -1243,7 +1253,7 @@ export class Node implements Promisable<Node> {
     };
 
     if (this.children().length > 0) {
-      props.children ??= this.children().map(child => child.snapshotClone());
+      props.children ??= this.children().map((child) => child.snapshotClone());
     }
 
     return this.instantiate(props);
@@ -1259,12 +1269,12 @@ export class Node implements Promisable<Node> {
    * @param customProps - Properties to override.
    */
   public reactiveClone(customProps: NodeState = {}): this {
-    const props = {...customProps};
+    const props = { ...customProps };
     if (this.children().length > 0) {
-      props.children ??= this.children().map(child => child.reactiveClone());
+      props.children ??= this.children().map((child) => child.reactiveClone());
     }
 
-    for (const {key, meta, signal} of this) {
+    for (const { key, meta, signal } of this) {
       if (!meta.cloneable || key in props) continue;
       props[key] = () => signal();
     }
@@ -1278,7 +1288,7 @@ export class Node implements Promisable<Node> {
    * @param props - Properties to pass to the constructor.
    */
   public instantiate(props: NodeProps = {}): this {
-    return new (<NodeConstructor<NodeProps, this>>this.constructor)(props);
+    return new (<NodeConstructor<NodeProps, this>> this.constructor)(props);
   }
 
   /**
@@ -1339,7 +1349,7 @@ export class Node implements Promisable<Node> {
    * Remove the given child.
    */
   protected removeChild(child: Node) {
-    this.setParsedChildren(this.children().filter(node => node !== child));
+    this.setParsedChildren(this.children().filter((node) => node !== child));
   }
 
   /**
@@ -1419,7 +1429,7 @@ export class Node implements Promisable<Node> {
       const childCache = child.fullCacheBBox();
       const childMatrix = child.localToParent();
       points.push(
-        ...childCache.corners.map(r => r.transformAsPoint(childMatrix)),
+        ...childCache.corners.map((r) => r.transformAsPoint(childMatrix)),
       );
     }
 
@@ -1487,8 +1497,9 @@ export class Node implements Promisable<Node> {
   @computed()
   protected parentWorldSpaceCacheBBox(): BBox {
     return (
-      this.findAncestor(node => node.requiresCache())?.worldSpaceCacheBBox() ??
-      new BBox(Vector2.zero, useScene2D().getRealSize())
+      this.findAncestor((node) => node.requiresCache())
+        ?.worldSpaceCacheBBox() ??
+        new BBox(Vector2.zero, useScene2D().getRealSize())
     );
   }
 
@@ -1794,7 +1805,7 @@ export class Node implements Promisable<Node> {
    */
   public getState(): NodeState {
     const state: NodeState = {};
-    for (const {key, meta, signal} of this) {
+    for (const { key, meta, signal } of this) {
       if (!meta.cloneable || key in state) continue;
       state[key] = signal();
     }
@@ -1928,12 +1939,12 @@ export class Node implements Promisable<Node> {
     for (const key in this.properties) {
       const meta = this.properties[key];
       const signal = this.signalByKey(key);
-      yield {meta, signal, key};
+      yield { meta, signal, key };
     }
   }
 
   private signalByKey(key: string): SimpleSignal<any> {
-    return (<Record<string, SimpleSignal<any>>>(<unknown>this))[key];
+    return (<Record<string, SimpleSignal<any>>> (<unknown> this))[key];
   }
 
   private reversedChildren() {

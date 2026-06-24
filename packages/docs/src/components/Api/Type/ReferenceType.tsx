@@ -1,10 +1,10 @@
 import React from 'react';
 
 import Token from '@site/src/components/Api/Code/Token';
-import TokenList, {ListType} from '@site/src/components/Api/Code/TokenList';
+import TokenList, { ListType } from '@site/src/components/Api/Code/TokenList';
 import Type from '@site/src/components/Api/Type';
-import {getUrl, useApiLookup} from '@site/src/contexts/api';
-import type {JSONOutput} from 'typedoc';
+import { getUrl, useApiLookup } from '@site/src/contexts/api';
+import type { JSONOutput } from 'typedoc';
 
 export default function ReferenceType({
   type,

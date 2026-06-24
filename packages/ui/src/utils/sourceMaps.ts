@@ -1,6 +1,6 @@
 import highlight from 'highlight.js';
-import {SourceMapConsumer} from 'source-map-js';
-import {withLoader} from './withLoader';
+import { SourceMapConsumer } from 'source-map-js';
+import { withLoader } from './withLoader';
 
 declare module 'source-map-js' {
   interface SourceMapConsumer {
@@ -77,10 +77,9 @@ export async function resolveStackTrace(
         if (position.line === null || position.column === null) {
           entry.isExternal = true;
         } else {
-          const source =
-            position.source[0] === '/'
-              ? position.source
-              : directory + position.source;
+          const source = position.source[0] === '/'
+            ? position.source
+            : directory + position.source;
 
           entry.file = source;
           entry.line = position.line;
@@ -134,10 +133,10 @@ export async function openFileInEditor(entry: StackTraceEntry) {
 
   await withLoader(() =>
     fetch(
-      `/__open-in-editor?file=${encodeURIComponent(relative)}:${entry.line}:${
-        entry.column
-      }`,
-    ),
+      `/__open-in-editor?file=${
+        encodeURIComponent(relative)
+      }:${entry.line}:${entry.column}`,
+    )
   );
 }
 
@@ -150,13 +149,13 @@ export function getSourceCodeFrame(entry: StackTraceEntry): string | null {
     return null;
   }
 
-  const {line, column} = entry;
+  const { line, column } = entry;
   const lastLine = line + 2;
   const spacing = lastLine.toString().length;
   const language = getExtension(entry.source) ?? 'ts';
 
   const code = highlight
-    .highlight(source, {language})
+    .highlight(source, { language })
     .value.split('\n')
     .slice(line - 1, lastLine);
 

@@ -1,23 +1,29 @@
 import clsx from 'clsx';
-import {useMemo, useRef} from 'preact/hooks';
-import {ViewportProvider, ViewportState, useApplication} from '../../contexts';
-import {useRenderingSettings, useSharedSettings, useSize} from '../../hooks';
-import {StageView} from '../viewport';
-import {OverlayCanvas} from '../viewport/OverlayCanvas';
+import { useMemo, useRef } from 'preact/hooks';
+import {
+  useApplication,
+  ViewportProvider,
+  ViewportState,
+} from '../../contexts';
+import { useRenderingSettings, useSharedSettings, useSize } from '../../hooks';
+import { StageView } from '../viewport';
+import { OverlayCanvas } from '../viewport/OverlayCanvas';
 import styles from '../viewport/Viewport.module.scss';
-import {PresentationControls} from './PresentationControls';
-import {SlideGraph} from './SlideGraph';
+import { PresentationControls } from './PresentationControls';
+import { SlideGraph } from './SlideGraph';
 
 export function PresentationMode() {
-  const {plugins, presenter} = useApplication();
+  const { plugins, presenter } = useApplication();
   const ref = useRef<HTMLDivElement>();
   const size = useSize(ref);
   const settings = useSharedSettings();
-  const {resolutionScale} = useRenderingSettings();
+  const { resolutionScale } = useRenderingSettings();
 
   const drawHooks = useMemo(
     () =>
-      plugins.map(plugin => plugin.presenterOverlay?.drawHook).filter(Boolean),
+      plugins.map((plugin) => plugin.presenterOverlay?.drawHook).filter(
+        Boolean,
+      ),
     [plugins],
   );
 

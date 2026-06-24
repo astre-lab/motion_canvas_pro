@@ -1,4 +1,4 @@
-import {useThemeConfig} from '@docusaurus/theme-common';
+import { useThemeConfig } from '@docusaurus/theme-common';
 import {
   splitNavbarItems,
   useNavbarMobileSidebar,
@@ -13,21 +13,19 @@ import SearchBar from '@theme/SearchBar';
 import React from 'react';
 import styles from './styles.module.css';
 
-function NavbarItems({items}) {
+function NavbarItems({ items }) {
   return (
     <>
-      {items.map((item, i) => (
-        <NavbarItem {...item} key={i} />
-      ))}
+      {items.map((item, i) => <NavbarItem {...item} key={i} />)}
     </>
   );
 }
 
-function NavbarContentLayout({left, right}) {
+function NavbarContentLayout({ left, right }) {
   return (
-    <div className="navbar__inner">
-      <div className="navbar__items">{left}</div>
-      <div className="navbar__items navbar__items--right">{right}</div>
+    <div className='navbar__inner'>
+      <div className='navbar__items'>{left}</div>
+      <div className='navbar__items navbar__items--right'>{right}</div>
     </div>
   );
 }

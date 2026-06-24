@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
-import {Readable} from 'stream';
-import {ModuleNode, Plugin, ResolvedConfig} from 'vite';
+import { Readable } from 'stream';
+import { ModuleNode, Plugin, ResolvedConfig } from 'vite';
 
 const AUDIO_EXTENSION_REGEX = /\.(mp3|wav|ogg|aac|flac)(?:$|\?)/;
 const AUDIO_HMR_DELAY = 1000;
@@ -10,7 +10,7 @@ interface AssetsPluginConfig {
   bufferedAssets: RegExp | false;
 }
 
-export function assetsPlugin({bufferedAssets}: AssetsPluginConfig): Plugin {
+export function assetsPlugin({ bufferedAssets }: AssetsPluginConfig): Plugin {
   let config: ResolvedConfig;
   return {
     name: 'motion-canvas:assets',
@@ -42,14 +42,14 @@ export function assetsPlugin({bufferedAssets}: AssetsPluginConfig): Plugin {
         if (!AUDIO_EXTENSION_REGEX.test(module.url)) {
           modules.push(module);
         } else {
-          await new Promise(resolve => {
+          await new Promise((resolve) => {
             setTimeout(resolve, AUDIO_HMR_DELAY);
           });
         }
       }
 
       if (urls.length > 0) {
-        ctx.server.ws.send('motion-canvas:assets', {urls});
+        ctx.server.ws.send('motion-canvas:assets', { urls });
       }
 
       return modules;

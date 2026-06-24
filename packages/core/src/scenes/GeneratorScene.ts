@@ -1,18 +1,18 @@
-import {Logger, PlaybackStatus} from '../app';
-import {decorate, threadable} from '../decorators';
-import {EventDispatcher, ValueDispatcher} from '../events';
-import {DependencyContext, SignalValue} from '../signals';
+import { Logger, PlaybackStatus } from '../app';
+import { decorate, threadable } from '../decorators';
+import { EventDispatcher, ValueDispatcher } from '../events';
+import { DependencyContext, SignalValue } from '../signals';
 import {
-  Thread,
-  ThreadGenerator,
   isPromisable,
   isPromise,
+  Thread,
+  ThreadGenerator,
   threads,
 } from '../threading';
-import {Vector2} from '../types';
-import {endPlayback, endScene, startPlayback, startScene} from '../utils';
-import {LifecycleEvents} from './LifecycleEvents';
-import {Random} from './Random';
+import { Vector2 } from '../types';
+import { endPlayback, endScene, startPlayback, startScene } from '../utils';
+import { LifecycleEvents } from './LifecycleEvents';
+import { Random } from './Random';
 import {
   CachedSceneData,
   FullSceneDescription,
@@ -20,14 +20,14 @@ import {
   SceneDescriptionReload,
   SceneRenderEvent,
 } from './Scene';
-import {SceneMetadata} from './SceneMetadata';
-import {SceneState} from './SceneState';
-import {Shaders} from './Shaders';
-import {Slides} from './Slides';
-import {Sounds} from './Sounds';
-import {Threadable} from './Threadable';
-import {Variables} from './Variables';
-import {TimeEvents} from './timeEvents';
+import { SceneMetadata } from './SceneMetadata';
+import { SceneState } from './SceneState';
+import { Shaders } from './Shaders';
+import { Slides } from './Slides';
+import { Sounds } from './Sounds';
+import { Threadable } from './Threadable';
+import { Variables } from './Variables';
+import { TimeEvents } from './timeEvents';
 
 export interface ThreadGeneratorFactory<T> {
   (view: T): ThreadGenerator;
@@ -39,8 +39,7 @@ export interface ThreadGeneratorFactory<T> {
  * Uses generators to control the animation.
  */
 export abstract class GeneratorScene<T>
-  implements Scene<ThreadGeneratorFactory<T>>, Threadable
-{
+  implements Scene<ThreadGeneratorFactory<T>>, Threadable {
   public readonly name: string;
   public readonly playback: PlaybackStatus;
   public readonly logger: Logger;
@@ -212,7 +211,7 @@ export abstract class GeneratorScene<T>
 
     if (this.isCached()) {
       setFrame(cached.lastFrame);
-      this.cache.current = {...cached};
+      this.cache.current = { ...cached };
       return;
     }
 
@@ -236,9 +235,9 @@ export abstract class GeneratorScene<T>
     cached.lastFrame = this.playback.frame;
     cached.duration = cached.lastFrame - cached.firstFrame;
     // Prevent the page from becoming unresponsive.
-    await new Promise(resolve => setTimeout(resolve, 0));
+    await new Promise((resolve) => setTimeout(resolve, 0));
     this.cached = true;
-    this.cache.current = {...cached};
+    this.cache.current = { ...cached };
     this.recalculated.dispatch();
   }
 
@@ -289,7 +288,7 @@ export abstract class GeneratorScene<T>
     this.random = new Random(this.meta.seed.get());
     this.runner = threads(
       () => this.runnerFactory(this.getView()),
-      thread => {
+      (thread) => {
         this.thread.current = thread;
       },
     );

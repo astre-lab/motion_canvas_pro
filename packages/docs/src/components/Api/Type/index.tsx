@@ -15,8 +15,8 @@ import TemplateLiteralType from '@site/src/components/Api/Type/TemplateLiteralTy
 import TupleType from '@site/src/components/Api/Type/TupleType';
 import TypeOperatorType from '@site/src/components/Api/Type/TypeOperatorType';
 import UnionType from '@site/src/components/Api/Type/UnionType';
-import React, {useMemo} from 'react';
-import type {JSONOutput} from 'typedoc';
+import React, { useMemo } from 'react';
+import type { JSONOutput } from 'typedoc';
 
 export interface CodeTypeProps {
   type: JSONOutput.SomeType;

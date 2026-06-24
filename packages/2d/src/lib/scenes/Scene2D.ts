@@ -7,11 +7,11 @@ import {
   Scene,
   SceneRenderEvent,
   ThreadGeneratorFactory,
-  Vector2,
   useLogger,
+  Vector2,
 } from '@motion-canvas/core';
-import {Camera, Node, View2D} from '../components';
-import {is} from '../utils';
+import { Camera, Node, View2D } from '../components';
+import { is } from '../utils';
 
 export class Scene2D extends GeneratorScene<View2D> implements Inspectable {
   private view: View2D | null = null;
@@ -96,7 +96,7 @@ export class Scene2D extends GeneratorScene<View2D> implements Inspectable {
       stack: node.creationStack,
       key: node.key,
     };
-    for (const {key, meta, signal} of node) {
+    for (const { key, meta, signal } of node) {
       if (!meta.inspectable) continue;
       attributes[key] = signal();
     }
@@ -118,7 +118,7 @@ export class Scene2D extends GeneratorScene<View2D> implements Inspectable {
           const scene = camera.scene();
           if (!scene) continue;
 
-          if (scene === node || scene.findFirst(n => n === node)) {
+          if (scene === node || scene.findFirst((n) => n === node)) {
             parentCameras.push(camera);
           }
         }

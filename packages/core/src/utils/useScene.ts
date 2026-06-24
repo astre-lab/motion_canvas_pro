@@ -1,4 +1,4 @@
-import type {Scene} from '../scenes';
+import type { Scene } from '../scenes';
 
 const SceneStack: Scene[] = [];
 

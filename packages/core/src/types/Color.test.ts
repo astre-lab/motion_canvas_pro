@@ -1,5 +1,5 @@
-import {describe, expect, test} from 'vitest';
-import {Color} from './Color';
+import { describe, expect, test } from 'vitest';
+import { Color } from './Color';
 
 describe('Color.lerp', () => {
   test('interpolates between colors', () => {

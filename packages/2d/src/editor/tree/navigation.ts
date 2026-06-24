@@ -1,11 +1,11 @@
-import {Node} from '@motion-canvas/2d';
-import {useShortcuts} from '@motion-canvas/ui';
-import {useComputed} from '@preact/signals';
-import {usePluginState} from '../Provider';
-import {SCENE_GRAPH_SHORTCUTS} from '../shortcuts';
+import { Node } from '@motion-canvas/2d';
+import { useShortcuts } from '@motion-canvas/ui';
+import { useComputed } from '@preact/signals';
+import { usePluginState } from '../Provider';
+import { SCENE_GRAPH_SHORTCUTS } from '../shortcuts';
 
 export function useKeyboardNavigation() {
-  const {selectedNode, scene, afterRender, openNodes, selectNode} =
+  const { selectedNode, scene, afterRender, openNodes, selectNode } =
     usePluginState();
 
   const detachedNodes = useComputed(() => {

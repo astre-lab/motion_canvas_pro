@@ -1,5 +1,5 @@
-import {ValueDispatcher} from '../events';
-import type {Scene, SceneDescriptionReload, Slide} from '../scenes';
+import { ValueDispatcher } from '../events';
+import type { Scene, SceneDescriptionReload, Slide } from '../scenes';
 
 export enum PlaybackState {
   Playing,
@@ -124,12 +124,12 @@ export class PlaybackManager {
   }
 
   public async goTo(slideId: string) {
-    await this.seekSlide(this.slides.find(slide => slide.id === slideId));
+    await this.seekSlide(this.slides.find((slide) => slide.id === slideId));
   }
 
   private async seekSlide(slide: Slide | null = null) {
     if (!slide) return;
-    const {id, scene} = slide;
+    const { id, scene } = slide;
 
     if (this.currentScene !== scene || this.currentScene.slides.didHappen(id)) {
       this.previousScene = null;
@@ -158,7 +158,7 @@ export class PlaybackManager {
   }
 
   public reload(description?: SceneDescriptionReload<never>) {
-    this.scenes.current.forEach(scene => scene.reload(description));
+    this.scenes.current.forEach((scene) => scene.reload(description));
   }
 
   public async recalculate() {
@@ -172,7 +172,7 @@ export class PlaybackManager {
     const scenes: Scene[] = [];
     try {
       for (const scene of this.scenes.current) {
-        await scene.recalculate(frame => {
+        await scene.recalculate((frame) => {
           this.frame = frame;
         });
         this.slides.push(...scene.slides.onChanged.current);
@@ -240,7 +240,7 @@ export class PlaybackManager {
       return scenes[0];
     }
 
-    const index = scenes.findIndex(s => s === scene);
+    const index = scenes.findIndex((s) => s === scene);
     if (index < 0) {
       return null;
     }

@@ -42,7 +42,7 @@ export function patienceDiff(
    * @returns A map of the unique lines to their index
    */
   function findUnique(lines: string[], start: number, end: number) {
-    const lineMap = new Map<string, {count: number; index: number}>();
+    const lineMap = new Map<string, { count: number; index: number }>();
     for (let i = start; i <= end; i++) {
       const line = lines[i];
       const data = lineMap.get(line);
@@ -50,7 +50,7 @@ export function patienceDiff(
         data.count++;
         data.index = i;
       } else {
-        lineMap.set(line, {count: 1, index: i});
+        lineMap.set(line, { count: 1, index: i });
       }
     }
 
@@ -69,7 +69,6 @@ export function patienceDiff(
    * bArray[bStart...bEnd], inclusive. This function uses findUnique to pare
    * down the aArray and bArray ranges first, before then walking the
    * comparison between the two arrays.
-   *
    *
    * @param aArray - The original array
    * @param aStart - The start of the original array to search
@@ -122,7 +121,7 @@ export function patienceDiff(
   ): Subsequence[] {
     const jagged: [Subsequence][] = [];
 
-    abMap.forEach(value => {
+    abMap.forEach((value) => {
       let i = 0;
       while (jagged[i] && jagged[i].at(-1)!.bIndex < value.bIndex) {
         i++;
@@ -307,7 +306,7 @@ export function patienceDiff(
  * @internal
  */
 export function printDiff(diff: ReturnType<typeof patienceDiff>) {
-  diff.lines.forEach(line => {
+  diff.lines.forEach((line) => {
     if (line.bIndex < 0) {
       console.log(`- ${line.line}`);
     } else if (line.aIndex < 0) {

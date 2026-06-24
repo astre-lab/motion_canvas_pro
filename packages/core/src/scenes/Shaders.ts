@@ -1,5 +1,8 @@
-import {SharedWebGLContext, WebGLContextOwner} from '../app/SharedWebGLContext';
-import {Scene} from './Scene';
+import {
+  SharedWebGLContext,
+  WebGLContextOwner,
+} from '../app/SharedWebGLContext';
+import { Scene } from './Scene';
 
 /**
  * @internal
@@ -73,7 +76,14 @@ export class Shaders implements WebGLContextOwner {
   private destinationTexture: WebGLTexture | null = null;
   private positionLocation = 0;
   private readonly quadPositions = new Float32Array([
-    -1.0, 1.0, -1.0, -1.0, 1.0, 1.0, 1.0, -1.0,
+    -1.0,
+    1.0,
+    -1.0,
+    -1.0,
+    1.0,
+    1.0,
+    1.0,
+    -1.0,
   ]);
 
   public constructor(

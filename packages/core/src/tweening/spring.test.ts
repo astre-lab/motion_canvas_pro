@@ -1,10 +1,10 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 
-import {afterAll, beforeAll, describe, expect, test} from 'vitest';
-import {PlaybackManager, PlaybackStatus} from '../app';
-import {threads} from '../threading';
-import {endPlayback, startPlayback, useTime} from '../utils';
-import {spring} from './spring';
+import { afterAll, beforeAll, describe, expect, test } from 'vitest';
+import { PlaybackManager, PlaybackStatus } from '../app';
+import { threads } from '../threading';
+import { endPlayback, startPlayback, useTime } from '../utils';
+import { spring } from './spring';
 
 describe('spring()', () => {
   const playback = new PlaybackManager();
@@ -24,7 +24,7 @@ describe('spring()', () => {
         },
         0,
         300,
-        _ => {
+        (_) => {
           // do nothing
         },
       );
@@ -41,7 +41,7 @@ describe('spring()', () => {
         },
         0,
         300,
-        _ => {
+        (_) => {
           // do nothing
         },
       );
@@ -58,7 +58,7 @@ describe('spring()', () => {
         },
         0,
         300,
-        _ => {
+        (_) => {
           // do nothing
         },
       );
@@ -99,7 +99,7 @@ describe('spring()', () => {
         },
         0,
         300,
-        _ => {
+        (_) => {
           // do nothing
         },
       );

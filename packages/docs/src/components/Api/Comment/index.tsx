@@ -1,9 +1,9 @@
-import {Collapsible} from '@docusaurus/theme-common';
+import { Collapsible } from '@docusaurus/theme-common';
 import Summary from '@site/src/components/Api/Comment/Summary';
 import ExperimentalWarning from '@site/src/components/ExperimentalWarning';
 import clsx from 'clsx';
-import React, {useMemo, useState} from 'react';
-import type {JSONOutput} from 'typedoc';
+import React, { useMemo, useState } from 'react';
+import type { JSONOutput } from 'typedoc';
 import styles from './styles.module.css';
 
 export default function Comment({
@@ -14,7 +14,7 @@ export default function Comment({
   full?: boolean;
 }) {
   const remarks = useMemo(() => {
-    return comment?.blockTags?.find(({tag}) => tag === '@remarks');
+    return comment?.blockTags?.find(({ tag }) => tag === '@remarks');
   }, [comment]);
 
   return (
@@ -27,7 +27,7 @@ export default function Comment({
   );
 }
 
-function Experimental({comment}: {comment: JSONOutput.Comment}) {
+function Experimental({ comment }: { comment: JSONOutput.Comment }) {
   const experimental = useMemo(
     () => comment?.modifierTags?.includes('@experimental'),
     [comment],
@@ -36,26 +36,26 @@ function Experimental({comment}: {comment: JSONOutput.Comment}) {
   return experimental ? <ExperimentalWarning /> : null;
 }
 
-function FullComment({comment}: {comment: JSONOutput.Comment}) {
+function FullComment({ comment }: { comment: JSONOutput.Comment }) {
   const [collapsed, setCollapsed] = useState(true);
   const preview = useMemo(
-    () => comment?.blockTags?.find(({tag}) => tag === '@preview'),
+    () => comment?.blockTags?.find(({ tag }) => tag === '@preview'),
     [comment],
   );
   const examples = useMemo(
-    () => comment?.blockTags?.filter(({tag}) => tag === '@example') ?? [],
+    () => comment?.blockTags?.filter(({ tag }) => tag === '@example') ?? [],
     [comment],
   );
   const defaultValue = useMemo(
-    () => comment?.blockTags?.find(({tag}) => tag === '@defaultValue'),
+    () => comment?.blockTags?.find(({ tag }) => tag === '@defaultValue'),
     [comment],
   );
   const deprecated = useMemo(
-    () => comment?.blockTags?.find(({tag}) => tag === '@deprecated'),
+    () => comment?.blockTags?.find(({ tag }) => tag === '@deprecated'),
     [comment],
   );
   const seeAlso = useMemo(
-    () => comment?.blockTags?.find(({tag}) => tag === '@see'),
+    () => comment?.blockTags?.find(({ tag }) => tag === '@see'),
     [comment],
   );
 
@@ -67,18 +67,18 @@ function FullComment({comment}: {comment: JSONOutput.Comment}) {
           <h4>
             <a
               className={clsx(styles.toggle, collapsed && styles.collapsed)}
-              onClick={e => {
+              onClick={(e) => {
                 e.preventDefault();
                 setCollapsed(!collapsed);
               }}
-              href="#"
+              href='#'
             >
               Examples
             </a>
           </h4>
           <Collapsible lazy as={'div'} collapsed={collapsed}>
             <div className={styles.collapse}>
-              {examples.map(example => (
+              {examples.map((example) => (
                 <Summary key={example.contentId} id={example.contentId} />
               ))}
             </div>
@@ -90,7 +90,7 @@ function FullComment({comment}: {comment: JSONOutput.Comment}) {
       {defaultValue && (
         <>
           Default Value:{' '}
-          <code>{defaultValue.content.map(part => part.text).join('')}</code>
+          <code>{defaultValue.content.map((part) => part.text).join('')}</code>
         </>
       )}
       {deprecated && (

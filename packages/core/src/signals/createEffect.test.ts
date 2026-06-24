@@ -1,7 +1,7 @@
-import {describe, expect, test, vi} from 'vitest';
-import {createSignal} from './createSignal';
+import { describe, expect, test, vi } from 'vitest';
+import { createSignal } from './createSignal';
 
-import {createEffect} from './createEffect';
+import { createEffect } from './createEffect';
 
 describe('createEffect()', () => {
   test('Invoked after creation', () => {

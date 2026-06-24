@@ -1,13 +1,13 @@
-import {JSX, Ref} from 'preact';
+import { JSX, Ref } from 'preact';
 
-import {Color} from '@motion-canvas/core';
-import {hsv} from 'chroma-js';
-import {forwardRef} from 'preact/compat';
-import {useEffect, useRef, useState} from 'preact/hooks';
-import {useSize} from '../../hooks';
-import {MouseButton, clamp} from '../../utils';
+import { Color } from '@motion-canvas/core';
+import { hsv } from 'chroma-js';
+import { forwardRef } from 'preact/compat';
+import { useEffect, useRef, useState } from 'preact/hooks';
+import { useSize } from '../../hooks';
+import { clamp, MouseButton } from '../../utils';
 import styles from './Controls.module.scss';
-import {NumberInput} from './NumberInput';
+import { NumberInput } from './NumberInput';
 
 type ColorPickerProps = Omit<JSX.HTMLAttributes<HTMLDivElement>, 'onChange'> & {
   color: Color;
@@ -15,7 +15,7 @@ type ColorPickerProps = Omit<JSX.HTMLAttributes<HTMLDivElement>, 'onChange'> & {
 };
 
 function ColorPickerInternal(
-  {color, onChange, ...props}: ColorPickerProps,
+  { color, onChange, ...props }: ColorPickerProps,
   ref: Ref<HTMLDivElement>,
 ) {
   const saturationRef = useRef<HTMLDivElement>();
@@ -43,8 +43,8 @@ function ColorPickerInternal(
       <div
         ref={saturationRef}
         className={styles.saturation}
-        style={{backgroundColor: hsv(hue * 360, 1, 1).hex()}}
-        onPointerDown={event => {
+        style={{ backgroundColor: hsv(hue * 360, 1, 1).hex() }}
+        onPointerDown={(event) => {
           if (event.button === MouseButton.Left) {
             event.preventDefault();
             event.stopPropagation();
@@ -58,7 +58,7 @@ function ColorPickerInternal(
             setValue(clamp(0, 1, v));
           }
         }}
-        onPointerMove={event => {
+        onPointerMove={(event) => {
           if (event.currentTarget.hasPointerCapture(event.pointerId)) {
             const x = event.clientX - saturationRect.left;
             const y = event.clientY - saturationRect.top;
@@ -81,7 +81,7 @@ function ColorPickerInternal(
       <div
         ref={hueRef}
         className={styles.hue}
-        onPointerDown={event => {
+        onPointerDown={(event) => {
           if (event.button === MouseButton.Left) {
             event.preventDefault();
             event.stopPropagation();
@@ -92,7 +92,7 @@ function ColorPickerInternal(
             setHue(clamp(0, 1, h));
           }
         }}
-        onPointerMove={event => {
+        onPointerMove={(event) => {
           if (event.currentTarget.hasPointerCapture(event.pointerId)) {
             const x = event.clientX - hueRect.left;
             const h = x / hueRect.width;
@@ -112,7 +112,7 @@ function ColorPickerInternal(
 
       <NumberInput
         value={hue}
-        onChange={h => setHue(clamp(0, 1, h))}
+        onChange={(h) => setHue(clamp(0, 1, h))}
         min={0}
         max={1}
         step={0.005}
@@ -122,7 +122,7 @@ function ColorPickerInternal(
 
       <NumberInput
         value={saturation}
-        onChange={s => setSaturation(clamp(0, 1, s))}
+        onChange={(s) => setSaturation(clamp(0, 1, s))}
         min={0}
         max={1}
         step={0.005}
@@ -132,7 +132,7 @@ function ColorPickerInternal(
 
       <NumberInput
         value={value}
-        onChange={v => setValue(clamp(0, 1, v))}
+        onChange={(v) => setValue(clamp(0, 1, v))}
         min={0}
         max={1}
         step={0.005}
@@ -142,7 +142,7 @@ function ColorPickerInternal(
 
       <NumberInput
         value={alpha}
-        onChange={a => setAlpha(clamp(0, 1, a))}
+        onChange={(a) => setAlpha(clamp(0, 1, a))}
         min={0}
         max={1}
         step={0.005}

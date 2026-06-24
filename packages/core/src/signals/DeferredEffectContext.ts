@@ -1,5 +1,5 @@
-import {useThread} from '../utils';
-import {DependencyContext} from './DependencyContext';
+import { useThread } from '../utils';
+import { DependencyContext } from './DependencyContext';
 
 export class DeferredEffectContext extends DependencyContext {
   private readonly unsubscribe;

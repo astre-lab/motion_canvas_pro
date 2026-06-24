@@ -1,8 +1,8 @@
-import {InterpolationFunction, TimingFunction} from '../tweening';
-import {PossibleVector2, Vector2} from '../types';
-import {CompoundSignal, CompoundSignalContext} from './CompoundSignalContext';
-import {Signal} from './SignalContext';
-import {SignalExtensions, SignalGenerator, SignalValue} from './types';
+import { InterpolationFunction, TimingFunction } from '../tweening';
+import { PossibleVector2, Vector2 } from '../types';
+import { CompoundSignal, CompoundSignalContext } from './CompoundSignalContext';
+import { Signal } from './SignalContext';
+import { SignalExtensions, SignalGenerator, SignalValue } from './types';
 
 export interface Vector2Edit<TOwner> {
   (callback: (current: Vector2) => SignalValue<PossibleVector2>): TOwner;
@@ -38,19 +38,19 @@ export interface Vector2SignalHelpers<TOwner> {
 export type Vector2Signal<
   TOwner = void,
   TContext = Vector2SignalContext<TOwner>,
-> = CompoundSignal<PossibleVector2, Vector2, 'x' | 'y', TOwner, TContext> &
-  Vector2SignalHelpers<TOwner>;
+> =
+  & CompoundSignal<PossibleVector2, Vector2, 'x' | 'y', TOwner, TContext>
+  & Vector2SignalHelpers<TOwner>;
 
 export class Vector2SignalContext<TOwner = void>
   extends CompoundSignalContext<PossibleVector2, Vector2, 'x' | 'y', TOwner>
-  implements Vector2SignalHelpers<TOwner>
-{
+  implements Vector2SignalHelpers<TOwner> {
   public constructor(
     entries: ('x' | 'y' | [keyof Vector2, Signal<any, any, TOwner>])[],
     parser: (value: PossibleVector2) => Vector2,
     initial: SignalValue<PossibleVector2>,
     interpolation: InterpolationFunction<Vector2>,
-    owner: TOwner = <TOwner>(<unknown>undefined),
+    owner: TOwner = <TOwner> (<unknown> undefined),
     extensions: Partial<SignalExtensions<PossibleVector2, Vector2>> = {},
   ) {
     super(entries, parser, initial, interpolation, owner, extensions);

@@ -1,7 +1,7 @@
-import {InterpolationFunction, map} from '../tweening';
-import {Signal, SignalContext} from './SignalContext';
-import {SignalExtensions, SignalValue} from './types';
-import {isReactive, modify} from './utils';
+import { InterpolationFunction, map } from '../tweening';
+import { Signal, SignalContext } from './SignalContext';
+import { SignalExtensions, SignalValue } from './types';
+import { isReactive, modify } from './utils';
 
 export type CompoundSignal<
   TSetterValue,
@@ -9,15 +9,17 @@ export type CompoundSignal<
   TKeys extends keyof TValue = keyof TValue,
   TOwner = void,
   TContext = CompoundSignalContext<TSetterValue, TValue, TKeys, TOwner>,
-> = Signal<TSetterValue, TValue, TOwner, TContext> & {
-  [K in TKeys]: Signal<
-    TValue[K],
-    TValue[K],
-    TOwner extends void
-      ? CompoundSignal<TSetterValue, TValue, TKeys, TOwner, TContext>
-      : TOwner
-  >;
-};
+> =
+  & Signal<TSetterValue, TValue, TOwner, TContext>
+  & {
+    [K in TKeys]: Signal<
+      TValue[K],
+      TValue[K],
+      TOwner extends void
+        ? CompoundSignal<TSetterValue, TValue, TKeys, TOwner, TContext>
+        : TOwner
+    >;
+  };
 
 export class CompoundSignalContext<
   TSetterValue,
@@ -35,7 +37,7 @@ export class CompoundSignalContext<
     parser: (value: TSetterValue) => TValue,
     initial: SignalValue<TSetterValue>,
     interpolation: InterpolationFunction<TValue>,
-    owner: TOwner = <TOwner>(<unknown>undefined),
+    owner: TOwner = <TOwner> (<unknown> undefined),
     extensions: Partial<SignalExtensions<TSetterValue, TValue>> = {},
   ) {
     super(undefined, interpolation, owner, parser, extensions);
@@ -50,13 +52,13 @@ export class CompoundSignalContext<
       } else {
         key = entry;
         signal = new SignalContext(
-          modify(initial, value => parser(value)[entry]),
-          <any>map,
+          modify(initial, (value) => parser(value)[entry]),
+          <any> map,
           owner ?? this.invokable,
         ).toSignal();
       }
       this.signals.push([key, signal]);
-      Object.defineProperty(this.invokable, key, {value: signal});
+      Object.defineProperty(this.invokable, key, { value: signal });
     }
   }
 
@@ -75,7 +77,7 @@ export class CompoundSignalContext<
 
   public override getter(): TValue {
     return this.parse(
-      <TSetterValue>(
+      <TSetterValue> (
         Object.fromEntries(
           this.signals.map(([key, property]) => [key, property()]),
         )

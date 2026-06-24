@@ -1,5 +1,5 @@
-import React, {ReactNode, useContext} from 'react';
-import type {JSONOutput} from 'typedoc';
+import React, { ReactNode, useContext } from 'react';
+import type { JSONOutput } from 'typedoc';
 
 declare module 'typedoc' {
   namespace JSONOutput {
@@ -58,7 +58,9 @@ export function ApiProvider({
   urlLookup: Record<string, ReflectionReference>;
 }) {
   return (
-    <Context.Provider value={{lookup, urlLookup}}>{children}</Context.Provider>
+    <Context.Provider value={{ lookup, urlLookup }}>
+      {children}
+    </Context.Provider>
   );
 }
 
@@ -67,17 +69,17 @@ export function useApiContext(): ApiContext {
 }
 
 export function useApiLookup(id: number): ApiLookup {
-  const {lookup} = useContext(Context);
+  const { lookup } = useContext(Context);
   return lookup[id];
 }
 
 interface ApiFinder {
-  <T extends JSONOutput.Reflection>(value?: {id: number; project: number}): T;
+  <T extends JSONOutput.Reflection>(value?: { id: number; project: number }): T;
 }
 
 export function useApiFinder(): ApiFinder {
-  const {lookup} = useContext(Context);
-  return (value => {
+  const { lookup } = useContext(Context);
+  return ((value) => {
     if (typeof value?.project === 'number') {
       return lookup[value.project][value.id];
     }
@@ -86,9 +88,9 @@ export function useApiFinder(): ApiFinder {
 }
 
 export function useUrlLookup(): (url: string) => JSONOutput.Reflection | null {
-  const {urlLookup, lookup} = useContext(Context);
+  const { urlLookup, lookup } = useContext(Context);
 
-  return url => {
+  return (url) => {
     const reference = urlLookup[url];
     if (!reference) {
       return null;

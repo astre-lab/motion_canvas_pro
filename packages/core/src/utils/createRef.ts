@@ -23,19 +23,18 @@ export function makeRef<TObject, TKey extends keyof TObject>(
   object: TObject,
   key: TKey,
 ): ReferenceReceiver<TObject[TKey]> {
-  return newValue => {
+  return (newValue) => {
     object[key] = newValue;
   };
 }
 
 export type RefsProperty<TValue> = TValue extends (config: {
   refs?: infer TReference;
-}) => void
-  ? TReference
+}) => void ? TReference
   : never;
 
 export function makeRefs<
-  T extends (config: {refs?: any}) => void,
+  T extends (config: { refs?: any }) => void,
 >(): RefsProperty<T> {
   return {} as RefsProperty<T>;
 }

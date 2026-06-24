@@ -1,14 +1,14 @@
 import {
   Circle,
+  contrast,
   Grid,
   Layout,
-  Rect,
-  Txt,
-  contrast,
   makeScene2D,
+  Rect,
   saturate,
+  Txt,
 } from '@motion-canvas/2d';
-import {createSignal, linear, map, waitFor} from '@motion-canvas/core';
+import { createSignal, linear, map, waitFor } from '@motion-canvas/core';
 
 export default makeScene2D(function* (view) {
   view.fontFamily('monospace').fontSize(20).fill('#141414');

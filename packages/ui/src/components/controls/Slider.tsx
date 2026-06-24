@@ -1,5 +1,5 @@
-import {useEffect, useState} from 'preact/hooks';
-import {MouseButton, clamp} from '../../utils';
+import { useEffect, useState } from 'preact/hooks';
+import { clamp, MouseButton } from '../../utils';
 import styles from './Controls.module.scss';
 
 export interface SliderProps {
@@ -7,7 +7,7 @@ export interface SliderProps {
   onChange?: (value: number) => void;
 }
 
-export function Slider({value, onChange}: SliderProps) {
+export function Slider({ value, onChange }: SliderProps) {
   const [internalValue, setInternalValue] = useState(value);
 
   useEffect(() => {
@@ -17,7 +17,7 @@ export function Slider({value, onChange}: SliderProps) {
   return (
     <div
       className={styles.slider}
-      onPointerDown={event => {
+      onPointerDown={(event) => {
         if (event.button === MouseButton.Left) {
           event.preventDefault();
           event.stopPropagation();
@@ -29,7 +29,7 @@ export function Slider({value, onChange}: SliderProps) {
           setInternalValue(clamp(0, 1, newInternalValue));
         }
       }}
-      onPointerMove={event => {
+      onPointerMove={(event) => {
         if (event.currentTarget.hasPointerCapture(event.pointerId)) {
           event.stopPropagation();
 
@@ -39,7 +39,7 @@ export function Slider({value, onChange}: SliderProps) {
           setInternalValue(clamp(0, 1, newInternalValue));
         }
       }}
-      onPointerUp={event => {
+      onPointerUp={(event) => {
         if (event.button === MouseButton.Left) {
           event.stopPropagation();
           event.currentTarget.releasePointerCapture(event.pointerId);

@@ -1,11 +1,11 @@
 import styles from './ResizeableLayout.module.scss';
 
-import {Signal} from '@preact/signals';
+import { Signal } from '@preact/signals';
 import clsx from 'clsx';
-import {ComponentChild} from 'preact';
-import {useRef} from 'preact/hooks';
-import {useStorage} from '../../hooks';
-import {clamp} from '../../utils';
+import { ComponentChild } from 'preact';
+import { useRef } from 'preact/hooks';
+import { useStorage } from '../../hooks';
+import { clamp } from '../../utils';
 
 interface ResizeableLayoutProps {
   id: string;
@@ -48,10 +48,10 @@ export function ResizeableLayout({
       </div>
       <div
         className={styles.separator}
-        onPointerDown={event => {
+        onPointerDown={(event) => {
           event.currentTarget.setPointerCapture(event.pointerId);
         }}
-        onPointerMove={event => {
+        onPointerMove={(event) => {
           if (event.currentTarget.hasPointerCapture(event.pointerId)) {
             const rect = containerRef.current.getBoundingClientRect();
             const pixels = event[axis] - rect[axis];
@@ -62,7 +62,7 @@ export function ResizeableLayout({
             setSize(percentage);
           }
         }}
-        onPointerUp={event => {
+        onPointerUp={(event) => {
           event.currentTarget.releasePointerCapture(event.pointerId);
         }}
       />

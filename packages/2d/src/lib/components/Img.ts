@@ -7,14 +7,14 @@ import {
   SerializedVector2,
   SignalValue,
   SimpleSignal,
-  Vector2,
   useLogger,
+  Vector2,
   viaProxy,
 } from '@motion-canvas/core';
-import {computed, initial, nodeName, signal} from '../decorators';
-import {DesiredLength} from '../partials';
-import {drawImage} from '../utils';
-import {Rect, RectProps} from './Rect';
+import { computed, initial, nodeName, signal } from '../decorators';
+import { DesiredLength } from '../partials';
+import { drawImage } from '../utils';
+import { Rect, RectProps } from './Rect';
 import imageWithoutSource from './__logs__/image-without-source.md';
 
 export interface ImgProps extends RectProps {
@@ -71,7 +71,7 @@ export class Img extends Rect {
 
   static {
     if (import.meta.hot) {
-      import.meta.hot.on('motion-canvas:assets', ({urls}) => {
+      import.meta.hot.on('motion-canvas:assets', ({ urls }) => {
         for (const url of urls) {
           if (Img.pool[url]) {
             delete Img.pool[url];
@@ -97,7 +97,7 @@ export class Img extends Rect {
    * ```
    */
   @signal()
-  public declare readonly src: SimpleSignal<string, this>;
+  declare public readonly src: SimpleSignal<string, this>;
 
   /**
    * The alpha value of this image.
@@ -108,7 +108,7 @@ export class Img extends Rect {
    */
   @initial(1)
   @signal()
-  public declare readonly alpha: SimpleSignal<number, this>;
+  declare public readonly alpha: SimpleSignal<number, this>;
 
   /**
    * Whether the image should be smoothed.
@@ -121,7 +121,7 @@ export class Img extends Rect {
    */
   @initial(true)
   @signal()
-  public declare readonly smoothing: SimpleSignal<boolean, this>;
+  declare public readonly smoothing: SimpleSignal<boolean, this>;
 
   public constructor(props: ImgProps) {
     super(props);
@@ -188,8 +188,7 @@ Make sure that source is correct and that the image exists.<br/>
 about working with images.`,
                 inspect: this.key,
               }),
-            ),
-          );
+            ));
         }),
       );
     }
@@ -201,7 +200,7 @@ about working with images.`,
   protected imageCanvas(): CanvasRenderingContext2D {
     const canvas = document
       .createElement('canvas')
-      .getContext('2d', {willReadFrequently: true});
+      .getContext('2d', { willReadFrequently: true });
     if (!canvas) {
       throw new Error('Could not create an image canvas');
     }

@@ -34,7 +34,7 @@ import {
   Vector2LengthSignal,
   vector2Signal,
 } from '../decorators';
-import {spacingSignal} from '../decorators/spacingSignal';
+import { spacingSignal } from '../decorators/spacingSignal';
 import {
   DesiredLength,
   FlexBasis,
@@ -47,8 +47,8 @@ import {
   LengthLimit,
   TextWrap,
 } from '../partials';
-import {drawLine, drawPivot, is} from '../utils';
-import {Node, NodeProps} from './Node';
+import { drawLine, drawPivot, is } from '../utils';
+import { Node, NodeProps } from './Node';
 
 export interface LayoutProps extends NodeProps {
   layout?: LayoutMode;
@@ -193,61 +193,61 @@ export class Layout extends Node {
   @initial(null)
   @interpolation(boolLerp)
   @signal()
-  public declare readonly layout: SimpleSignal<LayoutMode, this>;
+  declare public readonly layout: SimpleSignal<LayoutMode, this>;
 
   @initial(null)
   @signal()
-  public declare readonly maxWidth: SimpleSignal<LengthLimit, this>;
+  declare public readonly maxWidth: SimpleSignal<LengthLimit, this>;
   @initial(null)
   @signal()
-  public declare readonly maxHeight: SimpleSignal<LengthLimit, this>;
+  declare public readonly maxHeight: SimpleSignal<LengthLimit, this>;
   @initial(null)
   @signal()
-  public declare readonly minWidth: SimpleSignal<LengthLimit, this>;
+  declare public readonly minWidth: SimpleSignal<LengthLimit, this>;
   @initial(null)
   @signal()
-  public declare readonly minHeight: SimpleSignal<LengthLimit, this>;
+  declare public readonly minHeight: SimpleSignal<LengthLimit, this>;
   @initial(null)
   @signal()
-  public declare readonly ratio: SimpleSignal<number | null, this>;
+  declare public readonly ratio: SimpleSignal<number | null, this>;
 
   @spacingSignal('margin')
-  public declare readonly margin: SpacingSignal<this>;
+  declare public readonly margin: SpacingSignal<this>;
 
   @spacingSignal('padding')
-  public declare readonly padding: SpacingSignal<this>;
+  declare public readonly padding: SpacingSignal<this>;
 
   @initial('row')
   @signal()
-  public declare readonly direction: SimpleSignal<FlexDirection, this>;
+  declare public readonly direction: SimpleSignal<FlexDirection, this>;
   @initial(null)
   @signal()
-  public declare readonly basis: SimpleSignal<FlexBasis, this>;
+  declare public readonly basis: SimpleSignal<FlexBasis, this>;
   @initial(0)
   @signal()
-  public declare readonly grow: SimpleSignal<number, this>;
+  declare public readonly grow: SimpleSignal<number, this>;
   @initial(1)
   @signal()
-  public declare readonly shrink: SimpleSignal<number, this>;
+  declare public readonly shrink: SimpleSignal<number, this>;
   @initial('nowrap')
   @signal()
-  public declare readonly wrap: SimpleSignal<FlexWrap, this>;
+  declare public readonly wrap: SimpleSignal<FlexWrap, this>;
 
   @initial('start')
   @signal()
-  public declare readonly justifyContent: SimpleSignal<FlexContent, this>;
+  declare public readonly justifyContent: SimpleSignal<FlexContent, this>;
   @initial('normal')
   @signal()
-  public declare readonly alignContent: SimpleSignal<FlexContent, this>;
+  declare public readonly alignContent: SimpleSignal<FlexContent, this>;
   @initial('stretch')
   @signal()
-  public declare readonly alignItems: SimpleSignal<FlexItems, this>;
+  declare public readonly alignItems: SimpleSignal<FlexItems, this>;
   @initial('auto')
   @signal()
-  public declare readonly alignSelf: SimpleSignal<FlexItems, this>;
+  declare public readonly alignSelf: SimpleSignal<FlexItems, this>;
   @initial(0)
-  @vector2Signal({x: 'columnGap', y: 'rowGap'})
-  public declare readonly gap: Vector2LengthSignal<this>;
+  @vector2Signal({ x: 'columnGap', y: 'rowGap' })
+  declare public readonly gap: Vector2LengthSignal<this>;
   public get columnGap(): Signal<Length, number, this> {
     return this.gap.x;
   }
@@ -257,32 +257,32 @@ export class Layout extends Node {
 
   @defaultStyle('Roboto')
   @signal()
-  public declare readonly fontFamily: SimpleSignal<string, this>;
+  declare public readonly fontFamily: SimpleSignal<string, this>;
   @defaultStyle(48)
   @signal()
-  public declare readonly fontSize: SimpleSignal<number, this>;
+  declare public readonly fontSize: SimpleSignal<number, this>;
   @defaultStyle('normal')
   @signal()
-  public declare readonly fontStyle: SimpleSignal<string, this>;
+  declare public readonly fontStyle: SimpleSignal<string, this>;
   @defaultStyle(500)
   @signal()
-  public declare readonly fontWeight: SimpleSignal<number, this>;
+  declare public readonly fontWeight: SimpleSignal<number, this>;
   @defaultStyle('120%')
   @signal()
-  public declare readonly lineHeight: SimpleSignal<Length, this>;
+  declare public readonly lineHeight: SimpleSignal<Length, this>;
   @defaultStyle(0)
   @signal()
-  public declare readonly letterSpacing: SimpleSignal<number, this>;
+  declare public readonly letterSpacing: SimpleSignal<number, this>;
 
   @defaultStyle(false)
   @signal()
-  public declare readonly textWrap: SimpleSignal<TextWrap, this>;
+  declare public readonly textWrap: SimpleSignal<TextWrap, this>;
   @initial('ltr')
   @signal()
-  public declare readonly textDirection: SimpleSignal<CanvasDirection, this>;
+  declare public readonly textDirection: SimpleSignal<CanvasDirection, this>;
   @defaultStyle('start')
   @signal()
-  public declare readonly textAlign: SimpleSignal<CanvasTextAlign, this>;
+  declare public readonly textAlign: SimpleSignal<CanvasTextAlign, this>;
 
   protected getX(): number {
     if (this.isLayoutRoot()) {
@@ -355,9 +355,9 @@ export class Layout extends Node {
    * node.size.x(() => '50%');
    * ```
    */
-  @initial({x: null, y: null})
-  @vector2Signal({x: 'width', y: 'height'})
-  public declare readonly size: Vector2LengthSignal<this>;
+  @initial({ x: null, y: null })
+  @vector2Signal({ x: 'width', y: 'height' })
+  declare public readonly size: Vector2LengthSignal<this>;
   public get width(): Signal<Length, number, this> {
     return this.size.x;
   }
@@ -398,8 +398,10 @@ export class Layout extends Node {
 
     this.size.x(from);
     lock && this.lockSize();
-    yield* tween(time, value =>
-      this.size.x(interpolationFunction(from, to, timingFunction(value))),
+    yield* tween(
+      time,
+      (value) =>
+        this.size.x(interpolationFunction(from, to, timingFunction(value))),
     );
     this.size.x(value);
     lock && this.releaseSize();
@@ -439,8 +441,10 @@ export class Layout extends Node {
 
     this.size.y(from);
     lock && this.lockSize();
-    yield* tween(time, value =>
-      this.size.y(interpolationFunction(from, to, timingFunction(value))),
+    yield* tween(
+      time,
+      (value) =>
+        this.size.y(interpolationFunction(from, to, timingFunction(value))),
     );
     this.size.y(value);
     lock && this.releaseSize();
@@ -473,7 +477,7 @@ export class Layout extends Node {
     if (typeof size.x !== 'number' || typeof size.y !== 'number') {
       from = this.size();
     } else {
-      from = new Vector2(<Vector2>size);
+      from = new Vector2(<Vector2> size);
     }
 
     let to: Vector2;
@@ -482,7 +486,7 @@ export class Layout extends Node {
       typeof value.x === 'number' &&
       typeof value.y === 'number'
     ) {
-      to = new Vector2(<Vector2>value);
+      to = new Vector2(<Vector2> value);
     } else {
       this.size(value);
       to = this.size();
@@ -490,8 +494,10 @@ export class Layout extends Node {
 
     this.size(from);
     this.lockSize();
-    yield* tween(time, value =>
-      this.size(interpolationFunction(from, to, timingFunction(value))),
+    yield* tween(
+      time,
+      (value) =>
+        this.size(interpolationFunction(from, to, timingFunction(value))),
     );
     this.releaseSize();
     this.size(value);
@@ -513,7 +519,7 @@ export class Layout extends Node {
    * - `[-1, 1]` - bottom left corner
    */
   @vector2Signal('offset')
-  public declare readonly offset: Vector2Signal<this>;
+  declare public readonly offset: Vector2Signal<this>;
 
   /**
    * The position of the center of this node.
@@ -529,7 +535,7 @@ export class Layout extends Node {
    * space.
    */
   @originSignal(Origin.Middle)
-  public declare readonly middle: SimpleVector2Signal<this>;
+  declare public readonly middle: SimpleVector2Signal<this>;
 
   /**
    * The position of the top edge of this node.
@@ -542,7 +548,7 @@ export class Layout extends Node {
    * space.
    */
   @originSignal(Origin.Top)
-  public declare readonly top: SimpleVector2Signal<this>;
+  declare public readonly top: SimpleVector2Signal<this>;
   /**
    * The position of the bottom edge of this node.
    *
@@ -554,7 +560,7 @@ export class Layout extends Node {
    * parent space.
    */
   @originSignal(Origin.Bottom)
-  public declare readonly bottom: SimpleVector2Signal<this>;
+  declare public readonly bottom: SimpleVector2Signal<this>;
   /**
    * The position of the left edge of this node.
    *
@@ -566,7 +572,7 @@ export class Layout extends Node {
    * space.
    */
   @originSignal(Origin.Left)
-  public declare readonly left: SimpleVector2Signal<this>;
+  declare public readonly left: SimpleVector2Signal<this>;
   /**
    * The position of the right edge of this node.
    *
@@ -578,7 +584,7 @@ export class Layout extends Node {
    * space.
    */
   @originSignal(Origin.Right)
-  public declare readonly right: SimpleVector2Signal<this>;
+  declare public readonly right: SimpleVector2Signal<this>;
   /**
    * The position of the top left corner of this node.
    *
@@ -590,7 +596,7 @@ export class Layout extends Node {
    * parent space.
    */
   @originSignal(Origin.TopLeft)
-  public declare readonly topLeft: SimpleVector2Signal<this>;
+  declare public readonly topLeft: SimpleVector2Signal<this>;
   /**
    * The position of the top right corner of this node.
    *
@@ -602,7 +608,7 @@ export class Layout extends Node {
    * parent space.
    */
   @originSignal(Origin.TopRight)
-  public declare readonly topRight: SimpleVector2Signal<this>;
+  declare public readonly topRight: SimpleVector2Signal<this>;
   /**
    * The position of the bottom left corner of this node.
    *
@@ -614,7 +620,7 @@ export class Layout extends Node {
    * the parent space.
    */
   @originSignal(Origin.BottomLeft)
-  public declare readonly bottomLeft: SimpleVector2Signal<this>;
+  declare public readonly bottomLeft: SimpleVector2Signal<this>;
   /**
    * The position of the bottom right corner of this node.
    *
@@ -626,7 +632,7 @@ export class Layout extends Node {
    * the parent space.
    */
   @originSignal(Origin.BottomRight)
-  public declare readonly bottomRight: SimpleVector2Signal<this>;
+  declare public readonly bottomRight: SimpleVector2Signal<this>;
 
   /**
    * Get the cardinal point corresponding to the given origin.
@@ -662,14 +668,14 @@ export class Layout extends Node {
 
   @initial(false)
   @signal()
-  public declare readonly clip: SimpleSignal<boolean, this>;
+  declare public readonly clip: SimpleSignal<boolean, this>;
 
-  public declare element: HTMLElement;
-  public declare styles: CSSStyleDeclaration;
+  declare public element: HTMLElement;
+  declare public styles: CSSStyleDeclaration;
 
   @initial(0)
   @signal()
-  protected declare readonly sizeLockCounter: SimpleSignal<number, this>;
+  declare protected readonly sizeLockCounter: SimpleSignal<number, this>;
 
   public constructor(props: LayoutProps) {
     super(props);
@@ -958,8 +964,9 @@ export class Layout extends Node {
     this.element.style.minWidth = this.parseLength(this.minWidth());
     this.element.style.maxHeight = this.parseLength(this.maxHeight());
     this.element.style.minHeight = this.parseLength(this.minHeight()!);
-    this.element.style.aspectRatio =
-      this.ratio() === null ? '' : this.ratio()!.toString();
+    this.element.style.aspectRatio = this.ratio() === null
+      ? ''
+      : this.ratio()!.toString();
 
     this.element.style.marginTop = this.parsePixels(this.margin.top());
     this.element.style.marginBottom = this.parsePixels(this.margin.bottom());
@@ -998,10 +1005,9 @@ export class Layout extends Node {
     this.element.style.fontStyle = this.fontStyle();
 
     const lineHeight = this.lineHeight();
-    this.element.style.lineHeight =
-      typeof lineHeight === 'number'
-        ? `${lineHeight}px`
-        : (parseFloat(lineHeight as string) / 100).toString();
+    this.element.style.lineHeight = typeof lineHeight === 'number'
+      ? `${lineHeight}px`
+      : (parseFloat(lineHeight as string) / 100).toString();
 
     this.element.style.fontWeight = this.fontWeight().toString();
     this.element.style.letterSpacing = `${this.letterSpacing()}px`;
@@ -1041,7 +1047,7 @@ function originSignal(origin: Origin): PropertyDecorator {
     signal()(target, key);
     cloneable(false)(target, key);
     const meta = getPropertyMeta<any>(target, key);
-    meta!.parser = value => new Vector2(value);
+    meta!.parser = (value) => new Vector2(value);
     meta!.getter = function (this: Layout) {
       return this.computedSize()
         .getOriginOffset(origin)
@@ -1052,18 +1058,17 @@ function originSignal(origin: Origin): PropertyDecorator {
       value: SignalValue<PossibleVector2>,
     ) {
       this.position(
-        modify(value, unwrapped =>
+        modify(value, (unwrapped) =>
           this.getOriginDelta(origin)
             .transform(this.scalingRotationMatrix())
-            .flipped.add(unwrapped),
-        ),
+            .flipped.add(unwrapped)),
       );
       return this;
     };
   };
 }
 
-addInitializer<Layout>(Layout.prototype, instance => {
+addInitializer<Layout>(Layout.prototype, (instance) => {
   instance.element = document.createElement('div');
   instance.element.style.display = 'flex';
   instance.element.style.boxSizing = 'border-box';

@@ -1,23 +1,23 @@
-import {Color} from '@motion-canvas/core';
-import {valid} from 'chroma-js';
-import {useRef, useState} from 'preact/hooks';
-import {useReducedMotion} from '../../hooks';
-import {useClickOutside} from '../../hooks/useClickOutside';
-import {shake} from '../animations';
+import { Color } from '@motion-canvas/core';
+import { valid } from 'chroma-js';
+import { useRef, useState } from 'preact/hooks';
+import { useReducedMotion } from '../../hooks';
+import { useClickOutside } from '../../hooks/useClickOutside';
+import { shake } from '../animations';
 import tabsStyles from '../tabs/Tabs.module.scss';
-import {ColorPicker} from './ColorPicker';
-import {ColorPreview} from './ColorPreview';
+import { ColorPicker } from './ColorPicker';
+import { ColorPreview } from './ColorPreview';
 import styles from './Controls.module.scss';
-import {Input} from './Input';
+import { Input } from './Input';
 
 export interface ColorInputProps {
   value: Color | null;
   onChange: (value: string) => void;
 }
 
-export function ColorInput({value, onChange}: ColorInputProps) {
+export function ColorInput({ value, onChange }: ColorInputProps) {
   const pickerRef = useRef<HTMLDivElement>();
-  const [position, setPosition] = useState<{x: number; y: number}>(null);
+  const [position, setPosition] = useState<{ x: number; y: number }>(null);
   const reducedMotion = useReducedMotion();
 
   useClickOutside(pickerRef, () => {
@@ -30,7 +30,7 @@ export function ColorInput({value, onChange}: ColorInputProps) {
     <>
       <div className={styles.color}>
         <Input
-          onChange={event => {
+          onChange={(event) => {
             const input = event.target as HTMLInputElement;
             const newValue = input.value;
             if (!newValue || valid(newValue)) {
@@ -44,16 +44,16 @@ export function ColorInput({value, onChange}: ColorInputProps) {
               }
             }
           }}
-          placeholder="none"
-          type="text"
+          placeholder='none'
+          type='text'
           value={value?.serialize() ?? ''}
         />
         <div
           className={styles.button}
-          onPointerDown={event => {
+          onPointerDown={(event) => {
             event.preventDefault();
           }}
-          onClick={event => {
+          onClick={(event) => {
             const buttonRect = event.currentTarget.getBoundingClientRect();
             const paneRect = event.currentTarget
               .closest(`.${tabsStyles.pane}`)

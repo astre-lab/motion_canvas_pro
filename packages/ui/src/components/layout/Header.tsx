@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import type {JSX} from 'preact';
+import type { JSX } from 'preact';
 import styles from './Header.module.scss';
 
 export function Header({

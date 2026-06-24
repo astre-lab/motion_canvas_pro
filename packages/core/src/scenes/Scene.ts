@@ -1,20 +1,20 @@
-import type {Logger, PlaybackStatus, SharedWebGLContext} from '../app';
+import type { Logger, PlaybackStatus, SharedWebGLContext } from '../app';
 import type {
   SubscribableEvent,
   SubscribableValueEvent,
   ValueDispatcher,
 } from '../events';
-import type {Plugin} from '../plugin';
-import type {SignalValue} from '../signals';
-import type {Vector2} from '../types';
-import type {LifecycleEvents} from './LifecycleEvents';
-import type {Random} from './Random';
-import type {SceneMetadata} from './SceneMetadata';
-import type {Shaders} from './Shaders';
-import type {Slides} from './Slides';
-import type {Sounds} from './Sounds';
-import type {Variables} from './Variables';
-import type {TimeEvents} from './timeEvents';
+import type { Plugin } from '../plugin';
+import type { SignalValue } from '../signals';
+import type { Vector2 } from '../types';
+import type { LifecycleEvents } from './LifecycleEvents';
+import type { Random } from './Random';
+import type { SceneMetadata } from './SceneMetadata';
+import type { Shaders } from './Shaders';
+import type { Slides } from './Slides';
+import type { Sounds } from './Sounds';
+import type { Variables } from './Variables';
+import type { TimeEvents } from './timeEvents';
 
 /**
  * The constructor used when creating new scenes.
@@ -86,8 +86,9 @@ export interface SceneDescriptionReload<T = unknown> {
   stack?: string;
 }
 
-export type DescriptionOf<TScene> =
-  TScene extends Scene<infer TConfig> ? SceneDescription<TConfig> : never;
+export type DescriptionOf<TScene> = TScene extends Scene<infer TConfig>
+  ? SceneDescription<TConfig>
+  : never;
 
 /**
  * Describes cached information about the timing of a scene.

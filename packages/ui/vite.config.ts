@@ -1,6 +1,6 @@
 import preact from '@preact/preset-vite';
 import * as fs from 'fs';
-import {defineConfig} from 'vite';
+import { defineConfig } from 'vite';
 import dts from 'vite-plugin-dts';
 
 export default defineConfig({

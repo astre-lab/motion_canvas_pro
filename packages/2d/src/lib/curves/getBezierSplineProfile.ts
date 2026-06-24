@@ -1,9 +1,9 @@
-import {Vector2, clamp} from '@motion-canvas/core';
-import {CubicBezierSegment} from './CubicBezierSegment';
-import {CurveProfile} from './CurveProfile';
-import {KnotInfo} from './KnotInfo';
-import {PolynomialSegment} from './PolynomialSegment';
-import {QuadBezierSegment} from './QuadBezierSegment';
+import { clamp, Vector2 } from '@motion-canvas/core';
+import { CubicBezierSegment } from './CubicBezierSegment';
+import { CurveProfile } from './CurveProfile';
+import { KnotInfo } from './KnotInfo';
+import { PolynomialSegment } from './PolynomialSegment';
+import { QuadBezierSegment } from './QuadBezierSegment';
 
 function isCubicSegment(
   segment: PolynomialSegment,
@@ -95,10 +95,9 @@ function addSegmentToProfile(
   p2: Vector2,
   p3?: Vector2,
 ) {
-  const segment =
-    p3 !== undefined
-      ? new CubicBezierSegment(p0, p1, p2, p3)
-      : new QuadBezierSegment(p0, p1, p2);
+  const segment = p3 !== undefined
+    ? new CubicBezierSegment(p0, p1, p2, p3)
+    : new QuadBezierSegment(p0, p1, p2);
   profile.segments.push(segment);
   profile.arcLength += segment.arcLength;
 }

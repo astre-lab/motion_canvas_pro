@@ -1,6 +1,6 @@
 import Token from '@site/src/components/Api/Code/Token';
 import React from 'react';
-import type {JSONOutput} from 'typedoc';
+import type { JSONOutput } from 'typedoc';
 
 export default function FlagsPreview({
   flags,
@@ -38,9 +38,10 @@ export default function FlagsPreview({
 
   return (
     <>
-      {tokens.map(token => (
-        <Token key={token} type="keyword">
-          {token}{' '}
+      {tokens.map((token) => (
+        <Token key={token} type='keyword'>
+          {token}
+          {' '}
         </Token>
       ))}
     </>

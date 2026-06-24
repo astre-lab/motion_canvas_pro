@@ -1,5 +1,5 @@
-import {Semaphore, useLogger} from '../utils';
-import type {MetaField} from './MetaField';
+import { Semaphore, useLogger } from '../utils';
+import type { MetaField } from './MetaField';
 
 /**
  * Represents the meta file of a given entity.
@@ -95,7 +95,7 @@ export class MetaFile<T> {
 
   static {
     if (import.meta.hot) {
-      import.meta.hot.on('motion-canvas:meta-ack', ({source}) => {
+      import.meta.hot.on('motion-canvas:meta-ack', ({ source }) => {
         this.sourceLookup[source]?.();
       });
     }

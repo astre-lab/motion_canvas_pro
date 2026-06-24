@@ -40,7 +40,7 @@ export abstract class EventDispatcherBase<
   }
 
   protected notifySubscribers(value: TValue): ReturnType<THandler>[] {
-    return [...this.subscribers].map(handler => handler(value));
+    return [...this.subscribers].map((handler) => handler(value));
   }
 }
 

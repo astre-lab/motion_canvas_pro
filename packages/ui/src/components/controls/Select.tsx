@@ -3,7 +3,7 @@ import styles from './Controls.module.scss';
 
 export interface SelectProps<T> {
   title?: string;
-  options: {value: T; text: string}[];
+  options: { value: T; text: string }[];
   className?: string;
   main?: boolean;
   disabled?: boolean;
@@ -25,8 +25,8 @@ export function Select<T>({
       title={title}
       disabled={disabled}
       className={clsx(styles.select, className, main && styles.main)}
-      value={options.findIndex(option => option.value === value)}
-      onChange={event => {
+      value={options.findIndex((option) => option.value === value)}
+      onChange={(event) => {
         onChange(
           options[parseInt((event.target as HTMLSelectElement).value)].value,
         );

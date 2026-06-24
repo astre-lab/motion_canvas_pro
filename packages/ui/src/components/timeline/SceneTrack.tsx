@@ -1,20 +1,18 @@
 import styles from './Timeline.module.scss';
 
-import type {Scene} from '@motion-canvas/core';
-import {useMemo} from 'preact/hooks';
-import {useApplication, useTimelineContext} from '../../contexts';
-import {useScenes, useSubscribableValue} from '../../hooks';
-import {findAndOpenFirstUserFile} from '../../utils';
-import {SlideTrack} from './SlideTrack';
+import type { Scene } from '@motion-canvas/core';
+import { useMemo } from 'preact/hooks';
+import { useApplication, useTimelineContext } from '../../contexts';
+import { useScenes, useSubscribableValue } from '../../hooks';
+import { findAndOpenFirstUserFile } from '../../utils';
+import { SlideTrack } from './SlideTrack';
 
 export function SceneTrack() {
   const scenes = useScenes();
 
   return (
     <div className={styles.sceneTrack}>
-      {scenes.map(scene => (
-        <SceneClip scene={scene} />
-      ))}
+      {scenes.map((scene) => <SceneClip scene={scene} />)}
     </div>
   );
 }
@@ -23,15 +21,15 @@ interface SceneClipProps {
   scene: Scene;
 }
 
-function SceneClip({scene}: SceneClipProps) {
-  const {player, meta} = useApplication();
-  const {framesToPercents, framesToPixels, offset} = useTimelineContext();
+function SceneClip({ scene }: SceneClipProps) {
+  const { player, meta } = useApplication();
+  const { framesToPercents, framesToPixels, offset } = useTimelineContext();
   const cachedData = useSubscribableValue(scene.onCacheChanged);
 
   const nameStyle = useMemo(() => {
     const sceneOffset = framesToPixels(cachedData.firstFrame);
     return offset > sceneOffset
-      ? {paddingLeft: `${offset - sceneOffset}px`}
+      ? { paddingLeft: `${offset - sceneOffset}px` }
       : {};
   }, [offset, cachedData.firstFrame, framesToPixels]);
 
@@ -41,12 +39,12 @@ function SceneClip({scene}: SceneClipProps) {
       style={{
         width: `${framesToPercents(cachedData.duration)}%`,
       }}
-      onMouseDown={event => {
+      onMouseDown={(event) => {
         if (event.button === 1) {
           event.preventDefault();
         }
       }}
-      onMouseUp={event => {
+      onMouseUp={(event) => {
         if (event.button === 1) {
           event.stopPropagation();
           meta.shared.range.set([
@@ -70,11 +68,11 @@ function SceneClip({scene}: SceneClipProps) {
         <div
           className={styles.name}
           style={nameStyle}
-          title="Go to source"
-          onPointerDown={event => {
+          title='Go to source'
+          onPointerDown={(event) => {
             event.stopPropagation();
           }}
-          onPointerUp={async event => {
+          onPointerUp={async (event) => {
             event.stopPropagation();
             if (scene.creationStack) {
               await findAndOpenFirstUserFile(scene.creationStack);

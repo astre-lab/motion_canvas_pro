@@ -1,15 +1,15 @@
-import {linear, waitFor} from '@motion-canvas/core';
-import {describe, expect, it, vi} from 'vitest';
-import {Txt} from './Txt';
-import {TxtLeaf} from './TxtLeaf';
-import {generatorTest} from './__tests__/generatorTest';
-import {mockScene2D} from './__tests__/mockScene2D';
+import { linear, waitFor } from '@motion-canvas/core';
+import { describe, expect, it, vi } from 'vitest';
+import { Txt } from './Txt';
+import { TxtLeaf } from './TxtLeaf';
+import { generatorTest } from './__tests__/generatorTest';
+import { mockScene2D } from './__tests__/mockScene2D';
 
 describe('Txt', () => {
   mockScene2D();
 
   it('Handle plain text', () => {
-    const node = (<Txt lineWidth={8}>test</Txt>) as Txt;
+    const node = <Txt lineWidth={8}>test</Txt> as Txt;
 
     const parseSpy = vi.spyOn(node as any, 'parseChildren');
     const leaf = node.childAs<TxtLeaf>(0);

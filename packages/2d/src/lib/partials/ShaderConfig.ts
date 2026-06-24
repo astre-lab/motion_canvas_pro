@@ -5,7 +5,7 @@ import {
   useScene,
   WebGLConvertible,
 } from '@motion-canvas/core';
-import {Node} from '../components';
+import { Node } from '../components';
 
 /**
  * Describes a shader program used to apply effects to nodes.
@@ -101,10 +101,10 @@ export function parseShader(
   if (!value) {
     result = [];
   } else if (typeof value === 'string') {
-    result = [{fragment: value}];
+    result = [{ fragment: value }];
   } else if (Array.isArray(value)) {
-    result = value.map(item =>
-      typeof item === 'string' ? {fragment: item} : item,
+    result = value.map((item) =>
+      typeof item === 'string' ? { fragment: item } : item
     );
   } else {
     result = [value];

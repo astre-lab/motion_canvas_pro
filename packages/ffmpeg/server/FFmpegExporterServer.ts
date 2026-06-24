@@ -3,14 +3,14 @@ import type {
   RendererSettings,
   Sound,
 } from '@motion-canvas/core';
-import type {PluginConfig} from '@motion-canvas/vite-plugin';
-import {ffmpegPath, ffprobePath} from 'ffmpeg-ffprobe-static';
-import type {AudioVideoFilter, FilterSpecification} from 'fluent-ffmpeg';
+import type { PluginConfig } from '@motion-canvas/vite-plugin';
+import { ffmpegPath, ffprobePath } from 'ffmpeg-ffprobe-static';
+import type { AudioVideoFilter, FilterSpecification } from 'fluent-ffmpeg';
 import ffmpeg from 'fluent-ffmpeg';
 import * as fs from 'fs';
 import * as path from 'path';
-import {Readable} from 'stream';
-import {ImageStream} from './ImageStream';
+import { Readable } from 'stream';
+import { ImageStream } from './ImageStream';
 
 ffmpeg.setFfmpegPath(ffmpegPath!);
 ffmpeg.setFfprobePath(ffprobePath!);
@@ -29,7 +29,7 @@ export interface FFmpegExporterSettings extends RendererSettings {
 
 function formatFilters(filters: AudioVideoFilter[]): string {
   return filters
-    .map(f => {
+    .map((f) => {
       let options: string[] = [];
       if (typeof f.options === 'string') {
         options = [f.options];
@@ -101,7 +101,7 @@ export class FFmpegExporterServer {
       if (sound.end !== undefined) {
         filters.push({
           filter: 'atrim',
-          options: {end: sound.end - trimmed},
+          options: { end: sound.end - trimmed },
         });
       }
 
@@ -113,7 +113,7 @@ export class FFmpegExporterServer {
       if (sound.gain) {
         filters.push({
           filter: 'volume',
-          options: {volume: `${sound.gain}dB`},
+          options: { volume: `${sound.gain}dB` },
         });
       }
 
@@ -123,7 +123,7 @@ export class FFmpegExporterServer {
         );
         filters.push({
           filter: 'asetrate',
-          options: {r: rate},
+          options: { r: rate },
         });
         filters.push({
           filter: 'aresample',
@@ -135,7 +135,7 @@ export class FFmpegExporterServer {
         const delay = Math.round(sound.offset * 1000);
         filters.push({
           filter: 'adelay',
-          options: {delays: delay, all: 1},
+          options: { delays: delay, all: 1 },
         });
       }
 
@@ -157,7 +157,11 @@ export class FFmpegExporterServer {
         {
           filter: 'amix',
           // eslint-disable-next-line @typescript-eslint/naming-convention
-          options: {inputs: sounds.length, dropout_transition: 0, normalize: 0},
+          options: {
+            inputs: sounds.length,
+            dropout_transition: 0,
+            normalize: 0,
+          },
           inputs: streams,
           outputs: 'a',
         },
@@ -185,7 +189,7 @@ export class FFmpegExporterServer {
 
   public async start() {
     if (!fs.existsSync(this.config.output)) {
-      await fs.promises.mkdir(this.config.output, {recursive: true});
+      await fs.promises.mkdir(this.config.output, { recursive: true });
     }
     this.command.on('stderr', console.error);
     this.command.run();

@@ -1,6 +1,6 @@
-import {Logger} from '../app';
-import {Sound} from '../scenes';
-import {useLogger} from '../utils';
+import { Logger } from '../app';
+import { Sound } from '../scenes';
+import { useLogger } from '../utils';
 
 export class AudioManager {
   private readonly audioElement: HTMLAudioElement = new Audio();
@@ -17,7 +17,7 @@ export class AudioManager {
     private readonly context: AudioContext,
   ) {
     if (import.meta.hot) {
-      import.meta.hot.on('motion-canvas:assets', ({urls}) => {
+      import.meta.hot.on('motion-canvas:assets', ({ urls }) => {
         if (this.source && urls.includes(this.source)) {
           this.setSource(this.source);
         }

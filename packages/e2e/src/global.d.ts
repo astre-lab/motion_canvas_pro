@@ -6,5 +6,5 @@ declare namespace jest {
 
 declare module 'jest-image-snapshot' {
   const toMatchImageSnapshot: any;
-  export {toMatchImageSnapshot};
+  export { toMatchImageSnapshot };
 }

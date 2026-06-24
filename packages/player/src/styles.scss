@@ -63,9 +63,7 @@ $states: ('initial' 'loading' 'ready' 'error');
   max-width: 96px;
   aspect-ratio: 1;
   scale: 0.5;
-  transition:
-    scale 0.1s ease-in,
-    opacity 0.1s;
+  transition: scale 0.1s ease-in, opacity 0.1s;
   background-color: transparent;
   border: none;
 

@@ -90,7 +90,7 @@ export class SubscribableValueEvent<T> extends Subscribable<
    * Get the most recent value of this dispatcher.
    */
   public get current() {
-    return (<ValueDispatcher<T>>this.dispatcher).current;
+    return (<ValueDispatcher<T>> this.dispatcher).current;
   }
 
   /**
@@ -108,7 +108,7 @@ export class SubscribableValueEvent<T> extends Subscribable<
     handler: EventHandler<T>,
     dispatchImmediately = true,
   ): () => void {
-    return (<ValueDispatcher<T>>this.dispatcher).subscribe(
+    return (<ValueDispatcher<T>> this.dispatcher).subscribe(
       handler,
       dispatchImmediately,
     );

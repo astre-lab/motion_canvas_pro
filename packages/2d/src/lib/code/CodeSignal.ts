@@ -9,12 +9,12 @@ import {
   TimingFunction,
   unwrap,
 } from '@motion-canvas/core';
-import {Code} from '../components';
-import {addInitializer, getPropertyMetaOrCreate} from '../decorators';
-import {defaultDiffer} from './CodeDiffer';
-import {insert, replace} from './CodeFragment';
-import {CodeHighlighter} from './CodeHighlighter';
-import {CodePoint, CodeRange} from './CodeRange';
+import { Code } from '../components';
+import { addInitializer, getPropertyMetaOrCreate } from '../decorators';
+import { defaultDiffer } from './CodeDiffer';
+import { insert, replace } from './CodeFragment';
+import { CodeHighlighter } from './CodeHighlighter';
+import { CodePoint, CodeRange } from './CodeRange';
 import {
   CODE,
   CodeScope,
@@ -23,8 +23,8 @@ import {
   PossibleCodeScope,
   resolveCodeTag,
 } from './CodeScope';
-import {defaultTokenize} from './CodeTokenizer';
-import {extractRange} from './extractRange';
+import { defaultTokenize } from './CodeTokenizer';
+import { extractRange } from './extractRange';
 
 interface CodeModifier<TOwner> {
   (code: CodeTag): TOwner;
@@ -63,18 +63,18 @@ export interface CodeSignalHelpers<TOwner> {
   replace: CodeReplace<TOwner>;
 }
 
-export type CodeSignal<TOwner> = Signal<
-  PossibleCodeScope,
-  CodeScope,
-  TOwner,
-  CodeSignalContext<TOwner>
-> &
-  CodeSignalHelpers<TOwner>;
+export type CodeSignal<TOwner> =
+  & Signal<
+    PossibleCodeScope,
+    CodeScope,
+    TOwner,
+    CodeSignalContext<TOwner>
+  >
+  & CodeSignalHelpers<TOwner>;
 
 export class CodeSignalContext<TOwner>
   extends SignalContext<PossibleCodeScope, CodeScope, TOwner>
-  implements CodeSignalHelpers<TOwner>
-{
+  implements CodeSignalHelpers<TOwner> {
   private readonly progress = createSignal(0);
 
   public constructor(
@@ -257,8 +257,8 @@ export class CodeSignalContext<TOwner>
     current = this.get();
     this.set({
       progress: current.progress,
-      fragments: current.fragments.map(fragment =>
-        fragment === scope ? code : fragment,
+      fragments: current.fragments.map((fragment) =>
+        fragment === scope ? code : fragment
       ),
     });
     progress.context.dispose();
@@ -274,8 +274,8 @@ export class CodeSignalContext<TOwner>
     const current = this.get();
     this.set({
       progress: 0,
-      fragments: current.fragments.map(fragment =>
-        value.includes(fragment) ? resolveCodeTag(fragment, true) : fragment,
+      fragments: current.fragments.map((fragment) =>
+        value.includes(fragment) ? resolveCodeTag(fragment, true) : fragment
       ),
     });
   }
@@ -296,8 +296,8 @@ export class CodeSignalContext<TOwner>
     current = this.get();
     this.set({
       progress: current.progress,
-      fragments: current.fragments.map(fragment =>
-        fragment === scope ? value : fragment,
+      fragments: current.fragments.map((fragment) =>
+        fragment === scope ? value : fragment
       ),
     });
     progress.context.dispose();
@@ -319,8 +319,8 @@ export class CodeSignalContext<TOwner>
     current = this.get();
     this.set({
       progress: current.progress,
-      fragments: current.fragments.map(fragment =>
-        fragment === scope ? value : fragment,
+      fragments: current.fragments.map((fragment) =>
+        fragment === scope ? value : fragment
       ),
     });
     progress.context.dispose();

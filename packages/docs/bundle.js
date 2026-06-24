@@ -8,12 +8,12 @@ module.exports = () => ({
   name: 'docusaurus-bundle-plugin',
   async loadContent() {
     if (!fs.existsSync(PublicPath)) {
-      fs.mkdirSync(PublicPath, {recursive: true});
+      fs.mkdirSync(PublicPath, { recursive: true });
     }
 
     return await Promise.all([copyBundle('core'), copyBundle('2d')]);
   },
-  injectHtmlTags({content: [core, two]}) {
+  injectHtmlTags({ content: [core, two] }) {
     return {
       headTags: [
         {

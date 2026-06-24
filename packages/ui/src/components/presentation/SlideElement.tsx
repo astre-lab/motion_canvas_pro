@@ -1,6 +1,6 @@
-import type {Slide} from '@motion-canvas/core';
+import type { Slide } from '@motion-canvas/core';
 import clsx from 'clsx';
-import {useApplication} from '../../contexts';
+import { useApplication } from '../../contexts';
 import styles from './SlideGraph.module.scss';
 
 interface SlideElementProps {
@@ -9,8 +9,8 @@ interface SlideElementProps {
   inProgress: boolean;
 }
 
-export function SlideElement({slide, active, inProgress}: SlideElementProps) {
-  const {presenter} = useApplication();
+export function SlideElement({ slide, active, inProgress }: SlideElementProps) {
+  const { presenter } = useApplication();
   return (
     <button
       className={clsx(

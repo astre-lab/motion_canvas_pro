@@ -1,8 +1,8 @@
-import {Vector2, createSignal, range} from '@motion-canvas/core';
-import {describe, expect, it} from 'vitest';
-import {Circle} from '../Circle';
-import {Node} from '../Node';
-import {mockScene2D} from './mockScene2D';
+import { createSignal, range, Vector2 } from '@motion-canvas/core';
+import { describe, expect, it } from 'vitest';
+import { Circle } from '../Circle';
+import { Node } from '../Node';
+import { mockScene2D } from './mockScene2D';
 
 describe('clone', () => {
   mockScene2D();
@@ -10,9 +10,13 @@ describe('clone', () => {
   it('Normal clone', () => {
     const signal = createSignal(45);
     const template = (
-      <Circle lineWidth={8} startAngle={signal} end={0.5} />
+      <Circle
+        lineWidth={8}
+        startAngle={signal}
+        end={0.5}
+      />
     ) as Circle;
-    const clone = template.clone({end: 0});
+    const clone = template.clone({ end: 0 });
 
     expect(clone.lineWidth()).toBe(8);
     expect(clone.startAngle()).toBe(45);
@@ -27,9 +31,13 @@ describe('clone', () => {
   it('Reactive clone', () => {
     const signal = createSignal(45);
     const template = (
-      <Circle lineWidth={8} startAngle={signal} end={0.5} />
+      <Circle
+        lineWidth={8}
+        startAngle={signal}
+        end={0.5}
+      />
     ) as Circle;
-    const clone = template.reactiveClone({end: 0});
+    const clone = template.reactiveClone({ end: 0 });
 
     expect(clone.lineWidth()).toBe(8);
     expect(clone.startAngle()).toBe(45);
@@ -50,9 +58,13 @@ describe('clone', () => {
   it('Snapshot clone', () => {
     const signal = createSignal(45);
     const template = (
-      <Circle lineWidth={8} startAngle={signal} end={0.5} />
+      <Circle
+        lineWidth={8}
+        startAngle={signal}
+        end={0.5}
+      />
     ) as Circle;
-    const clone = template.snapshotClone({end: 0});
+    const clone = template.snapshotClone({ end: 0 });
 
     expect(clone.lineWidth()).toBe(8);
     expect(clone.startAngle()).toBe(45);
@@ -70,8 +82,8 @@ describe('clone', () => {
 
   it('Clone compound signal', () => {
     const signal = Vector2.createSignal(200);
-    const template = (<Circle offset={1} position={signal} />) as Circle;
-    const clone = template.clone({x: 100, offsetY: -1});
+    const template = <Circle offset={1} position={signal} /> as Circle;
+    const clone = template.clone({ x: 100, offsetY: -1 });
 
     expect(clone.x()).toBe(100);
     expect(clone.y()).toBe(200);
@@ -110,8 +122,7 @@ describe('clone', () => {
         {() =>
           range(count()).map(() => (
             <Circle lineWidth={8} startAngle={count} end={0.5} />
-          ))
-        }
+          ))}
       </Node>
     );
     const clone = template.clone();

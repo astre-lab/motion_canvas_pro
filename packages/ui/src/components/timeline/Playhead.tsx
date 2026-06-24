@@ -1,16 +1,16 @@
 import styles from './Timeline.module.scss';
 
-import {Signal} from '@preact/signals';
-import {useTimelineContext} from '../../contexts';
-import {usePlayerState, usePlayerTime} from '../../hooks';
+import { Signal } from '@preact/signals';
+import { useTimelineContext } from '../../contexts';
+import { usePlayerState, usePlayerTime } from '../../hooks';
 
 interface PlayheadProps {
   seeking: Signal<number | null>;
 }
 
-export function Playhead({seeking}: PlayheadProps) {
-  const {framesToPixels} = useTimelineContext();
-  const {speed} = usePlayerState();
+export function Playhead({ seeking }: PlayheadProps) {
+  const { framesToPixels } = useTimelineContext();
+  const { speed } = usePlayerState();
   const time = usePlayerTime();
   const frame = seeking.value ?? time.frame;
 

@@ -1,9 +1,11 @@
-import React, {useMemo} from 'react';
+import React, { useMemo } from 'react';
 
 import Token from '@site/src/components/Api/Code/Token';
-import type {JSONOutput} from 'typedoc';
+import type { JSONOutput } from 'typedoc';
 
-export default function LiteralType({type}: {type: JSONOutput.LiteralType}) {
+export default function LiteralType(
+  { type }: { type: JSONOutput.LiteralType },
+) {
   const [value, token] = useMemo(() => {
     if (type.value === null) {
       return ['null', 'keyword'];

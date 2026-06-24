@@ -1,4 +1,4 @@
-import React, {ReactNode} from 'react';
+import React, { ReactNode } from 'react';
 
 import Container from '@theme/CodeBlock/Container';
 import clsx from 'clsx';
@@ -11,7 +11,7 @@ export default function ApiContainer({
 }) {
   return (
     <Container
-      as="div"
+      as='div'
       className={clsx(styles.codeBlockContainer, 'language-typescript')}
     >
       {children}

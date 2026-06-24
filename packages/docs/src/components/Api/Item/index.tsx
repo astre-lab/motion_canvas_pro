@@ -4,9 +4,9 @@ import ModuleItem from '@site/src/components/Api/Item/ModuleItem';
 import ProjectItem from '@site/src/components/Api/Item/ProjectItem';
 import PropertyItem from '@site/src/components/Api/Item/PropertyItem';
 import TypeAliasItem from '@site/src/components/Api/Item/TypeAliasItem';
-import React, {useMemo} from 'react';
-import type {JSONOutput} from 'typedoc';
-import {ReflectionKind} from '../ReflectionKind';
+import React, { useMemo } from 'react';
+import type { JSONOutput } from 'typedoc';
+import { ReflectionKind } from '../ReflectionKind';
 
 export default function Item({
   reflection,

@@ -1,9 +1,12 @@
 import styles from './Playback.module.scss';
 
-import {useApplication} from '../../contexts';
-import {GLOBAL_EDITOR_SHORTCUTS, useShortcuts} from '../../contexts/shortcuts';
-import {usePlayerState} from '../../hooks';
-import {IconButton, IconCheckbox, Input, Select, Slider} from '../controls';
+import { useApplication } from '../../contexts';
+import {
+  GLOBAL_EDITOR_SHORTCUTS,
+  useShortcuts,
+} from '../../contexts/shortcuts';
+import { usePlayerState } from '../../hooks';
+import { IconButton, IconCheckbox, Input, Select, Slider } from '../controls';
 import {
   FastForward,
   FastRewind,
@@ -16,10 +19,10 @@ import {
   VolumeOff,
   VolumeOn,
 } from '../icons';
-import {Framerate} from './Framerate';
+import { Framerate } from './Framerate';
 
 export function PlaybackControls() {
-  const {player, renderer, meta, project} = useApplication();
+  const { player, renderer, meta, project } = useApplication();
   const state = usePlayerState();
 
   useShortcuts(GLOBAL_EDITOR_SHORTCUTS, {
@@ -37,23 +40,23 @@ export function PlaybackControls() {
   return (
     <div className={styles.controls}>
       <Select
-        title="Playback speed"
+        title='Playback speed'
         options={[
-          {value: 0.25, text: 'x0.25'},
-          {value: 0.5, text: 'x0.5'},
-          {value: 1, text: 'x1'},
-          {value: 1.5, text: 'x1.5'},
-          {value: 2, text: 'x2'},
+          { value: 0.25, text: 'x0.25' },
+          { value: 0.5, text: 'x0.5' },
+          { value: 1, text: 'x1' },
+          { value: 1.5, text: 'x1.5' },
+          { value: 2, text: 'x2' },
         ]}
         value={state.speed}
-        onChange={speed => player.setSpeed(speed)}
+        onChange={(speed) => player.setSpeed(speed)}
       />
       <div className={styles.volumeTrigger}>
         <IconCheckbox
-          titleOn="Mute audio [M]"
-          titleOff="Unmute audio [M]"
+          titleOn='Mute audio [M]'
+          titleOff='Unmute audio [M]'
           checked={!state.muted}
-          onChange={value => player.toggleAudio(value)}
+          onChange={(value) => player.toggleAudio(value)}
         >
           {state.muted ? <VolumeOff /> : <VolumeOn />}
         </IconCheckbox>
@@ -63,7 +66,7 @@ export function PlaybackControls() {
             <div className={styles.volume}>
               <Slider
                 value={state.volume}
-                onChange={volume => {
+                onChange={(volume) => {
                   if (isNaN(volume)) {
                     volume = 0;
                   }
@@ -75,41 +78,41 @@ export function PlaybackControls() {
         )}
       </div>
       <IconButton
-        title="Start [Shift + Left arrow]"
+        title='Start [Shift + Left arrow]'
         onClick={() => player.requestReset()}
       >
         <SkipPrevious />
       </IconButton>
       <IconButton
-        title="Previous frame [Left arrow]"
+        title='Previous frame [Left arrow]'
         onClick={() => player.requestPreviousFrame()}
       >
         <FastRewind />
       </IconButton>
       <IconCheckbox
         main
-        titleOn="Pause [Space]"
-        titleOff="Play [Space]"
+        titleOn='Pause [Space]'
+        titleOff='Play [Space]'
         checked={!state.paused}
-        onChange={value => player.togglePlayback(value)}
+        onChange={(value) => player.togglePlayback(value)}
       >
         {state.paused ? <PlayArrow /> : <Pause />}
       </IconCheckbox>
       <IconButton
-        title="Next frame [Right arrow]"
+        title='Next frame [Right arrow]'
         onClick={() => player.requestNextFrame()}
       >
         <FastForward />
       </IconButton>
       <IconButton
-        title="End [Shift + Right arrow]"
+        title='End [Shift + Right arrow]'
         onClick={() => player.requestSeek(Infinity)}
       >
         <SkipNext />
       </IconButton>
       <IconCheckbox
-        titleOn="Disable looping [L]"
-        titleOff="Enable looping [L]"
+        titleOn='Disable looping [L]'
+        titleOff='Enable looping [L]'
         checked={state.loop}
         onChange={() => player.toggleLoop()}
       >
@@ -118,14 +121,14 @@ export function PlaybackControls() {
       <Framerate
         render={(framerate, paused) => (
           <Input
-            title="Current framerate"
+            title='Current framerate'
             readOnly
             value={paused ? 'PAUSED' : `${framerate} FPS`}
           />
         )}
       />
       <IconButton
-        title="Save snapshot"
+        title='Save snapshot'
         onClick={() =>
           renderer.renderFrame(
             {
@@ -133,8 +136,7 @@ export function PlaybackControls() {
               name: project.name,
             },
             player.status.time,
-          )
-        }
+          )}
       >
         <PhotoCamera />
       </IconButton>

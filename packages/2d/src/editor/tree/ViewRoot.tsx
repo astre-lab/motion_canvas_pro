@@ -1,10 +1,10 @@
-import {useSignal, useSignalEffect} from '@preact/signals';
-import {usePluginState} from '../Provider';
-import {NodeElement} from './NodeElement';
-import {TreeRoot} from './TreeRoot';
+import { useSignal, useSignalEffect } from '@preact/signals';
+import { usePluginState } from '../Provider';
+import { NodeElement } from './NodeElement';
+import { TreeRoot } from './TreeRoot';
 
 export function ViewRoot() {
-  const {scene} = usePluginState();
+  const { scene } = usePluginState();
   const view = useSignal(scene.value?.getView());
 
   useSignalEffect(() => {
@@ -14,7 +14,7 @@ export function ViewRoot() {
     });
   });
 
-  return view.value ? (
-    <TreeRoot>{<NodeElement node={view.value} />}</TreeRoot>
-  ) : null;
+  return view.value
+    ? <TreeRoot>{<NodeElement node={view.value} />}</TreeRoot>
+    : null;
 }

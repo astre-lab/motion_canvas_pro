@@ -16,15 +16,15 @@ import {
 
 type ServerResponse =
   | {
-      status: 'success';
-      method: string;
-      data: unknown;
-    }
+    status: 'success';
+    method: string;
+    data: unknown;
+  }
   | {
-      status: 'error';
-      method: string;
-      message?: string;
-    };
+    status: 'error';
+    method: string;
+    message?: string;
+  };
 
 type FFmpegExporterOptions = ValueOf<
   ReturnType<typeof FFmpegExporterClient.meta>
@@ -96,8 +96,8 @@ export class FFmpegExporterClient implements Exporter {
       ...this.settings,
       ...options,
       audio: this.project.audio,
-      audioOffset:
-        this.project.meta.shared.audioOffset.get() - this.settings.range[0],
+      audioOffset: this.project.meta.shared.audioOffset.get() -
+        this.settings.range[0],
       sounds,
       duration,
     });
@@ -112,7 +112,7 @@ export class FFmpegExporterClient implements Exporter {
     context: CanvasRenderingContext2D,
   ): Promise<void> {
     while (this.concurrentFrames >= EXPORT_FRAME_LIMIT) {
-      await new Promise(resolve => setTimeout(resolve, EXPORT_RETRY_DELAY));
+      await new Promise((resolve) => setTimeout(resolve, EXPORT_RETRY_DELAY));
     }
 
     if (this.error) {
@@ -125,7 +125,7 @@ export class FFmpegExporterClient implements Exporter {
       .then(() => {
         this.concurrentFrames--;
       })
-      .catch(error => {
+      .catch((error) => {
         this.error = error;
         this.concurrentFrames--;
       });
@@ -133,7 +133,7 @@ export class FFmpegExporterClient implements Exporter {
 
   public async stop(result: RendererResult): Promise<void> {
     while (this.concurrentFrames >= EXPORT_FRAME_LIMIT) {
-      await new Promise(resolve => setTimeout(resolve, EXPORT_RETRY_DELAY));
+      await new Promise((resolve) => setTimeout(resolve, EXPORT_RETRY_DELAY));
     }
 
     if (this.error) {
@@ -177,14 +177,14 @@ export class FFmpegExporterClient implements Exporter {
         FFmpegExporterClient.response.subscribe(handle);
         switch (strategy) {
           case 'ws':
-            import.meta.hot!.send('motion-canvas/ffmpeg', {method, data});
+            import.meta.hot!.send('motion-canvas/ffmpeg', { method, data });
             break;
           case 'octet-stream':
             fetch(`/ffmpeg/${method}`, {
               method: 'POST',
               body: data as ArrayBuffer,
               // eslint-disable-next-line @typescript-eslint/naming-convention
-              headers: {'Content-Type': 'application/octet-stream'},
+              headers: { 'Content-Type': 'application/octet-stream' },
             }).catch(reject);
             break;
         }

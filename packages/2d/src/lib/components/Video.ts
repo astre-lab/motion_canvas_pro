@@ -1,19 +1,19 @@
 import {
   BBox,
+  clamp,
   DependencyContext,
+  isReactive,
   PlaybackState,
   SerializedVector2,
   SignalValue,
   SimpleSignal,
-  clamp,
-  isReactive,
   useLogger,
   useThread,
 } from '@motion-canvas/core';
-import {computed, initial, nodeName, signal} from '../decorators';
-import {DesiredLength} from '../partials';
-import {drawImage} from '../utils';
-import {Rect, RectProps} from './Rect';
+import { computed, initial, nodeName, signal } from '../decorators';
+import { DesiredLength } from '../partials';
+import { drawImage } from '../utils';
+import { Rect, RectProps } from './Rect';
 import reactivePlaybackRate from './__logs__/reactive-playback-rate.md';
 
 export interface VideoProps extends RectProps {
@@ -64,7 +64,7 @@ export class Video extends Rect {
    * ```
    */
   @signal()
-  public declare readonly src: SimpleSignal<string, this>;
+  declare public readonly src: SimpleSignal<string, this>;
 
   /**
    * The alpha value of this video.
@@ -75,7 +75,7 @@ export class Video extends Rect {
    */
   @initial(1)
   @signal()
-  public declare readonly alpha: SimpleSignal<number, this>;
+  declare public readonly alpha: SimpleSignal<number, this>;
 
   /**
    * Whether the video should be smoothed.
@@ -88,14 +88,14 @@ export class Video extends Rect {
    */
   @initial(true)
   @signal()
-  public declare readonly smoothing: SimpleSignal<boolean, this>;
+  declare public readonly smoothing: SimpleSignal<boolean, this>;
 
   /**
    * Whether this video should loop upon reaching the end.
    */
   @initial(false)
   @signal()
-  public declare readonly loop: SimpleSignal<boolean, this>;
+  declare public readonly loop: SimpleSignal<boolean, this>;
 
   /**
    * The rate at which the video plays, as multiples of the normal speed.
@@ -104,19 +104,19 @@ export class Video extends Rect {
    */
   @initial(1)
   @signal()
-  public declare readonly playbackRate: SimpleSignal<number, this>;
+  declare public readonly playbackRate: SimpleSignal<number, this>;
 
   @initial(0)
   @signal()
-  protected declare readonly time: SimpleSignal<number, this>;
+  declare protected readonly time: SimpleSignal<number, this>;
 
   @initial(false)
   @signal()
-  protected declare readonly playing: SimpleSignal<boolean, this>;
+  declare protected readonly playing: SimpleSignal<boolean, this>;
 
   private lastTime = -1;
 
-  public constructor({play, ...props}: VideoProps) {
+  public constructor({ play, ...props }: VideoProps) {
     super(props);
     if (play) {
       this.play();
@@ -180,7 +180,7 @@ export class Video extends Rect {
 
     if (video.readyState < 2) {
       DependencyContext.collectPromise(
-        new Promise<void>(resolve => {
+        new Promise<void>((resolve) => {
           const listener = () => {
             resolve();
             video.removeEventListener('canplay', listener);
@@ -224,8 +224,8 @@ export class Video extends Rect {
       return video;
     }
 
-    const playing =
-      this.playing() && time < video.duration && video.playbackRate > 0;
+    const playing = this.playing() && time < video.duration &&
+      video.playbackRate > 0;
     if (playing) {
       if (video.paused) {
         DependencyContext.collectPromise(video.play());
@@ -250,11 +250,10 @@ export class Video extends Rect {
     const alpha = this.alpha();
     if (alpha > 0) {
       const playbackState = this.view().playbackState();
-      const video =
-        playbackState === PlaybackState.Playing ||
-        playbackState === PlaybackState.Presenting
-          ? this.fastSeekedVideo()
-          : this.seekedVideo();
+      const video = playbackState === PlaybackState.Playing ||
+          playbackState === PlaybackState.Presenting
+        ? this.fastSeekedVideo()
+        : this.seekedVideo();
 
       const box = BBox.fromSizeCentered(this.computedSize());
       context.save();
@@ -290,7 +289,7 @@ export class Video extends Rect {
     this.lastTime = value;
     if (video.seeking) {
       DependencyContext.collectPromise(
-        new Promise<void>(resolve => {
+        new Promise<void>((resolve) => {
           const listener = () => {
             resolve();
             video.removeEventListener('seeked', listener);

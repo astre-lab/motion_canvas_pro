@@ -1,8 +1,8 @@
-import {useRef} from 'preact/hooks';
-import {useState} from 'react';
-import {VIEWPORT_SHORTCUTS, useShortcut} from '../../contexts/shortcuts';
-import {ButtonCheckbox} from '../controls/ButtonCheckbox';
-import {Colorize} from '../icons';
+import { useRef } from 'preact/hooks';
+import { useState } from 'react';
+import { useShortcut, VIEWPORT_SHORTCUTS } from '../../contexts/shortcuts';
+import { ButtonCheckbox } from '../controls/ButtonCheckbox';
+import { Colorize } from '../icons';
 
 export function ColorPicker() {
   return typeof EyeDropper === 'function' ? <ColorPickerImpl /> : <></>;
@@ -18,7 +18,7 @@ function ColorPickerImpl() {
       isActive.current = true;
       setActive(true);
       const dropper = new EyeDropper();
-      const {sRGBHex} = await dropper.open();
+      const { sRGBHex } = await dropper.open();
       await window.navigator.clipboard.writeText(sRGBHex);
     } catch (_) {
       // User canceled the operation.

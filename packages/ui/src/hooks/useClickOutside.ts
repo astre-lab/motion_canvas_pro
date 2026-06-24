@@ -1,4 +1,4 @@
-import {MutableRef, useEffect, useRef} from 'preact/hooks';
+import { MutableRef, useEffect, useRef } from 'preact/hooks';
 
 export function useClickOutside<T extends Element>(
   ref: MutableRef<T>,

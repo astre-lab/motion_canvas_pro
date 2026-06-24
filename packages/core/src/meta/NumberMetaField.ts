@@ -1,6 +1,6 @@
-import {clamp} from '../tweening';
-import {MetaField} from './MetaField';
-import {MetaOption} from './MetaOption';
+import { clamp } from '../tweening';
+import { MetaField } from './MetaField';
+import { MetaOption } from './MetaOption';
 
 /**
  * Represents a number stored in a meta file.

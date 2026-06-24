@@ -1,5 +1,5 @@
-import type {LogPayload} from '../app';
-import {DetailedError} from './DetailedError';
+import type { LogPayload } from '../app';
+import { DetailedError } from './DetailedError';
 import experimentalFeatures from './__logs__/experimental-features.md';
 
 type ExperimentalErrorProps = Pick<

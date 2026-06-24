@@ -1,5 +1,5 @@
-import {describe, expect, it} from 'vitest';
-import {applyTransformDiff, getTransformDiff} from './diff';
+import { describe, expect, it } from 'vitest';
+import { applyTransformDiff, getTransformDiff } from './diff';
 
 describe('diff', () => {
   it('Insert single item', () => {
@@ -29,7 +29,7 @@ describe('diff', () => {
       },
     ];
     const diff = getTransformDiff(from, to);
-    applyTransformDiff(from, diff, ({id}) => ({id}));
+    applyTransformDiff(from, diff, ({ id }) => ({ id }));
     expect(from).toEqual(to);
   });
 
@@ -72,7 +72,7 @@ describe('diff', () => {
       },
     ];
     const diff = getTransformDiff(from, to);
-    applyTransformDiff(from, diff, ({id}) => ({id}));
+    applyTransformDiff(from, diff, ({ id }) => ({ id }));
     expect(from).toEqual(to);
   });
   it('Insert multiple item', () => {
@@ -120,7 +120,7 @@ describe('diff', () => {
       },
     ];
     const diff = getTransformDiff(from, to);
-    applyTransformDiff(from, diff, ({id}) => ({id}));
+    applyTransformDiff(from, diff, ({ id }) => ({ id }));
     expect(from).toEqual(to);
   });
   it('Insert single item with equal id', () => {
@@ -151,7 +151,7 @@ describe('diff', () => {
     ];
     const diff = getTransformDiff(from, to);
     expect(diff.inserted).toEqual([]);
-    applyTransformDiff(from, diff, ({id}) => ({id}));
+    applyTransformDiff(from, diff, ({ id }) => ({ id }));
     expect(from).toEqual(to);
   });
   it('Insert multiple item with equal id', () => {
@@ -188,7 +188,7 @@ describe('diff', () => {
     ];
     const diff = getTransformDiff(from, to);
     expect(diff.inserted).toEqual([]);
-    applyTransformDiff(from, diff, ({id}) => ({id}));
+    applyTransformDiff(from, diff, ({ id }) => ({ id }));
     expect(from).toEqual(to);
   });
   it('Delete single item', () => {
@@ -212,7 +212,7 @@ describe('diff', () => {
       },
     ];
     const diff = getTransformDiff(from, to);
-    expect(diff.deleted.map(({current}) => current)).toEqual([
+    expect(diff.deleted.map(({ current }) => current)).toEqual([
       {
         id: '2',
       },
@@ -236,7 +236,7 @@ describe('diff', () => {
       },
     ];
     const diff = getTransformDiff(from, to);
-    expect(diff.deleted.map(({current}) => current)).toEqual([
+    expect(diff.deleted.map(({ current }) => current)).toEqual([
       {
         id: '2',
       },
@@ -400,7 +400,7 @@ describe('diff', () => {
       },
     ];
     const diff = getTransformDiff(from, to);
-    applyTransformDiff(from, diff, ({id}) => ({id}));
+    applyTransformDiff(from, diff, ({ id }) => ({ id }));
     expect(from).toEqual([
       {
         id: '1',
@@ -447,7 +447,7 @@ describe('diff', () => {
       },
     ];
     const diff = getTransformDiff(from, to);
-    applyTransformDiff(from, diff, ({id}) => ({id}));
+    applyTransformDiff(from, diff, ({ id }) => ({ id }));
     expect(from).toEqual(to);
   });
 });

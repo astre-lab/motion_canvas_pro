@@ -1,7 +1,9 @@
-import {createRef, Reference} from './createRef';
+import { createRef, Reference } from './createRef';
 
-export type ReferenceMap<T> = Map<string, Reference<T>> &
-  Record<string, Reference<T>> & {
+export type ReferenceMap<T> =
+  & Map<string, Reference<T>>
+  & Record<string, Reference<T>>
+  & {
     /**
      * Maps the references in this group to a new array.
      *

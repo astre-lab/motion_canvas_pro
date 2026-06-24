@@ -1,19 +1,19 @@
 import {
+  endPlayback,
+  endScene,
   FullSceneDescription,
   PlaybackManager,
   PlaybackStatus,
+  startPlayback,
+  startScene,
   ThreadGeneratorFactory,
   ValueDispatcher,
   Vector2,
-  endPlayback,
-  endScene,
-  startPlayback,
-  startScene,
 } from '@motion-canvas/core';
-import {ReadOnlyTimeEvents} from '@motion-canvas/core/lib/scenes/timeEvents';
-import {afterAll, beforeAll, beforeEach} from 'vitest';
-import {Scene2D, makeScene2D} from '../../scenes';
-import {View2D} from '../View2D';
+import { ReadOnlyTimeEvents } from '@motion-canvas/core/lib/scenes/timeEvents';
+import { afterAll, beforeAll, beforeEach } from 'vitest';
+import { makeScene2D, Scene2D } from '../../scenes';
+import { View2D } from '../View2D';
 
 /**
  * Set up the test environment to support creating nodes.

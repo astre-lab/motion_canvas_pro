@@ -1,10 +1,18 @@
-import type {Scene} from '@motion-canvas/core';
+import type { Scene } from '@motion-canvas/core';
 import clsx from 'clsx';
-import type {JSX} from 'preact';
-import {useLayoutEffect, useMemo, useRef, useState} from 'preact/hooks';
-import {useApplication, useModifiers, useTimelineContext} from '../../contexts';
-import {useScenes, useSharedSettings, useSubscribableValue} from '../../hooks';
-import {MouseButton} from '../../utils';
+import type { JSX } from 'preact';
+import { useLayoutEffect, useMemo, useRef, useState } from 'preact/hooks';
+import {
+  useApplication,
+  useModifiers,
+  useTimelineContext,
+} from '../../contexts';
+import {
+  useScenes,
+  useSharedSettings,
+  useSubscribableValue,
+} from '../../hooks';
+import { MouseButton } from '../../utils';
 import styles from './Timeline.module.scss';
 
 const HEIGHT = 48;
@@ -14,9 +22,7 @@ export function AudioTrack() {
   return (
     <div className={styles.audioTrack}>
       <MainAudioClip />
-      {scenes.map(scene => (
-        <AudioGroup scene={scene} />
-      ))}
+      {scenes.map((scene) => <AudioGroup scene={scene} />)}
     </div>
   );
 }
@@ -25,25 +31,23 @@ interface AudioGroupProps {
   scene: Scene;
 }
 
-export function AudioGroup({scene}: AudioGroupProps) {
+export function AudioGroup({ scene }: AudioGroupProps) {
   const sounds = useSubscribableValue(scene.sounds.onChanged);
   return (
     <>
-      {sounds.map(sound => (
-        <AudioClip hoverable {...sound} />
-      ))}
+      {sounds.map((sound) => <AudioClip hoverable {...sound} />)}
     </>
   );
 }
 
 function MainAudioClip() {
-  const {player, meta} = useApplication();
+  const { player, meta } = useApplication();
   const source = player.audio.getSource();
-  const {audioOffset} = useSharedSettings();
+  const { audioOffset } = useSharedSettings();
   const modifiers = useModifiers();
   const [editingOffset, setEditingOffset] = useState(0);
   const [isEditing, setIsEditing] = useState(false);
-  const {pixelsToSeconds} = useTimelineContext();
+  const { pixelsToSeconds } = useTimelineContext();
   const fullOffset = audioOffset + editingOffset;
 
   useLayoutEffect(() => {
@@ -59,7 +63,7 @@ function MainAudioClip() {
         audio={source}
         offset={fullOffset}
         disabled
-        onPointerDown={e => {
+        onPointerDown={(e) => {
           if (active && e.button === MouseButton.Left) {
             e.preventDefault();
             e.stopPropagation();
@@ -67,12 +71,12 @@ function MainAudioClip() {
             setIsEditing(true);
           }
         }}
-        onPointerMove={e => {
+        onPointerMove={(e) => {
           if (e.currentTarget.hasPointerCapture(e.pointerId)) {
             setEditingOffset(editingOffset + pixelsToSeconds(e.movementX));
           }
         }}
-        onPointerUp={e => {
+        onPointerUp={(e) => {
           if (e.button === MouseButton.Left) {
             e.currentTarget.releasePointerCapture(e.pointerId);
             meta.shared.audioOffset.set(fullOffset);
@@ -106,7 +110,7 @@ export function AudioClip({
   className,
   ...props
 }: AudioClipProps) {
-  const {player} = useApplication();
+  const { player } = useApplication();
   const audioData = useSubscribableValue(
     player.audioResources.get(audio).onData,
   );
@@ -130,8 +134,8 @@ export function AudioClip({
     clipDuration,
     waveformVisible,
   } = useMemo(() => {
-    const endOffset =
-      (Math.min(audioData.duration, end) - start) / realPlaybackRate;
+    const endOffset = (Math.min(audioData.duration, end) - start) /
+      realPlaybackRate;
 
     const clipStart = offset;
     const clipEnd = offset + endOffset;
@@ -140,8 +144,7 @@ export function AudioClip({
     const waveformEnd = Math.min(lastVisibleTime, clipEnd);
 
     const duration = waveformEnd - waveformStart;
-    const waveformVisible =
-      waveformStart < waveformEnd &&
+    const waveformVisible = waveformStart < waveformEnd &&
       waveformEnd > firstVisibleTime &&
       waveformStart < lastVisibleTime;
 
@@ -176,8 +179,8 @@ export function AudioClip({
     context.beginPath();
     context.moveTo(0, HEIGHT);
 
-    const relativeStartTime =
-      (waveformStart - offset) * realPlaybackRate + start;
+    const relativeStartTime = (waveformStart - offset) * realPlaybackRate +
+      start;
     const relativeEndTime = (waveformEnd - offset) * realPlaybackRate + start;
 
     const startSample = relativeStartTime * audioData.sampleRate;

@@ -3,7 +3,7 @@ separate thread:
 
 ```ts wrong
 // prettier-ignore
-yield* loop(() => rect().opacity(0).opacity(1, 1));
+yield * loop(() => rect().opacity(0).opacity(1, 1));
 ```
 
 ```ts correct
@@ -17,6 +17,6 @@ count as the first argument:
 
 ```ts
 // prettier-ignore
-yield* loop(10, () => rect().opacity(0).opacity(1, 1));
+yield * loop(10, () => rect().opacity(0).opacity(1, 1));
 //          ^ iteration count
 ```

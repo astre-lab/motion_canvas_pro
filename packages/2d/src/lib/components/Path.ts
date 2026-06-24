@@ -9,12 +9,12 @@ import {
   tween,
   Vector2,
 } from '@motion-canvas/core';
-import {CurveProfile} from '../curves';
-import {createCurveProfileLerp} from '../curves/createCurveProfileLerp';
-import {getPathProfile} from '../curves/getPathProfile';
-import {computed, signal} from '../decorators';
-import {drawLine, drawPivot} from '../utils';
-import {Curve, CurveProps} from './Curve';
+import { CurveProfile } from '../curves';
+import { createCurveProfileLerp } from '../curves/createCurveProfileLerp';
+import { getPathProfile } from '../curves/getPathProfile';
+import { computed, signal } from '../decorators';
+import { drawLine, drawPivot } from '../utils';
+import { Curve, CurveProps } from './Curve';
 
 export interface PathProps extends CurveProps {
   data: SignalValue<string>;
@@ -23,7 +23,7 @@ export interface PathProps extends CurveProps {
 export class Path extends Curve {
   private currentProfile = createSignal<CurveProfile | null>(null);
   @signal()
-  public declare readonly data: SimpleSignal<string, this>;
+  declare public readonly data: SimpleSignal<string, this>;
 
   public constructor(props: PathProps) {
     super(props);
@@ -36,7 +36,7 @@ export class Path extends Curve {
   }
 
   protected override childrenBBox() {
-    const points = this.profile().segments.flatMap(segment => segment.points);
+    const points = this.profile().segments.flatMap((segment) => segment.points);
     return BBox.fromPoints(...points);
   }
 
@@ -46,7 +46,7 @@ export class Path extends Curve {
     let coefficient = super.lineWidthCoefficient();
 
     if (join === 'miter') {
-      const {minSin} = this.profile();
+      const { minSin } = this.profile();
       if (minSin > 0) {
         coefficient = Math.max(coefficient, 0.5 / minSin);
       }
@@ -79,7 +79,7 @@ export class Path extends Curve {
     this.currentProfile(fromProfile);
     yield* tween(
       time,
-      value => {
+      (value) => {
         const progress = timingFunction(value);
         this.currentProfile(interpolator(progress));
       },

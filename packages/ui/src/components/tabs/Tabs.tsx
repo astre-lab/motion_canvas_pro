@@ -1,6 +1,6 @@
 import clsx from 'clsx';
-import {ComponentChildren, Ref, createContext, type JSX} from 'preact';
-import {useContext} from 'preact/hooks';
+import { ComponentChildren, createContext, type JSX, Ref } from 'preact';
+import { useContext } from 'preact/hooks';
 import styles from './Tabs.module.scss';
 
 interface TabsState {
@@ -24,7 +24,7 @@ export interface TabGroupProps extends TabsState {
   children: ComponentChildren;
 }
 
-export function TabGroup({children, ...rest}: TabGroupProps) {
+export function TabGroup({ children, ...rest }: TabGroupProps) {
   return <TabsContext.Provider value={rest}>{children}</TabsContext.Provider>;
 }
 
@@ -34,8 +34,8 @@ export interface TabProps extends JSX.HTMLAttributes<HTMLButtonElement> {
   tab: string;
 }
 
-export function Tab({className, tab, forwardRef, ...props}: TabProps) {
-  const {tab: currentTab, setTab} = useContext(TabsContext);
+export function Tab({ className, tab, forwardRef, ...props }: TabProps) {
+  const { tab: currentTab, setTab } = useContext(TabsContext);
   const active = tab === currentTab;
 
   return (
@@ -53,7 +53,7 @@ export interface TabLinkProps extends JSX.HTMLAttributes<HTMLAnchorElement> {
   disabled?: boolean;
 }
 
-export function TabLink({className, href, disabled, ...props}: TabLinkProps) {
+export function TabLink({ className, href, disabled, ...props }: TabLinkProps) {
   return (
     <a
       className={clsx(

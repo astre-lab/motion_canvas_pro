@@ -1,16 +1,16 @@
-import {NODE_NAME, Node} from '@motion-canvas/2d';
-import {useComputed, useSignal, useSignalEffect} from '@preact/signals';
-import {useEffect, useRef} from 'preact/hooks';
-import {usePluginState} from '../Provider';
-import {IconMap} from '../icons/IconMap';
-import {TreeElement} from './TreeElement';
+import { Node, NODE_NAME } from '@motion-canvas/2d';
+import { useComputed, useSignal, useSignalEffect } from '@preact/signals';
+import { useEffect, useRef } from 'preact/hooks';
+import { usePluginState } from '../Provider';
+import { IconMap } from '../icons/IconMap';
+import { TreeElement } from './TreeElement';
 
 interface NodeElementProps {
   node: Node;
   depth?: number;
 }
 
-export function NodeElement({node, depth = 0}: NodeElementProps) {
+export function NodeElement({ node, depth = 0 }: NodeElementProps) {
   const {
     selectedNode,
     visibleNodes,
@@ -39,7 +39,7 @@ export function NodeElement({node, depth = 0}: NodeElementProps) {
 
   useSignalEffect(() => {
     if (node.key === selectedNode.value?.key) {
-      ref.current?.scrollIntoView({block: 'nearest', behavior: 'instant'});
+      ref.current?.scrollIntoView({ block: 'nearest', behavior: 'instant' });
     }
   });
 
@@ -50,12 +50,12 @@ export function NodeElement({node, depth = 0}: NodeElementProps) {
       forwardRef={ref}
       open={open.value}
       hasChildren={children.value.length > 0}
-      onToggle={value => openNodes.toggle(node.key, value)}
+      onToggle={(value) => openNodes.toggle(node.key, value)}
       depth={depth}
       icon={<Icon />}
       label={node.key}
       selected={selectedNode.value === node}
-      onClick={event => {
+      onClick={(event) => {
         selectNode(node.key);
         event.stopPropagation();
       }}
@@ -64,7 +64,7 @@ export function NodeElement({node, depth = 0}: NodeElementProps) {
     >
       {open.value &&
         children.value.length > 0 &&
-        children.value.map(child => (
+        children.value.map((child) => (
           <NodeElement node={child} depth={depth + 1} />
         ))}
     </TreeElement>

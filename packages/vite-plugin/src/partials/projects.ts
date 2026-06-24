@@ -1,8 +1,8 @@
 import path from 'path';
-import {Plugin, ResolvedConfig} from 'vite';
-import {PluginOptions, ProjectData} from '../plugins';
-import {createMeta} from '../utils';
-import {getVersions} from '../versions';
+import { Plugin, ResolvedConfig } from 'vite';
+import { PluginOptions, ProjectData } from '../plugins';
+import { createMeta } from '../utils';
+import { getVersions } from '../versions';
 
 const PROJECT_QUERY_REGEX = /[?&]project\b/;
 
@@ -32,7 +32,7 @@ export function projectsPlugin({
       }
 
       const [base] = id.split('?');
-      const {name, dir} = path.posix.parse(base);
+      const { name, dir } = path.posix.parse(base);
 
       const runsInEditor = buildForEditor || config.command === 'serve';
       const metaFile = `${name}.meta`;
@@ -83,7 +83,7 @@ import {MetaFile} from '@motion-canvas/core';
           rollupOptions: {
             preserveEntrySignatures: 'strict',
             input: Object.fromEntries(
-              projects.map(project => [
+              projects.map((project) => [
                 project.name,
                 project.filePath + '?project',
               ]),
@@ -98,7 +98,7 @@ import {MetaFile} from '@motion-canvas/core';
           jsxImportSource: '@motion-canvas/2d/lib',
         },
         optimizeDeps: {
-          entries: projects.map(project => project.filePath),
+          entries: projects.map((project) => project.filePath),
           exclude: ['preact', 'preact/*', '@preact/signals'],
         },
       };

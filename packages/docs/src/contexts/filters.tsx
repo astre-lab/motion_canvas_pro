@@ -1,7 +1,7 @@
 import ExecutionEnvironment from '@docusaurus/ExecutionEnvironment';
 import useIsBrowser from '@docusaurus/useIsBrowser';
-import React, {ReactNode, useContext, useState} from 'react';
-import type {JSONOutput} from 'typedoc';
+import React, { ReactNode, useContext, useState } from 'react';
+import type { JSONOutput } from 'typedoc';
 
 export interface Filters {
   private: boolean;
@@ -15,12 +15,10 @@ const FILTERS_KEY = 'api-filters';
 const StoredValue = ExecutionEnvironment.canUseDOM
   ? localStorage.getItem(FILTERS_KEY)
   : null;
-const DefaultValue = StoredValue
-  ? JSON.parse(StoredValue)
-  : {
-      inherited: true,
-      private: false,
-    };
+const DefaultValue = StoredValue ? JSON.parse(StoredValue) : {
+  inherited: true,
+  private: false,
+};
 
 const Context = React.createContext<FiltersContext>([
   DefaultValue,
@@ -29,7 +27,7 @@ const Context = React.createContext<FiltersContext>([
   },
 ]);
 
-export function FiltersProvider({children}: {children: ReactNode}) {
+export function FiltersProvider({ children }: { children: ReactNode }) {
   const [filters, setFilters] = useState<Filters>(DefaultValue);
   const isBrowser = useIsBrowser();
 
@@ -37,7 +35,7 @@ export function FiltersProvider({children}: {children: ReactNode}) {
     <Context.Provider
       value={[
         filters,
-        value => {
+        (value) => {
           if (isBrowser) {
             localStorage.setItem(FILTERS_KEY, JSON.stringify(value));
           }
@@ -58,8 +56,8 @@ export function matchFilters(
   filter: Filters,
   reflection: JSONOutput.DeclarationReflection,
 ) {
-  const isPrivate =
-    reflection.flags?.isPrivate || reflection.flags?.isProtected;
+  const isPrivate = reflection.flags?.isPrivate ||
+    reflection.flags?.isProtected;
   if (!filter.private && isPrivate) return false;
 
   const isInherited = !!reflection.inheritedFrom;

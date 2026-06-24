@@ -1,4 +1,4 @@
-import {EventDispatcher} from '../events';
+import { EventDispatcher } from '../events';
 
 export enum LogLevel {
   Error = 'error',
@@ -140,7 +140,7 @@ export class Logger {
   }
 
   protected logLevel(level: LogLevel, payload: string | LogPayload) {
-    const result = typeof payload === 'string' ? {message: payload} : payload;
+    const result = typeof payload === 'string' ? { message: payload } : payload;
     result.level = level;
     this.log(result);
   }
@@ -151,7 +151,7 @@ export class Logger {
       const timeEnd = this.profilers[id];
       delete this.profilers[id];
 
-      const result = payload ?? {message: id};
+      const result = payload ?? { message: id };
       result.level ??= LogLevel.Debug;
       result.durationMs = time - timeEnd;
       this.log(result);

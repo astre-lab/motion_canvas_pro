@@ -1,8 +1,8 @@
-import {all} from '../flow';
-import {ThreadGenerator} from '../threading';
-import {Direction, Origin, Vector2} from '../types';
-import {useScene} from '../utils';
-import {useTransition} from './useTransition';
+import { all } from '../flow';
+import { ThreadGenerator } from '../threading';
+import { Direction, Origin, Vector2 } from '../types';
+import { useScene } from '../utils';
+import { useTransition } from './useTransition';
 
 /**
  * Perform a transition that slides the scene in the given direction.
@@ -33,8 +33,8 @@ export function* slideTransition(
   const previousPosition = Vector2.createSignal();
   const currentPosition = Vector2.createSignal(position);
   const endTransition = useTransition(
-    ctx => ctx.translate(currentPosition.x(), currentPosition.y()),
-    ctx => ctx.translate(previousPosition.x(), previousPosition.y()),
+    (ctx) => ctx.translate(currentPosition.x(), currentPosition.y()),
+    (ctx) => ctx.translate(previousPosition.x(), previousPosition.y()),
   );
 
   yield* all(

@@ -1,7 +1,7 @@
-import {waitFor} from '../flow';
-import {SignalValue} from '../signals';
-import {ThreadGenerator} from '../threading';
-import {useTransition} from './useTransition';
+import { waitFor } from '../flow';
+import { SignalValue } from '../signals';
+import { ThreadGenerator } from '../threading';
+import { useTransition } from './useTransition';
 
 /**
  * Perform a transition that doesn't do anything.

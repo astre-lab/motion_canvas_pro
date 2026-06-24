@@ -1,13 +1,13 @@
-import {Toggle} from '@motion-canvas/ui';
-import {clsx} from 'clsx';
-import {ComponentChildren, JSX} from 'preact';
-import {Ref} from 'preact/hooks';
+import { Toggle } from '@motion-canvas/ui';
+import { clsx } from 'clsx';
+import { ComponentChildren, JSX } from 'preact';
+import { Ref } from 'preact/hooks';
 import styles from './index.module.scss';
 
 const DEPTH_VAR = '--depth';
 
-interface TreeElementProps
-  extends Omit<
+interface TreeElementProps extends
+  Omit<
     JSX.HTMLAttributes<HTMLDivElement>,
     'label' | 'icon' | 'onToggle'
   > {
@@ -48,7 +48,7 @@ export function TreeElement({
           }
         }}
         {...props}
-        style={{[DEPTH_VAR]: `${depth}`}}
+        style={{ [DEPTH_VAR]: `${depth}` }}
       >
         <div ref={forwardRef} className={styles.label}>
           {hasChildren && (
@@ -56,7 +56,7 @@ export function TreeElement({
               animated={false}
               open={open}
               onToggle={onToggle}
-              onDblClick={e => {
+              onDblClick={(e) => {
                 e.stopPropagation();
               }}
             />

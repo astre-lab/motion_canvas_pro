@@ -27,7 +27,7 @@ export function jsx(
   config: JSXProps,
   key?: any,
 ): ComponentChildren {
-  const {ref, children, ...rest} = config;
+  const { ref, children, ...rest } = config;
   const flatChildren = Array.isArray(children) ? children.flat() : children;
 
   if (type === Fragment) {
@@ -35,11 +35,11 @@ export function jsx(
   }
 
   if (isClassComponent(type)) {
-    const node = new type({...rest, children: flatChildren, key});
+    const node = new type({ ...rest, children: flatChildren, key });
     ref?.(node);
     return node;
   } else {
-    return type({...rest, ref, children: flatChildren, key});
+    return type({ ...rest, ref, children: flatChildren, key });
   }
 }
-export {jsx as jsxs};
+export { jsx as jsxs };

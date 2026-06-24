@@ -1,6 +1,6 @@
-import {describe, expect, test} from 'vitest';
-import {createSignal} from '../signals';
-import {BBox, Vector2} from '../types';
+import { describe, expect, test } from 'vitest';
+import { createSignal } from '../signals';
+import { BBox, Vector2 } from '../types';
 
 describe('BBox', () => {
   test('Correctly parses values', () => {
@@ -8,7 +8,7 @@ describe('BBox', () => {
     const fromProperties = new BBox(10, 20, 200, 100);
     const fromArray = new BBox([10, 20, 200, 100]);
     const fromVectors = new BBox(new Vector2(10, 20), new Vector2(200, 100));
-    const fromObject = new BBox({x: 10, y: 20, width: 200, height: 100});
+    const fromObject = new BBox({ x: 10, y: 20, width: 200, height: 100 });
 
     expect(fromUndefined).toMatchObject({
       x: 0,
@@ -60,14 +60,14 @@ describe('BBox', () => {
     const width = createSignal(200);
     const box = BBox.createSignal(() => [10, 20, width(), 100]);
 
-    expect(box()).toMatchObject({x: 10, y: 20, width: 200, height: 100});
+    expect(box()).toMatchObject({ x: 10, y: 20, width: 200, height: 100 });
     expect(box.x()).toBe(10);
     expect(box.y()).toBe(20);
     expect(box.width()).toBe(200);
     expect(box.height()).toBe(100);
 
     width(400);
-    expect(box()).toMatchObject({x: 10, y: 20, width: 400, height: 100});
+    expect(box()).toMatchObject({ x: 10, y: 20, width: 400, height: 100 });
     expect(box.width()).toBe(400);
   });
 

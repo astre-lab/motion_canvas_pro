@@ -1,23 +1,23 @@
 import styles from './Console.module.scss';
 
-import {LogLevel, LogPayload} from '@motion-canvas/core';
+import { LogLevel, LogPayload } from '@motion-canvas/core';
 import clsx from 'clsx';
-import {useEffect, useMemo, useState} from 'preact/hooks';
-import {useApplication} from '../../contexts';
-import {useFormattedNumber} from '../../hooks';
-import {StackTraceEntry, resolveStackTrace} from '../../utils';
-import {IconButton, Toggle} from '../controls';
-import {Locate} from '../icons';
-import {Collapse} from '../layout';
-import {SourceCodeFrame} from './SourceCodeFrame';
-import {StackTrace} from './StackTrace';
+import { useEffect, useMemo, useState } from 'preact/hooks';
+import { useApplication } from '../../contexts';
+import { useFormattedNumber } from '../../hooks';
+import { resolveStackTrace, StackTraceEntry } from '../../utils';
+import { IconButton, Toggle } from '../controls';
+import { Locate } from '../icons';
+import { Collapse } from '../layout';
+import { SourceCodeFrame } from './SourceCodeFrame';
+import { StackTrace } from './StackTrace';
 
 export interface LogProps {
   payload: LogPayload;
 }
 
-export function Log({payload}: LogProps) {
-  const {logger} = useApplication();
+export function Log({ payload }: LogProps) {
+  const { logger } = useApplication();
   const [open, setOpen] = useState(payload.level === LogLevel.Error);
   const [entries, setEntries] = useState<StackTraceEntry[] | null>(null);
   const duration = useFormattedNumber(payload.durationMs, 2);
@@ -27,15 +27,15 @@ export function Log({payload}: LogProps) {
     }
 
     if (typeof payload.object === 'object' && 'byteLength' in payload.object) {
-      return `${payload.object.prototype?.name ?? 'ArrayLike'}[${
-        payload.object.byteLength
-      }]`;
+      return `${
+        payload.object.prototype?.name ?? 'ArrayLike'
+      }[${payload.object.byteLength}]`;
     }
 
     return JSON.stringify(payload.object, undefined, 2);
   }, [payload]);
   const userEntry = useMemo(() => {
-    return entries?.find(entry => !entry.isExternal) ?? null;
+    return entries?.find((entry) => !entry.isExternal) ?? null;
   }, [entries]);
 
   const hasBody = !!object || !!entries || !!payload.remarks;
@@ -62,7 +62,7 @@ export function Log({payload}: LogProps) {
         )}
         {payload.inspect && (
           <IconButton
-            title="Select related node"
+            title='Select related node'
             onClick={() => {
               logger.inspect(payload.inspect);
             }}
@@ -76,7 +76,7 @@ export function Log({payload}: LogProps) {
           {payload.remarks && (
             <div
               className={clsx(styles.section, styles.remarks)}
-              dangerouslySetInnerHTML={{__html: payload.remarks}}
+              dangerouslySetInnerHTML={{ __html: payload.remarks }}
             />
           )}
           {object && (

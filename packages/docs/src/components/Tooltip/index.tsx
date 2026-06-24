@@ -1,6 +1,6 @@
 import useIsBrowser from '@docusaurus/useIsBrowser';
 import Comment from '@site/src/components/Api/Comment';
-import {useUrlLookup} from '@site/src/contexts/api';
+import { useUrlLookup } from '@site/src/contexts/api';
 import clsx from 'clsx';
 import React, {
   ReactNode,
@@ -13,7 +13,7 @@ import styles from './styles.module.css';
 
 const WIDTH = 480 + 16;
 
-export default function Tooltip({children}: {children: ReactNode}) {
+export default function Tooltip({ children }: { children: ReactNode }) {
   const isBrowser = useIsBrowser();
   const urlLookup = useUrlLookup();
 
@@ -42,7 +42,7 @@ export default function Tooltip({children}: {children: ReactNode}) {
       return;
     }
 
-    const onEnter = e => {
+    const onEnter = (e) => {
       if (
         !e.target.href ||
         !containerRef.current?.contains(e.target) ||
@@ -67,7 +67,7 @@ export default function Tooltip({children}: {children: ReactNode}) {
       updatePosition();
     };
 
-    const onLeave = e => {
+    const onLeave = (e) => {
       if (e.target === linkRef.current) {
         setShow(false);
       }
