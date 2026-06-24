@@ -1,5 +1,5 @@
-import { AutoField } from './AutoField';
-import { Field, FieldSet, FieldSurface, FieldValue } from './Layout';
+import { AutoField } from './AutoField.tsx';
+import { Field, FieldSet, FieldSurface, FieldValue } from './Layout.tsx';
 
 export interface NumberFieldProps {
   value: any[];

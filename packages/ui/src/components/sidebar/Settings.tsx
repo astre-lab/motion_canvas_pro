@@ -1,7 +1,7 @@
-import { useApplication } from '../../contexts';
-import { Expandable } from '../fields';
-import { MetaFieldView } from '../meta';
-import { Pane } from '../tabs';
+import { useApplication } from '../../contexts/index.ts';
+import { Expandable } from '../fields/index.ts';
+import { MetaFieldView } from '../meta/index.ts';
+import { Pane } from '../tabs/index.ts';
 
 export function Settings() {
   const { settings } = useApplication();

@@ -4,6 +4,6 @@
  * @packageDocumentation
  */
 
-export * from './decorate';
-export * from './lazy';
-export * from './threadable';
+export * from './decorate.ts';
+export * from './lazy.ts';
+export * from './threadable.ts';

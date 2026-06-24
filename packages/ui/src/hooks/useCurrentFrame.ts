@@ -1,8 +1,8 @@
 import { RendererState } from '@motion-canvas/core';
-import { useApplication } from '../contexts';
-import { useRendererState } from './useRendererState';
-import { usePreviewSettings, useRenderingSettings } from './useSettings';
-import { useSubscribableValue } from './useSubscribable';
+import { useApplication } from '../contexts/index.ts';
+import { useRendererState } from './useRendererState.ts';
+import { usePreviewSettings, useRenderingSettings } from './useSettings.ts';
+import { useSubscribableValue } from './useSubscribable.ts';
 
 export function useCurrentFrame() {
   const { player, renderer } = useApplication();

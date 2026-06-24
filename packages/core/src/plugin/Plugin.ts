@@ -5,7 +5,7 @@ import type {
   Project,
   ProjectSettings,
   Renderer,
-} from '../app';
+} from '../app/index.ts';
 
 /**
  * Represents a runtime Motion Canvas plugin.

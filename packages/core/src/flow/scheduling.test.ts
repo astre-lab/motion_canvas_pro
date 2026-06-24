@@ -1,11 +1,11 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 
 import { afterAll, beforeAll, describe, expect, test } from 'vitest';
-import { PlaybackManager, PlaybackStatus } from '../app';
-import { threads } from '../threading';
-import { endPlayback, startPlayback, useTime } from '../utils';
-import { all } from './all';
-import { waitFor } from './scheduling';
+import { PlaybackManager, PlaybackStatus } from '../app/index.ts';
+import { threads } from '../threading/index.ts';
+import { endPlayback, startPlayback, useTime } from '../utils/index.ts';
+import { all } from './all.ts';
+import { waitFor } from './scheduling.ts';
 
 describe('waitFor()', () => {
   const playback = new PlaybackManager();

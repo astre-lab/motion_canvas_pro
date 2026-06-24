@@ -1,8 +1,8 @@
-import { decorate, threadable } from '../decorators';
-import { ThreadGenerator } from '../threading';
-import { useDuration } from '../utils';
-import { LoopCallback } from './loop';
-import { loopFor } from './loopFor';
+import { decorate, threadable } from '../decorators/index.ts';
+import { ThreadGenerator } from '../threading/index.ts';
+import { useDuration } from '../utils/index.ts';
+import { LoopCallback } from './loop.ts';
+import { loopFor } from './loopFor.ts';
 
 decorate(loopUntil, threadable());
 /**

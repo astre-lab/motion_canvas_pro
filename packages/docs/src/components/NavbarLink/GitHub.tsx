@@ -17,7 +17,7 @@ export default function GitHubNavbarLink() {
   return (
     <NavbarLink
       href={siteConfig.customFields.githubUrl as string}
-      suffix={'stars'}
+      suffix="stars"
       amount={stars}
     >
       <IconGitHub width={20} height={20} />

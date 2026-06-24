@@ -7,7 +7,7 @@ export default makeScene2D(function* (view) {
     <Circle
       ref={ref}
       size={160}
-      stroke={'lightseagreen'}
+      stroke="lightseagreen"
       lineWidth={8}
       endAngle={270}
       endArrow

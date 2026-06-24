@@ -4,7 +4,7 @@
  * @packageDocumentation
  */
 
-export * from './interpolationFunctions';
-export * from './spring';
-export * from './timingFunctions';
-export * from './tween';
+export * from './interpolationFunctions.ts';
+export * from './spring.ts';
+export * from './timingFunctions.ts';
+export * from './tween.ts';

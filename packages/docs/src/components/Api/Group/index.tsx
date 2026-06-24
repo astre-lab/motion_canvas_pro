@@ -84,7 +84,7 @@ export default function Group({
 
   return (
     <>
-      <Heading as={'h2'} id={group.title}>
+      <Heading as="h2" id={group.title}>
         {group.title}
       </Heading>
       {categories.length > 1

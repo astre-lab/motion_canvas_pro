@@ -41,8 +41,8 @@ export default makeScene2D(function* (view) {
         rotation={maskLayerRotation}
       />
       <Grid
-        compositeOperation={'source-in'}
-        stroke={'white'}
+        compositeOperation="source-in"
+        stroke="white"
         width={1000}
         height={400}
         spacing={5}
@@ -65,8 +65,8 @@ export default makeScene2D(function* (view) {
         rotation={valueLayerRotation}
       />
       <Grid
-        compositeOperation={'source-in'}
-        stroke={'#ff0'}
+        compositeOperation="source-in"
+        stroke="#ff0"
         width={1000}
         rotation={45}
         height={1000}
@@ -79,33 +79,33 @@ export default makeScene2D(function* (view) {
   // Legend (Bottom Center)
   yield view.add(
     <Rect
-      fill={'#1a1a1aa0'}
+      fill="#1a1a1aa0"
       layout
-      direction={'row'}
+      direction="row"
       gap={20}
       padding={20}
       bottom={() => view.getOriginDelta(Origin.Bottom)}
     >
-      <Layout gap={5} alignItems={'center'}>
+      <Layout gap={5} alignItems="center">
         <Grid
-          stroke={'white'}
+          stroke="white"
           width={18}
           height={18}
           spacing={5}
           lineWidth={1}
         />
-        <Txt fill={'white'}>Hidden Stencil / Mask Layer</Txt>
+        <Txt fill="white">Hidden Stencil / Mask Layer</Txt>
       </Layout>
-      <Layout gap={5} alignItems={'center'}>
+      <Layout gap={5} alignItems="center">
         <Grid
-          stroke={'#ff0'}
+          stroke="#ff0"
           rotation={45}
           width={18}
           height={18}
           spacing={5}
           lineWidth={1}
         />
-        <Txt fill={'white'}>Hidden Value Layer</Txt>
+        <Txt fill="white">Hidden Value Layer</Txt>
       </Layout>
     </Rect>,
   );
@@ -129,7 +129,7 @@ export default makeScene2D(function* (view) {
         width={360}
         position={valuePosition}
         rotation={valueLayerRotation}
-        compositeOperation={'source-in'}
+        compositeOperation="source-in"
       />
     </Node>,
   );

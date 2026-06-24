@@ -1,20 +1,20 @@
-import type { Logger, PlaybackStatus, SharedWebGLContext } from '../app';
+import type { Logger, PlaybackStatus, SharedWebGLContext } from '../app/index.ts';
 import type {
   SubscribableEvent,
   SubscribableValueEvent,
   ValueDispatcher,
-} from '../events';
-import type { Plugin } from '../plugin';
-import type { SignalValue } from '../signals';
-import type { Vector2 } from '../types';
-import type { LifecycleEvents } from './LifecycleEvents';
-import type { Random } from './Random';
-import type { SceneMetadata } from './SceneMetadata';
-import type { Shaders } from './Shaders';
-import type { Slides } from './Slides';
-import type { Sounds } from './Sounds';
-import type { Variables } from './Variables';
-import type { TimeEvents } from './timeEvents';
+} from '../events/index.ts';
+import type { Plugin } from '../plugin/index.ts';
+import type { SignalValue } from '../signals/index.ts';
+import type { Vector2 } from '../types/index.ts';
+import type { LifecycleEvents } from './LifecycleEvents.ts';
+import type { Random } from './Random.ts';
+import type { SceneMetadata } from './SceneMetadata.ts';
+import type { Shaders } from './Shaders.ts';
+import type { Slides } from './Slides.ts';
+import type { Sounds } from './Sounds.ts';
+import type { Variables } from './Variables.ts';
+import type { TimeEvents } from './timeEvents/index.ts';
 
 /**
  * The constructor used when creating new scenes.

@@ -1,8 +1,8 @@
 import { Scene } from '@motion-canvas/core';
 import clsx from 'clsx';
-import { useApplication } from '../../contexts';
-import { useSubscribableValue } from '../../hooks';
-import { findAndOpenFirstUserFile } from '../../utils';
+import { useApplication } from '../../contexts/index.ts';
+import { useSubscribableValue } from '../../hooks/index.ts';
+import { findAndOpenFirstUserFile } from '../../utils/index.ts';
 import styles from './Timeline.module.scss';
 
 export interface SlideTrackProps {

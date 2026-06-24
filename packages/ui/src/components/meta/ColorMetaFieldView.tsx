@@ -1,8 +1,8 @@
 import type { ColorMetaField } from '@motion-canvas/core';
 import { useState } from 'preact/hooks';
-import { useSubscribableValue } from '../../hooks';
-import { ColorInput } from '../controls';
-import { MetaFieldGroup } from './MetaFieldGroup';
+import { useSubscribableValue } from '../../hooks/index.ts';
+import { ColorInput } from '../controls/index.ts';
+import { MetaFieldGroup } from './MetaFieldGroup.tsx';
 
 export interface ColorMetaFieldViewProps {
   field: ColorMetaField;

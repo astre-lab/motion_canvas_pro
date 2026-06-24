@@ -2,10 +2,10 @@ import styles from './Timeline.module.scss';
 
 import type { Scene } from '@motion-canvas/core';
 import { useMemo } from 'preact/hooks';
-import { useApplication, useTimelineContext } from '../../contexts';
-import { useScenes, useSubscribableValue } from '../../hooks';
-import { findAndOpenFirstUserFile } from '../../utils';
-import { SlideTrack } from './SlideTrack';
+import { useApplication, useTimelineContext } from '../../contexts/index.ts';
+import { useScenes, useSubscribableValue } from '../../hooks/index.ts';
+import { findAndOpenFirstUserFile } from '../../utils/index.ts';
+import { SlideTrack } from './SlideTrack.tsx';
 
 export function SceneTrack() {
   const scenes = useScenes();

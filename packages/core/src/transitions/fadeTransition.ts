@@ -1,6 +1,6 @@
-import { createSignal } from '../signals';
-import { ThreadGenerator } from '../threading';
-import { useTransition } from './useTransition';
+import { createSignal } from '../signals/index.ts';
+import { ThreadGenerator } from '../threading/index.ts';
+import { useTransition } from './useTransition.ts';
 
 /**
  * Perform a transition that fades between the scenes.

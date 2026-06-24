@@ -27,7 +27,7 @@ export default function Tooltip({ children }: { children: ReactNode }) {
     if (!linkRef.current || !tooltipRef.current) return;
 
     const rect = linkRef.current.getBoundingClientRect();
-    const width = window.innerWidth;
+    const width = globalThis.innerWidth;
     let right = width - rect.left - WIDTH;
     if (right < 0) {
       right = 0;
@@ -52,7 +52,7 @@ export default function Tooltip({ children }: { children: ReactNode }) {
       }
 
       const url = new URL(e.target.href, document.baseURI);
-      if (url.pathname === window.location.pathname) {
+      if (url.pathname === globalThis.location.pathname) {
         return;
       }
 

@@ -1,8 +1,8 @@
-import { Scene } from '../scenes';
-import { unwrap } from '../signals';
-import type { Color } from '../types';
-import { CanvasColorSpace, Vector2 } from '../types';
-import { getContext } from '../utils';
+import { Scene } from '../scenes/index.ts';
+import { unwrap } from '../signals/index.ts';
+import type { Color } from '../types/index.ts';
+import { CanvasColorSpace, Vector2 } from '../types/index.ts';
+import { getContext } from '../utils/index.ts';
 
 export interface StageSettings {
   size: Vector2;

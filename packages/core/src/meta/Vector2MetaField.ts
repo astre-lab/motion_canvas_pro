@@ -1,5 +1,5 @@
-import { PossibleVector2, Vector2 } from '../types';
-import { MetaField } from './MetaField';
+import { PossibleVector2, Vector2 } from '../types/index.ts';
+import { MetaField } from './MetaField.ts';
 
 /**
  * Represents a two-dimensional vector stored in a meta file.

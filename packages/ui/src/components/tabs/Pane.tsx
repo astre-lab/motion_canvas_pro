@@ -1,6 +1,6 @@
 import { ComponentChildren, JSX } from 'preact';
 import { Ref } from 'preact/hooks';
-import { Header } from '../layout';
+import { Header } from '../layout/index.ts';
 import styles from './Tabs.module.scss';
 
 export interface PaneProps extends JSX.HTMLAttributes<HTMLDivElement> {

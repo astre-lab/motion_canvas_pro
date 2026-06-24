@@ -1,4 +1,4 @@
-import { Field, FieldSurface, FieldValue } from './Layout';
+import { Field, FieldSurface, FieldValue } from './Layout.tsx';
 
 export interface UnknownFieldProps {
   value: any;

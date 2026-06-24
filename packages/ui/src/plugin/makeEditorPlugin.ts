@@ -1,4 +1,4 @@
-import type { EditorPlugin } from './EditorPlugin';
+import type { EditorPlugin } from './EditorPlugin.ts';
 
 /**
  * A helper function for exporting editor plugins.

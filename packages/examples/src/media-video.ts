@@ -1,6 +1,6 @@
 import { makeProject } from '@motion-canvas/core';
 
-import scene from './scenes/media-video?scene';
+import scene from './scenes/media-video.tsx';
 
 export default makeProject({
   scenes: [scene],

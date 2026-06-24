@@ -1,5 +1,5 @@
-import { MetaOption } from '../meta';
-import { CanvasColorSpace, CanvasOutputMimeType } from '../types';
+import { MetaOption } from '../meta/index.ts';
+import { CanvasColorSpace, CanvasOutputMimeType } from '../types/index.ts';
 
 export const Scales: MetaOption<number>[] = [
   { value: 0.25, text: '0.25x (Quarter)' },

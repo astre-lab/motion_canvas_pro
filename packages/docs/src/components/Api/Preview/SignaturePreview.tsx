@@ -47,7 +47,7 @@ export default function SignaturePreview({
       {reflection.kind === ReflectionKind.ConstructorSignature
         ? (
           <>
-            <Token to={'#'} type='keyword'>
+            <Token to="#" type='keyword'>
               new
             </Token>{' '}
             <Token type='plain'>

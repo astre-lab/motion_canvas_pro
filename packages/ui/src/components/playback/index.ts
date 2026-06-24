@@ -1,2 +1,2 @@
-export * from './PlaybackControls';
-export * from './PlaybackProgress';
+export * from './PlaybackControls.tsx';
+export * from './PlaybackProgress.tsx';

@@ -1,5 +1,5 @@
 import { makeProject } from '@motion-canvas/core';
-import scene from './scenes/code?scene';
+import scene from './scenes/code.tsx';
 
 import { parser } from '@lezer/javascript';
 import { Code, LezerHighlighter } from '@motion-canvas/2d';

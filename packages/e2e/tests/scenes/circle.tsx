@@ -4,15 +4,15 @@ export default makeScene2D(function* (view) {
   view.add(
     <Circle
       size={200}
-      stroke={'blue'}
+      stroke="blue"
       lineWidth={40}
       arrowSize={40}
-      fill={'lightseagreen'}
-      strokeFirst={true}
+      fill="lightseagreen"
+      strokeFirst
       endArrow
       endAngle={-90}
       end={0.5}
-      lineCap={'round'}
+      lineCap="round"
       cache
     />,
   );

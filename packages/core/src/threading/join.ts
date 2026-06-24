@@ -1,7 +1,7 @@
-import { decorate, threadable } from '../decorators';
-import { useThread } from '../utils';
-import { Thread } from './Thread';
-import { ThreadGenerator } from './ThreadGenerator';
+import { decorate, threadable } from '../decorators/index.ts';
+import { useThread } from '../utils/index.ts';
+import { Thread } from './Thread.ts';
+import { ThreadGenerator } from './ThreadGenerator.ts';
 
 decorate(join, threadable());
 /**

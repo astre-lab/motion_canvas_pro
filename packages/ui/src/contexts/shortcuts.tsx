@@ -1,8 +1,8 @@
 import { Signal, useSignal } from '@preact/signals';
 import { ComponentChildren, createContext } from 'preact';
 import { Ref, useContext, useEffect, useRef } from 'preact/hooks';
-import { MouseButton } from '../utils';
-import { useApplication } from './application';
+import { MouseButton } from '../utils/index.ts';
+import { useApplication } from './application.tsx';
 
 export interface Action {
   name: string;
@@ -343,15 +343,15 @@ export function ShortcutsProvider(
       }
     };
 
-    window.addEventListener('keydown', keyDown, true);
-    window.addEventListener('pointermove', pointerMove, true);
-    window.addEventListener('pointerup', pointerUp, true);
-    window.addEventListener('keyup', updateModifiers, true);
+    globalThis.addEventListener('keydown', keyDown, true);
+    globalThis.addEventListener('pointermove', pointerMove, true);
+    globalThis.addEventListener('pointerup', pointerUp, true);
+    globalThis.addEventListener('keyup', updateModifiers, true);
     return () => {
-      window.removeEventListener('keydown', keyDown, true);
-      window.removeEventListener('pointermove', pointerMove, true);
-      window.removeEventListener('pointerup', pointerUp, true);
-      window.removeEventListener('keyup', updateModifiers, true);
+      globalThis.removeEventListener('keydown', keyDown, true);
+      globalThis.removeEventListener('pointermove', pointerMove, true);
+      globalThis.removeEventListener('pointerup', pointerUp, true);
+      globalThis.removeEventListener('keyup', updateModifiers, true);
     };
   }, []);
 

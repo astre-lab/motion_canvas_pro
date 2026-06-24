@@ -4,17 +4,17 @@
  * @packageDocumentation
  */
 
-export * from './Exporter';
-export * from './ImageExporter';
-export * from './Logger';
-export * from './PlaybackManager';
-export * from './PlaybackStatus';
-export * from './Player';
-export * from './Presenter';
-export * from './Project';
-export * from './ProjectMetadata';
-export * from './Renderer';
-export * from './SettingsMetadata';
-export * from './SharedWebGLContext';
-export * from './Stage';
-export * from './bootstrap';
+export * from './Exporter.ts';
+export * from './ImageExporter.ts';
+export * from './Logger.ts';
+export * from './PlaybackManager.ts';
+export * from './PlaybackStatus.ts';
+export * from './Player.ts';
+export * from './Presenter.ts';
+export * from './Project.ts';
+export * from './ProjectMetadata.ts';
+export * from './Renderer.ts';
+export * from './SettingsMetadata.ts';
+export * from './SharedWebGLContext.ts';
+export * from './Stage.ts';
+export * from './bootstrap.ts';

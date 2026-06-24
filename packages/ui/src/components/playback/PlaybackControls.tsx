@@ -1,12 +1,12 @@
 import styles from './Playback.module.scss';
 
-import { useApplication } from '../../contexts';
+import { useApplication } from '../../contexts/index.ts';
 import {
   GLOBAL_EDITOR_SHORTCUTS,
   useShortcuts,
-} from '../../contexts/shortcuts';
-import { usePlayerState } from '../../hooks';
-import { IconButton, IconCheckbox, Input, Select, Slider } from '../controls';
+} from '../../contexts/shortcuts.tsx';
+import { usePlayerState } from '../../hooks/index.ts';
+import { IconButton, IconCheckbox, Input, Select, Slider } from '../controls/index.ts';
 import {
   FastForward,
   FastRewind,
@@ -18,8 +18,8 @@ import {
   SkipPrevious,
   VolumeOff,
   VolumeOn,
-} from '../icons';
-import { Framerate } from './Framerate';
+} from '../icons/index.ts';
+import { Framerate } from './Framerate.tsx';
 
 export function PlaybackControls() {
   const { player, renderer, meta, project } = useApplication();

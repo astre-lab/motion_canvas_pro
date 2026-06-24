@@ -1,9 +1,9 @@
 import { LogLevel } from '@motion-canvas/core';
 import { useEffect, useRef, useState } from 'preact/hooks';
-import { useApplication, usePanels } from '../../contexts';
-import { useReducedMotion } from '../../hooks';
-import { EditorPanel } from '../../signals';
-import { shake } from '../animations';
+import { useApplication, usePanels } from '../../contexts/index.ts';
+import { useReducedMotion } from '../../hooks/index.ts';
+import { EditorPanel } from '../../signals/index.ts';
+import { shake } from '../animations/index.ts';
 import {
   Bug,
   HourglassBottom,
@@ -13,8 +13,8 @@ import {
   Science,
   Settings,
   Videocam,
-} from '../icons';
-import { Badge, Space, Tab, TabGroup, TabLink, Tabs } from '../tabs';
+} from '../icons/index.ts';
+import { Badge, Space, Tab, TabGroup, TabLink, Tabs } from '../tabs/index.ts';
 import styles from './Navigation.module.scss';
 
 export function Navigation() {
@@ -42,7 +42,7 @@ export function Navigation() {
       <TabLink
         title='Project Selection'
         id='project-selection-link'
-        href={window.location.pathname === '/' ? undefined : '../'}
+        href={globalThis.location.pathname === '/' ? undefined : '../'}
       >
         <MotionCanvas />
       </TabLink>

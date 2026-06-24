@@ -2,7 +2,7 @@ import {
   EventDispatcherBase,
   EventHandler,
   Subscribable,
-} from './EventDispatcherBase';
+} from './EventDispatcherBase.ts';
 
 /**
  * Dispatches a {@link SubscribableFlagEvent}.

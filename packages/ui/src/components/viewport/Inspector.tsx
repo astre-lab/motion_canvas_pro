@@ -2,10 +2,10 @@ import { useSignal, useSignalEffect } from '@preact/signals';
 import clsx from 'clsx';
 import { FunctionComponent } from 'preact';
 import { useEffect, useMemo, useRef } from 'preact/hooks';
-import { useApplication, usePanels } from '../../contexts';
-import { useReducedMotion } from '../../hooks';
-import { IconButton } from '../controls';
-import { ChevronRight } from '../icons/ChevronRight';
+import { useApplication, usePanels } from '../../contexts/index.ts';
+import { useReducedMotion } from '../../hooks/index.ts';
+import { IconButton } from '../controls/index.ts';
+import { ChevronRight } from '../icons/ChevronRight.tsx';
 import styles from './Viewport.module.scss';
 
 export function Inspector() {

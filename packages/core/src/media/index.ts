@@ -4,8 +4,8 @@
  * @packageDocumentation
  */
 
-export * from './AudioData';
-export * from './AudioManager';
-export * from './AudioManagerPool';
-export * from './AudioResourceManager';
-export * from './loadImage';
+export * from './AudioData.ts';
+export * from './AudioManager.ts';
+export * from './AudioManagerPool.ts';
+export * from './AudioResourceManager.ts';
+export * from './loadImage.ts';

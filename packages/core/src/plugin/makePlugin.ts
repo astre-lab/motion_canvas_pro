@@ -1,4 +1,4 @@
-import type { Plugin } from './Plugin';
+import type { Plugin } from './Plugin.ts';
 
 /**
  * A helper function for exporting Motion Canvas plugins.

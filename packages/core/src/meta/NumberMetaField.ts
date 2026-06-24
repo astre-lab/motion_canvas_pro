@@ -1,6 +1,6 @@
-import { clamp } from '../tweening';
-import { MetaField } from './MetaField';
-import { MetaOption } from './MetaOption';
+import { clamp } from '../tweening/index.ts';
+import { MetaField } from './MetaField.ts';
+import { MetaOption } from './MetaOption.ts';
 
 /**
  * Represents a number stored in a meta file.

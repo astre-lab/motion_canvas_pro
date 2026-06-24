@@ -1,2 +1,2 @@
-export * from './StageView';
-export * from './Viewport';
+export * from './StageView.tsx';
+export * from './Viewport.tsx';

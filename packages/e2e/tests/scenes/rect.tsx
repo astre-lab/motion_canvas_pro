@@ -5,7 +5,7 @@ export default makeScene2D(function* (view) {
     <Rect
       width={300}
       height={200}
-      fill={'#0008'}
+      fill="#0008"
       radius={[0, 100, 30, 200]}
       start={0.35}
     />,

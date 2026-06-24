@@ -1,7 +1,7 @@
-import { Logger } from '../app';
-import { Sound } from '../scenes';
-import { AudioManager } from './AudioManager';
-import { AudioResourceManager } from './AudioResourceManager';
+import { Logger } from '../app/index.ts';
+import { Sound } from '../scenes/index.ts';
+import { AudioManager } from './AudioManager.ts';
+import { AudioResourceManager } from './AudioResourceManager.ts';
 
 export class AudioManagerPool {
   private readonly context = new AudioContext();

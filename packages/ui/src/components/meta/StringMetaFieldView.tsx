@@ -1,7 +1,7 @@
 import type { StringMetaField } from '@motion-canvas/core';
-import { useSubscribableValue } from '../../hooks';
-import { Input, InputSelect } from '../controls';
-import { MetaFieldGroup } from './MetaFieldGroup';
+import { useSubscribableValue } from '../../hooks/index.ts';
+import { Input, InputSelect } from '../controls/index.ts';
+import { MetaFieldGroup } from './MetaFieldGroup.tsx';
 
 export interface StringMetaFieldViewProps {
   field: StringMetaField;

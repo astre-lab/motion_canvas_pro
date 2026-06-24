@@ -4,15 +4,15 @@
  * @packageDocumentation
  */
 
-export * from './GeneratorScene';
-export * from './Inspectable';
-export * from './LifecycleEvents';
-export * from './Random';
-export * from './Scene';
-export * from './SceneMetadata';
-export * from './SceneState';
-export * from './Shaders';
-export * from './Slides';
-export * from './Sounds';
-export * from './Threadable';
-export * from './Variables';
+export * from './GeneratorScene.ts';
+export * from './Inspectable.ts';
+export * from './LifecycleEvents.ts';
+export * from './Random.ts';
+export * from './Scene.ts';
+export * from './SceneMetadata.ts';
+export * from './SceneState.ts';
+export * from './Shaders.ts';
+export * from './Slides.ts';
+export * from './Sounds.ts';
+export * from './Threadable.ts';
+export * from './Variables.ts';

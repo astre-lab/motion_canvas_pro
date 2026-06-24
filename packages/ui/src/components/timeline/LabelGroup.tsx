@@ -1,7 +1,7 @@
 import type { Scene } from '@motion-canvas/core';
-import { useTimelineContext } from '../../contexts';
-import { useSubscribableValue } from '../../hooks';
-import { Label } from './Label';
+import { useTimelineContext } from '../../contexts/index.ts';
+import { useSubscribableValue } from '../../hooks/index.ts';
+import { Label } from './Label.tsx';
 
 interface LabelGroupProps {
   scene: Scene;

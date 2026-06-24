@@ -1,6 +1,6 @@
-import { Button, ButtonProps } from './Button';
+import { Button, ButtonProps } from './Button.tsx';
 import styles from './Controls.module.scss';
-import { Select, SelectProps } from './Select';
+import { Select, SelectProps } from './Select.tsx';
 
 export type ButtonSelectProps<T> =
   & Omit<ButtonProps, 'value' | 'onChange'>

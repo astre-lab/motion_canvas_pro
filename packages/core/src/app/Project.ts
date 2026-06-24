@@ -1,8 +1,8 @@
-import type { Plugin } from '../plugin';
-import { FullSceneDescription } from '../scenes';
-import { Logger } from './Logger';
-import type { ProjectMetadata } from './ProjectMetadata';
-import { SettingsMetadata } from './SettingsMetadata';
+import type { Plugin } from '../plugin/index.ts';
+import { FullSceneDescription } from '../scenes/index.ts';
+import { Logger } from './Logger.ts';
+import type { ProjectMetadata } from './ProjectMetadata.ts';
+import { SettingsMetadata } from './SettingsMetadata.ts';
 
 export interface ProjectSettings {
   /**

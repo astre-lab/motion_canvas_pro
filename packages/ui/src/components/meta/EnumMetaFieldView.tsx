@@ -1,7 +1,7 @@
 import type { EnumMetaField } from '@motion-canvas/core';
-import { useSubscribableValue } from '../../hooks';
-import { Select } from '../controls';
-import { MetaFieldGroup } from './MetaFieldGroup';
+import { useSubscribableValue } from '../../hooks/index.ts';
+import { Select } from '../controls/index.ts';
+import { MetaFieldGroup } from './MetaFieldGroup.tsx';
 
 export interface EnumMetaFieldViewProps {
   field: EnumMetaField<any>;

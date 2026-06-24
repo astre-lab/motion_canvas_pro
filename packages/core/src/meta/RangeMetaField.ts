@@ -1,6 +1,6 @@
-import { clamp } from '../tweening';
-import { EPSILON } from '../types';
-import { MetaField } from './MetaField';
+import { clamp } from '../tweening/index.ts';
+import { EPSILON } from '../types/index.ts';
+import { MetaField } from './MetaField.ts';
 
 /**
  * Represents a range stored in a meta file.

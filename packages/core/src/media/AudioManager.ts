@@ -1,6 +1,6 @@
-import { Logger } from '../app';
-import { Sound } from '../scenes';
-import { useLogger } from '../utils';
+import { Logger } from '../app/index.ts';
+import { Sound } from '../scenes/index.ts';
+import { useLogger } from '../utils/index.ts';
 
 export class AudioManager {
   private readonly audioElement: HTMLAudioElement = new Audio();

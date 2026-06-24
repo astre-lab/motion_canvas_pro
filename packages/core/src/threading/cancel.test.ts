@@ -1,12 +1,12 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 
 import { afterAll, beforeAll, describe, expect, test } from 'vitest';
-import { PlaybackManager, PlaybackStatus } from '../app';
-import { waitFor } from '../flow';
-import { endPlayback, startPlayback, useTime } from '../utils';
-import { cancel } from './cancel';
-import { join } from './join';
-import { threads } from './threads';
+import { PlaybackManager, PlaybackStatus } from '../app/index.ts';
+import { waitFor } from '../flow/index.ts';
+import { endPlayback, startPlayback, useTime } from '../utils/index.ts';
+import { cancel } from './cancel.ts';
+import { join } from './join.ts';
+import { threads } from './threads.ts';
 
 describe('cancel()', () => {
   const playback = new PlaybackManager();

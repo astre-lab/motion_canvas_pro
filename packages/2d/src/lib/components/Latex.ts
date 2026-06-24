@@ -68,7 +68,7 @@ export interface LatexProps extends Omit<SVGProps, 'svg'> {
 export class Latex extends SVGNode {
   @lazy(() => {
     return parseFloat(
-      window.getComputedStyle(SVGNode.containerElement).fontSize,
+      globalThis.getComputedStyle(SVGNode.containerElement).fontSize,
     );
   })
   private static containerFontSize: number;

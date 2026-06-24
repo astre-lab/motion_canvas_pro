@@ -18,7 +18,7 @@ export function Button({ main, loading, className, ...props }: ButtonProps) {
         loading && 'loading',
       )}
       onMouseUp={(event) => (event.target as HTMLButtonElement).blur()}
-      type={'button'}
+      type="button"
       {...props}
     />
   );

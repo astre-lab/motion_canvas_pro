@@ -1,5 +1,5 @@
-import { EventDispatcher } from '../events';
-import { Scene, SceneRenderEvent } from './Scene';
+import { EventDispatcher } from '../events/index.ts';
+import { Scene, SceneRenderEvent } from './Scene.ts';
 
 /**
  * Lifecycle events for {@link Scene} that are cleared on every reset.

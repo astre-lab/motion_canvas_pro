@@ -1,16 +1,16 @@
-import { EventDispatcher, ValueDispatcher } from '../events';
-import type { Scene, Sound } from '../scenes';
-import { ReadOnlyTimeEvents } from '../scenes/timeEvents';
-import { clampRemap } from '../tweening';
-import { Vector2 } from '../types';
-import { Semaphore } from '../utils';
-import type { Exporter } from './Exporter';
-import { PlaybackManager, PlaybackState } from './PlaybackManager';
-import { PlaybackStatus } from './PlaybackStatus';
-import type { Project } from './Project';
-import { SharedWebGLContext } from './SharedWebGLContext';
-import { Stage, StageSettings } from './Stage';
-import { TimeEstimator } from './TimeEstimator';
+import { EventDispatcher, ValueDispatcher } from '../events/index.ts';
+import type { Scene, Sound } from '../scenes/index.ts';
+import { ReadOnlyTimeEvents } from '../scenes/timeEvents/index.ts';
+import { clampRemap } from '../tweening/index.ts';
+import { Vector2 } from '../types/index.ts';
+import { Semaphore } from '../utils/index.ts';
+import type { Exporter } from './Exporter.ts';
+import { PlaybackManager, PlaybackState } from './PlaybackManager.ts';
+import { PlaybackStatus } from './PlaybackStatus.ts';
+import type { Project } from './Project.ts';
+import { SharedWebGLContext } from './SharedWebGLContext.ts';
+import { Stage, StageSettings } from './Stage.ts';
+import { TimeEstimator } from './TimeEstimator.ts';
 
 export interface RendererSettings extends StageSettings {
   name: string;

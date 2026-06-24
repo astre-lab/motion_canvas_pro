@@ -51,7 +51,7 @@ export default function CodeBlock({
             className='clean-btn'
             onClick={(e) => {
               e.preventDefault();
-              window.open(link, '_blank');
+              globalThis.open(link, '_blank');
             }}
           >
             <IconExternalLink width={18} height={18} />

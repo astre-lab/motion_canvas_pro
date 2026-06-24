@@ -21,7 +21,7 @@ export default makeScene2D(function* (view) {
           radius={5}
           width={10}
           height={10}
-          fill={'#e13238'}
+          fill="#e13238"
         />
       ))}
     </Layout>,

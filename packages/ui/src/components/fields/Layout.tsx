@@ -3,9 +3,9 @@ import styles from './Layout.module.scss';
 import clsx from 'clsx';
 import { ComponentChildren, JSX } from 'preact';
 import { useRef, useState } from 'preact/hooks';
-import { useFormattedNumber } from '../../hooks';
-import { Toggle } from '../controls';
-import { Collapse } from '../layout';
+import { useFormattedNumber } from '../../hooks/index.ts';
+import { Toggle } from '../controls/index.ts';
+import { Collapse } from '../layout/index.ts';
 
 export interface FieldSetProps {
   children: ComponentChildren;
@@ -72,12 +72,12 @@ export function Field({ label, copy, children }: FieldProps) {
       })}
       onClick={() => {
         if (!copy) return;
-        window.navigator.clipboard.writeText(copy);
+        globalThis.navigator.clipboard.writeText(copy);
         setCopied(true);
         if (timeout.current) {
           clearTimeout(timeout.current);
         }
-        timeout.current = window.setTimeout(() => {
+        timeout.current = globalThis.setTimeout(() => {
           setCopied(false);
           timeout.current = null;
         }, 1000);

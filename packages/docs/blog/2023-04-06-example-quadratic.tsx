@@ -9,7 +9,7 @@ export default makeScene2D(function* (view) {
     <QuadBezier
       ref={bezier}
       lineWidth={6}
-      stroke={'lightseagreen'}
+      stroke="lightseagreen"
       p0={[-200, 70]}
       p1={[0, -200]}
       p2={[200, 70]}

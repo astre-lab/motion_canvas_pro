@@ -21,7 +21,7 @@ export default makeScene2D(function* (view) {
         x={100}
         src={ImageSource}
         width={600}
-        compositeOperation={'source-out'}
+        compositeOperation="source-out"
       />
     </Node>,
   );

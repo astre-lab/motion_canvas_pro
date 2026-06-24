@@ -1,6 +1,6 @@
-import { decorate, threadable } from '../decorators';
-import { isThreadGenerator, ThreadGenerator } from '../threading';
-import { waitFor } from './scheduling';
+import { decorate, threadable } from '../decorators/index.ts';
+import { isThreadGenerator, ThreadGenerator } from '../threading/index.ts';
+import { waitFor } from './scheduling.ts';
 
 decorate(delay, threadable());
 /**

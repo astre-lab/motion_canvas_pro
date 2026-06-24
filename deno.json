@@ -1,4 +1,22 @@
 {
+  "lint": {
+    "rules": {
+      "tags": ["recommended"],
+      "include": [
+        "eqeqeq",
+        "curly",
+        "no-unused-vars",
+        "no-explicit-any",
+        "ban-ts-comment",
+        "no-non-null-assertion",
+        "no-namespace"
+      ]
+    },
+    "exclude": [
+      "packages/template",
+      "packages/create/template-*"
+    ]
+  },
   "fmt": {
     "singleQuote": true,
     "lineWidth": 80,

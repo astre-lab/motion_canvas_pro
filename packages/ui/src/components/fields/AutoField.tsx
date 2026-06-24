@@ -1,11 +1,11 @@
 import { Color, isType, Spacing, Vector2 } from '@motion-canvas/core';
 import { FunctionComponent } from 'preact';
-import { ArrayField } from './ArrayField';
-import { ColorField } from './ColorField';
-import { NumberField } from './NumberField';
-import { SpacingField } from './SpacingField';
-import { UnknownField } from './UnknownField';
-import { Vector2Field } from './Vector2Field';
+import { ArrayField } from './ArrayField.tsx';
+import { ColorField } from './ColorField.tsx';
+import { NumberField } from './NumberField.tsx';
+import { SpacingField } from './SpacingField.tsx';
+import { UnknownField } from './UnknownField.tsx';
+import { Vector2Field } from './Vector2Field.tsx';
 
 export interface AutoFieldProps {
   value: any;

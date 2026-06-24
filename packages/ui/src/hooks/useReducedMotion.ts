@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'preact/hooks';
 
-const MediaQuery = window.matchMedia(`(prefers-reduced-motion: reduce)`);
+const MediaQuery = globalThis.matchMedia(`(prefers-reduced-motion: reduce)`);
 
 export function useReducedMotion() {
   const [reducedMotion, setReducedMotion] = useState(MediaQuery.matches);

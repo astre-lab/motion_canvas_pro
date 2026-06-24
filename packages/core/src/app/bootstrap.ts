@@ -1,10 +1,10 @@
-import { MetaFile } from '../meta';
-import { Plugin } from '../plugin';
-import DefaultPlugin from '../plugin/DefaultPlugin';
-import { Logger } from './Logger';
-import { Project, ProjectSettings, Versions } from './Project';
-import { ProjectMetadata } from './ProjectMetadata';
-import { createSettingsMetadata } from './SettingsMetadata';
+import { MetaFile } from '../meta/index.ts';
+import { Plugin } from '../plugin/index.ts';
+import DefaultPlugin from '../plugin/DefaultPlugin.ts';
+import { Logger } from './Logger.ts';
+import { Project, ProjectSettings, Versions } from './Project.ts';
+import { ProjectMetadata } from './ProjectMetadata.ts';
+import { createSettingsMetadata } from './SettingsMetadata.ts';
 
 /**
  * Bootstrap a project.

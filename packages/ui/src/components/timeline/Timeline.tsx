@@ -10,7 +10,7 @@ import {
   useApplication,
   useShortcuts,
   useSurfaceShortcuts,
-} from '../../contexts';
+} from '../../contexts/index.ts';
 import {
   useDuration,
   usePlayerTime,
@@ -20,16 +20,16 @@ import {
   useSize,
   useStateChange,
   useStorage,
-} from '../../hooks';
-import { labelClipDraggingLeftSignal } from '../../signals';
-import { clamp, MouseButton, MouseMask } from '../../utils';
-import { borderHighlight } from '../animations';
-import { AudioTrack } from './AudioTrack';
-import { LabelTrack } from './LabelTrack';
-import { Playhead } from './Playhead';
-import { RangeSelector } from './RangeSelector';
-import { SceneTrack } from './SceneTrack';
-import { Timestamps } from './Timestamps';
+} from '../../hooks/index.ts';
+import { labelClipDraggingLeftSignal } from '../../signals/index.ts';
+import { clamp, MouseButton, MouseMask } from '../../utils/index.ts';
+import { borderHighlight } from '../animations/index.ts';
+import { AudioTrack } from './AudioTrack.tsx';
+import { LabelTrack } from './LabelTrack.tsx';
+import { Playhead } from './Playhead.tsx';
+import { RangeSelector } from './RangeSelector.tsx';
+import { SceneTrack } from './SceneTrack.tsx';
+import { Timestamps } from './Timestamps.tsx';
 
 const ZOOM_SPEED = 0.1;
 const ZOOM_MIN = 0.5;

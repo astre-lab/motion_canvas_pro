@@ -23,7 +23,7 @@ export default makeScene2D(function* (view) {
         width={() => radius() * scale * 2}
         height={() => radius() * scale * 2}
         // highlight-end
-        fill={'#e13238'}
+        fill="#e13238"
       />
       <Line
         points={[
@@ -36,14 +36,14 @@ export default makeScene2D(function* (view) {
         endArrow
         endOffset={8}
         lineWidth={8}
-        stroke={'#242424'}
+        stroke="#242424"
       />
       <Txt
         // highlight-start
         text={() => `r = ${radius().toFixed(2)}`}
         x={() => (radius() * scale) / 2}
         // highlight-end
-        fill={'#242424'}
+        fill="#242424"
         {...textStyle}
       />
       <Txt
@@ -51,7 +51,7 @@ export default makeScene2D(function* (view) {
         text={() => `A = ${area().toFixed(2)}`}
         y={() => radius() * scale}
         // highlight-end
-        fill={'#e13238'}
+        fill="#e13238"
         {...textStyle}
       />
     </>,

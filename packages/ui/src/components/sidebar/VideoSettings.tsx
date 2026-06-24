@@ -1,11 +1,11 @@
 import { RendererState } from '@motion-canvas/core';
-import { useApplication } from '../../contexts';
-import { useRendererState, useStorage } from '../../hooks';
-import { openOutputPath } from '../../utils';
-import { Button, ButtonSelect, Group, Label, Separator } from '../controls';
-import { Expandable } from '../fields';
-import { MetaFieldView } from '../meta';
-import { Pane } from '../tabs';
+import { useApplication } from '../../contexts/index.ts';
+import { useRendererState, useStorage } from '../../hooks/index.ts';
+import { openOutputPath } from '../../utils/index.ts';
+import { Button, ButtonSelect, Group, Label, Separator } from '../controls/index.ts';
+import { Expandable } from '../fields/index.ts';
+import { MetaFieldView } from '../meta/index.ts';
+import { Pane } from '../tabs/index.ts';
 
 export function VideoSettings() {
   const { meta } = useApplication();
@@ -86,7 +86,7 @@ function ProcessButton({ processId, setProcess }: ProcessButtonProps) {
         main
         loading
         id='render'
-        data-rendering={true}
+        data-rendering
         disabled={rendererState === RendererState.Aborting}
         onClick={() => {
           renderer.abort();

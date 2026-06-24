@@ -5,8 +5,8 @@ import {
   useApplication,
   ViewportProvider,
   ViewportState,
-} from '../../contexts';
-import { useShortcuts, VIEWPORT_SHORTCUTS } from '../../contexts/shortcuts';
+} from '../../contexts/index.ts';
+import { useShortcuts, VIEWPORT_SHORTCUTS } from '../../contexts/shortcuts.tsx';
 import {
   usePreviewSettings,
   useSharedSettings,
@@ -14,17 +14,17 @@ import {
   useStorage,
   useSubscribable,
   useSubscribableValue,
-} from '../../hooks';
-import { MouseButton } from '../../utils';
-import { highlight } from '../animations';
-import { Button, Select } from '../controls';
-import { ButtonCheckbox } from '../controls/ButtonCheckbox';
-import { Grid as GridIcon, Recenter } from '../icons';
-import { ColorPicker } from './ColorPicker';
-import { Coordinates } from './Coordinates';
-import { Inspector } from './Inspector';
-import { OverlayCanvas } from './OverlayCanvas';
-import { PreviewStage } from './PreviewStage';
+} from '../../hooks/index.ts';
+import { MouseButton } from '../../utils/index.ts';
+import { highlight } from '../animations/index.ts';
+import { Button, Select } from '../controls/index.ts';
+import { ButtonCheckbox } from '../controls/ButtonCheckbox.tsx';
+import { Grid as GridIcon, Recenter } from '../icons/index.ts';
+import { ColorPicker } from './ColorPicker.tsx';
+import { Coordinates } from './Coordinates.tsx';
+import { Inspector } from './Inspector.tsx';
+import { OverlayCanvas } from './OverlayCanvas.tsx';
+import { PreviewStage } from './PreviewStage.tsx';
 import styles from './Viewport.module.scss';
 
 const ZOOM_SPEED = 0.1;
@@ -210,13 +210,13 @@ export function EditorPreview() {
           />
           <Button
             disabled={state.x === 0 && state.y === 0}
-            title={'Recenter'}
+            title="Recenter"
             onClick={() => setPosition({ x: 0, y: 0 })}
           >
             <Recenter />
           </Button>
           <ButtonCheckbox
-            title={"Toggle grid [']"}
+            title="Toggle grid [']"
             onChecked={setGrid}
             checked={grid}
           >

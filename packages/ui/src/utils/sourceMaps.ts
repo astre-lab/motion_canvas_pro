@@ -1,6 +1,6 @@
 import highlight from 'highlight.js';
 import { SourceMapConsumer } from 'source-map-js';
-import { withLoader } from './withLoader';
+import { withLoader } from './withLoader.ts';
 
 declare module 'source-map-js' {
   interface SourceMapConsumer {

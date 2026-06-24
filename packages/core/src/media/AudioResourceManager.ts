@@ -1,6 +1,6 @@
-import { Logger } from '../app';
-import { ValueDispatcher } from '../events';
-import { AudioData, EMPTY_AUDIO_DATA } from './AudioData';
+import { Logger } from '../app/index.ts';
+import { ValueDispatcher } from '../events/index.ts';
+import { AudioData, EMPTY_AUDIO_DATA } from './AudioData.ts';
 
 export class AudioResourceManager {
   private readonly context = new AudioContext();

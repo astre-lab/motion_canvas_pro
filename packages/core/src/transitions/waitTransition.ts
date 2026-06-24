@@ -1,7 +1,7 @@
-import { waitFor } from '../flow';
-import { SignalValue } from '../signals';
-import { ThreadGenerator } from '../threading';
-import { useTransition } from './useTransition';
+import { waitFor } from '../flow/index.ts';
+import { SignalValue } from '../signals/index.ts';
+import { ThreadGenerator } from '../threading/index.ts';
+import { useTransition } from './useTransition.ts';
 
 /**
  * Perform a transition that doesn't do anything.

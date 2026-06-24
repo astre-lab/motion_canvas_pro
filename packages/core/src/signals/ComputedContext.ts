@@ -1,5 +1,5 @@
-import { errorToLog, useLogger } from '../utils';
-import { DependencyContext } from './DependencyContext';
+import { errorToLog, useLogger } from '../utils/index.ts';
+import { DependencyContext } from './DependencyContext.ts';
 
 export interface Computed<TValue> {
   (...args: any[]): TValue;

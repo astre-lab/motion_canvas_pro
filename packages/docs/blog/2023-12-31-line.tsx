@@ -11,7 +11,7 @@ export default makeScene2D(function* (view) {
         [150, 70],
         [0, -70],
       ]}
-      stroke={'lightseagreen'}
+      stroke="lightseagreen"
       lineWidth={8}
       radius={20}
       closed

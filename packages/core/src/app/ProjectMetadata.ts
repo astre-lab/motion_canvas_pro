@@ -7,10 +7,10 @@ import {
   ObjectMetaField,
   RangeMetaField,
   Vector2MetaField,
-} from '../meta';
-import { CanvasColorSpace, Color, Vector2 } from '../types';
-import { ColorSpaces, FrameRates, Scales } from './presets';
-import type { Project } from './Project';
+} from '../meta/index.ts';
+import { CanvasColorSpace, Color, Vector2 } from '../types/index.ts';
+import { ColorSpaces, FrameRates, Scales } from './presets.ts';
+import type { Project } from './Project.ts';
 
 function createProjectMetadata(project: Project) {
   const meta = {

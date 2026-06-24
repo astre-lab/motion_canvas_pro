@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import type { JSX } from 'preact';
 import { useRef, useState } from 'preact/hooks';
-import { clamp, MouseButton } from '../../utils';
+import { clamp, MouseButton } from '../../utils/index.ts';
 import styles from './Controls.module.scss';
 
 type NumberInputProps =
@@ -37,12 +37,12 @@ export function NumberInput({
   return (
     <>
       <input
-        type={'number'}
+        type="number"
         ref={inputRef}
         min={min}
         max={max}
         step={step}
-        lang={'en'}
+        lang="en"
         value={currentValue?.toFixed(decimalPlaces)}
         onChangeCapture={() => onChange?.(parseFloat(inputRef.current.value))}
         onPointerDown={(event) => {

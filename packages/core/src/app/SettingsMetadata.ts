@@ -4,8 +4,8 @@ import {
   MetaField,
   ObjectMetaField,
   Vector2MetaField,
-} from '../meta';
-import { Color, Vector2 } from '../types';
+} from '../meta/index.ts';
+import { Color, Vector2 } from '../types/index.ts';
 
 /**
  * Create a runtime representation of the settings metadata.

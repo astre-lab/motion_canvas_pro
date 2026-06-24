@@ -3,8 +3,8 @@ import {
   ComputedContext,
   createSignal,
   PromiseHandle,
-} from '../signals';
-import { createComputed } from './createComputed';
+} from './index.ts';
+import { createComputed } from './createComputed.ts';
 
 export function createComputedAsync<T>(
   factory: () => Promise<T>,

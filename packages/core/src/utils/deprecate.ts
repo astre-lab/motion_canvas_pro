@@ -1,4 +1,4 @@
-import { useLogger } from './useScene';
+import { useLogger } from './useScene.ts';
 
 /**
  * Mark the given function as deprecated.

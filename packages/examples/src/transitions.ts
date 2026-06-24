@@ -1,7 +1,7 @@
 import { makeProject } from '@motion-canvas/core';
 
-import first from './scenes/transitions-first?scene';
-import second from './scenes/transitions-second?scene';
+import first from './scenes/transitions-first.tsx';
+import second from './scenes/transitions-second.tsx';
 
 export default makeProject({
   scenes: [first, second],

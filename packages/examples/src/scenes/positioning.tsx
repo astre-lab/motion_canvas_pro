@@ -15,7 +15,7 @@ export default makeScene2D(function* (view) {
         width={1920}
         height={1920}
         spacing={() => scale() * 60}
-        stroke={'#444'}
+        stroke="#444"
         lineWidth={1}
         lineCap='square'
         cache

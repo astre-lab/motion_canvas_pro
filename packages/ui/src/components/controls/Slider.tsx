@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'preact/hooks';
-import { clamp, MouseButton } from '../../utils';
+import { clamp, MouseButton } from '../../utils/index.ts';
 import styles from './Controls.module.scss';
 
 export interface SliderProps {

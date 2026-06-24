@@ -1,5 +1,5 @@
 import { useCallback, useMemo, useState } from 'preact/hooks';
-import { useApplication } from '../contexts';
+import { useApplication } from '../contexts/index.ts';
 
 export function useStorage<T>(
   id: string,

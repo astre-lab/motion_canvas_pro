@@ -8,16 +8,16 @@ import {
   Renderer,
 } from '@motion-canvas/core';
 import { ComponentChild, render } from 'preact';
-import { Editor } from './Editor';
-import { ProjectData, ProjectSelection } from './ProjectSelection';
+import { Editor } from './Editor.tsx';
+import { ProjectData, ProjectSelection } from './ProjectSelection.tsx';
 import {
   ApplicationProvider,
   PanelsProvider,
   ShortcutsProvider,
-} from './contexts';
-import GridPlugin from './plugin/GridPlugin';
-import { projectNameSignal } from './signals';
-import { getItem, setItem } from './utils';
+} from './contexts/index.ts';
+import GridPlugin from './plugin/GridPlugin/index.ts';
+import { projectNameSignal } from './signals/index.ts';
+import { getItem, setItem } from './utils/index.ts';
 
 const ExperimentalHooks = [
   'tabs',
@@ -101,7 +101,7 @@ export function editor(project: Project) {
 
   const meta = project.meta;
 
-  const queryString = window.location.search;
+  const queryString = globalThis.location.search;
   const urlParams = new URLSearchParams(queryString);
 
   const startInPresenter = urlParams.has('present');
@@ -174,15 +174,15 @@ export function index(projects: ProjectData[]) {
   renderRoot(<ProjectSelection projects={projects} />);
 }
 
-export * from './components/animations';
-export * from './components/controls';
-export * from './components/fields';
-export * from './components/icons';
-export * from './components/layout';
-export * from './components/meta';
-export * from './components/tabs';
-export * from './contexts';
-export * from './hooks';
-export * from './plugin';
-export * from './signals';
-export * from './utils';
+export * from './components/animations/index.ts';
+export * from './components/controls/index.ts';
+export * from './components/fields/index.ts';
+export * from './components/icons/index.ts';
+export * from './components/layout/index.ts';
+export * from './components/meta/index.ts';
+export * from './components/tabs/index.ts';
+export * from './contexts/index.ts';
+export * from './hooks/index.ts';
+export * from './plugin/index.ts';
+export * from './signals/index.ts';
+export * from './utils/index.ts';

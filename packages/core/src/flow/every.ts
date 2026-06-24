@@ -1,6 +1,6 @@
-import { decorate, threadable } from '../decorators';
-import { ThreadGenerator } from '../threading';
-import { usePlayback } from '../utils';
+import { decorate, threadable } from '../decorators/index.ts';
+import { ThreadGenerator } from '../threading/index.ts';
+import { usePlayback } from '../utils/index.ts';
 
 export interface EveryCallback {
   /**

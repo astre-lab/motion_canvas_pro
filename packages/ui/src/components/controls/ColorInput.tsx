@@ -1,14 +1,14 @@
 import { Color } from '@motion-canvas/core';
 import { valid } from 'chroma-js';
 import { useRef, useState } from 'preact/hooks';
-import { useReducedMotion } from '../../hooks';
-import { useClickOutside } from '../../hooks/useClickOutside';
-import { shake } from '../animations';
+import { useReducedMotion } from '../../hooks/index.ts';
+import { useClickOutside } from '../../hooks/useClickOutside.ts';
+import { shake } from '../animations/index.ts';
 import tabsStyles from '../tabs/Tabs.module.scss';
-import { ColorPicker } from './ColorPicker';
-import { ColorPreview } from './ColorPreview';
+import { ColorPicker } from './ColorPicker.tsx';
+import { ColorPreview } from './ColorPreview.tsx';
 import styles from './Controls.module.scss';
-import { Input } from './Input';
+import { Input } from './Input.tsx';
 
 export interface ColorInputProps {
   value: Color | null;

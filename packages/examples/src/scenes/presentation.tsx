@@ -26,8 +26,8 @@ export default makeScene2D(function* (view) {
     <Rect
       cache
       ref={backdrop}
-      width={'50%'}
-      height={'50%'}
+      width="50%"
+      height="50%"
       fill={RED}
       radius={40}
       smoothCorners
@@ -36,7 +36,7 @@ export default makeScene2D(function* (view) {
       <Txt
         ref={title}
         scale={0.5}
-        compositeOperation={'destination-out'}
+        compositeOperation="destination-out"
         rotation={() => -rotation() * rotationScale()}
       >
         START

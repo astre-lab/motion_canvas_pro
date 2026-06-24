@@ -1,10 +1,10 @@
-import { all } from '../flow';
-import { createSignal } from '../signals';
-import { ThreadGenerator } from '../threading';
-import { clampRemap, easeInOutCubic, linear } from '../tweening';
-import { BBox, Vector2 } from '../types';
-import { useScene } from '../utils';
-import { useTransition } from './useTransition';
+import { all } from '../flow/index.ts';
+import { createSignal } from '../signals/index.ts';
+import { ThreadGenerator } from '../threading/index.ts';
+import { clampRemap, easeInOutCubic, linear } from '../tweening/index.ts';
+import { BBox, Vector2 } from '../types/index.ts';
+import { useScene } from '../utils/index.ts';
+import { useTransition } from './useTransition.ts';
 
 /**
  * Perform a transition that zooms out from a given area of the scene.

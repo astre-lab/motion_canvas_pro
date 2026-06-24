@@ -1,4 +1,4 @@
-import { createRef, Reference } from './createRef';
+import { createRef, Reference } from './createRef.ts';
 
 export type ReferenceMap<T> =
   & Map<string, Reference<T>>

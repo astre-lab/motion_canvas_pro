@@ -1,7 +1,7 @@
 import { Vector2MetaField } from '@motion-canvas/core';
-import { useSubscribableValue } from '../../hooks';
-import { NumberInput } from '../controls';
-import { MetaFieldGroup } from './MetaFieldGroup';
+import { useSubscribableValue } from '../../hooks/index.ts';
+import { NumberInput } from '../controls/index.ts';
+import { MetaFieldGroup } from './MetaFieldGroup.tsx';
 
 export interface Vector2MetaFieldViewProps {
   field: Vector2MetaField;

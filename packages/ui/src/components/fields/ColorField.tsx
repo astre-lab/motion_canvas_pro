@@ -1,6 +1,6 @@
 import { Color } from '@motion-canvas/core';
-import { ColorPreview } from '../controls/ColorPreview';
-import { Field, FieldSet, FieldValue, NumericField } from './Layout';
+import { ColorPreview } from '../controls/ColorPreview.tsx';
+import { Field, FieldSet, FieldValue, NumericField } from './Layout.tsx';
 
 export interface ColorFieldProps {
   value: Color;

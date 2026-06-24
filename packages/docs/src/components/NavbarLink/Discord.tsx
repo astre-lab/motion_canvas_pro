@@ -17,7 +17,7 @@ export default function DiscordNavbarLink() {
   return (
     <NavbarLink
       href={siteConfig.customFields.discordUrl as string}
-      suffix={'online'}
+      suffix="online"
       amount={activeUsers}
     >
       <IconDiscord width={20} height={20} />

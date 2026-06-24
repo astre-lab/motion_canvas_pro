@@ -1,5 +1,5 @@
-import { useScene } from './useScene';
-import { useThread } from './useThread';
+import { useScene } from './useScene.ts';
+import { useThread } from './useThread.ts';
 
 /**
  * Register a time event and get its duration in seconds.

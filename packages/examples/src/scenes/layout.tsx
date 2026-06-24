@@ -11,22 +11,22 @@ export default makeScene2D(function* (view) {
   view.add(
     <>
       <Layout layout gap={10} padding={10} width={440} height={240}>
-        <Rect ref={colA} grow={1} fill={'#242424'} radius={4} />
+        <Rect ref={colA} grow={1} fill="#242424" radius={4} />
         <Layout gap={10} direction='column' grow={3}>
           <Rect
             ref={rowA}
             grow={8}
             fill={RED}
             radius={4}
-            stroke={'#fff'}
+            stroke="#fff"
             lineWidth={4}
             margin={2}
           >
-            <Circle layout={false} width={20} height={20} fill={'#fff'} />
+            <Circle layout={false} width={20} height={20} fill="#fff" />
           </Rect>
-          <Rect grow={2} fill={'#242424'} radius={4} />
+          <Rect grow={2} fill="#242424" radius={4} />
         </Layout>
-        <Rect ref={colB} grow={3} fill={'#242424'} radius={4} />
+        <Rect ref={colB} grow={3} fill="#242424" radius={4} />
       </Layout>
     </>,
   );

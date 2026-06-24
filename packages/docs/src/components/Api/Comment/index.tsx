@@ -76,7 +76,7 @@ function FullComment({ comment }: { comment: JSONOutput.Comment }) {
               Examples
             </a>
           </h4>
-          <Collapsible lazy as={'div'} collapsed={collapsed}>
+          <Collapsible lazy as="div" collapsed={collapsed}>
             <div className={styles.collapse}>
               {examples.map((example) => (
                 <Summary key={example.contentId} id={example.contentId} />

@@ -1,12 +1,12 @@
 import type { RangeMetaField } from '@motion-canvas/core';
-import { useApplication } from '../../contexts';
+import { useApplication } from '../../contexts/index.ts';
 import {
   useDuration,
   usePreviewSettings,
   useSubscribableValue,
-} from '../../hooks';
-import { NumberInput } from '../controls';
-import { MetaFieldGroup } from './MetaFieldGroup';
+} from '../../hooks/index.ts';
+import { NumberInput } from '../controls/index.ts';
+import { MetaFieldGroup } from './MetaFieldGroup.tsx';
 
 export interface RangeMetaFieldViewProps {
   field: RangeMetaField;

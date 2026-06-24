@@ -4,10 +4,10 @@
  * @packageDocumentation
  */
 
-export * from './Thread';
-export * from './ThreadGenerator';
-export * from './cancel';
-export * from './join';
-export * from './names';
-export * from './spawn';
-export * from './threads';
+export * from './Thread.ts';
+export * from './ThreadGenerator.ts';
+export * from './cancel.ts';
+export * from './join.ts';
+export * from './names.ts';
+export * from './spawn.ts';
+export * from './threads.ts';

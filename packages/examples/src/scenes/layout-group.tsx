@@ -6,12 +6,12 @@ export default makeScene2D(function* (view) {
 
   view.add(
     <>
-      <Layout direction={'column'} width={960} gap={40} layout>
+      <Layout direction="column" width={960} gap={40} layout>
         <Node ref={group}>
-          <Rect height={240} fill={'#ff6470'} />
-          <Rect height={240} fill={'#ff6470'} />
+          <Rect height={240} fill="#ff6470" />
+          <Rect height={240} fill="#ff6470" />
         </Node>
-        <Rect height={240} fill={'#ff6470'} />
+        <Rect height={240} fill="#ff6470" />
       </Layout>
     </>,
   );

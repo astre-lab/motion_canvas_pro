@@ -4,18 +4,18 @@
  * @packageDocumentation
  */
 
-export * from './CompoundSignalContext';
-export * from './ComputedContext';
-export * from './DeferredEffectContext';
-export * from './DependencyContext';
-export * from './EffectContext';
-export * from './SignalContext';
-export * from './Vector2SignalContext';
-export * from './createComputed';
-export * from './createComputedAsync';
-export * from './createDeferredEffect';
-export * from './createEffect';
-export * from './createSignal';
-export * from './symbols';
-export * from './types';
-export * from './utils';
+export * from './CompoundSignalContext.ts';
+export * from './ComputedContext.ts';
+export * from './DeferredEffectContext.ts';
+export * from './DependencyContext.ts';
+export * from './EffectContext.ts';
+export * from './SignalContext.ts';
+export * from './Vector2SignalContext.ts';
+export * from './createComputed.ts';
+export * from './createComputedAsync.ts';
+export * from './createDeferredEffect.ts';
+export * from './createEffect.ts';
+export * from './createSignal.ts';
+export * from './symbols.ts';
+export * from './types.ts';
+export * from './utils.ts';

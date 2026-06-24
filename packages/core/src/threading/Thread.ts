@@ -1,10 +1,10 @@
-import { EventDispatcher } from '../events';
-import { noop } from '../flow';
-import { createSignal } from '../signals';
-import { endThread, startThread, useLogger } from '../utils';
-import { isThreadGenerator, ThreadGenerator } from './ThreadGenerator';
+import { EventDispatcher } from '../events/index.ts';
+import { noop } from '../flow/index.ts';
+import { createSignal } from '../signals/index.ts';
+import { endThread, startThread, useLogger } from '../utils/index.ts';
+import { isThreadGenerator, ThreadGenerator } from './ThreadGenerator.ts';
 import reusedGenerator from './__logs__/reused-generator.md';
-import { getTaskName, setTaskName } from './names';
+import { getTaskName, setTaskName } from './names.ts';
 
 /**
  * A class representing an individual thread.

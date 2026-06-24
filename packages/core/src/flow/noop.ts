@@ -1,5 +1,5 @@
-import { decorate, threadable } from '../decorators';
-import { ThreadGenerator } from '../threading';
+import { decorate, threadable } from '../decorators/index.ts';
+import { ThreadGenerator } from '../threading/index.ts';
 
 decorate(noop, threadable());
 /**

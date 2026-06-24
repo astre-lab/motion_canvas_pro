@@ -1,3 +1,3 @@
-export * from './Settings';
-export * from './Threads';
-export * from './VideoSettings';
+export * from './Settings.tsx';
+export * from './Threads.tsx';
+export * from './VideoSettings.tsx';

@@ -1,33 +1,33 @@
-import { Logger, PlaybackStatus } from '../app';
-import { decorate, threadable } from '../decorators';
-import { EventDispatcher, ValueDispatcher } from '../events';
-import { DependencyContext, SignalValue } from '../signals';
+import { Logger, PlaybackStatus } from '../app/index.ts';
+import { decorate, threadable } from '../decorators/index.ts';
+import { EventDispatcher, ValueDispatcher } from '../events/index.ts';
+import { DependencyContext, SignalValue } from '../signals/index.ts';
 import {
   isPromisable,
   isPromise,
   Thread,
   ThreadGenerator,
   threads,
-} from '../threading';
-import { Vector2 } from '../types';
-import { endPlayback, endScene, startPlayback, startScene } from '../utils';
-import { LifecycleEvents } from './LifecycleEvents';
-import { Random } from './Random';
+} from '../threading/index.ts';
+import { Vector2 } from '../types/index.ts';
+import { endPlayback, endScene, startPlayback, startScene } from '../utils/index.ts';
+import { LifecycleEvents } from './LifecycleEvents.ts';
+import { Random } from './Random.ts';
 import {
   CachedSceneData,
   FullSceneDescription,
   Scene,
   SceneDescriptionReload,
   SceneRenderEvent,
-} from './Scene';
-import { SceneMetadata } from './SceneMetadata';
-import { SceneState } from './SceneState';
-import { Shaders } from './Shaders';
-import { Slides } from './Slides';
-import { Sounds } from './Sounds';
-import { Threadable } from './Threadable';
-import { Variables } from './Variables';
-import { TimeEvents } from './timeEvents';
+} from './Scene.ts';
+import { SceneMetadata } from './SceneMetadata.ts';
+import { SceneState } from './SceneState.ts';
+import { Shaders } from './Shaders.ts';
+import { Slides } from './Slides.ts';
+import { Sounds } from './Sounds.ts';
+import { Threadable } from './Threadable.ts';
+import { Variables } from './Variables.ts';
+import { TimeEvents } from './timeEvents/index.ts';
 
 export interface ThreadGeneratorFactory<T> {
   (view: T): ThreadGenerator;

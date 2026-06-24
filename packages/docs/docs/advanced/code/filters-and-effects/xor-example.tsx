@@ -15,8 +15,8 @@ export default makeScene2D(function* (view) {
       <Circle
         ref={valueRef}
         size={0}
-        fill={'white'}
-        compositeOperation={'xor'}
+        fill="white"
+        compositeOperation="xor"
       />
     </Node>,
   );

@@ -20,7 +20,7 @@ export default makeScene2D(function* (view) {
         ref={maskRef}
         size={250}
         src='/img/logo_dark.svg'
-        compositeOperation={'destination-in'}
+        compositeOperation="destination-in"
       />
       {
         /** !!! Notice how the roles got reversed in comparison to source-in

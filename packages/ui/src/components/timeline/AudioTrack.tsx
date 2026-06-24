@@ -6,13 +6,13 @@ import {
   useApplication,
   useModifiers,
   useTimelineContext,
-} from '../../contexts';
+} from '../../contexts/index.ts';
 import {
   useScenes,
   useSharedSettings,
   useSubscribableValue,
-} from '../../hooks';
-import { MouseButton } from '../../utils';
+} from '../../hooks/index.ts';
+import { MouseButton } from '../../utils/index.ts';
 import styles from './Timeline.module.scss';
 
 const HEIGHT = 48;

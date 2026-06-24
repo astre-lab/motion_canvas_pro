@@ -1,4 +1,4 @@
-import { getContext } from '../utils';
+import { getContext } from '../utils/index.ts';
 
 let Canvas: HTMLCanvasElement;
 let Context: CanvasRenderingContext2D;

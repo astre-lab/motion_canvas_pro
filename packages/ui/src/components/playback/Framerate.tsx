@@ -1,6 +1,6 @@
 import { VNode } from 'preact';
 import { useMemo, useRef } from 'preact/hooks';
-import { usePlayerState, usePlayerTime } from '../../hooks';
+import { usePlayerState, usePlayerTime } from '../../hooks/index.ts';
 
 interface FramerateProps {
   render: (framerate: number, paused: boolean) => VNode<unknown>;

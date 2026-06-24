@@ -3,9 +3,9 @@ import styles from './Timeline.module.scss';
 import type { Scene } from '@motion-canvas/core';
 import type { TimeEvent } from '@motion-canvas/core/lib/scenes/timeEvents';
 import { useLayoutEffect, useState } from 'preact/hooks';
-import { useApplication, useTimelineContext } from '../../contexts';
-import { labelClipDraggingLeftSignal } from '../../signals';
-import { findAndOpenFirstUserFile } from '../../utils';
+import { useApplication, useTimelineContext } from '../../contexts/index.ts';
+import { labelClipDraggingLeftSignal } from '../../signals/index.ts';
+import { findAndOpenFirstUserFile } from '../../utils/index.ts';
 
 interface LabelProps {
   event: TimeEvent;

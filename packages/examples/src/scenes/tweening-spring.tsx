@@ -15,7 +15,7 @@ export default makeScene2D(function* (view) {
       ref={circle}
       x={-400}
       size={240}
-      fill={'#e13238'}
+      fill="#e13238"
     />,
   );
 

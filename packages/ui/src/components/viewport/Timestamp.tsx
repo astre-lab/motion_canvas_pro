@@ -1,7 +1,7 @@
 import { JSX } from 'preact';
-import { useApplication } from '../../contexts';
-import { usePlayerState } from '../../hooks';
-import { formatDuration } from '../../utils';
+import { useApplication } from '../../contexts/index.ts';
+import { usePlayerState } from '../../hooks/index.ts';
+import { formatDuration } from '../../utils/index.ts';
 import styles from './Viewport.module.scss';
 
 interface TimestampProps extends JSX.HTMLAttributes<HTMLInputElement> {

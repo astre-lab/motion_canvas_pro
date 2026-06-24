@@ -1,7 +1,7 @@
-import { InterpolationFunction, map } from '../tweening';
-import { Signal, SignalContext } from './SignalContext';
-import { SignalExtensions, SignalValue } from './types';
-import { isReactive, modify } from './utils';
+import { InterpolationFunction, map } from '../tweening/index.ts';
+import { Signal, SignalContext } from './SignalContext.ts';
+import { SignalExtensions, SignalValue } from './types.ts';
+import { isReactive, modify } from './utils.ts';
 
 export type CompoundSignal<
   TSetterValue,

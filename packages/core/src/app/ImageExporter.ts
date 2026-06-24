@@ -1,18 +1,18 @@
-import { EventDispatcher } from '../events';
+import { EventDispatcher } from '../events/index.ts';
 import {
   BoolMetaField,
   EnumMetaField,
   NumberMetaField,
   ObjectMetaField,
   ValueOf,
-} from '../meta';
-import { clamp } from '../tweening';
-import { CanvasOutputMimeType } from '../types';
-import type { Exporter } from './Exporter';
-import type { Logger } from './Logger';
-import type { Project } from './Project';
-import type { RendererSettings } from './Renderer';
-import { FileTypes } from './presets';
+} from '../meta/index.ts';
+import { clamp } from '../tweening/index.ts';
+import { CanvasOutputMimeType } from '../types/index.ts';
+import type { Exporter } from './Exporter.ts';
+import type { Logger } from './Logger.ts';
+import type { Project } from './Project.ts';
+import type { RendererSettings } from './Renderer.ts';
+import { FileTypes } from './presets.ts';
 
 const EXPORT_FRAME_LIMIT = 256;
 const EXPORT_RETRY_DELAY = 1000;

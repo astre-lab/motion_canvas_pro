@@ -1,8 +1,8 @@
-import { all } from '../flow';
-import { ThreadGenerator } from '../threading';
-import { Direction, Origin, Vector2 } from '../types';
-import { useScene } from '../utils';
-import { useTransition } from './useTransition';
+import { all } from '../flow/index.ts';
+import { ThreadGenerator } from '../threading/index.ts';
+import { Direction, Origin, Vector2 } from '../types/index.ts';
+import { useScene } from '../utils/index.ts';
+import { useTransition } from './useTransition.ts';
 
 /**
  * Perform a transition that slides the scene in the given direction.

@@ -1,7 +1,7 @@
-import type { ExporterClass, Project } from '../app';
-import { ValueDispatcher } from '../events';
-import { EnumMetaField } from './EnumMetaField';
-import { MetaField } from './MetaField';
+import type { ExporterClass, Project } from '../app/index.ts';
+import { ValueDispatcher } from '../events/index.ts';
+import { EnumMetaField } from './EnumMetaField.ts';
+import { MetaField } from './MetaField.ts';
 
 /**
  * Represents the exporter configuration.

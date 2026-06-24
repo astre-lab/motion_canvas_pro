@@ -1,5 +1,5 @@
-import { MetaField } from './MetaField';
-import { MetaOption } from './MetaOption';
+import { MetaField } from './MetaField.ts';
+import { MetaOption } from './MetaOption.ts';
 
 /**
  * Represents a string stored in a meta file.

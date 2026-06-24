@@ -6,17 +6,17 @@ import {
   Vector2,
 } from '@motion-canvas/core';
 import type { FunctionComponent } from 'preact';
-import { useSubscribableValue } from '../../hooks';
-import { Separator } from '../controls';
-import { BoolMetaFieldView } from './BoolMetaFieldView';
-import { ColorMetaFieldView } from './ColorMetaFieldView';
-import { EnumMetaFieldView } from './EnumMetaFieldView';
-import { NumberMetaFieldView } from './NumberMetaFieldView';
-import { ObjectMetaFieldView } from './ObjectMetaFieldView';
-import { RangeMetaFieldView } from './RangeMetaFieldView';
-import { StringMetaFieldView } from './StringMetaFieldView';
-import { UnknownMetaFieldView } from './UnknownMetaFieldView';
-import { Vector2MetaFieldView } from './Vector2MetaFieldView';
+import { useSubscribableValue } from '../../hooks/index.ts';
+import { Separator } from '../controls/index.ts';
+import { BoolMetaFieldView } from './BoolMetaFieldView.tsx';
+import { ColorMetaFieldView } from './ColorMetaFieldView.tsx';
+import { EnumMetaFieldView } from './EnumMetaFieldView.tsx';
+import { NumberMetaFieldView } from './NumberMetaFieldView.tsx';
+import { ObjectMetaFieldView } from './ObjectMetaFieldView.tsx';
+import { RangeMetaFieldView } from './RangeMetaFieldView.tsx';
+import { StringMetaFieldView } from './StringMetaFieldView.tsx';
+import { UnknownMetaFieldView } from './UnknownMetaFieldView.tsx';
+import { Vector2MetaFieldView } from './Vector2MetaFieldView.tsx';
 
 interface MetaFieldViewProps {
   field: MetaField<any>;

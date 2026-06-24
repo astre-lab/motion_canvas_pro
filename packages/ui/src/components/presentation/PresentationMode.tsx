@@ -4,13 +4,13 @@ import {
   useApplication,
   ViewportProvider,
   ViewportState,
-} from '../../contexts';
-import { useRenderingSettings, useSharedSettings, useSize } from '../../hooks';
-import { StageView } from '../viewport';
-import { OverlayCanvas } from '../viewport/OverlayCanvas';
+} from '../../contexts/index.ts';
+import { useRenderingSettings, useSharedSettings, useSize } from '../../hooks/index.ts';
+import { StageView } from '../viewport/index.ts';
+import { OverlayCanvas } from '../viewport/OverlayCanvas.tsx';
 import styles from '../viewport/Viewport.module.scss';
-import { PresentationControls } from './PresentationControls';
-import { SlideGraph } from './SlideGraph';
+import { PresentationControls } from './PresentationControls.tsx';
+import { SlideGraph } from './SlideGraph.tsx';
 
 export function PresentationMode() {
   const { plugins, presenter } = useApplication();

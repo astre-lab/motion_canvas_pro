@@ -1,14 +1,14 @@
-import { ValueDispatcher } from '../events';
-import type { Scene, Slide } from '../scenes';
-import { ReadOnlyTimeEvents } from '../scenes/timeEvents';
-import { Vector2 } from '../types';
-import { Semaphore } from '../utils';
-import type { Logger } from './Logger';
-import { PlaybackManager, PlaybackState } from './PlaybackManager';
-import { PlaybackStatus } from './PlaybackStatus';
-import type { Project } from './Project';
-import { SharedWebGLContext } from './SharedWebGLContext';
-import { Stage, StageSettings } from './Stage';
+import { ValueDispatcher } from '../events/index.ts';
+import type { Scene, Slide } from '../scenes/index.ts';
+import { ReadOnlyTimeEvents } from '../scenes/timeEvents/index.ts';
+import { Vector2 } from '../types/index.ts';
+import { Semaphore } from '../utils/index.ts';
+import type { Logger } from './Logger.ts';
+import { PlaybackManager, PlaybackState } from './PlaybackManager.ts';
+import { PlaybackStatus } from './PlaybackStatus.ts';
+import type { Project } from './Project.ts';
+import { SharedWebGLContext } from './SharedWebGLContext.ts';
+import { Stage, StageSettings } from './Stage.ts';
 
 export interface PresenterSettings extends StageSettings {
   name: string;

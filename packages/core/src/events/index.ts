@@ -4,8 +4,8 @@
  * @packageDocumentation
  */
 
-export * from './AsyncEventDispatcher';
-export * from './EventDispatcher';
-export * from './EventDispatcherBase';
-export * from './FlagDispatcher';
-export * from './ValueDispatcher';
+export * from './AsyncEventDispatcher.ts';
+export * from './EventDispatcher.ts';
+export * from './EventDispatcherBase.ts';
+export * from './FlagDispatcher.ts';
+export * from './ValueDispatcher.ts';

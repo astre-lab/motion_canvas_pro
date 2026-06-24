@@ -4,9 +4,9 @@ import {
   useShortcut,
   useViewportContext,
   VIEWPORT_SHORTCUTS,
-} from '../../contexts';
-import { useCurrentScene, useViewportMatrix } from '../../hooks';
-import { ReadOnlyInput } from '../controls';
+} from '../../contexts/index.ts';
+import { useCurrentScene, useViewportMatrix } from '../../hooks/index.ts';
+import { ReadOnlyInput } from '../controls/index.ts';
 import styles from './Viewport.module.scss';
 
 export function Coordinates() {
@@ -41,11 +41,11 @@ export function Coordinates() {
   // Below method is used for the copy to clipboard keybind
   useShortcut(VIEWPORT_SHORTCUTS, 'copyCoordinates', async () => {
     const positionString = `${mousePos.x}, ${mousePos.y}`;
-    await window.navigator.clipboard.writeText(positionString);
+    await globalThis.navigator.clipboard.writeText(positionString);
   });
 
   return (
-    <ReadOnlyInput className={styles.coordinates} title={'Coordinates'}>
+    <ReadOnlyInput className={styles.coordinates} title="Coordinates">
       ({mousePos.x}, {mousePos.y})
     </ReadOnlyInput>
   );

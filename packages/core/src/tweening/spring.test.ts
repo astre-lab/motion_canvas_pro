@@ -1,10 +1,10 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 
 import { afterAll, beforeAll, describe, expect, test } from 'vitest';
-import { PlaybackManager, PlaybackStatus } from '../app';
-import { threads } from '../threading';
-import { endPlayback, startPlayback, useTime } from '../utils';
-import { spring } from './spring';
+import { PlaybackManager, PlaybackStatus } from '../app/index.ts';
+import { threads } from '../threading/index.ts';
+import { endPlayback, startPlayback, useTime } from '../utils/index.ts';
+import { spring } from './spring.ts';
 
 describe('spring()', () => {
   const playback = new PlaybackManager();

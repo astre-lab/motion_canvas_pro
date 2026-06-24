@@ -1,5 +1,5 @@
-import { Color, PossibleColor } from '../types';
-import { MetaField } from './MetaField';
+import { Color, PossibleColor } from '../types/index.ts';
+import { MetaField } from './MetaField.ts';
 
 /**
  * Represents a color stored in a meta file.

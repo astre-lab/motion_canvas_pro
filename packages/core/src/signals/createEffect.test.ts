@@ -1,7 +1,7 @@
 import { describe, expect, test, vi } from 'vitest';
-import { createSignal } from './createSignal';
+import { createSignal } from './createSignal.ts';
 
-import { createEffect } from './createEffect';
+import { createEffect } from './createEffect.ts';
 
 describe('createEffect()', () => {
   test('Invoked after creation', () => {

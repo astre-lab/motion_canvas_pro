@@ -7,7 +7,7 @@ import { Switch } from '@motion-canvas/examples/src/components/Switch';
 export default makeScene2D(function* (view) {
   const switchRef = createRef<Switch>();
 
-  view.add(<Switch ref={switchRef} initialState={true} />);
+  view.add(<Switch ref={switchRef} initialState />);
 
   yield* switchRef().toggle(0.6);
   yield* waitFor(1);

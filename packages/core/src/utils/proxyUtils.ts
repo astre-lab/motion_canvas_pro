@@ -5,7 +5,7 @@
  * the Proxy instead.
  */
 
-import { useLogger } from './useScene';
+import { useLogger } from './useScene.ts';
 
 /**
  * Route the given url through a local proxy.
@@ -29,7 +29,7 @@ export function viaProxy(url: string) {
   // window.location.hostname is being passed here to ensure that
   // this does not throw an Error for same-origin requests
   // e.g. /some/image -> localhost:9000/some/image
-  const selfUrl = new URL(window.location.toString());
+  const selfUrl = new URL(globalThis.location.toString());
   // inside a try-catch in case the URL cannot be understood
   try {
     const expandedUrl = new URL(url, selfUrl);

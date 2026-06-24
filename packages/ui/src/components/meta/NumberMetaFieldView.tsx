@@ -1,7 +1,7 @@
 import type { NumberMetaField } from '@motion-canvas/core';
-import { useSubscribableValue } from '../../hooks';
-import { NumberInput, NumberInputSelect } from '../controls';
-import { MetaFieldGroup } from './MetaFieldGroup';
+import { useSubscribableValue } from '../../hooks/index.ts';
+import { NumberInput, NumberInputSelect } from '../controls/index.ts';
+import { MetaFieldGroup } from './MetaFieldGroup.tsx';
 
 export interface NumberMetaFieldViewProps {
   field: NumberMetaField;

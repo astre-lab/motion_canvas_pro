@@ -23,14 +23,14 @@ export default makeScene2D(function* (view) {
       {/** Stencil / Mask Layer. It defines if the Value Layer is visible or not */}
       <Img ref={maskRef} size={250} src='/img/logo_dark.svg' />
       {/** Value Layer (which in itself is generated from a composite operation)  */}
-      <Node cache compositeOperation={'xor'}>
-        <Circle ref={valueRef} size={0} fill={'white'} />
+      <Node cache compositeOperation="xor">
+        <Circle ref={valueRef} size={0} fill="white" />
         <Img
           ref={imageRef}
           width={600}
           rotation={180}
           src={ImageSource}
-          compositeOperation={'source-in'}
+          compositeOperation="source-in"
         />
       </Node>
     </Node>,

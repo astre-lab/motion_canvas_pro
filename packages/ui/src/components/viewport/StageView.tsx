@@ -2,7 +2,7 @@ import type { Stage } from '@motion-canvas/core';
 import clsx from 'clsx';
 import { JSX } from 'preact';
 import { MutableRef, useLayoutEffect, useRef } from 'preact/hooks';
-import { useSharedSettings } from '../../hooks';
+import { useSharedSettings } from '../../hooks/index.ts';
 import styles from './Viewport.module.scss';
 
 export interface StageViewProps extends JSX.HTMLAttributes<HTMLDivElement> {

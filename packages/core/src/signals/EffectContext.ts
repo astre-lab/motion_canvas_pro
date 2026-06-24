@@ -1,4 +1,4 @@
-import { DependencyContext } from './DependencyContext';
+import { DependencyContext } from './DependencyContext.ts';
 
 export class EffectContext extends DependencyContext {
   public constructor(private readonly callback: () => void) {

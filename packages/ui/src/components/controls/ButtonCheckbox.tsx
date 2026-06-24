@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import { Button, ButtonProps } from './Button';
+import { Button, ButtonProps } from './Button.tsx';
 import styles from './Controls.module.scss';
 
 export interface ButtonCheckboxProps extends ButtonProps {
@@ -18,7 +18,7 @@ export function ButtonCheckbox({
         onChecked?.(!checked);
       }}
       className={clsx(checked && styles.checked)}
-      type={'button'}
+      type="button"
       {...props}
     />
   );

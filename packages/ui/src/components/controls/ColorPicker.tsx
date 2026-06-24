@@ -4,10 +4,10 @@ import { Color } from '@motion-canvas/core';
 import { hsv } from 'chroma-js';
 import { forwardRef } from 'preact/compat';
 import { useEffect, useRef, useState } from 'preact/hooks';
-import { useSize } from '../../hooks';
-import { clamp, MouseButton } from '../../utils';
+import { useSize } from '../../hooks/index.ts';
+import { clamp, MouseButton } from '../../utils/index.ts';
 import styles from './Controls.module.scss';
-import { NumberInput } from './NumberInput';
+import { NumberInput } from './NumberInput.tsx';
 
 type ColorPickerProps = Omit<JSX.HTMLAttributes<HTMLDivElement>, 'onChange'> & {
   color: Color;
@@ -117,7 +117,7 @@ function ColorPickerInternal(
         max={1}
         step={0.005}
         decimalPlaces={4}
-        label={'H'}
+        label="H"
       />
 
       <NumberInput
@@ -127,7 +127,7 @@ function ColorPickerInternal(
         max={1}
         step={0.005}
         decimalPlaces={4}
-        label={'S'}
+        label="S"
       />
 
       <NumberInput
@@ -137,7 +137,7 @@ function ColorPickerInternal(
         max={1}
         step={0.005}
         decimalPlaces={4}
-        label={'V'}
+        label="V"
       />
 
       <NumberInput
@@ -147,7 +147,7 @@ function ColorPickerInternal(
         max={1}
         step={0.005}
         decimalPlaces={4}
-        label={'A'}
+        label="A"
       />
     </div>
   );

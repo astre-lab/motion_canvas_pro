@@ -3,12 +3,12 @@ import styles from './Console.module.scss';
 import { capitalize, LogLevel } from '@motion-canvas/core';
 import clsx from 'clsx';
 import { useLayoutEffect, useRef } from 'preact/hooks';
-import { useApplication } from '../../contexts';
-import { useStorage, useSubscribableValue } from '../../hooks';
-import { IconButton, Pill } from '../controls';
-import { Clear } from '../icons';
-import { Pane } from '../tabs';
-import { Log } from './Log';
+import { useApplication } from '../../contexts/index.ts';
+import { useStorage, useSubscribableValue } from '../../hooks/index.ts';
+import { IconButton, Pill } from '../controls/index.ts';
+import { Clear } from '../icons/index.ts';
+import { Pane } from '../tabs/index.ts';
+import { Log } from './Log.tsx';
 
 const LOG_LEVELS: Record<string, boolean> = {
   [LogLevel.Error]: true,
@@ -49,7 +49,7 @@ export function Console() {
           })}
         </div>
         {logs.length > 0 && (
-          <IconButton onClick={() => logger.clear()} title={'Clear console'}>
+          <IconButton onClick={() => logger.clear()} title="Clear console">
             <Clear />
           </IconButton>
         )}

@@ -27,7 +27,7 @@ export default makeScene2D(function* (view) {
   view.add(
     <Node y={-30}>
       {/* Grid and animated point */}
-      <Grid size={700} stroke={'#444'} lineWidth={3} spacing={100}>
+      <Grid size={700} stroke="#444" lineWidth={3} spacing={100}>
         <Rect
           layout
           size={100}
@@ -35,7 +35,7 @@ export default makeScene2D(function* (view) {
           x={() => time() * 500 - 300}
           y={() => value() * -500 + 300}
         >
-          <Circle size={60} fill={'#C22929'} margin={20}></Circle>
+          <Circle size={60} fill="#C22929" margin={20}></Circle>
         </Rect>
       </Grid>
 
@@ -48,8 +48,8 @@ export default makeScene2D(function* (view) {
             [0, 750],
             [0, 35],
           ]}
-          stroke={'#DDD'}
-          lineCap={'round'}
+          stroke="#DDD"
+          lineCap="round"
           endArrow
           arrowSize={15}
         >
@@ -58,7 +58,7 @@ export default makeScene2D(function* (view) {
         {/* Tracker */}
         <Layout y={() => value() * -500 + 650}>
           <Txt
-            fill={'#DDD'}
+            fill="#DDD"
             text={() => value().toFixed(2).toString()}
             fontWeight={300}
             fontSize={30}
@@ -66,7 +66,7 @@ export default makeScene2D(function* (view) {
             y={3}
           >
           </Txt>
-          <Circle size={30} fill={'#DDD'}></Circle>
+          <Circle size={30} fill="#DDD"></Circle>
         </Layout>
 
         {/* Label */}
@@ -76,9 +76,9 @@ export default makeScene2D(function* (view) {
           fontWeight={400}
           fontSize={50}
           padding={20}
-          fontFamily={'Candara'}
-          fill={'#DDD'}
-          text={'VALUE'}
+          fontFamily="Candara"
+          fill="#DDD"
+          text="VALUE"
         >
         </Txt>
       </Node>
@@ -92,8 +92,8 @@ export default makeScene2D(function* (view) {
             [50, 800],
             [765, 800],
           ]}
-          stroke={'#DDD'}
-          lineCap={'round'}
+          stroke="#DDD"
+          lineCap="round"
           endArrow
           arrowSize={15}
         >
@@ -101,9 +101,9 @@ export default makeScene2D(function* (view) {
 
         {/* Tracker */}
         <Layout y={800} x={() => time() * 500 + 150}>
-          <Circle size={30} fill={'#DDD'}></Circle>
+          <Circle size={30} fill="#DDD"></Circle>
           <Txt
-            fill={'#DDD'}
+            fill="#DDD"
             text={() => (time() * TIME).toFixed(2).toString()}
             fontWeight={300}
             fontSize={30}
@@ -119,9 +119,9 @@ export default makeScene2D(function* (view) {
           fontWeight={400}
           fontSize={50}
           padding={20}
-          fontFamily={'Candara'}
-          fill={'#DDD'}
-          text={'TIME'}
+          fontFamily="Candara"
+          fill="#DDD"
+          text="TIME"
         >
         </Txt>
       </Node>

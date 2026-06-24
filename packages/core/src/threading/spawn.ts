@@ -1,5 +1,5 @@
-import { useThread } from '../utils';
-import { ThreadGenerator } from './ThreadGenerator';
+import { useThread } from '../utils/index.ts';
+import { ThreadGenerator } from './ThreadGenerator.ts';
 
 /**
  * Run the given task concurrently.

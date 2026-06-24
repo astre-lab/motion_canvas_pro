@@ -3,15 +3,15 @@
  * @packageDocumentation
  */
 
-export * from './all';
-export * from './any';
-export * from './chain';
-export * from './delay';
-export * from './every';
-export * from './loop';
-export * from './loopFor';
-export * from './loopUntil';
-export * from './noop';
-export * from './run';
-export * from './scheduling';
-export * from './sequence';
+export * from './all.ts';
+export * from './any.ts';
+export * from './chain.ts';
+export * from './delay.ts';
+export * from './every.ts';
+export * from './loop.ts';
+export * from './loopFor.ts';
+export * from './loopUntil.ts';
+export * from './noop.ts';
+export * from './run.ts';
+export * from './scheduling.ts';
+export * from './sequence.ts';

@@ -1,4 +1,4 @@
-import { Vector2 } from './Vector';
+import { Vector2 } from './Vector.ts';
 
 export enum Center {
   Vertical = 1,

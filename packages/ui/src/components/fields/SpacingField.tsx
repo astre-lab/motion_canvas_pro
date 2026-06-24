@@ -1,5 +1,5 @@
 import { Spacing } from '@motion-canvas/core';
-import { Field, FieldSet, FieldValue, NumericField } from './Layout';
+import { Field, FieldSet, FieldValue, NumericField } from './Layout.tsx';
 
 export interface SpacingFieldProps {
   value: Spacing;

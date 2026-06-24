@@ -1,5 +1,5 @@
 import { describe, expect, test } from 'vitest';
-import { Color } from './Color';
+import { Color } from './Color.ts';
 
 describe('Color.lerp', () => {
   test('interpolates between colors', () => {

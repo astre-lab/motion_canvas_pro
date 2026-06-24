@@ -1,6 +1,6 @@
 import { describe, expect, test } from 'vitest';
-import { createSignal } from '../signals';
-import { PossibleVector2, Vector2 } from '../types';
+import { createSignal } from '../signals/index.ts';
+import { PossibleVector2, Vector2 } from './index.ts';
 
 describe('Vector2', () => {
   test('Correctly parses values', () => {

@@ -5,8 +5,8 @@ import {
   useCurrentFrame,
   useCurrentScene,
   useSubscribableValue,
-} from '../../hooks';
-import { Pane } from '../tabs';
+} from '../../hooks/index.ts';
+import { Pane } from '../tabs/index.ts';
 
 export function Threads() {
   useCurrentFrame();

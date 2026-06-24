@@ -1,4 +1,4 @@
-import { deprecate } from '../utils';
+import { deprecate } from '../utils/index.ts';
 
 /**
  * Create a deprecated decorator that marks methods as deprecated.

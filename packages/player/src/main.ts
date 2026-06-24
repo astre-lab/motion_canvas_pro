@@ -101,7 +101,7 @@ class MotionCanvasPlayer extends HTMLElement {
       this.setPlaying(true);
     }
 
-    this.mouseMoveId = window.setTimeout(() => {
+    this.mouseMoveId = globalThis.setTimeout(() => {
       this.mouseMoveId = null;
       this.updateClass();
     }, 2000);

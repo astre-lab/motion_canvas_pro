@@ -1,9 +1,9 @@
 import type { Scene } from '@motion-canvas/core';
 import { useEffect, useState } from 'preact/hooks';
-import { useApplication } from '../../contexts';
-import { useSubscribableValue } from '../../hooks';
-import { ControlledExpandable } from '../fields';
-import { SlideElement } from './SlideElement';
+import { useApplication } from '../../contexts/index.ts';
+import { useSubscribableValue } from '../../hooks/index.ts';
+import { ControlledExpandable } from '../fields/index.ts';
+import { SlideElement } from './SlideElement.tsx';
 
 interface SceneGroupProps {
   scene: Scene;

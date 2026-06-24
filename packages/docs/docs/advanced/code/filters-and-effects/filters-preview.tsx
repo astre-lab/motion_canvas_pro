@@ -9,9 +9,9 @@ export default makeScene2D(function* (view) {
   const currentEffectText = createSignal('');
   yield view.add(
     <>
-      <Img src={'/img/logo_dark.svg'} size={200} x={-200} ref={iconRef} />
+      <Img src="/img/logo_dark.svg" size={200} x={-200} ref={iconRef} />
       <Txt
-        fill={'rgba(255, 255, 255, 0.6)'}
+        fill="rgba(255, 255, 255, 0.6)"
         fontSize={20}
         x={200}
         text={() => 'Current Filter: ' + currentEffectText()}

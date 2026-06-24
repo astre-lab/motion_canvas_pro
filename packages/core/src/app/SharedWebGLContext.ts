@@ -1,4 +1,4 @@
-import { Logger } from './Logger';
+import { Logger } from './Logger.ts';
 import includeWithoutPreprocessor from './__logs__/include-without-preprocessor.md';
 
 const SOURCE_URL_REGEX = /^\/\/# sourceURL=(.*)$/gm;
@@ -151,7 +151,7 @@ function logGlslError(logger: Logger, log: string | null, source: string) {
   SOURCE_URL_REGEX.lastIndex = 0;
   const sourceMatch = SOURCE_URL_REGEX.exec(source);
   if (sourceMatch) {
-    const url = new URL(sourceMatch[1], window.location.origin);
+    const url = new URL(sourceMatch[1], globalThis.location.origin);
     url.searchParams.set('t', Date.now().toString());
     sourceUrl = url.toString();
   }
